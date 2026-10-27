@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>หน่วยการเรียนรู้ที่ 2: การประยุกต์ใช้แนวคิดเชิงคำนวณเพื่อพัฒนาโครงงาน | วิทยาการคำนวณ ม.4</title>
+  <link rel="icon" type="image/gif" href="img/LOGOprofile.gif" />
+  <link rel="apple-touch-icon" href="img/LOGOprofile.gif" />
+  
+  <!-- Google Fonts: Sarabun, Kanit, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Kanit:wght@400;500;600;700&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent-green: #00b400;
+      --accent-purple: #7c3aed;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      --accent-teal: #0d9488;
+      
+      --bg-body: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-alt: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-subtle: #94a3b8;
+      --border-color: #e2e8f0;
+      
+      --font-body: 'Sarabun', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Kanit', sans-serif;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+    }
+
+    [data-theme="dark"] {
+      --bg-body: #0b1120;
+      --bg-surface: #131d31;
+      --bg-surface-alt: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+      --border-color: #27354f;
+      --primary-light: rgba(2, 132, 199, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.8;
+      font-size: 16px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Reading Progress Bar */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      z-index: 1000;
+    }
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0284c7, #10b981, #f59e0b, #ec4899);
+      transition: width 0.1s ease-out;
+    }
+
+    /* Top Navbar */
+    .top-navbar {
+      position: sticky;
+      top: 0;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 999;
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-inner {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--primary);
+      color: white;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-btn {
+      padding: 7px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface-alt);
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+
+    /* Page Layout */
+    .page-layout {
+      max-width: 1220px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+      }
+      .toc-sidebar {
+        display: none;
+      }
+    }
+
+    /* Sticky Sidebar TOC */
+    .toc-sidebar {
+      position: sticky;
+      top: 80px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .toc-header {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+    }
+    .toc-list {
+      list-style: none;
+    }
+    .toc-item {
+      margin-bottom: 4px;
+    }
+    .toc-link {
+      display: block;
+      padding: 6px 10px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      transition: all 0.15s ease;
+      line-height: 1.4;
+    }
+    .toc-link:hover, .toc-link.active {
+      color: var(--primary-dark);
+      background: var(--primary-light);
+      font-weight: 600;
+    }
+
+    /* Main Article Content */
+    .main-article {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    @media (max-width: 640px) {
+      .main-article {
+        padding: 20px;
+      }
+    }
+
+    /* Hero Unit Banner */
+    .unit-hero {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 30px;
+      margin-bottom: 35px;
+    }
+    .unit-hero h1 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-top: 8px;
+      margin-bottom: 10px;
+    }
+    .unit-hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+    }
+    .unit-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+    .meta-box {
+      background: var(--bg-surface);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      font-size: 0.85rem;
+    }
+    .meta-box strong {
+      display: block;
+      color: var(--primary-dark);
+      margin-bottom: 2px;
+    }
+
+    .badge-pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .badge-unit {
+      background: var(--primary);
+      color: white;
+      text-transform: uppercase;
+    }
+
+    /* Headings */
+    h2.section-heading {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.45;
+      margin-top: 50px;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border-color);
+      display: block;
+    }
+    h2.section-heading > span,
+    h2.section-heading > i {
+      margin-right: 6px;
+      white-space: nowrap;
+    }
+    h3.subsection-heading {
+      font-family: var(--font-heading);
+      font-size: 1.22rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.45;
+      margin-top: 32px;
+      margin-bottom: 14px;
+      display: block;
+    }
+    h3.subsection-heading > i {
+      margin-right: 8px;
+    }
+    p {
+      margin-bottom: 16px;
+      color: var(--text-main);
+    }
+
+    /* Cards & Boxes */
+    .callout-box {
+      border-left: 4px solid var(--primary);
+      background: var(--primary-light);
+      padding: 18px 22px;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin: 24px 0;
+      font-size: 0.95rem;
+    }
+    .callout-title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .example-card {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      margin: 24px 0;
+    }
+    .example-header {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-rose);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .feature-card {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    .feature-icon-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: white;
+      margin-bottom: 10px;
+    }
+    .feature-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+    .feature-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Diagram Wrap */
+    .diagram-wrap {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin: 28px 0;
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+      text-align: center;
+    }
+    .diagram-caption {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .diagram-desc {
+      font-size: 0.82rem;
+      color: var(--text-subtle);
+      margin-top: 4px;
+    }
+
+    /* Styled Tables */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+    .custom-table th, .custom-table td {
+      border: 1px solid var(--border-color);
+      padding: 12px 16px;
+      text-align: left;
+    }
+    .custom-table th {
+      background: var(--bg-surface-alt);
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .custom-table tr:hover {
+      background: rgba(2, 132, 199, 0.03);
+    }
+
+    /* Accordion Quiz */
+    .quiz-card {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin: 14px 0;
+      overflow: hidden;
+    }
+    .quiz-question {
+      padding: 16px 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .quiz-question:hover {
+      background: var(--primary-light);
+    }
+    .quiz-answer {
+      display: none;
+      padding: 16px 20px;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .quiz-card.open .quiz-answer {
+      display: block;
+    }
+    .quiz-card.open .toggle-icon {
+      transform: rotate(180deg);
+    }
+    .toggle-icon {
+      transition: transform 0.2s;
+    }
+
+    /* Footer */
+    .page-footer {
+      border-top: 1px solid var(--border-color);
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-subtle);
+      margin-top: 50px;
+    }
+
+    /* Print Styles */
+    @media print {
+      .top-navbar, .toc-sidebar, .nav-actions, #progress-container {
+        display: none !important;
+      }
+      .page-layout {
+        grid-template-columns: 1fr;
+        margin: 0;
+        padding: 0;
+      }
+      .main-article {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+      }
+      body {
+        background: white;
+        color: black;
+      }
+    }
+  </style>
+    <style>
+      .fa-solid, .fas, i.fa-solid, i.fas, [class*="fa-solid"], [class*="fas"] {
+        font-family: "Font Awesome 6 Free" !important;
+        font-weight: 900 !important;
+        font-style: normal !important;
+      }
+      .fa-regular, .far, i.fa-regular, i.far, [class*="fa-regular"], [class*="far"] {
+        font-family: "Font Awesome 6 Free" !important;
+        font-weight: 400 !important;
+        font-style: normal !important;
+      }
+      .fa-brands, .fab, i.fa-brands, i.fab, [class*="fa-brands"], [class*="fab"] {
+        font-family: "Font Awesome 6 Brands" !important;
+        font-weight: 400 !important;
+        font-style: normal !important;
+      }
+    </style>
+  </head>
+<body>
+
+  <!-- Reading Progress Bar -->
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- Sticky Navbar -->
+  <header class="top-navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon">
+          <i class="fa-solid fa-laptop-code"></i>
+        </div>
+        <div>
+          <div class="brand-title">วิทยาการคำนวณ ม.4</div>
+          <div class="brand-subtitle">คู่มือการเรียนรู้ฉบับสมบูรณ์</div>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <button class="nav-btn" onclick="toggleTheme()" title="สลับโหมดมืด/สว่าง">
+          <i class="fa-solid fa-moon" id="theme-btn-icon"></i>
+          <span id="theme-text">โหมดมืด</span>
+        </button>
+        <button class="nav-btn" onclick="window.print()" title="พิมพ์หรือบันทึกเป็น PDF">
+          <i class="fa-solid fa-print"></i> พิมพ์เอกสาร
+        </button>
+        <a href="unit1.html" class="nav-btn" title="ไปที่หน่วยการเรียนรู้ที่ 1">
+          <i class="fa-solid fa-arrow-left"></i> หน่วยที่ 1
+        </a>
+        <a href="index.html" class="nav-btn" style="background: var(--primary); color: white; border-color: var(--primary);">
+          <i class="fa-solid fa-house"></i> หน้าหลัก
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Layout -->
+  <div class="page-layout">
+
+    <!-- Sticky Table of Contents -->
+    <aside class="toc-sidebar">
+      <div class="toc-header">
+        <i class="fa-solid fa-list-ol"></i> สารบัญหน่วยที่ 2
+      </div>
+      <ul class="toc-list">
+        <li class="toc-item"><a href="#intro" class="toc-link">ภาพรวมหน่วยการเรียนรู้ที่ 2</a></li>
+        <li class="toc-item"><a href="#case1" class="toc-link">กรณีศึกษาที่ 1: เว็บไซต์ห้องสมุด</a></li>
+        <li class="toc-item"><a href="#case1-problem" class="toc-link" style="padding-left: 20px;">• ที่มา & ปัญหาของห้องสมุด</a></li>
+        <li class="toc-item"><a href="#case1-ct" class="toc-link" style="padding-left: 20px;">• การใช้แนวคิดเชิงคำนวณ 4 ด้าน</a></li>
+        <li class="toc-item"><a href="#case1-sdlc" class="toc-link" style="padding-left: 20px;">• ดำเนินงานตาม SDLC 5 ขั้น</a></li>
+        <li class="toc-item"><a href="#case1-dfd" class="toc-link" style="padding-left: 20px;">• แผนภาพ DFD เว็บไซต์ห้องสมุด</a></li>
+        <li class="toc-item"><a href="#case1-ui" class="toc-link" style="padding-left: 20px;">• ออกแบบ UI Responsive</a></li>
+        
+        <li class="toc-item"><a href="#case2" class="toc-link">กรณีศึกษาที่ 2: โปรแกรมแจ้งเตือนกินยา</a></li>
+        <li class="toc-item"><a href="#case2-problem" class="toc-link" style="padding-left: 20px;">• ที่มา & ปัญหาการกินยา</a></li>
+        <li class="toc-item"><a href="#case2-ct" class="toc-link" style="padding-left: 20px;">• การใช้แนวคิดเชิงคำนวณ 4 ด้าน</a></li>
+        <li class="toc-item"><a href="#case2-sdlc" class="toc-link" style="padding-left: 20px;">• ดำเนินงานตาม SDLC 5 ขั้น</a></li>
+        <li class="toc-item"><a href="#case2-flowchart" class="toc-link" style="padding-left: 20px;">• ผังงานแจ้งเตือน & Snooze</a></li>
+        <li class="toc-item"><a href="#case2-elderly-ui" class="toc-link" style="padding-left: 20px;">• ออกแบบ UI ผู้สูงอายุ</a></li>
+        
+        <li class="toc-item"><a href="#summary" class="toc-link">ท้ายหน่วยการเรียนรู้ที่ 2</a></li>
+        <li class="toc-item"><a href="#summary-compare" class="toc-link" style="padding-left: 20px;">• เปรียบเทียบ 2 โครงงาน</a></li>
+        <li class="toc-item"><a href="#summary-challenge" class="toc-link" style="padding-left: 20px;">• กิจกรรม Project Challenge</a></li>
+        <li class="toc-item"><a href="#quiz-section" class="toc-link">แบบทดสอบทบทวนความรู้</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-article">
+
+      <!-- Pre-test Banner for Unit 2 -->
+      <div style="background: linear-gradient(135deg, rgba(13, 148, 136, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%); border: 1.5px solid #0d9488; border-radius: 16px; padding: 18px 24px; margin: 24px 0 32px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="width: 44px; height: 44px; border-radius: 12px; background: #0d9488; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+            <i class="fa-solid fa-list-check"></i>
+          </div>
+          <div>
+            <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-heading); margin: 0 0 4px 0;">แบบทดสอบวัดผลสัมฤทธิ์ก่อนเรียน (Pre-test) หน่วยที่ 2</h4>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin: 0;">ประเมินความรู้พื้นฐานก่อนเข้าสู่บทเรียน จำนวน 10 ข้อ (เวลา 15 นาที)</p>
+          </div>
+        </div>
+        <a href="index.html?quiz=quiz-pre-unit2" style="background: #0d9488; color: white; padding: 10px 22px; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25); transition: all 0.2s ease;">
+          <i class="fa-solid fa-pen-to-square"></i> เริ่มทำแบบทดสอบก่อนเรียน (10 ข้อ)
+        </a>
+      </div>
+
+      <!-- Hero Header -->
+      <section id="intro" class="unit-hero">
+        <span class="badge-pill badge-unit">หน่วยการเรียนรู้ที่ 2</span>
+        <h1>การประยุกต์ใช้แนวคิดเชิงคำนวณเพื่อพัฒนาโครงงาน</h1>
+        <p>หลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี (วิทยาการคำนวณ) ม.4</p>
+        
+        <div class="unit-meta-grid">
+          <div class="meta-box">
+            <strong>ตัวชี้วัดแกนกลาง</strong>
+            ว 4.2 ม.4/1 ประยุกต์ใช้แนวคิดเชิงคำนวณในการพัฒนาโครงงานที่มีการบูรณาการกับวิชาอื่น
+          </div>
+          <div class="meta-box">
+            <strong>เวลาเรียนรวม</strong>
+            20 ชั่วโมง (2 กรณีศึกษาโครงงานจริง)
+          </div>
+          <div class="meta-box">
+            <strong>ลักษณะการเรียนรู้</strong>
+            Project-Based Learning & Case Studies
+          </div>
+        </div>
+      </section>
+
+      <!-- Unit Overview Callout -->
+      <div class="callout-box">
+        <div class="callout-title">
+          <i class="fa-solid fa-graduation-cap"></i> จุดเน้นของหน่วยการเรียนรู้ที่ 2
+        </div>
+        <p style="margin: 0;">
+          ในหน่วยนี้ นักเรียนจะได้นำความรู้จากหน่วยที่ 1 ทั้ง <strong>4 องค์ประกอบของแนวคิดเชิงคำนวณ (Computational Thinking)</strong> และ <strong>วงจรการพัฒนาระบบ (SDLC 5 ขั้นตอน)</strong> มาฝึกปฏิบัติจริงผ่านกรณีศึกษาโครงงานคอมพิวเตอร์ 2 รูปแบบที่พบได้ในชีวิตจริง ได้แก่ ระบบสารสนเทศสำหรับโรงเรียน (Web Application) และโปรแกรมเทคโนโลยีสุขภาพบนอุปกรณ์เคลื่อนที่ (Mobile Application)
+        </p>
+      </div>
+
+      <!-- ===================================================================
+           CASE STUDY 1
+           =================================================================== -->
+      <section id="case1" style="margin-top: 40px;">
+        <h2 class="section-heading">
+          <span style="color: var(--primary);">กรณีศึกษาที่ 1:</span> โครงงานพัฒนาเว็บไซต์แนะนำการใช้งานห้องสมุด
+        </h2>
+
+        <h3 id="case1-problem" class="subsection-heading">
+          <i class="fa-solid fa-book-bookmark" style="color: var(--primary);"></i> 1. ความเป็นมาและความสำคัญของปัญหา (Problem Statement)
+        </h3>
+        <p>
+          ห้องสมุดโรงเรียนเป็นแหล่งเรียนรู้ที่สำคัญของครู นักเรียน และบุคลากร แต่จากการสำรวจสภาพปัญหาจริง พบว่าผู้ใช้บริการเผชิญอุปสรรคสำคัญหลายประการ:
+        </p>
+        
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon-badge" style="background: var(--accent-rose);">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="feature-title">หาหนังสือไม่พบ</div>
+            <div class="feature-desc">ผู้ใช้ไม่ทราบเลขเรียกหนังสือ (Call Number) หรือไม่เข้าใจระบบหมวดหมู่ดิวอี้ ทำให้เสียเวลาค้นหาตามชั้นวาง</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-badge" style="background: var(--accent-amber);">
+              <i class="fa-solid fa-clipboard-question"></i>
+            </div>
+            <div class="feature-title">ไม่ทราบกฎระเบียบ</div>
+            <div class="feature-desc">นักเรียนใหม่ไม่ทราบขั้นตอนการยืม-คืน จำนวนเล่มที่ยืมได้ และอัตราค่าปรับเมื่อส่งคืนเกินกำหนด</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-badge" style="background: var(--primary);">
+              <i class="fa-solid fa-map-location-dot"></i>
+            </div>
+            <div class="feature-title">สับสนตำแหน่งโซน</div>
+            <div class="feature-desc">ห้องสมุดมีขนาดใหญ่ มีโซนอ่านหนังสือ โซนสื่อมัลติมีเดีย และมุมวารสาร แต่ไม่มีแผนผังนำทางที่ชัดเจน</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-badge" style="background: var(--accent-green);">
+              <i class="fa-solid fa-bullhorn"></i>
+            </div>
+            <div class="feature-title">การสื่อสารจำกัด</div>
+            <div class="feature-desc">การประชาสัมพันธ์กิจกรรมและหนังสือใหม่ติดอยู่เฉพาะบอร์ดหน้าห้องสมุด นักเรียนเข้าไม่ถึงข้อมูลล่วงหน้า</div>
+          </div>
+        </div>
+
+        <p>
+          <strong>เป้าหมายโครงงาน:</strong> พัฒนาเว็บไซต์แนะนำการใช้งานห้องสมุดในรูปแบบ <strong>Responsive Web Application</strong> เพื่อให้ผู้ใช้สามารถเปิดดูข้อมูลได้ทุกที่ทุกเวลา ทั้งบนเครื่องคอมพิวเตอร์ สมาร์ตโฟน และแท็บเล็ต
+        </p>
+
+        <!-- SVG 2.1: Library Web System Architecture -->
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 840 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="max-width: 840px; font-family: 'Sarabun', sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+    <polygon points="0 0, 7 3.5, 0 7" fill="#64748b" />
+  </marker>
+</defs>
+
+            <rect x="15" y="15" width="810" height="250" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="420" y="42" fill="#0f172a" font-size="14" font-weight="bold" text-anchor="middle">สถาปัตยกรรมระบบเว็บไซต์แนะนำการใช้งานห้องสมุด (Client-Server Architecture)</text>
+
+            <!-- Client Tier (Left) -->
+            <rect x="35" y="65" width="220" height="180" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+            <text x="145" y="90" fill="#1d4ed8" font-size="12" font-weight="bold" text-anchor="middle">1. ฝั่งผู้ใช้งาน (Client Devices)</text>
+            <rect x="55" y="105" width="180" height="32" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+            <text x="145" y="125" fill="#334155" font-size="11" text-anchor="middle">📱 สมาร์ตโฟน / แท็บเล็ต</text>
+            <rect x="55" y="145" width="180" height="32" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+            <text x="145" y="165" fill="#334155" font-size="11" text-anchor="middle">💻 เครื่องคอมพิวเตอร์นักเรียน</text>
+            <rect x="55" y="185" width="180" height="32" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+            <text x="145" y="205" fill="#334155" font-size="11" text-anchor="middle">🖥️ คอมพิวเตอร์เคาน์เตอร์บรรณารักษ์</text>
+
+            <!-- Communication Channel -->
+            <path d="M 255 155 L 340 155" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+            <text x="297" y="145" fill="#0284c7" font-size="10" font-weight="bold" text-anchor="middle">HTTP / HTTPS</text>
+            <path d="M 340 175 L 255 175" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+            <text x="297" y="195" fill="#047857" font-size="10" font-weight="bold" text-anchor="middle">HTML/JSON</text>
+
+            <!-- Web Server Tier (Middle) -->
+            <rect x="345" y="65" width="210" height="180" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+            <text x="450" y="90" fill="#047857" font-size="12" font-weight="bold" text-anchor="middle">2. เว็บเซิร์ฟเวอร์ (Web Server)</text>
+            <rect x="365" y="105" width="170" height="32" rx="6" fill="#ffffff" stroke="#a7f3d0"/>
+            <text x="450" y="125" fill="#334155" font-size="11" text-anchor="middle">เว็บเพจแนะนำการใช้งาน</text>
+            <rect x="365" y="145" width="170" height="32" rx="6" fill="#ffffff" stroke="#a7f3d0"/>
+            <text x="450" y="165" fill="#334155" font-size="11" text-anchor="middle">ระบบสืบค้นหนังสือ</text>
+            <rect x="365" y="185" width="170" height="32" rx="6" fill="#ffffff" stroke="#a7f3d0"/>
+            <text x="450" y="205" fill="#334155" font-size="11" text-anchor="middle">ระบบแสดงแผนผังชั้นวาง</text>
+
+            <!-- Database Communication -->
+            <path d="M 555 155 L 630 155" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+            <text x="592" y="145" fill="#b45309" font-size="10" font-weight="bold" text-anchor="middle">SQL Query</text>
+
+            <!-- Database Tier (Right) -->
+            <rect x="635" y="65" width="170" height="180" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+            <text x="720" y="90" fill="#b45309" font-size="12" font-weight="bold" text-anchor="middle">3. ฐานข้อมูล (Database)</text>
+            <rect x="650" y="105" width="140" height="28" rx="4" fill="#ffffff" stroke="#fde68a"/>
+            <text x="720" y="123" fill="#334155" font-size="10" text-anchor="middle">D1: ข้อมูลหนังสือ (Books)</text>
+            <rect x="650" y="140" width="140" height="28" rx="4" fill="#ffffff" stroke="#fde68a"/>
+            <text x="720" y="158" fill="#334155" font-size="10" text-anchor="middle">D2: ข้อมูลหมวดหมู่ (Category)</text>
+            <rect x="650" y="175" width="140" height="28" rx="4" fill="#ffffff" stroke="#fde68a"/>
+            <text x="720" y="193" fill="#334155" font-size="10" text-anchor="middle">D3: ประกาศประชาสัมพันธ์</text>
+            <rect x="650" y="210" width="140" height="25" rx="4" fill="#ffffff" stroke="#fde68a"/>
+            <text x="720" y="226" fill="#334155" font-size="9" text-anchor="middle">D4: สถิติการเข้าใช้งาน</text>
+          </svg>
+          <div class="diagram-caption">
+            <i class="fa-solid fa-server"></i> ภาพที่ 2.1: สถาปัตยกรรมระบบเว็บไซต์แนะนำการใช้งานห้องสมุด (Client-Server Architecture)
+          </div>
+          <div class="diagram-desc">แสดงการเชื่อมต่อระหว่างอุปกรณ์ของผู้ใช้ เว็บเซิร์ฟเวอร์ และระบบฐานข้อมูลห้องสมุด</div>
+        </div>
+
+        <h3 id="case1-ct" class="subsection-heading">
+          <i class="fa-solid fa-cubes" style="color: var(--primary);"></i> 2. การประยุกต์ใช้แนวคิดเชิงคำนวณ (4 องค์ประกอบสำคัญ of CT) ในโครงงานห้องสมุด
+        </h3>
+        
+        <p>
+          ทีมผู้พัฒนาได้นำ 4 องค์ประกอบของแนวคิดเชิงคำนวณเข้ามาจัดระเบียบการแก้ปัญหาโครงงานห้องสมุด ดังนี้:
+        </p>
+
+        <!-- SVG 2.2: Decomposition for Library -->
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 840 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="max-width: 840px; font-family: 'Sarabun', sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+    <polygon points="0 0, 7 3.5, 0 7" fill="#64748b" />
+  </marker>
+</defs>
+
+            <rect x="270" y="15" width="300" height="54" rx="8" fill="#0284c7" stroke="#0369a1" stroke-width="2"/>
+            <text x="420" y="38" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">โครงงานเว็บไซต์แนะนำการใช้งานห้องสมุด</text>
+            <text x="420" y="55" fill="#e0f2fe" font-size="11" text-anchor="middle">การแยกย่อยปัญหา (Decomposition)</text>
+
+            <path d="M 420 69 L 420 95" stroke="#94a3b8" stroke-width="2" fill="none" />
+            <path d="M 115 95 L 725 95" stroke="#94a3b8" stroke-width="2" fill="none" />
+            <path d="M 115 95 L 115 120" stroke="#94a3b8" stroke-width="2" fill="none" />
+            <path d="M 315 95 L 315 120" stroke="#94a3b8" stroke-width="2" fill="none" />
+            <path d="M 525 95 L 525 120" stroke="#94a3b8" stroke-width="2" fill="none" />
+            <path d="M 725 95 L 725 120" stroke="#94a3b8" stroke-width="2" fill="none" />
+
+            <!-- Sub 1 -->
+            <rect x="20" y="120" width="190" height="135" rx="8" fill="#f0f9ff" stroke="#38bdf8" stroke-width="1.5"/>
+            <rect x="20" y="120" width="190" height="32" rx="8" fill="#38bdf8"/>
+            <text x="115" y="142" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">1. ระบบแนะนำระเบียบ</text>
+            <text x="32" y="172" fill="#334155" font-size="10">• เวลาเปิด-ปิดห้องสมุด</text>
+            <text x="32" y="192" fill="#334155" font-size="10">• ข้อปฏิบัติการแต่งกาย</text>
+            <text x="32" y="212" fill="#334155" font-size="10">• มารยาทการใช้เสียง</text>
+            <text x="32" y="232" fill="#334155" font-size="10">• ข้อห้ามนำอาหารเข้า</text>
+
+            <!-- Sub 2 -->
+            <rect x="220" y="120" width="190" height="135" rx="8" fill="#ecfdf5" stroke="#34d399" stroke-width="1.5"/>
+            <rect x="220" y="120" width="190" height="32" rx="8" fill="#10b981"/>
+            <text x="315" y="142" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">2. ระบบยืม-คืนและสื่อ</text>
+            <text x="232" y="172" fill="#334155" font-size="10">• ขั้นตอนการยืมหนังสือ</text>
+            <text x="232" y="192" fill="#334155" font-size="10">• สิทธิ์การยืมตามระดับชั้น</text>
+            <text x="232" y="212" fill="#334155" font-size="10">• ขั้นตอนการคืน & ค่าปรับ</text>
+            <text x="232" y="232" fill="#334155" font-size="10">• สื่อมัลติมีเดียและ E-Book</text>
+
+            <!-- Sub 3 -->
+            <rect x="430" y="120" width="190" height="135" rx="8" fill="#fffbeb" stroke="#fbbf24" stroke-width="1.5"/>
+            <rect x="430" y="120" width="190" height="32" rx="8" fill="#f59e0b"/>
+            <text x="525" y="142" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">3. ผังชั้นวาง & สืบค้น</text>
+            <text x="442" y="172" fill="#334155" font-size="10">• แผนผังโซนห้องสมุด 2D</text>
+            <text x="442" y="192" fill="#334155" font-size="10">• หมวดหมู่ดิวอี้ (000-900)</text>
+            <text x="442" y="212" fill="#334155" font-size="10">• ช่องสืบค้นชื่อเรื่อง/ผู้แต่ง</text>
+            <text x="442" y="232" fill="#334155" font-size="10">• แสดงสถานะว่าง/ถูกยืม</text>
+
+            <!-- Sub 4 -->
+            <rect x="630" y="120" width="190" height="135" rx="8" fill="#fdf2f8" stroke="#f472b6" stroke-width="1.5"/>
+            <rect x="630" y="120" width="190" height="32" rx="8" fill="#ec4899"/>
+            <text x="725" y="142" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">4. ประชาสัมพันธ์ & สถิติ</text>
+            <text x="642" y="172" fill="#334155" font-size="10">• ป้ายประกาศกิจกรรม</text>
+            <text x="642" y="192" fill="#334155" font-size="10">• แนะนำหนังสือเข้าใหม่</text>
+            <text x="642" y="212" fill="#334155" font-size="10">• หนังสือน่าอ่านประจำเดือน</text>
+            <text x="642" y="232" fill="#334155" font-size="10">• บันทึกยอดผู้เข้าใช้งาน</text>
+          </svg>
+          <div class="diagram-caption">
+            <i class="fa-solid fa-sitemap"></i> ภาพที่ 2.2: การแยกย่อยปัญหา (Decomposition) ของโครงงานเว็บไซต์แนะนำการใช้งานห้องสมุด
+          </div>
+          <div class="diagram-desc">แสดงการแตกปัญหาออกเป็น 4 โมดูลหลัก ช่วยให้สมาชิกในกลุ่มแบ่งงานกันพัฒนาได้อย่างเป็นอิสระ</div>
+        </div>
+
+        <div style="background: var(--bg-surface-alt); border-radius: var(--radius-md); padding: 20px; margin: 20px 0; font-size: 0.9rem;">
+          <h4 style="font-weight: 700; color: var(--text-main); margin-bottom: 10px;">
+            <i class="fa-solid fa-brain" style="color: var(--primary);"></i> การบูรณาการองค์ประกอบที่ 2, 3 และ 4:
+          </h4>
+          <ul style="padding-left: 20px; line-height: 1.8; color: var(--text-muted);">
+            <li><strong>Pattern Recognition:</strong> ผู้ใช้งานมักค้นหาหนังสือจาก 3 ปัจจัยหลักคือ 1) ชื่อหนังสือ 2) ชื่อผู้แต่ง 3) หมวดหมู่วิชา จึงออกแบบกล่องค้นหาแบบรวม (Unified Search Bar) ที่รองรับทั้งสามมิติ</li>
+            <li><strong>Abstraction:</strong> ในฐานข้อมูล คัดเลือกเฉพาะฟิลด์ที่จำเป็นต่อการค้นหา ได้แก่ รหัสหนังสือ, ชื่อเรื่อง, ผู้แต่ง, หมวดหมู่, เลขเรียกหนังสือ, ชั้นวาง และสถานะ โดยตัดขนาดความหนากระดาษหรือสีของปกที่ไม่ได้ใช้ค้นหาออกไป</li>
+            <li><strong>Algorithm Design:</strong> เขียนขั้นตอนวิธี: เมื่อผู้ใช้พิมพ์คำค้น ➔ แปลงข้อความเป็นตัวพิมพ์เล็ก ➔ ค้นหาในฐานข้อมูล ➔ หากพบ แสดงรายการและระบุเลขชั้นวาง ➔ หากไม่พบ แนะนำคำค้นใกล้เคียงหรือหมวดหมู่ที่เกี่ยวข้อง</li>
+          </ul>
+        </div>
+
+        <h3 id="case1-sdlc" class="subsection-heading">
+          <i class="fa-solid fa-arrows-spin" style="color: var(--primary);"></i> 3. การดำเนินงานตามวงจร SDLC 5 ขั้นตอน
+        </h3>
+        
+        <p>
+          โครงงานเว็บไซต์ห้องสมุดปฏิบัติตามมาตรฐาน <strong>SDLC</strong> ครบถ้วนทั้ง 5 ขั้นตอน:
+        </p>
+
+        <!-- DFD Section -->
+        <h4 id="case1-dfd" style="font-weight: 700; font-size: 1.05rem; margin-top: 24px; margin-bottom: 12px; color: var(--primary-dark);">
+          <i class="fa-solid fa-diagram-project"></i> แผนภาพกระแสข้อมูล (DFD Level 1) ของระบบเว็บไซต์ห้องสมุด
+        </h4>
+        <p>
+          ในขั้นตอนการวิเคราะห์ (Analysis) ทีมผู้พัฒนาได้แปลงความต้องการเป็นแผนภาพ DFD Level 1 ดังนี้:
+        </p>
+
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 840 340" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="max-width: 840px; font-family: 'Sarabun', sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+    <polygon points="0 0, 7 3.5, 0 7" fill="#64748b" />
+  </marker>
+</defs>
+
+            <rect x="15" y="15" width="810" height="310" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="420" y="40" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">แผนภาพกระแสข้อมูลระดับ 1 (DFD Level 1): ระบบเว็บไซต์แนะนำการใช้งานห้องสมุด</text>
+
+            <!-- Entity: Student/Teacher (Left) -->
+            <rect x="35" y="110" width="130" height="90" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+            <text x="100" y="145" fill="#1d4ed8" font-size="12" font-weight="bold" text-anchor="middle">นักเรียน / ครู</text>
+            <text x="100" y="165" fill="#64748b" font-size="10" text-anchor="middle">(ผู้ใช้บริการ)</text>
+            <text x="100" y="185" fill="#94a3b8" font-size="9" text-anchor="middle">[External Entity]</text>
+
+            <!-- Flows from Left Entity to Process 1.0 & 2.0 -->
+            <path d="M 165 130 L 250 85" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+            <text x="195" y="98" fill="#0369a1" font-size="9" font-weight="bold">คำค้นหนังสือ</text>
+
+            <path d="M 165 155 L 250 155" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+            <text x="207" y="148" fill="#0369a1" font-size="9" font-weight="bold">เลือกดูระเบียบ</text>
+
+            <path d="M 165 180 L 250 225" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+            <text x="195" y="215" fill="#0369a1" font-size="9" font-weight="bold">ดูผังชั้นวาง</text>
+
+            <!-- Process 1.0: Search Book -->
+            <circle cx="285" cy="80" r="35" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+            <text x="285" y="75" fill="#065f46" font-size="10" font-weight="bold" text-anchor="middle">1.0</text>
+            <text x="285" y="90" fill="#065f46" font-size="9" font-weight="bold" text-anchor="middle">สืบค้นหนังสือ</text>
+
+            <!-- Process 2.0: Guide Rules & Borrowing -->
+            <circle cx="285" cy="155" r="35" fill="#fffbeb" stroke="#f59e0b" stroke-width="2"/>
+            <text x="285" y="150" fill="#92400e" font-size="10" font-weight="bold" text-anchor="middle">2.0</text>
+            <text x="285" y="165" fill="#92400e" font-size="9" font-weight="bold" text-anchor="middle">แนะนำระเบียบ</text>
+
+            <!-- Process 3.0: Shelf Mapping -->
+            <circle cx="285" cy="235" r="35" fill="#fdf2f8" stroke="#ec4899" stroke-width="2"/>
+            <text x="285" y="230" fill="#be185d" font-size="10" font-weight="bold" text-anchor="middle">3.0</text>
+            <text x="285" y="245" fill="#be185d" font-size="9" font-weight="bold" text-anchor="middle">แนะนำผังชั้น</text>
+
+            <!-- Data Store D1: Books -->
+            <g transform="translate(430, 60)">
+              <line x1="0" y1="0" x2="130" y2="0" stroke="#475569" stroke-width="2"/>
+              <line x1="0" y1="35" x2="130" y2="35" stroke="#475569" stroke-width="2"/>
+              <text x="18" y="22" fill="#0284c7" font-size="11" font-weight="bold">D1</text>
+              <line x1="38" y1="0" x2="38" y2="35" stroke="#cbd5e1" stroke-width="1.5"/>
+              <text x="82" y="22" fill="#334155" font-size="10" font-weight="600" text-anchor="middle">ข้อมูลหนังสือ</text>
+            </g>
+            <path d="M 320 80 L 420 80" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+
+            <!-- Data Store D2: Rules & FAQs -->
+            <g transform="translate(430, 140)">
+              <line x1="0" y1="0" x2="130" y2="0" stroke="#475569" stroke-width="2"/>
+              <line x1="0" y1="35" x2="130" y2="35" stroke="#475569" stroke-width="2"/>
+              <text x="18" y="22" fill="#d97706" font-size="11" font-weight="bold">D2</text>
+              <line x1="38" y1="0" x2="38" y2="35" stroke="#cbd5e1" stroke-width="1.5"/>
+              <text x="82" y="22" fill="#334155" font-size="10" font-weight="600" text-anchor="middle">ข้อมูลกฎระเบียบ</text>
+            </g>
+            <path d="M 320 155 L 420 155" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+
+            <!-- Data Store D3: Shelf Map Data -->
+            <g transform="translate(430, 220)">
+              <line x1="0" y1="0" x2="130" y2="0" stroke="#475569" stroke-width="2"/>
+              <line x1="0" y1="35" x2="130" y2="35" stroke="#475569" stroke-width="2"/>
+              <text x="18" y="22" fill="#ec4899" font-size="11" font-weight="bold">D3</text>
+              <line x1="38" y1="0" x2="38" y2="35" stroke="#cbd5e1" stroke-width="1.5"/>
+              <text x="82" y="22" fill="#334155" font-size="10" font-weight="600" text-anchor="middle">พิกัดผังชั้นวาง</text>
+            </g>
+            <path d="M 320 235 L 420 235" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+
+            <!-- Entity: Librarian (Right) -->
+            <rect x="670" y="110" width="130" height="90" rx="6" fill="#fdf2f8" stroke="#ec4899" stroke-width="2"/>
+            <text x="735" y="145" fill="#be185d" font-size="12" font-weight="bold" text-anchor="middle">บรรณารักษ์</text>
+            <text x="735" y="165" fill="#64748b" font-size="10" text-anchor="middle">(ผู้ดูแลระบบ)</text>
+            <text x="735" y="185" fill="#94a3b8" font-size="9" text-anchor="middle">[External Entity]</text>
+
+            <!-- Librarian flows -->
+            <path d="M 670 145 L 570 85" stroke="#ec4899" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+            <text x="625" y="105" fill="#be185d" font-size="9" font-weight="bold">อัปเดตหนังสือ</text>
+
+            <path d="M 670 170 L 570 235" stroke="#ec4899" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+            <text x="625" y="215" fill="#be185d" font-size="9" font-weight="bold">ปรับผังห้องสมุด</text>
+          </svg>
+          <div class="diagram-caption">
+            <i class="fa-solid fa-diagram-project"></i> ภาพที่ 2.3: แผนภาพกระแสข้อมูลระดับ 1 (DFD Level 1) ของระบบเว็บไซต์ห้องสมุด
+          </div>
+          <div class="diagram-desc">แสดงการปฏิสัมพันธ์ระหว่างผู้ใช้บริการ ระบบสืบค้น แผนผังชั้นวาง และการปรับปรุงข้อมูลของบรรณารักษ์</div>
+        </div>
+
+        <!-- UI Wireframe -->
+        <h4 id="case1-ui" style="font-weight: 700; font-size: 1.05rem; margin-top: 24px; margin-bottom: 12px; color: var(--primary-dark);">
+          <i class="fa-solid fa-table-columns"></i> การออกแบบหน้าจอติดต่อผู้ใช้งาน (Responsive UI Wireframe)
+        </h4>
+        <p>
+          ในขั้นตอนการออกแบบ (Design) ได้จัดทำต้นแบบหน้าจอ (Mockup) เพื่อให้รองรับทั้งจอคอมพิวเตอร์และมือถือ:
+        </p>
+
+        <!-- SVG 2.4: Library Responsive Wireframe -->
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 840 330" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="max-width: 840px; font-family: 'Sarabun', sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+    <polygon points="0 0, 7 3.5, 0 7" fill="#64748b" />
+  </marker>
+</defs>
+
+            <rect x="15" y="15" width="810" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="420" y="38" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">การออกแบบหน้าจอติดต่อผู้ใช้ (UI Wireframe): Desktop vs Mobile Responsive View</text>
+
+            <!-- Desktop View (Left) -->
+            <g transform="translate(35, 55)">
+              <rect x="0" y="0" width="460" height="240" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+              <!-- Browser Header -->
+              <rect x="0" y="0" width="460" height="26" rx="8" fill="#e2e8f0"/>
+              <circle cx="15" cy="13" r="4" fill="#ef4444"/>
+              <circle cx="28" cy="13" r="4" fill="#f59e0b"/>
+              <circle cx="41" cy="13" r="4" fill="#10b981"/>
+              <rect x="60" y="5" width="280" height="16" rx="4" fill="#ffffff"/>
+              <text x="70" y="17" fill="#64748b" font-size="9">https://library.school.ac.th</text>
+
+              <!-- Web Navbar -->
+              <rect x="10" y="34" width="440" height="28" rx="4" fill="#0284c7"/>
+              <text x="25" y="52" fill="#ffffff" font-size="10" font-weight="bold">📚 ห้องสมุดโรงเรียน</text>
+              <text x="210" y="52" fill="#ffffff" font-size="9">หน้าแรก</text>
+              <text x="260" y="52" fill="#ffffff" font-size="9">กฎระเบียบ</text>
+              <text x="320" y="52" fill="#ffffff" font-size="9">ผังชั้นวาง</text>
+              <text x="380" y="52" fill="#ffffff" font-size="9">สืบค้นหนังสือ</text>
+
+              <!-- Search Bar -->
+              <rect x="40" y="72" width="380" height="28" rx="14" fill="#f1f5f9" stroke="#cbd5e1"/>
+              <text x="60" y="89" fill="#94a3b8" font-size="9">🔍 พิมพ์ชื่อหนังสือ, ชื่อผู้แต่ง หรือหมวดหมู่ดิวอี้...</text>
+              <rect x="360" y="74" width="55" height="24" rx="12" fill="#0284c7"/>
+              <text x="387" y="90" fill="#ffffff" font-size="9" text-anchor="middle">ค้นหา</text>
+
+              <!-- 3 Content Columns -->
+              <rect x="20" y="112" width="130" height="115" rx="6" fill="#f0f9ff" stroke="#bae6fd"/>
+              <text x="85" y="132" fill="#0369a1" font-size="9" font-weight="bold" text-anchor="middle">หมวดหมู่ดิวอี้ 000-900</text>
+              <text x="30" y="152" fill="#475569" font-size="8">• 000 วิทยาการคอมฯ</text>
+              <text x="30" y="168" fill="#475569" font-size="8">• 500 วิทยาศาสตร์</text>
+              <text x="30" y="184" fill="#475569" font-size="8">• 600 เทคโนโลยี</text>
+              <text x="30" y="200" fill="#475569" font-size="8">• 800 วรรณคดี</text>
+
+              <rect x="165" y="112" width="130" height="115" rx="6" fill="#ecfdf5" stroke="#a7f3d0"/>
+              <text x="230" y="132" fill="#065f46" font-size="9" font-weight="bold" text-anchor="middle">แผนผังชั้นวาง 2D</text>
+              <rect x="175" y="142" width="50" height="30" rx="3" fill="#ffffff" stroke="#10b981"/>
+              <text x="200" y="160" fill="#10b981" font-size="7" text-anchor="middle">โซน A</text>
+              <rect x="235" y="142" width="50" height="30" rx="3" fill="#ffffff" stroke="#10b981"/>
+              <text x="260" y="160" fill="#10b981" font-size="7" text-anchor="middle">โซน B</text>
+              <text x="230" y="195" fill="#475569" font-size="8" text-anchor="middle">คลิกโซนเพื่อดูหมวดหมู่</text>
+
+              <rect x="310" y="112" width="130" height="115" rx="6" fill="#fdf2f8" stroke="#fbcfe8"/>
+              <text x="375" y="132" fill="#be185d" font-size="9" font-weight="bold" text-anchor="middle">ประกาศประชาสัมพันธ์</text>
+              <text x="320" y="152" fill="#475569" font-size="8">• เปิดรับสมัครสารวัตรนักเรียน</text>
+              <text x="320" y="168" fill="#475569" font-size="8">• แนะนำหนังสือใหม่ 15 เล่ม</text>
+              <text x="320" y="184" fill="#475569" font-size="8">• เวลาทำการช่วงสอบปลายภาค</text>
+            </g>
+
+            <!-- Mobile View (Right) -->
+            <g transform="translate(540, 55)">
+              <rect x="0" y="0" width="150" height="240" rx="16" fill="#ffffff" stroke="#475569" stroke-width="3"/>
+              <!-- Phone notch -->
+              <rect x="45" y="5" width="60" height="8" rx="4" fill="#0f172a"/>
+              <!-- Phone Header -->
+              <rect x="8" y="20" width="134" height="24" rx="4" fill="#0284c7"/>
+              <text x="15" y="35" fill="#ffffff" font-size="8" font-weight="bold">📚 ห้องสมุด</text>
+              <text x="130" y="35" fill="#ffffff" font-size="10">☰</text>
+
+              <!-- Mobile Search -->
+              <rect x="12" y="50" width="126" height="20" rx="10" fill="#f1f5f9" stroke="#cbd5e1"/>
+              <text x="20" y="63" fill="#94a3b8" font-size="7">🔍 ค้นหาหนังสือ...</text>
+
+              <!-- Stacked Cards for Mobile -->
+              <rect x="12" y="76" width="126" height="42" rx="4" fill="#f0f9ff" stroke="#bae6fd"/>
+              <text x="20" y="90" fill="#0369a1" font-size="8" font-weight="bold">หมวดหมู่ดิวอี้</text>
+              <text x="20" y="105" fill="#64748b" font-size="7">000 คอมฯ | 500 วิทย์</text>
+
+              <rect x="12" y="124" width="126" height="42" rx="4" fill="#ecfdf5" stroke="#a7f3d0"/>
+              <text x="20" y="138" fill="#065f46" font-size="8" font-weight="bold">แผนผังชั้นวาง</text>
+              <text x="20" y="153" fill="#64748b" font-size="7">แตะเพื่อเปิดแผนที่นำทาง</text>
+
+              <rect x="12" y="172" width="126" height="42" rx="4" fill="#fdf2f8" stroke="#fbcfe8"/>
+              <text x="20" y="186" fill="#be185d" font-size="8" font-weight="bold">ประกาศห้องสมุด</text>
+              <text x="20" y="201" fill="#64748b" font-size="7">หนังสือใหม่ประจำสัปดาห์</text>
+
+              <!-- Home indicator -->
+              <line x1="50" y1="230" x2="100" y2="230" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+            </g>
+
+            <text x="265" y="310" fill="#0369a1" font-size="10" font-weight="bold" text-anchor="middle">มุมมองคอมพิวเตอร์ (Desktop 3 คอลัมน์)</text>
+            <text x="615" y="310" fill="#047857" font-size="10" font-weight="bold" text-anchor="middle">มุมมองสมาร์ตโฟน (Mobile 1 คอลัมน์)</text>
+          </svg>
+          <div class="diagram-caption">
+            <i class="fa-solid fa-mobile-screen-button"></i> ภาพที่ 2.4: การออกแบบหน้าจอ UI แบบ Responsive (ปรับเลย์เอาต์ตามขนาดหน้าจอ)
+          </div>
+          <div class="diagram-desc">แสดงการจัดวางหน้าจอที่ปรับเปลี่ยนได้ยืดหยุ่น ทำให้นักเรียนเปิดใช้งานจากสมาร์ตโฟนได้อย่างสะดวก</div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           CASE STUDY 2
+           =================================================================== -->
+      <section id="case2" style="margin-top: 50px;">
+        <h2 class="section-heading">
+          <span style="color: var(--accent-rose);">กรณีศึกษาที่ 2:</span> โครงงานพัฒนาโปรแกรมแจ้งเตือนการกินยา<wbr><span style="white-space: nowrap;">ผ่านสมาร์ตโฟนหรือแท็บเล็ต</span>
+        </h2>
+
+        <h3 id="case2-problem" class="subsection-heading">
+          <i class="fa-solid fa-pills" style="color: var(--accent-rose);"></i> 1. ความเป็นมาและความสำคัญของปัญหา (Health Tech)
+        </h3>
+        <p>
+          ในสังคมผู้สูงอายุ (Aging Society) ผู้ป่วยโรคเรื้อรัง เช่น โรคความดันโลหิตสูง โรคเบาหวาน หรือโรคหัวใจ ต้องรับประทานยาหลายชนิดในแต่ละวัน จากการศึกษาข้อมูลร่วมกับโรงพยาบาล พบปัญหาสำคัญที่ส่งผลต่อสุขภาพของผู้ป่วย:
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon-badge" style="background: var(--accent-rose);">
+              <i class="fa-solid fa-bell-slash"></i>
+            </div>
+            <div class="feature-title">ลืมกินยาตามเวลา</div>
+            <div class="feature-desc">ผู้สูงอายุมีอาการหลงลืม ทำให้กินยาไม่ตรงเวลา ส่งผลให้ระดับยาในกระแสเลือดไม่คงที่ ประสิทธิภาพการรักษาลดลง</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-badge" style="background: var(--accent-amber);">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="feature-title">กินยาซ้ำซ้อน</div>
+            <div class="feature-desc">จำไม่ได้ว่ากินยาไปแล้วหรือยัง จึงกินยาซ้ำ เสี่ยงต่อภาวะยาเกินขนาด (Overdose) ที่เป็นอันตรายถึงชีวิต</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-badge" style="background: var(--accent-purple);">
+              <i class="fa-solid fa-tablets"></i>
+            </div>
+            <div class="feature-title">สับสนชนิดและเม็ดยา</div>
+            <div class="feature-desc">ซองยามีตัวหนังสือขนาดเล็ก ผู้ป่วยสายตายาวอ่านฉลากไม่ชัดเจน สับสนระหว่างยาก่อนอาหารและหลังอาหาร</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-badge" style="background: var(--accent-teal);">
+              <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <div class="feature-title">ลืมนัดพบแพทย์</div>
+            <div class="feature-desc">ไม่ทราบประวัติการกินยาย้อนหลังเมื่อแพทย์ซักประวัติ และลืมวันนัดตรวจติดตามอาการของโรงพยาบาล</div>
+          </div>
+        </div>
+
+        <p>
+          <strong>เป้าหมายโครงงาน:</strong> พัฒนาโปรแกรมแอปพลิเคชันบนสมาร์ตโฟน/แท็บเล็ต (ชื่อต้นแบบ <em>"nMeMo"</em>) เพื่อแจ้งเตือนการกินยา บันทึกประวัติ และแจ้งเตือนไปยังญาติเมื่อผู้ป่วยลืมกินยา
+        </p>
+
+        <h3 id="case2-ct" class="subsection-heading">
+          <i class="fa-solid fa-cubes" style="color: var(--accent-rose);"></i> 2. การประยุกต์ใช้แนวคิดเชิงคำนวณ (4 องค์ประกอบสำคัญ of CT) ในโครงงานแจ้งเตือนการกินยา
+        </h3>
+
+        <!-- SVG 2.5: Decomposition for Medicine App -->
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 840 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="max-width: 840px; font-family: 'Sarabun', sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+    <polygon points="0 0, 7 3.5, 0 7" fill="#64748b" />
+  </marker>
+</defs>
+
+            <rect x="250" y="15" width="340" height="54" rx="8" fill="#e11d48" stroke="#be185d" stroke-width="2"/>
+            <text x="420" y="38" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">แอปพลิเคชันแจ้งเตือนการกินยาบนสมาร์ตโฟน</text>
+            <text x="420" y="55" fill="#ffe4e6" font-size="11" text-anchor="middle">การแยกย่อยปัญหา (Decomposition)</text>
+
+            <path d="M 420 69 L 420 95" stroke="#94a3b8" stroke-width="2" fill="none" />
+            <path d="M 115 95 L 725 95" stroke="#94a3b8" stroke-width="2" fill="none" />
+            <path d="M 115 95 L 115 120" stroke="#94a3b8" stroke-width="2" fill="none" />
+            <path d="M 315 95 L 315 120" stroke="#94a3b8" stroke-width="2" fill="none" />
+            <path d="M 525 95 L 525 120" stroke="#94a3b8" stroke-width="2" fill="none" />
+            <path d="M 725 95 L 725 120" stroke="#94a3b8" stroke-width="2" fill="none" />
+
+            <!-- Sub 1 -->
+            <rect x="20" y="120" width="190" height="135" rx="8" fill="#fff1f2" stroke="#fecdd3" stroke-width="1.5"/>
+            <rect x="20" y="120" width="190" height="32" rx="8" fill="#f43f5e"/>
+            <text x="115" y="142" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">1. ข้อมูลส่วนตัว & ญาติ</text>
+            <text x="32" y="172" fill="#334155" font-size="10">• ลงทะเบียนผู้ใช้งาน</text>
+            <text x="32" y="192" fill="#334155" font-size="10">• ข้อมูลโรคประจำตัว/การแพ้ยา</text>
+            <text x="32" y="212" fill="#334155" font-size="10">• เบอร์โทรติดต่อญาติผู้ดูแล</text>
+            <text x="32" y="232" fill="#334155" font-size="10">• สายด่วนฉุกเฉิน 1669</text>
+
+            <!-- Sub 2 -->
+            <rect x="220" y="120" width="190" height="135" rx="8" fill="#fdf4ff" stroke="#f0abfc" stroke-width="1.5"/>
+            <rect x="220" y="120" width="190" height="32" rx="8" fill="#d946ef"/>
+            <text x="315" y="142" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">2. จัดการรายการยา</text>
+            <text x="232" y="172" fill="#334155" font-size="10">• บันทึกชื่อยาและขนาดยา</text>
+            <text x="232" y="192" fill="#334155" font-size="10">• ถ่ายภาพเม็ดยาเพื่อช่วยจำ</text>
+            <text x="232" y="212" fill="#334155" font-size="10">• ระบุเวลาก่อน/หลังอาหาร</text>
+            <text x="232" y="232" fill="#334155" font-size="10">• จำนวนยาคงเหลือในขวด</text>
+
+            <!-- Sub 3 -->
+            <rect x="430" y="120" width="190" height="135" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+            <rect x="430" y="120" width="190" height="32" rx="8" fill="#3b82f6"/>
+            <text x="525" y="142" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">3. แจ้งเตือน & Snooze</text>
+            <text x="442" y="172" fill="#334155" font-size="10">• ตั้งเวลาเตือนตามมื้ออาหาร</text>
+            <text x="442" y="192" fill="#334155" font-size="10">• เสียงเตือนดังพิเศษ & สั่น</text>
+            <text x="442" y="212" fill="#334155" font-size="10">• ปุ่มกดยืนยัน "กินยาแล้ว"</text>
+            <text x="442" y="232" fill="#334155" font-size="10">• เตือนซ้ำทุก 10 นาที (Snooze)</text>
+
+            <!-- Sub 4 -->
+            <rect x="630" y="120" width="190" height="135" rx="8" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1.5"/>
+            <rect x="630" y="120" width="190" height="32" rx="8" fill="#10b981"/>
+            <text x="725" y="142" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">4. ประวัติ & เชื่อมโยง รพ.</text>
+            <text x="642" y="172" fill="#334155" font-size="10">• ปฏิทินบันทึกประวัติการกิน</text>
+            <text x="642" y="192" fill="#334155" font-size="10">• แจ้งเตือนวันนัดพบแพทย์</text>
+            <text x="642" y="212" fill="#334155" font-size="10">• สรุปรายงาน % ความตรงเวลา</text>
+            <text x="642" y="232" fill="#334155" font-size="10">• ส่งแจ้งเตือนหาญาติเมื่อไม่กิน</text>
+          </svg>
+          <div class="diagram-caption">
+            <i class="fa-solid fa-sitemap"></i> ภาพที่ 2.5: การแยกย่อยปัญหา (Decomposition) ของโปรแกรมแจ้งเตือนการกินยา
+          </div>
+          <div class="diagram-desc">แบ่งโครงงานออกเป็น 4 ฟังก์ชันหลัก เพื่อให้การออกแบบฐานข้อมูลและการพัฒนาโค้ดทำได้อย่างเป็นระบบ</div>
+        </div>
+
+        <h3 id="case2-sdlc" class="subsection-heading">
+          <i class="fa-solid fa-arrows-spin" style="color: var(--accent-rose);"></i> 3. การดำเนินงานตามวงจร SDLC 5 ขั้นตอน
+        </h3>
+        
+        <p>
+          ในขั้นตอนการวิเคราะห์ความต้องการ (Analysis) ได้กำหนด <strong>10 กระบวนการทำงานหลัก</strong> ของระบบ และจัดทำ <strong>ผังงานขั้นตอนวิธี (Flowchart)</strong> ของระบบเตือนซ้ำ:
+        </p>
+
+        <!-- SVG 2.7: Algorithm Flowchart for Medicine Reminder -->
+        <h4 id="case2-flowchart" style="font-weight: 700; font-size: 1.05rem; margin-top: 24px; margin-bottom: 12px; color: var(--accent-rose);">
+          <i class="fa-solid fa-code-fork"></i> ผังงานขั้นตอนวิธีของระบบแจ้งเตือนการกินยาและระบบเตือนซ้ำ (Snooze Logic)
+        </h4>
+
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 840 460" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="max-width: 840px; font-family: 'Sarabun', sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+    <polygon points="0 0, 7 3.5, 0 7" fill="#64748b" />
+  </marker>
+</defs>
+
+            <rect x="15" y="15" width="810" height="430" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="420" y="42" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">ผังงานขั้นตอนวิธี: การตรวจสอบเวลาแจ้งเตือน, การกดยืนยัน และระบบเตือนซ้ำ (Snooze Alert Logic)</text>
+
+            <!-- Start -->
+            <rect x="365" y="60" width="110" height="32" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="420" y="81" fill="#1e40af" font-size="11" font-weight="bold" text-anchor="middle">เริ่มต้น (Start)</text>
+            <line x1="420" y1="92" x2="420" y2="115" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+            <!-- Read Current Time & Pill Schedule -->
+            <rect x="330" y="115" width="180" height="38" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="420" y="132" fill="#334155" font-size="10" font-weight="bold" text-anchor="middle">อ่านเวลาปัจจุบันจากอุปกรณ์</text>
+            <text x="420" y="146" fill="#64748b" font-size="9" text-anchor="middle">และดึงตารางเวลาเตือนกินยา</text>
+            <line x1="420" y1="153" x2="420" y2="175" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+            <!-- Decision 1: Time Match? -->
+            <polygon points="420,175 495,205 420,235 345,205" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+            <text x="420" y="202" fill="#92400e" font-size="10" font-weight="bold" text-anchor="middle">ถึงเวลาเตือนยา?</text>
+            <text x="420" y="215" fill="#92400e" font-size="9" text-anchor="middle">(Current == Alarm)</text>
+
+            <!-- Decision 1 NO (Loop Back) -->
+            <line x1="495" y1="205" x2="570" y2="205" stroke="#64748b" stroke-width="2"/>
+            <line x1="570" y1="205" x2="570" y2="134" stroke="#64748b" stroke-width="2"/>
+            <line x1="570" y1="134" x2="515" y2="134" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="525" y="198" fill="#64748b" font-size="9" font-weight="bold">ไม่ใช่ (รอรอบถัดไป)</text>
+
+            <!-- Decision 1 YES (Down) -->
+            <line x1="420" y1="235" x2="420" y2="265" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="430" y="252" fill="#16a34a" font-size="9" font-weight="bold">ใช่</text>
+
+            <!-- Trigger Alarm & Display Screen -->
+            <rect x="330" y="265" width="180" height="42" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+            <text x="420" y="282" fill="#991b1b" font-size="10" font-weight="bold" text-anchor="middle">🔔 ส่งเสียงเตือน & สั่น</text>
+            <text x="420" y="297" fill="#991b1b" font-size="9" text-anchor="middle">แสดงภาพเม็ดยาและจำนวนเม็ด</text>
+            <line x1="420" y1="307" x2="420" y2="330" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+            <!-- Decision 2: User Pressed "Already Taken"? -->
+            <polygon points="420,330 500,360 420,390 340,360" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+            <text x="420" y="357" fill="#991b1b" font-size="10" font-weight="bold" text-anchor="middle">ผู้ป่วยกดปุ่ม</text>
+            <text x="420" y="370" fill="#991b1b" font-size="9" text-anchor="middle">"กินยาแล้ว"?</text>
+
+            <!-- Decision 2 YES (Left branch: Save Log & Finish) -->
+            <line x1="340" y1="360" x2="220" y2="360" stroke="#16a34a" stroke-width="2"/>
+            <line x1="220" y1="360" x2="220" y2="385" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="270" y="352" fill="#16a34a" font-size="9" font-weight="bold">ใช่ (ยืนยันกินยา)</text>
+
+            <rect x="130" y="385" width="180" height="38" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="220" y="402" fill="#166534" font-size="10" font-weight="bold" text-anchor="middle">บันทึกประวัติการกินยา (Log)</text>
+            <text x="220" y="416" fill="#166534" font-size="9" text-anchor="middle">และตัดยอดสต็อกยาในขวด</text>
+
+            <!-- Decision 2 NO (Right branch: Snooze or Alert Family) -->
+            <line x1="500" y1="360" x2="620" y2="360" stroke="#dc2626" stroke-width="2"/>
+            <line x1="620" y1="360" x2="620" y2="385" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="525" y="352" fill="#dc2626" font-size="9" font-weight="bold">ยังไม่กด / เกิน 10 นาที</text>
+
+            <rect x="530" y="385" width="180" height="38" rx="4" fill="#fff1f2" stroke="#f43f5e" stroke-width="1.5"/>
+            <text x="620" y="402" fill="#be185d" font-size="10" font-weight="bold" text-anchor="middle">เตือนซ้ำ (Snooze) ครั้งที่ 1-2</text>
+            <text x="620" y="416" fill="#be185d" font-size="9" text-anchor="middle">หากครบ 3 ครั้ง ส่งข้อความหาญาติ</text>
+          </svg>
+          <div class="diagram-caption">
+            <i class="fa-solid fa-code-fork"></i> ภาพที่ 2.7: ผังงานขั้นตอนวิธีของระบบแจ้งเตือนการกินยาและระบบเตือนซ้ำ (Snooze Logic)
+          </div>
+          <div class="diagram-desc">แสดงการตัดสินใจตรวจสอบสถานะการกินยา และระบบความปลอดภัยแจ้งเตือนผู้ดูแลกรณีผู้ป่วยไม่กดยืนยัน</div>
+        </div>
+
+        <!-- Elderly Friendly UI Design -->
+        <h4 id="case2-elderly-ui" style="font-weight: 700; font-size: 1.05rem; margin-top: 24px; margin-bottom: 12px; color: var(--accent-rose);">
+          <i class="fa-solid fa-universal-access"></i> การออกแบบ UI/UX สำหรับผู้สูงอายุ (Elderly-Friendly Design)
+        </h4>
+        <p>
+          หัวใจสำคัญของโครงงานนี้คือ <strong>ความง่ายในการใช้งาน (Usability)</strong> ของผู้สูงอายุ:
+        </p>
+
+        <!-- SVG 2.8: Elderly-Friendly UI Comparison -->
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 840 320" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="max-width: 840px; font-family: 'Sarabun', sans-serif;">
+<defs>
+  <marker id="arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+    <polygon points="0 0, 7 3.5, 0 7" fill="#64748b" />
+  </marker>
+</defs>
+
+            <rect x="15" y="15" width="810" height="290" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="420" y="40" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">การเปรียบเทียบการออกแบบหน้าจอทั่วไป VS หน้าจอที่ออกแบบเพื่อผู้สูงอายุ (Elderly-Friendly UI)</text>
+
+            <!-- Standard UI (Bad for elderly) -->
+            <g transform="translate(60, 60)">
+              <rect x="0" y="0" width="310" height="225" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+              <rect x="0" y="0" width="310" height="26" rx="8" fill="#f1f5f9"/>
+              <text x="155" y="18" fill="#64748b" font-size="10" font-weight="bold" text-anchor="middle">❌ หน้าจอทั่วไป (ใช้งานยากสำหรับผู้สูงวัย)</text>
+
+              <text x="20" y="55" fill="#94a3b8" font-size="9">Medicine Alert: Atenolol 50mg</text>
+              <text x="20" y="70" fill="#94a3b8" font-size="8">Take 1 tablet orally before breakfast</text>
+
+              <!-- Tiny buttons -->
+              <rect x="20" y="85" width="70" height="22" rx="4" fill="#e2e8f0"/>
+              <text x="55" y="100" fill="#475569" font-size="8" text-anchor="middle">Dismiss</text>
+
+              <rect x="100" y="85" width="70" height="22" rx="4" fill="#e2e8f0"/>
+              <text x="135" y="100" fill="#475569" font-size="8" text-anchor="middle">Confirm</text>
+
+              <text x="20" y="145" fill="#dc2626" font-size="10" font-weight="bold">ข้อบกพร่อง:</text>
+              <text x="20" y="165" fill="#64748b" font-size="9">• ตัวหนังสือขนาดเล็กเกินไป อ่านยาก</text>
+              <text x="20" y="182" fill="#64748b" font-size="9">• ปุ่มกดยืนยันมีขนาดเล็ก กดพลาดได้ง่าย</text>
+              <text x="20" y="199" fill="#64748b" font-size="9">• ไม่มีภาพเม็ดยา ทำให้สับสนชนิดยา</text>
+            </g>
+
+            <!-- Elderly UI (Good) -->
+            <g transform="translate(450, 60)">
+              <rect x="0" y="0" width="330" height="225" rx="8" fill="#ffffff" stroke="#10b981" stroke-width="2"/>
+              <rect x="0" y="0" width="330" height="26" rx="8" fill="#d1fae5"/>
+              <text x="165" y="18" fill="#065f46" font-size="10" font-weight="bold" text-anchor="middle">✓ หน้าจอเพื่อผู้สูงอายุ (แอปพลิเคชัน nMeMo)</text>
+
+              <text x="20" y="55" fill="#e11d48" font-size="13" font-weight="bold">⏰ ถึงเวลาทานยาเช้า (08:00 น.)</text>
+
+              <!-- Pill Visual Representation -->
+              <rect x="20" y="68" width="290" height="52" rx="6" fill="#fff1f2" stroke="#fecdd3"/>
+              <circle cx="50" cy="94" r="16" fill="#ffffff" stroke="#e11d48" stroke-width="2"/>
+              <line x1="38" y1="94" x2="62" y2="94" stroke="#e11d48" stroke-width="2"/>
+              <text x="75" y="88" fill="#991b1b" font-size="11" font-weight="bold">ยาลดความดัน (เม็ดสีขาวกลม)</text>
+              <text x="75" y="105" fill="#047857" font-size="10" font-weight="bold">จำนวน 1 เม็ด • ก่อนอาหาร</text>
+
+              <!-- Giant Confirm Button -->
+              <rect x="20" y="130" width="290" height="42" rx="8" fill="#10b981"/>
+              <text x="165" y="156" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">✓ ทานยาเรียบร้อยแล้ว (กดที่นี่)</text>
+
+              <!-- Giant Snooze Button -->
+              <rect x="20" y="180" width="290" height="32" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+              <text x="165" y="201" fill="#475569" font-size="11" font-weight="600" text-anchor="middle">เตือนอีกครั้งในอีก 10 นาที (Snooze)</text>
+            </g>
+          </svg>
+          <div class="diagram-caption">
+            <i class="fa-solid fa-universal-access"></i> ภาพที่ 2.8: การเปรียบเทียบการออกแบบหน้าจอทั่วไปกับการออกแบบที่เข้าใจผู้สูงอายุ (Elderly UI)
+          </div>
+          <div class="diagram-desc">แสดงการใช้ตัวหนังสือขนาดใหญ่ สีคอนทราสต์ชัดเจน แสดงภาพจำลองเม็ดยา และปุ่มกดสัมผัสขนาดใหญ่</div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SUMMARY & COMPARISON
+           =================================================================== -->
+      <section id="summary" style="margin-top: 50px;">
+        <h2 class="section-heading">
+          <span style="color: var(--accent-purple);">ท้ายหน่วยการเรียนรู้ที่ 2:</span> สรุปและประเมินผลการเรียนรู้
+        </h2>
+
+        <h3 id="summary-compare" class="subsection-heading">
+          <i class="fa-solid fa-code-compare" style="color: var(--accent-purple);"></i> สรุปเปรียบเทียบการประยุกต์ใช้แนวคิดเชิงคำนวณและ SDLC ระหว่าง 2 โครงงาน
+        </h3>
+
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>หัวข้อเปรียบเทียบ</th>
+              <th>กรณีศึกษาที่ 1: เว็บไซต์ห้องสมุด</th>
+              <th>กรณีศึกษาที่ 2: โปรแกรมแจ้งเตือนกินยา</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. ประเภทโครงงาน</strong></td>
+              <td>ระบบสารสนเทศ (Web Application)</td>
+              <td>เทคโนโลยีสุขภาพส่วนบุคคล (Mobile App / Health Tech)</td>
+            </tr>
+            <tr>
+              <td><strong>2. กลุ่มผู้ใช้งานหลัก</strong></td>
+              <td>นักเรียน, ครู, บรรณารักษ์ (ระบบในโรงเรียน)</td>
+              <td>ผู้ป่วย, ผู้สูงอายุ, ญาติผู้ดูแล, โรงพยาบาล</td>
+            </tr>
+            <tr>
+              <td><strong>3. การแยกย่อย (Decomposition)</strong></td>
+              <td>แยกตามโซนสารสนเทศ (ระเบียบ, ยืมคืน, ผังชั้นวาง, ค้นหา)</td>
+              <td>แยกตามฟังก์ชันความปลอดภัย (ข้อมูลยา, เตือนตามเวลา, Snooze, ญาติ)</td>
+            </tr>
+            <tr>
+              <td><strong>4. การคิดเชิงนามธรรม (Abstraction)</strong></td>
+              <td>คัดกรองเฉพาะเลขเรียกหนังสือและตำแหน่งชั้นวาง</td>
+              <td>คัดกรองเฉพาะรูปเม็ดยา เวลาเตือน และขนาดยา</td>
+            </tr>
+            <tr>
+              <td><strong>5. ความท้าทายใน SDLC</strong></td>
+              <td>การออกแบบ Responsive UI และฐานข้อมูลหนังสือขนาดใหญ่</td>
+              <td>ความแม่นยำของนาฬิกาปลุก และ UI ที่ผู้สูงอายุใช้งานง่าย</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Project Challenge Card -->
+        <div id="summary-challenge" class="example-card" style="border-left: 4px solid var(--accent-purple);">
+          <div class="example-header" style="color: var(--accent-purple);">
+            <i class="fa-solid fa-lightbulb"></i> กิจกรรมท้าทายความคิด: การเขียนข้อเสนอโครงงาน (Mini Project Pitch)
+          </div>
+          <p style="font-size: 0.92rem; color: var(--text-main); margin-bottom: 12px;">
+            ให้นักเรียนแบ่งกลุ่ม 4-5 คน เลือกระบุปัญหาในโรงเรียนหรือชุมชน 1 ปัญหา แล้วร่วมกันร่างแนวทางการพัฒนาโครงงานโดยตอบคำถาม 4 ข้อ:
+          </p>
+          <ol style="padding-left: 20px; line-height: 1.8; font-size: 0.88rem; color: var(--text-muted);">
+            <li><strong>ปัญหาและที่มา:</strong> ปัญหาคืออะไร ใครคือผู้เดือดร้อน และทำไมต้องใช้เทคโนโลยีแก้ปัญหา?</li>
+            <li><strong>การแยกย่อยปัญหา (Decomposition):</strong> หากจะพัฒนาระบบนี้ ควรแบ่งออกเป็นระบบย่อยใดบ้าง?</li>
+            <li><strong>แพลตฟอร์มที่เลือกใช้:</strong> ควรพัฒนาเป็น Web Application หรือ Mobile Application เพราะเหตุใด?</li>
+            <li><strong>เกณฑ์วัดความสำเร็จ:</strong> อะไรคือตัวชี้วัดว่าโครงงานนี้แก้ปัญหาได้สำเร็จจริง (เช่น เวลาที่ลดลง หรือ % ความพึงพอใจ)?</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           INTERACTIVE QUIZ SECTION
+           =================================================================== -->
+      <section id="quiz-section" style="margin-top: 50px;">
+        <h2 class="section-heading">
+          <i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> แบบทดสอบทบทวนความรู้ประจำหน่วยที่ 2 (Interactive Self-Check)
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+          คลิกที่การ์ดคำถามเพื่อตรวจสอบความเข้าใจและเปิดดูแนวคำตอบเฉลย:
+        </p>
+
+        <!-- Q1 -->
+        <div class="quiz-card" onclick="this.classList.toggle('open')">
+          <div class="quiz-question">
+            <span>1. ในโครงงานเว็บไซต์ห้องสมุด การออกแบบหน้าจอแบบ "Responsive Web Design" มีประโยชน์ต่อนักเรียนอย่างไร?</span>
+            <i class="fa-solid fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="quiz-answer">
+            <strong>แนวตอบ:</strong> ช่วยให้หน้าจอเว็บไซต์สามารถปรับขนาดตัวอักษร เมนู และการจัดวางคอลัมน์ให้เหมาะสมกับขนาดหน้าจอของอุปกรณ์ทุกชนิดโดยอัตโนมัติ ทำให้นักเรียนสามารถเปิดค้นหาหนังสือจากสมาร์ตโฟนระหว่างเดินในห้องสมุดได้อย่างสะดวกสบาย โดยไม่ต้องซูมเข้าซูมออก
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="quiz-card" onclick="this.classList.toggle('open')">
+          <div class="quiz-question">
+            <span>2. การใช้ "Abstraction" ในระบบฐานข้อมูลของโครงงานห้องสมุด ช่วยประหยัดพื้นที่และเพิ่มความเร็วได้อย่างไร?</span>
+            <i class="fa-solid fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="quiz-answer">
+            <strong>แนวตอบ:</strong> โดยการคัดเลือกจัดเก็บเฉพาะข้อมูลที่จำเป็นต่อการสืบค้น (เช่น ชื่อเรื่อง, ผู้แต่ง, หมวดหมู่, เลขเรียกหนังสือ, สถานะ) และตัดข้อมูลที่ไม่จำเป็น เช่น สีของปกหนังสือ ชนิดของกระดาษ หรือประวัติโรงพิมพ์ออกไป ทำให้ฐานข้อมูลมีขนาดกะทัดรัด ประมวลผลและค้นหาผลลัพธ์ได้อย่างรวดเร็ว
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="quiz-card" onclick="this.classList.toggle('open')">
+          <div class="quiz-question">
+            <span>3. ในโครงงานแอปแจ้งเตือนการกินยา เหตุใดจึงต้องมีฟังก์ชัน "เตือนซ้ำ (Snooze)" และแจ้งเตือนไปยังญาติ?</span>
+            <i class="fa-solid fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="quiz-answer">
+            <strong>แนวตอบ:</strong> เพื่อความปลอดภัยสูงสุดของผู้ป่วย เพราะผู้สูงอายุอาจติดธุระ กำลังเดิน หรือไม่ได้ยินเสียงเตือนในครั้งแรก การมีระบบ Snooze เตือนซ้ำทุก 10 นาที และระบบ Fail-Safe แจ้งเตือนไปยังญาติเมื่อผู้ป่วยไม่กดยืนยันเกิน 3 ครั้ง จะช่วยให้คนในครอบครัวสามารถช่วยเหลือได้ทันท่วงที ป้องกันการขาดยา
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="quiz-card" onclick="this.classList.toggle('open')">
+          <div class="quiz-question">
+            <span>4. หากต้องเลือกระหว่าง Web App กับ Mobile App สำหรับผู้สูงอายุ เหตุใดโครงงานกินยาจึงเลือก Mobile App?</span>
+            <i class="fa-solid fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="quiz-answer">
+            <strong>แนวตอบ:</strong> เพราะแอปพลิเคชันแจ้งเตือนการกินยาต้องการเข้าถึงฮาร์ดแวร์ของอุปกรณ์โดยตรง เช่น ระบบนาฬิกาปลุกเบื้องหลัง (Background Alarm Service), มอเตอร์สั่นสะเทือน, ระบบส่งข้อความแจ้งเตือนฉุกเฉิน และการทำงานแบบออฟไลน์เมื่อไม่มีอินเทอร์เน็ต ซึ่ง Mobile App สามารถทำงานส่วนนี้ได้อย่างแม่นยำและเสถียรกว่า
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="quiz-card" onclick="this.classList.toggle('open')">
+          <div class="quiz-question">
+            <span>5. จุดร่วมสำคัญที่สุดในการนำวงจร SDLC มาใช้กับทั้ง 2 โครงงานคืออะไร?</span>
+            <i class="fa-solid fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="quiz-answer">
+            <strong>แนวตอบ:</strong> คือการทำให้กระบวนการพัฒนาโครงงานมีทิศทางที่ชัดเจน เริ่มต้นจากการศึกษาปัญหาและความต้องการจริงของผู้ใช้ (Analysis) มีการวางแผนเวลา (Planning) ออกแบบก่อนลงมือเขียนโค้ด (Design) และต้องผ่านการทดสอบกับผู้ใช้จริง (Testing & UAT) ก่อนนำไปใช้งานจริง ช่วยลดความผิดพลาดและประหยัดเวลา
+          </div>
+        </div>
+
+        <!-- Quiz Action Callout Card -->
+        <div style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(59, 130, 246, 0.04) 100%); border: 2px solid rgba(124, 58, 237, 0.35); border-radius: 16px; padding: 28px 24px; margin-top: 40px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;">
+          <div style="width: 56px; height: 56px; border-radius: 50%; background: #7c3aed; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);">
+            <i class="fa-solid fa-clipboard-check"></i>
+          </div>
+          <div>
+            <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px;">
+              แบบทดสอบวัดผลสัมฤทธิ์ทางการเรียนท้ายหน่วยที่ 2
+            </h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 580px; margin: 0 auto; line-height: 1.6;">
+              ทดสอบความรู้ความเข้าใจ 20 ข้อ (สุ่มโจทย์และตัวเลือก) • จับเวลา 30 นาที • ระบบป้องกันการทุจริต พร้อมบันทึกคะแนนลงฐานข้อมูล Supabase ทันที
+            </p>
+          </div>
+          <a href="index.html?quiz=quiz-unit2" style="background: #7c3aed; color: white; padding: 12px 30px; border-radius: 12px; font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 1.05rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25); transition: all 0.2s ease;">
+            <i class="fa-solid fa-pen-to-square"></i> เริ่มทำแบบทดสอบหน่วยที่ 2 (20 ข้อ)
+          </a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Page Footer -->
+  <footer class="page-footer">
+    <p>สื่อการเรียนรู้วิทยาการคำนวณ ม.4 • หน่วยการเรียนรู้ที่ 2 การประยุกต์ใช้แนวคิดเชิงคำนวณเพื่อพัฒนาโครงงาน</p>
+    <p style="margin-top: 4px; font-size: 0.78rem;">จัดทำตามหลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน (ว 4.2 ม.4/1)</p>
+  </footer>
+
+  <script>
+    // Scroll progress bar
+    window.onscroll = function() {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById("progress-bar").style.width = scrolled + "%";
+      updateTocActive();
+    };
+
+    function updateTocActive() {
+      const sections = document.querySelectorAll('section[id], h3[id], h4[id]');
+      const scrollPos = window.scrollY + 140;
+      
+      sections.forEach(sec => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+        const link = document.querySelector(`.toc-link[href="#${id}"]`);
+        if (link) {
+          if (scrollPos >= top && scrollPos < top + height) {
+            document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        }
+      });
+    }
+
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('csm4-unit2-theme', next);
+      updateThemeBtn(next);
+    }
+
+    function updateThemeBtn(theme) {
+      const icon = document.getElementById('theme-btn-icon');
+      const text = document.getElementById('theme-text');
+      if (theme === 'dark') {
+        icon.className = 'fa-solid fa-sun';
+        icon.style.color = '#38bdf8';
+        text.innerText = 'โหมดสว่าง';
+      } else {
+        icon.className = 'fa-solid fa-moon';
+        icon.style.color = 'inherit';
+        text.innerText = 'โหมดมืด';
+      }
+    }
+
+    // Restore saved theme (Default: dark mode standby)
+    const savedTheme = localStorage.getItem('csm4-unit2-theme') || localStorage.getItem('csm4-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeBtn(savedTheme);
+  </script>
+
+</body>
+</html>

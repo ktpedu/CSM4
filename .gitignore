@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+package-lock.json.bak
+
+# Environment variables & secrets (NEVER commit secrets to Git)
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Uploaded files
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Large binary files (>50MB)
+*TMCS*.pdf
+
+# Scratch & temporary files
+scratch/
+scratch_*
+*.bak
+*.pre_*
+.gemini/

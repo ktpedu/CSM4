@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>หนังสือเรียนอิเล็กทรอนิกส์ (E-Book) เทคโนโลยี (วิทยาการคำนวณ) ม.4 | โรงเรียนวังน้ำเย็นวิทยาคม</title>
+  <link rel="icon" type="image/gif" href="img/LOGOprofile.gif" />
+  <link rel="apple-touch-icon" href="img/LOGOprofile.gif" />
+
+  <!-- Google Fonts: Sarabun, Kanit, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kanit:wght@400;500;600;700;800&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-page: #f8fafc;
+      --bg-book: #ffffff;
+      --bg-sidebar: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --primary: #059669;
+      --primary-dark: #047857;
+      --primary-light: #ecfdf5;
+      --accent-blue: #0284c7;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      --accent-purple: #7c3aed;
+      --font-body: 'Sarabun', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Kanit', sans-serif;
+      --font-mono: 'Inter', monospace;
+      --base-font-size: 16px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    [data-theme="sepia"] {
+      --bg-page: #f4ecd8;
+      --bg-book: #fbf7ee;
+      --bg-sidebar: #efe6ce;
+      --text-main: #433422;
+      --text-muted: #78644e;
+      --border-color: #dfd2b8;
+      --primary: #85531d;
+      --primary-dark: #643e14;
+      --primary-light: #f1e4cb;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #0b1120;
+      --bg-book: #111827;
+      --bg-sidebar: #0f172a;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border-color: #1e293b;
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --primary-light: rgba(16, 185, 129, 0.15);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: var(--base-font-size);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-main);
+      background: var(--bg-page);
+      line-height: 1.75;
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* Top Sticky Navigation Bar */
+    .ebook-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-book);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .topbar-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border-color);
+      object-fit: cover;
+    }
+
+    .topbar-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.05rem;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topbar-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 9999px;
+      letter-spacing: 0.5px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .theme-pill-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .theme-pill-btn:hover {
+      transform: scale(1.15);
+    }
+
+    /* Main Container Layout */
+    .ebook-layout {
+      display: flex;
+      max-width: 1500px;
+      margin: 0 auto;
+      min-height: calc(100vh - 60px);
+    }
+
+    /* Sidebar Navigation */
+    .ebook-sidebar {
+      width: 320px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+      padding: 20px 14px;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar-search-box {
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .sidebar-search-input {
+      width: 100%;
+      padding: 8px 12px 8px 34px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .sidebar-search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-light);
+    }
+
+    .sidebar-search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .toc-group-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin: 18px 8px 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .toc-item {
+      display: block;
+      padding: 9px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      line-height: 1.4;
+      transition: all 0.15s ease;
+      margin-bottom: 3px;
+      border-left: 3px solid transparent;
+    }
+
+    .toc-item:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .toc-item.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      border-left-color: var(--primary);
+    }
+
+    .toc-item-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+
+    /* Content Area */
+    .ebook-content {
+      flex: 1;
+      padding: 40px 60px 100px;
+      max-width: 1020px;
+      margin: 0 auto;
+    }
+
+    /* Book Cover Page */
+    .book-cover {
+      background: linear-gradient(135deg, #064e3b 0%, #065f46 40%, #047857 100%);
+      color: white;
+      border-radius: 24px;
+      padding: 60px 50px;
+      margin-bottom: 50px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .book-cover::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      pointer-events: none;
+    }
+
+    .cover-top-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .cover-title {
+      font-family: var(--font-heading);
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .cover-subtitle {
+      font-size: 1.15rem;
+      opacity: 0.92;
+      max-width: 650px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+
+    .cover-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      font-size: 0.88rem;
+    }
+
+    .cover-meta-item strong {
+      display: block;
+      color: #a7f3d0;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    /* Chapter Header Banner */
+    .chapter-banner {
+      background: var(--bg-book);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 36px 40px;
+      margin: 60px 0 35px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .chapter-banner.unit-header {
+      background: linear-gradient(135deg, rgba(5, 150, 105, 0.08) 0%, rgba(2, 132, 199, 0.05) 100%);
+      border: 2px solid var(--primary);
+    }
+
+    .chapter-num {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .chapter-title {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .chapter-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Section Headings */
+    h2.section-title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin: 36px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h3.subsection-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 26px 0 12px;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    p {
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    /* Visual Callout Box */
+    .callout-box {
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-left: 4px solid var(--primary);
+      background: var(--bg-book);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      border-left-width: 5px;
+    }
+
+    .callout-box.tip {
+      border-left-color: #10b981;
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .callout-box.info {
+      border-left-color: #0284c7;
+      background: rgba(2, 132, 199, 0.05);
+    }
+
+    .callout-box.warning {
+      border-left-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.05);
+    }
+
+    .callout-header {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Diagram Wrap */
+    .diagram-card {
+      background: var(--bg-book);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 28px 0;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .diagram-caption {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    /* 4-Component Grid */
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin: 24px 0;
+    }
+
+    .comp-card {
+      background: var(--bg-book);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .comp-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .comp-card-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      color: white;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .comp-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .comp-card-en {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    /* Comparison Table */
+    .table-container {
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    table.content-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      background: var(--bg-book);
+    }
+
+    table.content-table th, table.content-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    table.content-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-family: var(--font-heading);
+      font-weight: 700;
+    }
+
+    /* Key Takeaway Summary Box */
+    .takeaway-card {
+      background: linear-gradient(135deg, rgba(5, 150, 105, 0.08) 0%, rgba(16, 185, 129, 0.03) 100%);
+      border: 1.5px solid var(--primary);
+      border-radius: 18px;
+      padding: 26px 30px;
+      margin: 40px 0;
+    }
+
+    .takeaway-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .takeaway-list {
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.92rem;
+    }
+
+    /* Review Questions Accordion */
+    .review-qa-card {
+      background: var(--bg-book);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .review-qa-btn {
+      width: 100%;
+      padding: 14px 18px;
+      background: none;
+      border: none;
+      text-align: left;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .review-qa-btn:hover {
+      background: var(--primary-light);
+    }
+
+    .review-qa-body {
+      padding: 0 18px 16px;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      display: none;
+      color: var(--text-main);
+      border-top: 1px dashed var(--border-color);
+      padding-top: 12px;
+    }
+
+    .review-qa-card.open .review-qa-body {
+      display: block;
+    }
+
+    .review-qa-card.open .qa-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Print Styles */
+    @media print {
+      .ebook-topbar, .ebook-sidebar, .action-btn {
+        display: none !important;
+      }
+      .ebook-layout {
+        display: block !important;
+      }
+      .ebook-content {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .chapter-banner {
+        page-break-before: always;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .ebook-sidebar {
+        display: none;
+      }
+      .ebook-sidebar.open-mobile {
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 60px;
+        z-index: 200;
+        width: 85%;
+        max-width: 320px;
+        box-shadow: var(--shadow-lg);
+      }
+      .ebook-content {
+        padding: 20px;
+      }
+      .cover-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+    <style>
+      .fa-solid, .fas, i.fa-solid, i.fas, [class*="fa-solid"], [class*="fas"] {
+        font-family: "Font Awesome 6 Free" !important;
+        font-weight: 900 !important;
+        font-style: normal !important;
+      }
+      .fa-regular, .far, i.fa-regular, i.far, [class*="fa-regular"], [class*="far"] {
+        font-family: "Font Awesome 6 Free" !important;
+        font-weight: 400 !important;
+        font-style: normal !important;
+      }
+      .fa-brands, .fab, i.fa-brands, i.fab, [class*="fa-brands"], [class*="fab"] {
+        font-family: "Font Awesome 6 Brands" !important;
+        font-weight: 400 !important;
+        font-style: normal !important;
+      }
+    </style>
+  </head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="ebook-topbar">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <button class="action-btn" onclick="toggleSidebarMobile()" id="btn-sidebar-toggle" style="display: none;" title="เปิดสารบัญ">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <a href="index.html" class="topbar-brand" title="กลับสู่หน้าหลัก CS-M4">
+        <img src="img/LOGOprofile.gif" alt="Logo" class="topbar-logo" />
+        <span class="topbar-title">
+          วิทยาการคำนวณ ม.4
+          <span class="topbar-badge">E-Book</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="topbar-actions">
+      <!-- Font Size Controls -->
+      <button class="action-btn" onclick="changeFontSize(-1)" title="ลดขนาดตัวอักษร">A-</button>
+      <button class="action-btn" onclick="resetFontSize()" title="ขนาดปกติ">A</button>
+      <button class="action-btn" onclick="changeFontSize(1)" title="เพิ่มขนาดตัวอักษร">A+</button>
+
+      <!-- Theme Controls -->
+      <div style="display: flex; gap: 6px; align-items: center; margin: 0 4px;">
+        <button class="theme-pill-btn" onclick="setTheme('light')" style="background: #ffffff;" title="โหมดสว่าง"></button>
+        <button class="theme-pill-btn" onclick="setTheme('sepia')" style="background: #f4ecd8;" title="โหมดถนอมสายตา"></button>
+        <button class="theme-pill-btn" onclick="setTheme('dark')" style="background: #0f172a;" title="โหมดมืด"></button>
+      </div>
+
+      <button class="action-btn" onclick="window.print()" title="พิมพ์หนังสือ">
+        <i class="fa-solid fa-print"></i> พิมพ์
+      </button>
+      <button class="action-btn" onclick="toggleFullscreen()" title="เปิดเต็มจอ">
+        <i class="fa-solid fa-expand"></i>
+      </button>
+      <a href="index.html" class="action-btn" style="background: var(--primary); color: white; border-color: var(--primary);" title="กลับสู่ศูนย์การเรียนรู้">
+        <i class="fa-solid fa-house"></i> หน้าหลัก
+      </a>
+    </div>
+  </header>
+
+  <!-- Layout Wrap -->
+  <div class="ebook-layout">
+
+    <!-- Left Sidebar: Table of Contents -->
+    <aside class="ebook-sidebar" id="ebook-sidebar">
+      <div class="sidebar-search-box">
+        <i class="fa-solid fa-magnifying-glass sidebar-search-icon"></i>
+        <input type="text" class="sidebar-search-input" id="sidebar-search" placeholder="ค้นหาหัวข้อในหนังสือเรียน..." oninput="filterToc(this.value)" />
+      </div>
+
+      <nav id="toc-nav">
+        <a href="#cover" class="toc-item active"><i class="fa-solid fa-book-open mr-1"></i> หน้าปกและคำนำ</a>
+
+        <div class="toc-group-title"><i class="fa-solid fa-folder-open text-emerald-600"></i> หน่วยที่ 1: แนวคิดเชิงคำนวณ</div>
+        <a href="#unit-1" class="toc-item"><span class="toc-item-badge">ภาพรวม</span> สาระสำคัญและแนวคิดประจำหน่วยที่ 1</a>
+        <a href="#ch-1" class="toc-item"><span class="toc-item-badge">เรื่อง 1</span> แนวคิดเชิงคำนวณ (4 องค์ประกอบ)</a>
+        <a href="#ch-2" class="toc-item"><span class="toc-item-badge">เรื่อง 2</span> วงจรการพัฒนาระบบ (SDLC 5 ขั้น)</a>
+        <a href="#ch-3" class="toc-item"><span class="toc-item-badge">เรื่อง 3</span> การทำเค้าโครงรายงานโครงงาน 5 บท</a>
+
+        <div class="toc-group-title"><i class="fa-solid fa-folder-open text-sky-600"></i> หน่วยที่ 2: การพัฒนาโครงงาน</div>
+        <a href="#unit-2" class="toc-item"><span class="toc-item-badge">ภาพรวม</span> สาระสำคัญและแนวคิดประจำหน่วยที่ 2</a>
+        <a href="#ch-4" class="toc-item"><span class="toc-item-badge">เรื่อง 4</span> กรณีศึกษาที่ 1: เว็บไซต์ห้องสมุดดิจิทัล</a>
+        <a href="#ch-5" class="toc-item"><span class="toc-item-badge">เรื่อง 5</span> กรณีศึกษาที่ 2: แอปแจ้งเตือนการกินยา</a>
+        <a href="#ch-6" class="toc-item"><span class="toc-item-badge">เรื่อง 6</span> การทดสอบ การเผยแพร่ และจริยธรรม</a>
+
+        <div class="toc-group-title"><i class="fa-solid fa-bookmark text-amber-500"></i> ภาคผนวกและเอกสารอ้างอิง</div>
+        <a href="#appendix-glossary" class="toc-item"><i class="fa-solid fa-spell-check mr-1"></i> อภิธานศัพท์เทคโนโลยี</a>
+        <a href="#appendix-references" class="toc-item"><i class="fa-solid fa-link mr-1"></i> บรรณานุกรมอ้างอิง APA 7th</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content Reader -->
+    <main class="ebook-content" id="ebook-content">
+
+      <!-- ===================================================================
+           COVER & FRONT MATTER
+           =================================================================== -->
+      <section id="cover" class="book-cover">
+        <div class="cover-top-tag">
+          <i class="fa-solid fa-graduation-cap"></i> หนังสือเรียนอิเล็กทรอนิกส์ (E-Book) รายวิชาพื้นฐาน
+        </div>
+        <h1 class="cover-title">
+          เทคโนโลยี (วิทยาการคำนวณ) ม.4
+        </h1>
+        <p class="cover-subtitle">
+          การประยุกต์ใช้แนวคิดเชิงคำนวณในการพัฒนาโครงงานเทคโนโลยีสารสนเทศอย่างเป็นระบบและสร้างสรรค์ เชื่อมโยงบริบทในชีวิตจริง
+        </p>
+
+        <div class="cover-meta">
+          <div class="cover-meta-item">
+            <strong>กลุ่มสาระการเรียนรู้</strong>
+            วิทยาศาสตร์และเทคโนโลยี
+          </div>
+          <div class="cover-meta-item">
+            <strong>มาตรฐานและตัวชี้วัด</strong>
+            มาตรฐาน ว 4.2 ตัวชี้วัด ม.4/1
+          </div>
+          <div class="cover-meta-item">
+            <strong>สถาบันการศึกษา</strong>
+            โรงเรียนวังน้ำเย็นวิทยาคม
+          </div>
+          <div class="cover-meta-item">
+            <strong>ผู้เรียบเรียงและพัฒนา</strong>
+            ครูปณิฏฐา บุญยงค์
+          </div>
+        </div>
+      </section>
+
+      <!-- คำนำ -->
+      <section style="margin-bottom: 50px;">
+        <h2 class="section-title"><i class="fa-solid fa-feather text-emerald-600"></i> คำนำและคำชี้แจงสำหรับนักเรียน</h2>
+        <p>
+          หนังสือเรียนอิเล็กทรอนิกส์ (E-Book) รายวิชาพื้นฐานวิทยาศาสตร์และเทคโนโลยี <strong>เทคโนโลยี (วิทยาการคำนวณ) ชั้นมัธยมศึกษาปีที่ 4</strong> เล่มนี้ จัดทำขึ้นเพื่อเป็นสื่อการเรียนรู้หลักสำหรับนักเรียนในการศึกษา ค้นคว้า และฝึกปฏิบัติการแก้ปัญหาด้วยตนเอง โดยมุ่งเน้นการพัฒนาสมรรถนะสำคัญตาม <strong>มาตรฐาน ว 4.2 ม.4/1: "ประยุกต์ใช้แนวคิดเชิงคำนวณในการพัฒนาโครงงานที่มีการบูรณาการกับวิชาอื่นอย่างสร้างสรรค์ และเชื่อมโยงกับชีวิตจริง"</strong>
+        </p>
+        <p>
+          เนื้อหาภายในเล่มแบ่งออกเป็น 2 หน่วยการเรียนรู้หลัก จำนวน 6 เรื่องการเรียนรู้ ครอบคลุมทั้งภาคทฤษฎีและภาคปฏิบัติ ประกอบด้วย แผนภาพเชิงมโนทัศน์ (Visual Diagrams), ผังงานระบบ (System Flowcharts), กรณีศึกษาในบริบทจริงของโรงเรียนและชุมชน พร้อมคำถามทบทวนความเข้าใจและแนวคำตอบ ผู้เรียนสามารถใช้ประกอบการเรียนรู้ควบคู่กับระบบแพลตฟอร์มออนไลน์ได้อย่างมีประสิทธิภาพ
+        </p>
+      </section>
+
+
+      <!-- ===================================================================
+           UNIT 1: แนวคิดเชิงคำนวณในการพัฒนาโครงงาน
+           =================================================================== -->
+      <section id="unit-1" class="chapter-banner unit-header">
+        <span class="chapter-num"><i class="fa-solid fa-cube mr-1"></i> หน่วยการเรียนรู้ที่ 1</span>
+        <h2 class="chapter-title">แนวคิดเชิงคำนวณในการพัฒนาโครงงาน</h2>
+        <p class="chapter-desc">
+          ศึกษาแก่นสาระสำคัญของแนวคิดเชิงคำนวณทั้ง 4 องค์ประกอบ การนำกระบวนการทางวิศวกรรมซอฟต์แวร์ด้วยวงจรการพัฒนาระบบ (SDLC 5 ขั้นตอน) มาใช้แก้ปัญหา และระเบียบวิธีการเขียนรายงานโครงงานคอมพิวเตอร์ 5 บทตามมาตรฐานวิชาการ
+        </p>
+      </section>
+
+      <!-- -------------------------------------------------------------------
+           CHAPTER 1: COMPUTATIONAL THINKING
+           ------------------------------------------------------------------- -->
+      <article id="ch-1" style="margin-bottom: 70px;">
+        <span class="chapter-num"><i class="fa-solid fa-book-open mr-1"></i> เรื่องที่ 1</span>
+        <h2 class="chapter-title">แนวคิดเชิงคำนวณกับการแก้ปัญหา (Computational Thinking)</h2>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 1.1 ความหมายและจุดมุ่งหมายของแนวคิดเชิงคำนวณ</h3>
+        <p>
+          <strong>แนวคิดเชิงคำนวณ (Computational Thinking: CT)</strong> ไม่ใช่การฝึกให้นักเรียนคิดเหมือนเครื่องคอมพิวเตอร์ แต่เป็น <em>"กระบวนการคิดวิเคราะห์ในการแก้ปัญหาอย่างเป็นระบบ มีตรรกะ และมีขั้นตอนวิธีที่ชัดเจน"</em> เพื่อให้ได้แนวทางแก้ไขปัญหาที่ทั้งมนุษย์และระบบคอมพิวเตอร์สามารถนำไปปฏิบัติได้อย่างมีประสิทธิภาพและเกิดผลสัมฤทธิ์สูงสุด
+        </p>
+
+        <div class="callout-box info">
+          <div class="callout-header"><i class="fa-solid fa-lightbulb"></i> ข้อสังเกตสำคัญ</div>
+          แนวคิดเชิงคำนวณเป็นทักษะชีวิตขั้นพื้นฐาน (Foundational Skill) ที่ไม่จำกัดเฉพาะการเขียนโปรแกรม แต่นำไปใช้ได้กับการจัดระเบียบความคิด การวางแผนเวลา การบริหารโครงการ และการตัดสินใจในชีวิตประจำวัน
+        </div>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 1.2 องค์ประกอบของแนวคิดเชิงคำนวณทั้ง 4 ด้าน</h3>
+        <p>
+          ตามมาตรฐานหลักสูตรแกนกลางฯ แนวคิดเชิงคำนวณประกอบด้วย 4 องค์ประกอบสำคัญที่เชื่อมโยงและสนับสนุนซึ่งกันและกันอย่างเป็นระบบ ดังนี้:
+        </p>
+
+        <!-- 4 Components Cards -->
+        <div class="comp-grid">
+          <!-- 1. Decomposition -->
+          <div class="comp-card">
+            <div class="comp-card-badge" style="background: #0284c7;">1</div>
+            <div class="comp-card-title">การแยกส่วนประกอบและการย่อยปัญหา</div>
+            <div class="comp-card-en">Decomposition</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              การจำแนกปัญหาใหญ่หรือระบบงานที่ซับซ้อนออกเป็นส่วนประกอบย่อยๆ ที่เป็นอิสระต่อกัน เพื่อให้สามารถบริหารจัดการ ทำความเข้าใจ และแก้ไขปัญหาทีละส่วนได้อย่างมีประสิทธิภาพ
+            </p>
+          </div>
+
+          <!-- 2. Pattern Recognition -->
+          <div class="comp-card">
+            <div class="comp-card-badge" style="background: #059669;">2</div>
+            <div class="comp-card-title">การหารูปแบบของปัญหา</div>
+            <div class="comp-card-en">Pattern Recognition</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              การค้นหาความเหมือน ความคล้ายคลึง หรือแบบแผนพฤติกรรมที่เกิดขึ้นซ้ำๆ ของชุดข้อมูล เพื่อนำประสบการณ์หรือรูปแบบวิธีแก้เดิมมาใช้คาดการณ์และแก้ปัญหาใหม่ได้ทันท่วงที
+            </p>
+          </div>
+
+          <!-- 3. Abstraction -->
+          <div class="comp-card">
+            <div class="comp-card-badge" style="background: #d97706;">3</div>
+            <div class="comp-card-title">การคิดเชิงนามธรรม</div>
+            <div class="comp-card-en">Abstraction</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              การคัดเลือกเฉพาะสาระสำคัญและคุณลักษณะที่จำเป็นต่อการแก้ปัญหา พร้อมทั้งตัดรายละเอียดปลีกย่อยที่ไม่เกี่ยวข้องออกไป เพื่อสร้างเป็นแบบจำลองแนวคิด (Model) ที่กระชับ
+            </p>
+          </div>
+
+          <!-- 4. Algorithm Design -->
+          <div class="comp-card">
+            <div class="comp-card-badge" style="background: #e11d48;">4</div>
+            <div class="comp-card-title">การออกแบบขั้นตอนวิธี</div>
+            <div class="comp-card-en">Algorithm Design</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              การกำหนดลำดับขั้นตอนการปฏิบัติงานเพื่อแก้ปัญหาอย่างชัดเจน เรียงตามลำดับก่อน-หลัง ไม่กำกวม มีเงื่อนไข และมีจุดสิ้นสุดที่แน่นอน โดยสามารถนำไปถ่ายทอดเป็นรหัสลำลองหรือผังงานได้
+            </p>
+          </div>
+        </div>
+
+        <!-- SVG 1: CT Integration Diagram -->
+        <div class="diagram-card">
+          <svg viewBox="0 0 800 240" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="max-width: 800px; font-family: 'Sarabun', sans-serif;">
+            <rect x="10" y="10" width="780" height="220" rx="16" fill="rgba(5, 150, 105, 0.04)" stroke="#cbd5e1" stroke-width="1.5" />
+            
+            <!-- Box 1 -->
+            <rect x="35" y="45" width="160" height="150" rx="12" fill="#ffffff" stroke="#0284c7" stroke-width="2" />
+            <circle cx="115" cy="80" r="24" fill="#e0f2fe" />
+            <text x="115" y="87" fill="#0284c7" font-size="16" font-weight="bold" text-anchor="middle">1</text>
+            <text x="115" y="125" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">Decomposition</text>
+            <text x="115" y="148" fill="#475569" font-size="11" text-anchor="middle">แตกปัญหาใหญ่</text>
+            <text x="115" y="168" fill="#0284c7" font-size="10" text-anchor="middle">เป็นระบบย่อยๆ</text>
+
+            <!-- Arrow 1 -->
+            <path d="M 200 120 L 225 120" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#arrow)" />
+
+            <!-- Box 2 -->
+            <rect x="230" y="45" width="160" height="150" rx="12" fill="#ffffff" stroke="#059669" stroke-width="2" />
+            <circle cx="310" cy="80" r="24" fill="#d1fae5" />
+            <text x="310" y="87" fill="#059669" font-size="16" font-weight="bold" text-anchor="middle">2</text>
+            <text x="310" y="125" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">Pattern</text>
+            <text x="310" y="148" fill="#475569" font-size="11" text-anchor="middle">ค้นหาแบบแผน</text>
+            <text x="310" y="168" fill="#059669" font-size="10" text-anchor="middle">เทียบเคียงวิธีแก้</text>
+
+            <!-- Arrow 2 -->
+            <path d="M 395 120 L 420 120" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#arrow)" />
+
+            <!-- Box 3 -->
+            <rect x="425" y="45" width="160" height="150" rx="12" fill="#ffffff" stroke="#d97706" stroke-width="2" />
+            <circle cx="505" cy="80" r="24" fill="#fef3c7" />
+            <text x="505" y="87" fill="#d97706" font-size="16" font-weight="bold" text-anchor="middle">3</text>
+            <text x="505" y="125" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">Abstraction</text>
+            <text x="505" y="148" fill="#475569" font-size="11" text-anchor="middle">กรองสาระสำคัญ</text>
+            <text x="505" y="168" fill="#d97706" font-size="10" text-anchor="middle">ตัดสิ่งรบกวนออก</text>
+
+            <!-- Arrow 3 -->
+            <path d="M 590 120 L 615 120" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#arrow)" />
+
+            <!-- Box 4 -->
+            <rect x="620" y="45" width="150" height="150" rx="12" fill="#ffffff" stroke="#e11d48" stroke-width="2" />
+            <circle cx="695" cy="80" r="24" fill="#ffe4e6" />
+            <text x="695" y="87" fill="#e11d48" font-size="16" font-weight="bold" text-anchor="middle">4</text>
+            <text x="695" y="125" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">Algorithm</text>
+            <text x="695" y="148" fill="#475569" font-size="11" text-anchor="middle">ออกแบบขั้นตอน</text>
+            <text x="695" y="168" fill="#e11d48" font-size="10" text-anchor="middle">ได้ผลลัพธ์แน่นอน</text>
+          </svg>
+          <div class="diagram-caption">ภาพที่ 1.1: โครงสร้างความสัมพันธ์และลำดับการประยุกต์ใช้ 4 องค์ประกอบของแนวคิดเชิงคำนวณ</div>
+        </div>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 1.3 การถ่ายทอดขั้นตอนวิธี: รหัสลำลอง (Pseudocode) และผังงาน (Flowchart)</h3>
+        <p>
+          เมื่อได้ขั้นตอนวิธีในการแก้ปัญหาแล้ว ผู้พัฒนาจำเป็นต้องถ่ายทอดความคิดออกมาให้ผู้อื่นและสมาชิกในทีมเข้าใจตรงกัน โดยเครื่องมือหลัก 2 ชนิด ได้แก่:
+        </p>
+
+        <div class="table-container">
+          <table class="content-table">
+            <thead>
+              <tr>
+                <th style="width: 22%;">เครื่องมือ</th>
+                <th style="width: 38%;">ลักษณะและข้อกำหนด</th>
+                <th style="width: 40%;">ตัวอย่างการนำไปใช้</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>รหัสลำลอง<br>(Pseudocode)</strong></td>
+                <td>การอธิบายขั้นตอนการทำงานด้วยภาษาธรรมชาติกึ่งโครงสร้าง ไม่มีไวยากรณ์คอมพิวเตอร์ที่เข้มงวด มนุษย์อ่านเข้าใจง่าย</td>
+                <td>
+                  <code style="font-size: 0.8rem; background: var(--primary-light); padding: 4px 8px; border-radius: 6px; display: block;">
+                    เริ่มต้น<br>
+                    &nbsp;&nbsp;รับค่า Score<br>
+                    &nbsp;&nbsp;ถ้า Score >= 50 แสดงผล "ผ่าน"<br>
+                    &nbsp;&nbsp;มิฉะนั้น แสดงผล "ไม่ผ่าน"<br>
+                    สิ้นสุด
+                  </code>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>ผังงานมาตรฐาน<br>(Flowchart)</strong></td>
+                <td>การใช้รูปสัญลักษณ์เรขาคณิตมาตรฐานตามข้อกำหนดของ ANSI/ISO เพื่อแสดงลำดับและทิศทางการไหลของข้อมูล</td>
+                <td>ใช้สัญลักษณ์ Terminal, Process, Decision, Data Input/Output และทิศทางลูกศร</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 1.4 โครงสร้างการควบคุมการทำงาน 3 รูปแบบ</h3>
+        <p>
+          ขั้นตอนวิธีมาตรฐานทุกชนิดสามารถสังเคราะห์ขึ้นจากโครงสร้างควบคุมพื้นฐาน 3 รูปแบบ ดังต่อไปนี้:
+        </p>
+        <ol style="padding-left: 24px; line-height: 1.8; margin-bottom: 20px;">
+          <li><strong>โครงสร้างแบบเรียงลำดับ (Sequence Structure):</strong> การทำงานของคำสั่งเรียงตามลำดับจากบนลงล่าง ทีละคำสั่ง โดยไม่มีการข้ามขั้นตอน</li>
+          <li><strong>โครงสร้างแบบทางเลือก (Selection / Decision Structure):</strong> การตรวจสอบเงื่อนไขทางตรรกะ หากผลเป็นจริง (True) จะทำคำสั่งหนึ่ง หากเป็นเท็จ (False) จะทำอีกคำสั่งหนึ่ง เช่น คำสั่ง <code>IF-THEN-ELSE</code></li>
+          <li><strong>โครงสร้างแบบวนซ้ำ (Iteration / Repetition Structure):</strong> การทำคำสั่งซ้ำตราบเท่าที่เงื่อนไขยังเป็นจริง เช่น โครงสร้าง <code>WHILE Loop</code> หรือการทำซ้ำตามจำนวนรอบที่ระบุแน่นอน</li>
+        </ol>
+
+        <!-- Chapter 1 Key Takeaways -->
+        <div class="takeaway-card">
+          <div class="takeaway-title"><i class="fa-solid fa-clipboard-check"></i> สรุปประเด็นสำคัญประจำเรื่องที่ 1</div>
+          <ul class="takeaway-list">
+            <li>แนวคิดเชิงคำนวณประกอบด้วย 4 องค์ประกอบ: การแยกย่อย (Decomposition), การหารูปแบบ (Pattern), การคิดเชิงนามธรรม (Abstraction) และการออกแบบขั้นตอนวิธี (Algorithm)</li>
+            <li>การคิดเชิงนามธรรมคือการคัดกรองเฉพาะ "สาระสำคัญ" และตัดรายละเอียดปลีกย่อยที่ไม่จำเป็นออกไป</li>
+            <li>ขั้นตอนวิธีที่ดีต้องมีความชัดเจน ไม่กำกวม มีลำดับแน่นอน และมีจุดสิ้นสุดเสมอ</li>
+          </ul>
+        </div>
+
+        <!-- Review QA Accordion -->
+        <div style="margin-top: 24px;">
+          <h4 style="font-family: var(--font-heading); font-size: 1rem; margin-bottom: 12px; font-weight: 700;">
+            <i class="fa-solid fa-circle-question text-emerald-600"></i> คำถามชวนคิดทบทวนท้ายเรื่องที่ 1:
+          </h4>
+          
+          <div class="review-qa-card">
+            <button class="review-qa-btn" onclick="this.parentElement.classList.toggle('open')">
+              <span>1. เหตุใดการคิดเชิงนามธรรม (Abstraction) จึงมีความสำคัญอย่างยิ่งต่อการออกแบบระบบฐานข้อมูล?</span>
+              <i class="fa-solid fa-chevron-down qa-icon"></i>
+            </button>
+            <div class="review-qa-body">
+              <strong>แนวคำตอบครูผู้สอน:</strong> เพราะข้อมูลในโลกความเป็นจริงมีรายละเอียดมหาศาล หากไม่ใช้ Abstraction ฐานข้อมูลจะเต็มไปด้วยข้อมูลที่ไม่เกี่ยวข้อง (เช่น สีผิว ส่วนสูง สีผม ในระบบยืมคืนหนังสือ) ทำให้สิ้นเปลืองพื้นที่จัดเก็บและสืบค้นข้อมูลล่าช้า การตัดทอนเหลือเฉพาะฟิลด์ที่จำเป็น (รหัสนักเรียน, ชื่อ, รหัสหนังสือ) จึงช่วยให้ระบบประมวลผลได้อย่างรวดเร็วและแม่นยำ
+            </div>
+          </div>
+
+          <div class="review-qa-card">
+            <button class="review-qa-btn" onclick="this.parentElement.classList.toggle('open')">
+              <span>2. รหัสลำลอง (Pseudocode) แตกต่างจากภาษาโปรแกรมคอมพิวเตอร์จริงอย่างไร?</span>
+              <i class="fa-solid fa-chevron-down qa-icon"></i>
+            </button>
+            <div class="review-qa-body">
+              <strong>แนวคำตอบครูผู้สอน:</strong> รหัสลำลองเขียนด้วยภาษาข้อความธรรมชาติที่มนุษย์เข้าใจง่าย เพื่อจำลองขั้นตอนวิธีทางตรรกะโดยไม่ต้องกังวลเรื่องไวยากรณ์ (Syntax) ที่เคร่งครัด ขณะที่ภาษาโปรแกรมจริง (เช่น Python, JavaScript) มีไวยากรณ์ตายตัวและสามารถนำไปคอมไพล์ให้คอมพิวเตอร์ประมวลผลได้ทันที
+            </div>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- -------------------------------------------------------------------
+           CHAPTER 2: SDLC 5 STEPS
+           ------------------------------------------------------------------- -->
+      <article id="ch-2" style="margin-bottom: 70px;">
+        <span class="chapter-num"><i class="fa-solid fa-book-open mr-1"></i> เรื่องที่ 2</span>
+        <h2 class="chapter-title">การพัฒนาโครงงานด้วยวงจรพัฒนาระบบ (SDLC 5 ขั้นตอน)</h2>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 2.1 วงจรการพัฒนาระบบ (SDLC) คืออะไร?</h3>
+        <p>
+          <strong>วงจรการพัฒนาระบบ (System Development Life Cycle: SDLC)</strong> คือ ระเบียบวิธีและกระบวนการทำงานที่เป็นมาตรฐานสากลทางวิศวกรรมซอฟต์แวร์ ซึ่งกำหนดขั้นตอนการทำงานตั้งแต่เริ่มต้นค้นหาปัญหา ไปจนถึงการส่งมอบและการดูแลรักษาระบบอย่างต่อเนื่อง ช่วยให้ทีมพัฒนาบริหารเวลา จัดสรรทรัพยากร และควบคุมคุณภาพของโครงงานให้ประสบความสำเร็จตามเป้าหมาย
+        </p>
+
+        <!-- SVG 2: SDLC Cycle Diagram -->
+        <div class="diagram-card">
+          <svg viewBox="0 0 800 240" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="max-width: 800px; font-family: 'Sarabun', sans-serif;">
+            <rect x="10" y="10" width="780" height="220" rx="16" fill="rgba(2, 132, 199, 0.04)" stroke="#cbd5e1" stroke-width="1.5" />
+            
+            <!-- Step 1 -->
+            <rect x="25" y="40" width="135" height="155" rx="10" fill="#ffffff" stroke="#0284c7" stroke-width="2" />
+            <text x="92" y="68" fill="#0284c7" font-size="12" font-weight="bold" text-anchor="middle">ขั้นที่ 1</text>
+            <text x="92" y="92" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">การวางแผน</text>
+            <text x="92" y="110" fill="#64748b" font-size="11" text-anchor="middle">(Planning)</text>
+            <rect x="35" y="125" width="115" height="58" rx="6" fill="#f0f9ff" />
+            <text x="92" y="145" fill="#0369a1" font-size="10" text-anchor="middle">ระบุปัญหา/เป้าหมาย</text>
+            <text x="92" y="165" fill="#0369a1" font-size="10" text-anchor="middle">Gantt Chart</text>
+
+            <!-- Arrow 1 -->
+            <path d="M 162 118 L 178 118" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Step 2 -->
+            <rect x="180" y="40" width="135" height="155" rx="10" fill="#ffffff" stroke="#059669" stroke-width="2" />
+            <text x="247" y="68" fill="#059669" font-size="12" font-weight="bold" text-anchor="middle">ขั้นที่ 2</text>
+            <text x="247" y="92" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">การวิเคราะห์</text>
+            <text x="247" y="110" fill="#64748b" font-size="11" text-anchor="middle">(Analysis)</text>
+            <rect x="190" y="125" width="115" height="58" rx="6" fill="#ecfdf5" />
+            <text x="247" y="145" fill="#065f46" font-size="10" text-anchor="middle">Requirements</text>
+            <text x="247" y="165" fill="#065f46" font-size="10" text-anchor="middle">Context / DFD</text>
+
+            <!-- Arrow 2 -->
+            <path d="M 317 118 L 333 118" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Step 3 -->
+            <rect x="335" y="40" width="135" height="155" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="2" />
+            <text x="402" y="68" fill="#d97706" font-size="12" font-weight="bold" text-anchor="middle">ขั้นที่ 3</text>
+            <text x="402" y="92" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">การออกแบบ</text>
+            <text x="402" y="110" fill="#64748b" font-size="11" text-anchor="middle">(Design)</text>
+            <rect x="345" y="125" width="115" height="58" rx="6" fill="#fffbeb" />
+            <text x="402" y="145" fill="#92400e" font-size="10" text-anchor="middle">ผังงาน / ERD</text>
+            <text x="402" y="165" fill="#92400e" font-size="10" text-anchor="middle">UI Wireframe</text>
+
+            <!-- Arrow 3 -->
+            <path d="M 472 118 L 488 118" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Step 4 -->
+            <rect x="490" y="40" width="135" height="155" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="2" />
+            <text x="557" y="68" fill="#7c3aed" font-size="12" font-weight="bold" text-anchor="middle">ขั้นที่ 4</text>
+            <text x="557" y="92" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">พัฒนา/ทดสอบ</text>
+            <text x="557" y="110" fill="#64748b" font-size="11" text-anchor="middle">(Dev & Test)</text>
+            <rect x="500" y="125" width="115" height="58" rx="6" fill="#f5f3ff" />
+            <text x="557" y="145" fill="#5b21b6" font-size="10" text-anchor="middle">เขียนโปรแกรม/โค้ด</text>
+            <text x="557" y="165" fill="#5b21b6" font-size="10" text-anchor="middle">Unit / UAT Testing</text>
+
+            <!-- Arrow 4 -->
+            <path d="M 627 118 L 643 118" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Step 5 -->
+            <rect x="645" y="40" width="130" height="155" rx="10" fill="#ffffff" stroke="#e11d48" stroke-width="2" />
+            <text x="710" y="68" fill="#e11d48" font-size="12" font-weight="bold" text-anchor="middle">ขั้นที่ 5</text>
+            <text x="710" y="92" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">การบำรุงรักษา</text>
+            <text x="710" y="110" fill="#64748b" font-size="11" text-anchor="middle">(Maintenance)</text>
+            <rect x="655" y="125" width="110" height="58" rx="6" fill="#fff1f2" />
+            <text x="710" y="145" fill="#9f1239" font-size="10" text-anchor="middle">แก้ไข Bug / อัปเดต</text>
+            <text x="710" y="165" fill="#9f1239" font-size="10" text-anchor="middle">สำรองข้อมูล Backup</text>
+          </svg>
+          <div class="diagram-caption">ภาพที่ 2.1: วงจรการพัฒนาระบบ 5 ขั้นตอน (System Development Life Cycle: SDLC)</div>
+        </div>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 2.2 รายละเอียดและกิจกรรมสำคัญในแต่ละขั้นตอน</h3>
+
+        <div style="display: flex; flex-direction: column; gap: 16px; margin: 20px 0;">
+          <div class="callout-box" style="border-left-color: #0284c7;">
+            <strong>1. ขั้นตอนการวางแผน (Planning Phase):</strong>
+            สำรวจและระบุปัญหาที่แท้จริง กำหนดวัตถุประสงค์และขอบเขตโครงงาน ศึกษาความเป็นไปได้ (Feasibility Study) ทั้งด้านเทคโนโลยี งบประมาณ กฎหมาย และกรอบเวลา พร้อมจัดทำแผนภูมิแกนต์ (Gantt Chart)
+          </div>
+
+          <div class="callout-box" style="border-left-color: #059669;">
+            <strong>2. ขั้นตอนการวิเคราะห์ (Analysis Phase):</strong>
+            รวบรวมข้อกำหนดความต้องการของผู้ใช้ (User Requirements) จำแนกเป็น Functional Requirements (ระบบต้องทำอะไร) และ Non-Functional Requirements (สมรรถนะและความปลอดภัย) พร้อมจำลองกระบวนการด้วยแผนภาพบริบท (Context Diagram) และแผนภาพกระแสข้อมูล (DFD)
+          </div>
+
+          <div class="callout-box" style="border-left-color: #d97706;">
+            <strong>3. ขั้นตอนการออกแบบ (Design Phase):</strong>
+            สร้างแบบจำลองพิมพ์เขียวระบบ ออกแบบโครงสร้างฐานข้อมูลเชิงสัมพันธ์ (ER Diagram), กำหนดคีย์หลัก (Primary Key), ออกแบบผังงาน และสร้างแบบร่างหน้าจอส่วนประสานผู้ใช้ (UI Mockup / Wireframe) ตามหลัก User-friendly
+          </div>
+
+          <div class="callout-box" style="border-left-color: #7c3aed;">
+            <strong>4. ขั้นตอนการพัฒนาและทดสอบระบบ (Implementation & Testing Phase):</strong>
+            ลงมือเขียนชุดคำสั่งโปรแกรมตามพิมพ์เขียวที่ออกแบบไว้ และดำเนินการทดสอบระบบอย่างเข้มงวด 4 ระดับ (Unit Test, Integration Test, System Test และ UAT) เพื่อขจัดข้อผิดพลาด (Debugging) ก่อนนำไปติดตั้งใช้งานจริง
+          </div>
+
+          <div class="callout-box" style="border-left-color: #e11d48;">
+            <strong>5. ขั้นตอนการบำรุงรักษา (Maintenance Phase):</strong>
+            ติดตามดูแลระบบภายหลังเปิดใช้งานจริง แก้ไขข้อผิดพลาดที่ตรวจพบ (Corrective Maintenance) ปรับปรุงระบบให้เข้ากับสภาพแวดล้อมใหม่ (Adaptive) และกำหนดนโยบายสำรองข้อมูล (Data Backup) สม่ำเสมอ
+          </div>
+        </div>
+
+        <!-- Takeaways -->
+        <div class="takeaway-card">
+          <div class="takeaway-title"><i class="fa-solid fa-clipboard-check"></i> สรุปประเด็นสำคัญประจำเรื่องที่ 2</div>
+          <ul class="takeaway-list">
+            <li>ขั้นตอนการวิเคราะห์ตอบคำถามว่า <em>"ระบบต้องทำอะไร (What to do)"</em> ส่วนขั้นตอนการออกแบบตอบว่า <em>"จะสร้างระบบด้วยวิธีการใด (How to do)"</em></li>
+            <li>Gantt Chart เป็นเครื่องมือวางแผนที่แสดงกิจกรรมควบคู่กับแกนเวลา ช่วยป้องกันปัญหางานส่งล่าช้า</li>
+            <li>การทดสอบระดับ UAT (User Acceptance Testing) ทำโดยผู้ใช้งานจริง เพื่อให้ความเห็นชอบก่อนนำระบบไปใช้งานจริง</li>
+          </ul>
+        </div>
+      </article>
+
+
+      <!-- -------------------------------------------------------------------
+           CHAPTER 3: 5-CHAPTER PROJECT REPORT
+           ------------------------------------------------------------------- -->
+      <article id="ch-3" style="margin-bottom: 70px;">
+        <span class="chapter-num"><i class="fa-solid fa-book-open mr-1"></i> เรื่องที่ 3</span>
+        <h2 class="chapter-title">การจัดทำเค้าโครงและรายงานโครงงานคอมพิวเตอร์ 5 บท</h2>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 3.1 โครงสร้างรายงานโครงงาน 3 ส่วนหลักตามมาตรฐาน สพฐ.</h3>
+        <p>
+          การจัดทำเอกสารรายงานโครงงานเชิงวิชาการตามมาตรฐานของสำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน (สพฐ.) มีโครงสร้างบังคับ 3 ส่วนหลัก ได้แก่:
+        </p>
+
+        <div class="table-container">
+          <table class="content-table">
+            <thead>
+              <tr>
+                <th style="width: 25%;">ส่วนของรายงาน</th>
+                <th style="width: 75%;">รายละเอียดและองค์ประกอบย่อย</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. ส่วนประกอบตอนต้น<br>(Preliminary)</strong></td>
+                <td>
+                  ปกนอก, ใบรองปก, ปกใน, <strong>บทคัดย่อ (Abstract)</strong> ภาษาไทยและภาษาอังกฤษ, กิตติกรรมประกาศ (ขอบคุณผู้สนับสนุน), สารบัญเนื้อหา, สารบัญตาราง และสารบัญภาพ
+                </td>
+              </tr>
+              <tr>
+                <td><strong>2. ส่วนเนื้อหา 5 บท<br>(Body of Report)</strong></td>
+                <td>
+                  • <strong>บทที่ 1 บทนำ:</strong> ความเป็นมาและความสำคัญ, วัตถุประสงค์ (SMART), ขอบเขต, ประโยชน์ที่คาดว่าจะได้รับ, นิยามศัพท์เฉพาะ<br>
+                  • <strong>บทที่ 2 เอกสารและงานวิจัยที่เกี่ยวข้อง:</strong> ทฤษฎี เทคโนโลยี ซอฟต์แวร์ และงานวิจัยสนับสนุน<br>
+                  • <strong>บทที่ 3 วิธีดำเนินการทำโครงงาน:</strong> เครื่องมือ/อุปกรณ์ ขั้นตอน SDLC 5 ขั้นตอน และผังงานระบบ<br>
+                  • <strong>บทที่ 4 ผลการดำเนินงาน:</strong> นำเสนอชิ้นงาน ภาพหน้าจอระบบ ตารางสถิติผลการทดสอบ<br>
+                  • <strong>บทที่ 5 สรุปผล อภิปรายผล และข้อเสนอแนะ:</strong> สรุปผลสัมฤทธิ์ อภิปรายเหตุผลเชิงวิชาการ และข้อเสนอแนะพัฒนาต่อ
+                </td>
+              </tr>
+              <tr>
+                <td><strong>3. ส่วนประกอบตอนท้าย<br>(Back Matter)</strong></td>
+                <td>
+                  <strong>บรรณานุกรม (References)</strong> ตามรูปแบบสากล APA 7th Edition, ภาคผนวก (เช่น แบบสอบถามความพึงพอใจ, โค้ดสำคัญ), และประวัติผู้จัดทำโครงงาน
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 3.2 ตัวอย่างการเขียนอ้างอิงบรรณานุกรมมาตรฐาน APA 7th Edition</h3>
+        <div class="callout-box" style="font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.8;">
+          <strong>• การอ้างอิงหนังสือ / เอกสารหลักสูตร:</strong><br>
+          กระทรวงศึกษาธิการ. (2560). <em>ตัวชี้วัดและสาระการเรียนรู้แกนกลาง กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี (ฉบับปรับปรุง พ.ศ. 2560)</em>. โรงพิมพ์ชุมนุมสหกรณ์การเกษตรแห่งประเทศไทย.<br><br>
+          <strong>• การอ้างอิงวารสารวิชาการ:</strong><br>
+          บุญยงค์, ป. (2568). การพัฒนาทักษะแนวคิดเชิงคำนวณผ่านโครงงานเทคโนโลยีสารสนเทศ. <em>วารสารนวัตกรรมการศึกษา</em>, 12(3), 45-58.
+        </div>
+      </article>
+
+
+      <!-- ===================================================================
+           UNIT 2: การประยุกต์ใช้แนวคิดเชิงคำนวณเพื่อพัฒนาโครงงาน
+           =================================================================== -->
+      <section id="unit-2" class="chapter-banner unit-header" style="border-color: var(--accent-blue);">
+        <span class="chapter-num" style="color: var(--accent-blue);"><i class="fa-solid fa-laptop-code mr-1"></i> หน่วยการเรียนรู้ที่ 2</span>
+        <h2 class="chapter-title">การประยุกต์ใช้แนวคิดเชิงคำนวณเพื่อพัฒนาโครงงาน</h2>
+        <p class="chapter-desc">
+          ศึกษาและฝึกปฏิบัติการพัฒนาโครงงานจริงผ่าน 2 กรณีศึกษาเชิงลึก: โครงงานเว็บไซต์ห้องสมุดดิจิทัล (Web App) และโครงงานแอปพลิเคชันแจ้งเตือนการกินยา (Health Tech) พร้อมหลักการทดสอบ การประเมินผล และจริยธรรมดิจิทัล
+        </p>
+      </section>
+
+      <!-- -------------------------------------------------------------------
+           CHAPTER 4: CASE STUDY 1 - LIBRARY WEB APP
+           ------------------------------------------------------------------- -->
+      <article id="ch-4" style="margin-bottom: 70px;">
+        <span class="chapter-num"><i class="fa-solid fa-book-open mr-1"></i> เรื่องที่ 4</span>
+        <h2 class="chapter-title">กรณีศึกษาที่ 1: โครงงานพัฒนาเว็บไซต์ห้องสมุดดิจิทัล</h2>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 4.1 สภาพปัญหาและการแยกย่อยปัญหา (Decomposition)</h3>
+        <p>
+          ในสถานศึกษาเดิม นักเรียนต้องใช้เวลานานในการเดินหาหนังสือตามชั้นวาง เนื่องจากไม่ทราบว่าหนังสือเล่มที่ต้องการอยู่ในหมวดหมู่ใด หรือถูกผู้อื่นยืมไปแล้วหรือไม่ ทีมผู้พัฒนาจึงได้ย่อยปัญหาออกเป็น 4 ระบบย่อย:
+        </p>
+        <ol style="padding-left: 24px; line-height: 1.8; margin-bottom: 18px;">
+          <li><strong>ระบบสืบค้นหนังสือ (Search System):</strong> ค้นหาตามชื่อเรื่อง ผู้แต่ง หรือหมวดหมู่ดิวอี้ (Dewey)</li>
+          <li><strong>ระบบฐานข้อมูลและการจัดการสต็อก (Database & Inventory):</strong> ติดตามสถานะหนังสือ (ว่าง / ถูกยืม)</li>
+          <li><strong>ระบบสมาชิกและการยืม-คืน (Membership & Borrowing):</strong> บันทึกประวัติและกำหนดวันส่งคืน</li>
+          <li><strong>ระบบสถิติและแนะนำหนังสือยอดนิยม (Recommendation):</strong> รวบรวมข้อมูลสถิติเชิงบริหาร</li>
+        </ol>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 4.2 การคิดเชิงนามธรรมในฐานข้อมูล และการออกแบบ Responsive Web</h3>
+        <p>
+          ในการออกแบบฐานข้อมูลหนังสือ ทีมผู้พัฒนาใช้ <strong>Abstraction</strong> จัดเก็บเฉพาะเขตข้อมูลที่จำเป็น ได้แก่: <code>BookID, Title, Author, CategoryCode, CallNumber, Status</code> โดยตัดรายละเอียดที่ไม่จำเป็นออก เช่น สีปก ชนิดกระดาษ ทำให้ระบบสืบค้นตอบสนองได้ภายใน 0.5 วินาที
+        </p>
+        <p>
+          นอกจากนี้ ได้เลือกใช้ <strong>Responsive Web Design</strong> เพื่อให้นักเรียนสามารถเปิดค้นหาหนังสือจากสมาร์ตโฟนขณะเดินในห้องสมุดได้อย่างสะดวกสบาย โดยไม่ต้องซูมเข้าซูมออก
+        </p>
+      </article>
+
+
+      <!-- -------------------------------------------------------------------
+           CHAPTER 5: CASE STUDY 2 - MEDICINE REMINDER APP
+           ------------------------------------------------------------------- -->
+      <article id="ch-5" style="margin-bottom: 70px;">
+        <span class="chapter-num"><i class="fa-solid fa-book-open mr-1"></i> เรื่องที่ 5</span>
+        <h2 class="chapter-title">กรณีศึกษาที่ 2: โครงงานแอปพลิเคชันแจ้งเตือนการกินยา (Health Tech)</h2>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 5.1 ปัญหาการกินยาของผู้สูงอายุ และสถาปัตยกรรม Mobile App</h3>
+        <p>
+          ผู้สูงอายุที่มีโรคประจำตัวมักลืมกินยา หรือกินยาซ้ำซ้อนเนื่องจากความสับสน การเลือกพัฒนาเป็น <strong>Mobile Application</strong> จึงตอบโจทย์มากที่สุด เพราะสามารถเข้าถึงฮาร์ดแวร์ของอุปกรณ์ เช่น ระบบเสียงเตือนเบื้องหลัง (Background Alarm), มอเตอร์สั่นสะเทือน, และทำงานได้แม้ไม่มีสัญญาณอินเทอร์เน็ต
+        </p>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 5.2 ผังงานตรรกะระบบเตือนซ้ำ (Snooze Logic) และระบบ Fail-Safe</h3>
+        <p>
+          เพื่อความปลอดภัยสูงสุด หากผู้ป่วยไม่ได้ยินเสียงเตือนในครั้งแรก ระบบจะมีตรรกะเตือนซ้ำ (Snooze) ทุก 10 นาที และหากผู้ป่วยไม่กดยืนยันการกินยาเกิน 3 ครั้ง ระบบจะมีกลไก <strong>Fail-Safe</strong> ส่งข้อความแจ้งเตือนฉุกเฉินไปยังสมาร์ตโฟนของญาติทันที
+        </p>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 5.3 หลักการออกแบบ UI สำหรับผู้สูงอายุ (Elderly-Friendly UI)</h3>
+        <div class="comp-grid">
+          <div class="comp-card">
+            <strong style="color: var(--accent-rose);"><i class="fa-solid fa-eye mr-1"></i> สีและการมองเห็น</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">ใช้ความเปรียบต่างของสีสูง (High Contrast) ไม่ใช้สีโทนหม่น ตัวอักษรขนาดใหญ่ไม่น้อยกว่า 18pt</p>
+          </div>
+          <div class="comp-card">
+            <strong style="color: var(--accent-blue);"><i class="fa-solid fa-hand-pointer mr-1"></i> การสัมผัส</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">ปุ่มกดมีขนาดไม่ต่ำกว่า 48x48 พิกเซล วางห่างกันอย่างพอเหมาะ เพื่อป้องกันการกดปุ่มผิดพลาด</p>
+          </div>
+          <div class="comp-card">
+            <strong style="color: var(--primary);"><i class="fa-solid fa-volume-high mr-1"></i> เสียงและการสั่น</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">ผสานการเตือนด้วยเสียงระดับความถี่ที่ได้ยินชัดเจนควบคู่กับการสั่นสะเทือนยาว</p>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- -------------------------------------------------------------------
+           CHAPTER 6: TESTING, ETHICS & PDPA
+           ------------------------------------------------------------------- -->
+      <article id="ch-6" style="margin-bottom: 70px;">
+        <span class="chapter-num"><i class="fa-solid fa-book-open mr-1"></i> เรื่องที่ 6</span>
+        <h2 class="chapter-title">การทดสอบระบบ การเผยแพร่ผลงาน และจริยธรรมดิจิทัล</h2>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 6.1 การทดสอบระบบ 4 ระดับ (Software Testing Hierarchy)</h3>
+        <div class="table-container">
+          <table class="content-table">
+            <thead>
+              <tr>
+                <th style="width: 25%;">ระดับการทดสอบ</th>
+                <th style="width: 75%;">วัตถุประสงค์และผู้ปฏิบัติงาน</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Unit Testing</strong></td>
+                <td>ทดสอบฟังก์ชันหรือโมดูลย่อยที่เล็กที่สุด โดยผู้เขียนโปรแกรม เพื่อยืนยันว่าการคำนวณถูกต้อง</td>
+              </tr>
+              <tr>
+                <td><strong>2. Integration Testing</strong></td>
+                <td>ทดสอบการทำงานเชื่อมโยงระหว่างโมดูล เช่น หน้าจอ UI ส่งค่าบันทึกลงฐานข้อมูลได้ตรงกัน</td>
+              </tr>
+              <tr>
+                <td><strong>3. System Testing</strong></td>
+                <td>ทดสอบระบบภาพรวมทั้งหมด ทั้งฟังก์ชันการทำงาน ความปลอดภัย และความเร็วในการประมวลผล</td>
+              </tr>
+              <tr>
+                <td><strong>4. User Acceptance Test (UAT)</strong></td>
+                <td>ให้ผู้ใช้งานจริงทดลองใช้งานและประเมินผล เพื่อยืนยันว่าระบบตอบโจทย์ตรงตามข้อกำหนดก่อนรับมอบ</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="subsection-title"><i class="fa-solid fa-circle-dot"></i> 6.2 จริยธรรม สัญญาอนุญาต Creative Commons และ PDPA</h3>
+        <p>
+          การพัฒนาโครงงานที่มีความรับผิดชอบต่อสังคม ผู้เรียนต้องปฏิบัติตามกฎหมายและจรรยาบรรณวิชาชีพ 3 มิติหลัก:
+        </p>
+        <ul style="padding-left: 24px; line-height: 1.8;">
+          <li><strong>กฎหมายลิขสิทธิ์:</strong> การนำภาพ ไอคอน เพลง หรือโค้ดของผู้อื่นมาใช้ ต้องตรวจสอบสัญญาอนุญาต เช่น <em>Creative Commons (CC-BY-NC)</em> และเขียนอ้างอิงแหล่งที่มาอย่างชัดเจน</li>
+          <li><strong>พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA):</strong> ห้ามเก็บรวบรวมข้อมูลส่วนบุคคลที่อ่อนไหวโดยไม่ได้รับความยินยอม และต้องมีมาตรการรักษาความปลอดภัยของรหัสผ่าน</li>
+          <li><strong>จรรยาบรรณวิชาชีพ:</strong> ไม่สร้างชิ้นงานที่ละเมิดสิทธิผู้อื่น ไม่แพร่กระจายมัลแวร์ และคำนึงถึงความปลอดภัยต่อชุมชนและสิ่งแวดล้อม</li>
+        </ul>
+      </article>
+
+
+      <!-- ===================================================================
+           BACK MATTER: GLOSSARY & REFERENCES
+           =================================================================== -->
+      <section id="appendix-glossary" style="margin-bottom: 50px;">
+        <h2 class="section-title"><i class="fa-solid fa-spell-check text-amber-500"></i> อภิธานศัพท์เทคโนโลยีและวิทยาการคำนวณ (Glossary)</h2>
+        <div class="table-container">
+          <table class="content-table">
+            <thead>
+              <tr>
+                <th style="width: 30%;">คำศัพท์</th>
+                <th style="width: 70%;">ความหมายเชิงวิชาการ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Algorithm (ขั้นตอนวิธี)</strong></td>
+                <td>ลำดับขั้นตอนคำสั่งที่ชัดเจนในการแก้ปัญหา มีจุดเริ่มต้นและจุดสิ้นสุดที่แน่นอน</td>
+              </tr>
+              <tr>
+                <td><strong>Decomposition (การแยกส่วนประกอบ)</strong></td>
+                <td>การแตกปัญหาใหญ่หรือระบบที่ซับซ้อนออกเป็นปัญหาย่อยๆ ที่จัดการได้ง่าย</td>
+              </tr>
+              <tr>
+                <td><strong>Abstraction (การคิดเชิงนามธรรม)</strong></td>
+                <td>การคัดกรองเฉพาะสาระสำคัญที่จำเป็น และตัดทอนรายละเอียดที่ไม่เกี่ยวข้องออกไป</td>
+              </tr>
+              <tr>
+                <td><strong>Pattern Recognition (การหารูปแบบ)</strong></td>
+                <td>การเปรียบเทียบหาความเหมือน คล้ายคลึง หรือแบบแผนซ้ำๆ ของชุดข้อมูล</td>
+              </tr>
+              <tr>
+                <td><strong>SDLC (วงจรการพัฒนาระบบ)</strong></td>
+                <td>วงจรชีวิตมาตรฐานในการพัฒนาซอฟต์แวร์ 5 ขั้นตอน: Planning, Analysis, Design, Implementation, Maintenance</td>
+              </tr>
+              <tr>
+                <td><strong>Debugging (การขจัดข้อผิดพลาด)</strong></td>
+                <td>กระบวนการตรวจหาตำแหน่งและแก้ไขข้อบกพร่อง (Bug) ในขั้นตอนวิธีหรือโปรแกรม</td>
+              </tr>
+              <tr>
+                <td><strong>UAT (การทดสอบยอมรับของผู้ใช้)</strong></td>
+                <td>การทดสอบขั้นสุดท้ายโดยผู้ใช้งานจริง เพื่อประเมินความสอดคล้องกับความต้องการ</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="appendix-references" style="margin-bottom: 80px;">
+        <h2 class="section-title"><i class="fa-solid fa-link text-emerald-600"></i> บรรณานุกรมอ้างอิง (APA 7th Edition)</h2>
+        <div class="callout-box" style="font-size: 0.88rem; line-height: 1.8;">
+          กระทรวงศึกษาธิการ. (2560). <em>ตัวชี้วัดและสาระการเรียนรู้แกนกลาง กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี (ฉบับปรับปรุง พ.ศ. 2560) ตามหลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน พุทธศักราช 2551</em>. โรงพิมพ์ชุมนุมสหกรณ์การเกษตรแห่งประเทศไทย.<br><br>
+          สถาบันส่งเสริมการสอนวิทยาศาสตร์และเทคโนโลยี. (2562). <em>หนังสือเรียนรายวิชาพื้นฐานวิทยาศาสตร์และเทคโนโลยี เทคโนโลยี (วิทยาการคำนวณ) ชั้นมัธยมศึกษาปีที่ 4</em>. โรงพิมพ์ สกสค. ลาดพร้าว.<br><br>
+          Pressman, R. S., & Maxim, B. R. (2020). <em>Software Engineering: A Practitioner's Approach</em> (9th ed.). McGraw-Hill Education.<br><br>
+          Wing, J. M. (2006). Computational thinking. <em>Communications of the ACM</em>, 49(3), 33-35.
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Theme Switcher
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('csm4-ebook-theme', theme);
+    }
+    const savedTheme = localStorage.getItem('csm4-ebook-theme') || 'light';
+    setTheme(savedTheme);
+
+    // Font Sizing
+    let currentFontSize = 16;
+    function changeFontSize(delta) {
+      currentFontSize = Math.min(22, Math.max(13, currentFontSize + delta));
+      document.documentElement.style.setProperty('--base-font-size', currentFontSize + 'px');
+    }
+    function resetFontSize() {
+      currentFontSize = 16;
+      document.documentElement.style.setProperty('--base-font-size', '16px');
+    }
+
+    // Fullscreen Toggle
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    // Mobile Sidebar Toggle
+    function toggleSidebarMobile() {
+      const sidebar = document.getElementById('ebook-sidebar');
+      sidebar.classList.toggle('open-mobile');
+    }
+
+    // Search in TOC
+    function filterToc(query) {
+      const q = query.trim().toLowerCase();
+      const items = document.querySelectorAll('#toc-nav .toc-item');
+      items.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        item.style.display = text.includes(q) ? 'block' : 'none';
+      });
+    }
+
+    // ScrollSpy for Active TOC Link
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('article[id], section[id]');
+      const scrollPos = window.scrollY + 100;
+
+      sections.forEach(sec => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+        const link = document.querySelector(`#toc-nav a[href="#${id}"]`);
+
+        if (link && scrollPos >= top && scrollPos < top + height) {
+          document.querySelectorAll('#toc-nav .toc-item').forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
