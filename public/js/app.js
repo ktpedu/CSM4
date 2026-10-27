@@ -13,11 +13,23 @@ let currentQuizFilter = 'all';
 let activeSlideDeck = null;
 let currentSlideIndex = 0;
 
+// Host Detection Helper: Returns true if running on GitHub Pages, static host, or file:///
+function isStaticOrServerlessHost() {
+  return window.location.protocol === 'file:' || 
+         window.location.hostname.endsWith('github.io') || 
+         window.location.hostname.endsWith('github.dev') || 
+         window.location.hostname.endsWith('gitlab.io') || 
+         window.location.hostname.endsWith('vercel.app') || 
+         window.location.hostname.endsWith('netlify.app') || 
+         window.location.hostname.endsWith('firebaseapp.com') || 
+         window.location.hostname.endsWith('web.app');
+}
+
 // API Fetch Helper
 async function apiFetch(endpoint, method = 'GET', body = null) {
-  // If opened directly as local file (file:/// protocol), bypass remote network call gracefully
-  if (window.location.protocol === 'file:') {
-    console.warn('Running via file:// protocol. Local file mode active for:', endpoint);
+  // If opened on GitHub Pages, static host, or local file, bypass backend gracefully
+  if (isStaticOrServerlessHost()) {
+    console.warn('Running in static host mode (GitHub Pages / file). Client-side Supabase mode active for:', endpoint);
     throw new Error('OFFLINE_FILE_PROTOCOL');
   }
 
@@ -31,6 +43,10 @@ async function apiFetch(endpoint, method = 'GET', body = null) {
 
   try {
     const res = await fetch(`/api${endpoint}`, opts);
+    const contentType = res.headers.get('content-type') || '';
+    if (!contentType.includes('application/json')) {
+      throw new Error('OFFLINE_FILE_PROTOCOL');
+    }
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'เกิดข้อผิดพลาดในการเชื่อมต่อ');
     return data;
@@ -1622,7 +1638,7 @@ async function syncStudentsFromGoogleSheetClient(silent = false) {
 
   try {
     // 1. If running under server mode, call server sync endpoint first
-    if (window.location.protocol !== 'file:') {
+    if (!isStaticOrServerlessHost()) {
       try {
         let serverRes = null;
         try {
@@ -1734,7 +1750,7 @@ async function handleLogin(username, password) {
     }
 
     let res;
-    if (window.location.protocol === 'file:') {
+    if (isStaticOrServerlessHost()) {
       const staffAccounts = {
         'teacher': { user: { id: 'u-teacher', username: 'teacher', full_name: 'ครูปณิฏฐา บุญยงค์ (ผู้สอน ม.4)', role: 'teacher', avatar: 'img/teacher_panittha.jpg' }, token: 'mock-token-teacher' },
         'admin': { user: { id: 'u-admin', username: 'admin', full_name: 'ผู้ดูแลระบบ (Admin CS-M4)', role: 'admin', avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=admin' }, token: 'mock-token-admin' }
@@ -2076,7 +2092,7 @@ async function fetchAnnouncementsData() {
   }
 
   // 2. Try Local Server API
-  if (window.location.protocol !== 'file:') {
+  if (!isStaticOrServerlessHost()) {
     try {
       const data = await apiFetch('/announcements');
       if (Array.isArray(data) && data.length > 0) {
@@ -3048,7 +3064,7 @@ function filterWorksheets(unitKey) {
 async function loadWorksheetsData(filterUnit = currentWorksheetFilter) {
   try {
     let data;
-    if (window.location.protocol === 'file:') {
+    if (isStaticOrServerlessHost()) {
       data = OFFLINE_WORKSHEETS;
     } else {
       try {
@@ -3557,7 +3573,7 @@ function renderSubmissionCardHtml(sub, assignments) {
 // Helper to fetch all submissions from Supabase Cloud / local API
 async function fetchAllSubmissions() {
   let list = [];
-  if (window.location.protocol !== 'file:') {
+  if (!isStaticOrServerlessHost()) {
     try {
       list = await apiFetch('/submissions');
       if (Array.isArray(list) && list.length > 0) return list;
@@ -3597,7 +3613,7 @@ async function fetchAllSubmissions() {
 async function loadAssignmentsData() {
   try {
     let assignments = OFFLINE_ASSIGNMENTS;
-    if (window.location.protocol !== 'file:') {
+    if (!isStaticOrServerlessHost()) {
       try {
         const fetched = await apiFetch('/assignments');
         if (Array.isArray(fetched) && fetched.length > 0) assignments = fetched;
@@ -3873,7 +3889,7 @@ async function doSubmitAssignment() {
         let uploadedViaServer = false;
 
         // Try local server endpoint if not running on file:// protocol
-        if (window.location.protocol !== 'file:') {
+        if (!isStaticOrServerlessHost()) {
           try {
             const formData = new FormData();
             formData.append('file', currentSelectedFile);
@@ -3993,7 +4009,7 @@ async function doSubmitAssignment() {
     }
 
     // 4. Also call server endpoint if running on localhost/http
-    if (window.location.protocol !== 'file:') {
+    if (!isStaticOrServerlessHost()) {
       try {
         await apiFetch('/submissions', 'POST', {
           assignment_id,
@@ -4071,7 +4087,7 @@ async function doGradeSubmission() {
     }
 
     // 2. Server API if running
-    if (window.location.protocol !== 'file:') {
+    if (!isStaticOrServerlessHost()) {
       try {
         await apiFetch('/submissions/grade', 'POST', { submission_id, score, feedback });
       } catch (e) {}
@@ -5393,7 +5409,7 @@ function getOfflineQuizById(quizId) {
 async function loadQuizzesData() {
   try {
     let quizzes;
-    if (window.location.protocol === 'file:') {
+    if (isStaticOrServerlessHost()) {
       quizzes = getOfflineQuizzesList(currentQuizFilter);
     } else {
       try {
@@ -5819,7 +5835,7 @@ async function openQuizModal(quizId) {
   }
   try {
     let rawQuiz = null;
-    if (window.location.protocol === 'file:') {
+    if (isStaticOrServerlessHost()) {
       rawQuiz = getOfflineQuizById(quizId);
     } else {
       try {
@@ -6055,7 +6071,7 @@ async function submitQuizAnswers(isAutoSubmit = false, autoReason = '') {
   try {
     let serverRes = null;
     // In Online mode: submit to backend API and get official graded response
-    if (window.location.protocol !== 'file:') {
+    if (!isStaticOrServerlessHost()) {
       try {
         serverRes = await apiFetch(`/quizzes/${currentQuiz.id}/submit`, 'POST', {
           answers,
@@ -6482,7 +6498,7 @@ async function loadAdminData() {
 
   try {
     let users = [];
-    if (window.location.protocol === 'file:') {
+    if (isStaticOrServerlessHost()) {
       const staff = [
         { id: 'u-teacher', username: 'teacher', full_name: 'ครูปณิฏฐา บุญยงค์ (ผู้สอน ม.4)', role: 'teacher', avatar: 'img/teacher_panittha.jpg' },
         { id: 'u-admin', username: 'admin', full_name: 'ผู้ดูแลระบบ (Admin CS-M4)', role: 'admin', avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=admin' }
@@ -6948,7 +6964,7 @@ async function checkSupabaseStatusUI() {
   badge.style.color = '#d97706';
 
   try {
-    if (window.location.protocol === 'file:') {
+    if (isStaticOrServerlessHost()) {
       badge.innerHTML = '<i class="fa-solid fa-circle-exclamation text-amber-500"></i> เปิดไฟล์แบบ file:// (รันผ่าน http://localhost:3000 เพื่อเชื่อมต่อ)';
       badge.style.color = '#d97706';
       if (msgBox) msgBox.innerHTML = '<i class="fa-solid fa-circle-info mr-1"></i> กรุณารันคำสั่ง <code>npm start</code> เพื่อเปิดระบบเชื่อมต่อ Supabase';
