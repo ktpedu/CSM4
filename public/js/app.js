@@ -5874,7 +5874,7 @@ async function loadQuizzesData() {
           <p class="text-xs" style="color: var(--text-muted); font-family: 'Sarabun', sans-serif;">
             ${isAntiCheatQuiz(q)
               ? `จำนวนทั้งหมด ${q.questionCount} ข้อ • ข้อสอบมาตรฐาน (ระบบตรวจจับการทุจริต & บังคับเต็มหน้าจอ)`
-              : `จำนวนทั้งหมด ${q.questionCount} ข้อ พร้อมตรวจคำตอบและเฉลยทันที (โหมดเรียนรู้ ไม่จำกัดการสลับหน้าจอ)`}
+              : `จำนวนทั้งหมด ${q.questionCount} ข้อ พร้อมตรวจคำตอบและเฉลยทันที`}
           </p>
           <div class="flex items-center justify-between text-xs pt-1">
             <span class="text-emerald-500 font-semibold flex items-center gap-1.5">
@@ -5954,7 +5954,7 @@ function isAntiCheatQuiz(quiz) {
 function updateQuizWatermark() {
   const layer = document.getElementById('quiz-watermark-layer');
   if (!layer) return;
-  if (!currentUser) {
+  if (!currentUser || !currentQuiz || !isAntiCheatQuiz(currentQuiz)) {
     layer.innerHTML = '';
     return;
   }
@@ -6207,6 +6207,8 @@ function confirmCloseQuiz() {
       if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
       else if (document.webkitExitFullscreen) document.webkitExitFullscreen().catch(() => {});
     }
+    const watermarkLayer = document.getElementById('quiz-watermark-layer');
+    if (watermarkLayer) watermarkLayer.innerHTML = '';
     closeModal('modal-take-quiz');
     showToast('ออกจากการทำแบบทดสอบแล้ว', 'info');
   }
@@ -6442,7 +6444,7 @@ async function startProctoredQuiz(rawQuiz) {
     if (hasAntiCheat) {
       subEl.innerHTML = `<i class="fa-solid fa-shield-halved text-amber-400"></i> ข้อสอบ ${currentQuiz.questions.length} ข้อ • เวลาทำข้อสอบ ${currentQuiz.timeLimitMinutes || 30} นาที • ระบบตรวจจับการทุจริต (ไม่อนุญาตให้สลับหน้าจอ)`;
     } else {
-      subEl.innerHTML = `<i class="fa-solid fa-circle-info text-emerald-400"></i> แบบทดสอบ ${currentQuiz.questions.length} ข้อ • เวลาทำ ${currentQuiz.timeLimitMinutes || 30} นาที • โหมดฝึกฝน (สามารถเปิดเอกสารประกอบได้)`;
+      subEl.innerHTML = `<i class="fa-solid fa-circle-info text-emerald-400"></i> แบบทดสอบ ${currentQuiz.questions.length} ข้อ • เวลาทำ ${currentQuiz.timeLimitMinutes || 30} นาที`;
     }
   }
 
@@ -6510,7 +6512,7 @@ async function startProctoredQuiz(rawQuiz) {
     requestFullscreenSafe();
     showToast('เริ่มทำข้อสอบ (ระบบตรวจจับการทุจริต & โหมดเต็มหน้าจอ)', 'success');
   } else {
-    showToast('เริ่มทำแบบทดสอบ (โหมดฝึกฝนการเรียนรู้)', 'success');
+    showToast('เริ่มทำแบบทดสอบ', 'success');
   }
 }
 
@@ -6524,6 +6526,8 @@ async function submitQuizAnswers(isAutoSubmit = false, autoReason = '') {
   if (modalEl) modalEl.classList.remove('is-fullscreen-active');
   const enforcer = document.getElementById('quiz-fullscreen-enforcer');
   if (enforcer) enforcer.style.display = 'none';
+  const watermarkLayer = document.getElementById('quiz-watermark-layer');
+  if (watermarkLayer) watermarkLayer.innerHTML = '';
   if (isDocumentInFullscreen()) {
     if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
     else if (document.webkitExitFullscreen) document.webkitExitFullscreen().catch(() => {});
