@@ -562,6 +562,66 @@ async function saveUserAvatar() {
 }
 
 const STUDENT_ACCOUNTS = {
+  "20727": {
+    "id": "u-20727",
+    "username": "20727",
+    "full_name": "นายอินทร์ภิลักษณ์ บัวเรียง (ม.4/4)",
+    "real_name": "นายอินทร์ภิลักษณ์ บัวเรียง",
+    "role": "student",
+    "student_id": "20727",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=20727"
+  },
+  "21003": {
+    "id": "u-21003",
+    "username": "21003",
+    "full_name": "นางสาววิภาวี เทพบุตร (ม.4/4)",
+    "real_name": "นางสาววิภาวี เทพบุตร",
+    "role": "student",
+    "student_id": "21003",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21003"
+  },
+  "21006": {
+    "id": "u-21006",
+    "username": "21006",
+    "full_name": "เด็กหญิงสิรินทรา ภูจีรัง (ม.4/4)",
+    "real_name": "เด็กหญิงสิรินทรา ภูจีรัง",
+    "role": "student",
+    "student_id": "21006",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21006"
+  },
+  "21018": {
+    "id": "u-21018",
+    "username": "21018",
+    "full_name": "เด็กชายธนวัฒน์ พิณรัตน์ (ม.4/4)",
+    "real_name": "เด็กชายธนวัฒน์ พิณรัตน์",
+    "role": "student",
+    "student_id": "21018",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21018"
+  },
+  "21033": {
+    "id": "u-21033",
+    "username": "21033",
+    "full_name": "นางสาวธัญญารัตน์ บุญอินทร์ (ม.4/4)",
+    "real_name": "นางสาวธัญญารัตน์ บุญอินทร์",
+    "role": "student",
+    "student_id": "21033",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21033"
+  },
+  "21040": {
+    "id": "u-21040",
+    "username": "21040",
+    "full_name": "นางสาวพิยดา ศิลาอุดม (ม.4/4)",
+    "real_name": "นางสาวพิยดา ศิลาอุดม",
+    "role": "student",
+    "student_id": "21040",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21040"
+  },
   "21071": {
     "id": "u-21071",
     "username": "21071",
@@ -832,6 +892,16 @@ const STUDENT_ACCOUNTS = {
     "class_room": "ม.4/10",
     "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21161"
   },
+  "21168": {
+    "id": "u-21168",
+    "username": "21168",
+    "full_name": "นายปราโมทย์ ตะกิ่มนอก (ม.4/4)",
+    "real_name": "นายปราโมทย์ ตะกิ่มนอก",
+    "role": "student",
+    "student_id": "21168",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21168"
+  },
   "21187": {
     "id": "u-21187",
     "username": "21187",
@@ -851,6 +921,16 @@ const STUDENT_ACCOUNTS = {
     "student_id": "21209",
     "class_room": "ม.4/12",
     "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21209"
+  },
+  "21224": {
+    "id": "u-21224",
+    "username": "21224",
+    "full_name": "นางสาวณัฎฐิชา เศรษฐบุตร (ม.4/4)",
+    "real_name": "นางสาวณัฎฐิชา เศรษฐบุตร",
+    "role": "student",
+    "student_id": "21224",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21224"
   },
   "21276": {
     "id": "u-21276",
@@ -1302,6 +1382,16 @@ const STUDENT_ACCOUNTS = {
     "class_room": "ม.4/12",
     "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21412"
   },
+  "21413": {
+    "id": "u-21413",
+    "username": "21413",
+    "full_name": "เด็กชายภูมาธิน ไพรวงค์ (ม.4/4)",
+    "real_name": "เด็กชายภูมาธิน ไพรวงค์",
+    "role": "student",
+    "student_id": "21413",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21413"
+  },
   "21418": {
     "id": "u-21418",
     "username": "21418",
@@ -1331,6 +1421,26 @@ const STUDENT_ACCOUNTS = {
     "student_id": "21422",
     "class_room": "ม.4/10",
     "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21422"
+  },
+  "21427": {
+    "id": "u-21427",
+    "username": "21427",
+    "full_name": "นางสาวจุติไตรพร กรองสี (ม.4/4)",
+    "real_name": "นางสาวจุติไตรพร กรองสี",
+    "role": "student",
+    "student_id": "21427",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21427"
+  },
+  "21428": {
+    "id": "u-21428",
+    "username": "21428",
+    "full_name": "นางสาวชุติมา จันทร์ทา (ม.4/4)",
+    "real_name": "นางสาวชุติมา จันทร์ทา",
+    "role": "student",
+    "student_id": "21428",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21428"
   },
   "21429": {
     "id": "u-21429",
@@ -1372,6 +1482,16 @@ const STUDENT_ACCOUNTS = {
     "class_room": "ม.4/12",
     "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21434"
   },
+  "21436": {
+    "id": "u-21436",
+    "username": "21436",
+    "full_name": "นางสาวนารีรัตน์ เหตุเกษ (ม.4/4)",
+    "real_name": "นางสาวนารีรัตน์ เหตุเกษ",
+    "role": "student",
+    "student_id": "21436",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21436"
+  },
   "21437": {
     "id": "u-21437",
     "username": "21437",
@@ -1381,6 +1501,16 @@ const STUDENT_ACCOUNTS = {
     "student_id": "21437",
     "class_room": "ม.4/10",
     "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21437"
+  },
+  "21438": {
+    "id": "u-21438",
+    "username": "21438",
+    "full_name": "นางสาวปลื้มฤดี พิทักษ์ (ม.4/4)",
+    "real_name": "นางสาวปลื้มฤดี พิทักษ์",
+    "role": "student",
+    "student_id": "21438",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21438"
   },
   "21439": {
     "id": "u-21439",
@@ -1441,6 +1571,276 @@ const STUDENT_ACCOUNTS = {
     "student_id": "21558",
     "class_room": "ม.4/10",
     "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21558"
+  },
+  "23479": {
+    "id": "u-23479",
+    "username": "23479",
+    "full_name": "เด็กชายเกียรติคุณ ประสิทธิ์นอก (ม.4/4)",
+    "real_name": "เด็กชายเกียรติคุณ ประสิทธิ์นอก",
+    "role": "student",
+    "student_id": "23479",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23479"
+  },
+  "23480": {
+    "id": "u-23480",
+    "username": "23480",
+    "full_name": "นายณัฐวุฒิ จำปาบุรี (ม.4/4)",
+    "real_name": "นายณัฐวุฒิ จำปาบุรี",
+    "role": "student",
+    "student_id": "23480",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23480"
+  },
+  "23481": {
+    "id": "u-23481",
+    "username": "23481",
+    "full_name": "นายปฐวี แถวโสภา (ม.4/4)",
+    "real_name": "นายปฐวี แถวโสภา",
+    "role": "student",
+    "student_id": "23481",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23481"
+  },
+  "23482": {
+    "id": "u-23482",
+    "username": "23482",
+    "full_name": "นายปภังกร ปานสุวรรณ์ (ม.4/4)",
+    "real_name": "นายปภังกร ปานสุวรรณ์",
+    "role": "student",
+    "student_id": "23482",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23482"
+  },
+  "23483": {
+    "id": "u-23483",
+    "username": "23483",
+    "full_name": "เด็กชายภาณุวัฒน์ แก้วแก่นคูณ (ม.4/4)",
+    "real_name": "เด็กชายภาณุวัฒน์ แก้วแก่นคูณ",
+    "role": "student",
+    "student_id": "23483",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23483"
+  },
+  "23484": {
+    "id": "u-23484",
+    "username": "23484",
+    "full_name": "นายภานุวัฒน์ ขันทอง (ม.4/4)",
+    "real_name": "นายภานุวัฒน์ ขันทอง",
+    "role": "student",
+    "student_id": "23484",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23484"
+  },
+  "23485": {
+    "id": "u-23485",
+    "username": "23485",
+    "full_name": "นายวัชรากร โคตรโนนกอก (ม.4/4)",
+    "real_name": "นายวัชรากร โคตรโนนกอก",
+    "role": "student",
+    "student_id": "23485",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23485"
+  },
+  "23486": {
+    "id": "u-23486",
+    "username": "23486",
+    "full_name": "นางสาวกชพร บุสทิพย์ (ม.4/4)",
+    "real_name": "นางสาวกชพร บุสทิพย์",
+    "role": "student",
+    "student_id": "23486",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23486"
+  },
+  "23487": {
+    "id": "u-23487",
+    "username": "23487",
+    "full_name": "นางสาวกวินตรา หวังยศ (ม.4/4)",
+    "real_name": "นางสาวกวินตรา หวังยศ",
+    "role": "student",
+    "student_id": "23487",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23487"
+  },
+  "23488": {
+    "id": "u-23488",
+    "username": "23488",
+    "full_name": "นางสาวขวัญจิรา ไพรัตน์ (ม.4/4)",
+    "real_name": "นางสาวขวัญจิรา ไพรัตน์",
+    "role": "student",
+    "student_id": "23488",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23488"
+  },
+  "23489": {
+    "id": "u-23489",
+    "username": "23489",
+    "full_name": "เด็กหญิงจุฬามณี ม่วงคุ้ม (ม.4/4)",
+    "real_name": "เด็กหญิงจุฬามณี ม่วงคุ้ม",
+    "role": "student",
+    "student_id": "23489",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23489"
+  },
+  "23490": {
+    "id": "u-23490",
+    "username": "23490",
+    "full_name": "นางสาวฐิตาภา จู (ม.4/4)",
+    "real_name": "นางสาวฐิตาภา จู",
+    "role": "student",
+    "student_id": "23490",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23490"
+  },
+  "23491": {
+    "id": "u-23491",
+    "username": "23491",
+    "full_name": "เด็กหญิงธัญลักษณ์ ไชยสนาม (ม.4/4)",
+    "real_name": "เด็กหญิงธัญลักษณ์ ไชยสนาม",
+    "role": "student",
+    "student_id": "23491",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23491"
+  },
+  "23492": {
+    "id": "u-23492",
+    "username": "23492",
+    "full_name": "เด็กหญิงนันทิชา ประมวล (ม.4/4)",
+    "real_name": "เด็กหญิงนันทิชา ประมวล",
+    "role": "student",
+    "student_id": "23492",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23492"
+  },
+  "23493": {
+    "id": "u-23493",
+    "username": "23493",
+    "full_name": "นางสาวปนัดดา ลือปัญญา (ม.4/4)",
+    "real_name": "นางสาวปนัดดา ลือปัญญา",
+    "role": "student",
+    "student_id": "23493",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23493"
+  },
+  "23494": {
+    "id": "u-23494",
+    "username": "23494",
+    "full_name": "เด็กหญิงปรียานุช แดงสวัสดิ์ (ม.4/4)",
+    "real_name": "เด็กหญิงปรียานุช แดงสวัสดิ์",
+    "role": "student",
+    "student_id": "23494",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23494"
+  },
+  "23495": {
+    "id": "u-23495",
+    "username": "23495",
+    "full_name": "เด็กหญิงปาริตา ป่ากว้าง (ม.4/4)",
+    "real_name": "เด็กหญิงปาริตา ป่ากว้าง",
+    "role": "student",
+    "student_id": "23495",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23495"
+  },
+  "23496": {
+    "id": "u-23496",
+    "username": "23496",
+    "full_name": "นางสาวพิรดา หลอดเข็ม (ม.4/4)",
+    "real_name": "นางสาวพิรดา หลอดเข็ม",
+    "role": "student",
+    "student_id": "23496",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23496"
+  },
+  "23497": {
+    "id": "u-23497",
+    "username": "23497",
+    "full_name": "นางสาวมธุริน พุทธโคตร (ม.4/4)",
+    "real_name": "นางสาวมธุริน พุทธโคตร",
+    "role": "student",
+    "student_id": "23497",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23497"
+  },
+  "23498": {
+    "id": "u-23498",
+    "username": "23498",
+    "full_name": "เด็กหญิงรัตติกาล ประเสริฐ (ม.4/4)",
+    "real_name": "เด็กหญิงรัตติกาล ประเสริฐ",
+    "role": "student",
+    "student_id": "23498",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23498"
+  },
+  "23499": {
+    "id": "u-23499",
+    "username": "23499",
+    "full_name": "นางสาววชิรญา ดำรงค์สกุลไทย (ม.4/4)",
+    "real_name": "นางสาววชิรญา ดำรงค์สกุลไทย",
+    "role": "student",
+    "student_id": "23499",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23499"
+  },
+  "23500": {
+    "id": "u-23500",
+    "username": "23500",
+    "full_name": "นางสาววนิดา สุวรรณสิงห์ (ม.4/4)",
+    "real_name": "นางสาววนิดา สุวรรณสิงห์",
+    "role": "student",
+    "student_id": "23500",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23500"
+  },
+  "23501": {
+    "id": "u-23501",
+    "username": "23501",
+    "full_name": "เด็กหญิงสิริกุล บุญไสว (ม.4/4)",
+    "real_name": "เด็กหญิงสิริกุล บุญไสว",
+    "role": "student",
+    "student_id": "23501",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23501"
+  },
+  "23502": {
+    "id": "u-23502",
+    "username": "23502",
+    "full_name": "นางสาวสุทธิดา ป้องประดา (ม.4/4)",
+    "real_name": "นางสาวสุทธิดา ป้องประดา",
+    "role": "student",
+    "student_id": "23502",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23502"
+  },
+  "23503": {
+    "id": "u-23503",
+    "username": "23503",
+    "full_name": "นางสาวสุพัตรา เพชรทิพย์ (ม.4/4)",
+    "real_name": "นางสาวสุพัตรา เพชรทิพย์",
+    "role": "student",
+    "student_id": "23503",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23503"
+  },
+  "23504": {
+    "id": "u-23504",
+    "username": "23504",
+    "full_name": "นางสาวอภิญญา ทวีสกุลรัตน์ (ม.4/4)",
+    "real_name": "นางสาวอภิญญา ทวีสกุลรัตน์",
+    "role": "student",
+    "student_id": "23504",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23504"
+  },
+  "23505": {
+    "id": "u-23505",
+    "username": "23505",
+    "full_name": "นางสาวอริสรา ตันสุรินทร์ (ม.4/4)",
+    "real_name": "นางสาวอริสรา ตันสุรินทร์",
+    "role": "student",
+    "student_id": "23505",
+    "class_room": "ม.4/4",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23505"
   },
   "23548": {
     "id": "u-23548",
@@ -1653,8 +2053,44 @@ async function syncStudentsFromGoogleSheetClient(silent = false) {
       }
     }
 
-    // 2. Fetch directly from Supabase CSV (works in both file: and http:)
+    // 2. Fetch directly from Supabase Cloud REST API first (works on GitHub Pages & static hosts)
+    let fetchedFromSupabase = false;
     try {
+      const sbUsersRes = await fetch(`${SUPABASE_REST_URL}/users?role=eq.student&select=*`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      if (sbUsersRes.ok) {
+        const sbUsers = await sbUsersRes.json();
+        if (Array.isArray(sbUsers) && sbUsers.length > 0) {
+          sbUsers.forEach(u => {
+            const cleanId = (u.student_id || u.username).trim();
+            const cleanClass = (u.class_room || 'ม.4').trim();
+            classesFound[cleanClass] = (classesFound[cleanClass] || 0) + 1;
+            STUDENT_ACCOUNTS[cleanId] = {
+              id: u.id || `u-${cleanId}`,
+              username: cleanId,
+              full_name: u.full_name || `${u.real_name} (${cleanClass})`,
+              real_name: u.real_name || u.full_name,
+              class_room: cleanClass,
+              role: 'student',
+              avatar: u.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${cleanId}`
+            };
+          });
+          fetchedFromSupabase = true;
+          count = Object.keys(STUDENT_ACCOUNTS).length;
+          localStorage.setItem('csm4_student_accounts', JSON.stringify(STUDENT_ACCOUNTS));
+          localStorage.setItem('csm4_students_last_synced', new Date().toISOString());
+        }
+      }
+    } catch (sbErr) {
+      console.warn('Direct Supabase REST student fetch fallback to CSV:', sbErr.message);
+    }
+
+    // 3. Fallback to Google Sheet CSV if Supabase REST was unreachable
+    if (!fetchedFromSupabase) try {
       const response = await fetch(GOOGLE_STUDENT_SHEET_CSV, { cache: 'no-store' });
       if (response.ok) {
         const csvText = await response.text();

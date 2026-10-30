@@ -369,29 +369,43 @@ async function syncStudentsFromGoogleSheet() {
     if (supabaseService.isConfigured()) {
       const sbResult = await supabaseService.syncStudentsFromSupabase();
       if (sbResult && sbResult.success) {
+        const users = db.get('users') || [];
+        const students = users.filter(u => u.role === 'student');
+        const classes = {};
+        students.forEach(s => {
+          const c = s.class_room || 'ไม่ระบุห้อง';
+          classes[c] = (classes[c] || 0) + 1;
+        });
         return {
           success: true,
           message: 'ซิงค์ข้อมูลนักเรียนจาก Supabase Cloud สำเร็จ',
-          totalStudents: sbResult.totalRemoteStudents || 105,
+          totalStudents: students.length,
           updatedCount: sbResult.updatedCount || 0,
           addedCount: sbResult.addedCount || 0,
-          classes: { 'ม.4/10': 40, 'ม.4/11': 19, 'ม.4/12': 30, 'ม.4/9': 35 }
+          classes
         };
       }
     }
     const users = db.get('users') || [];
     const students = users.filter(u => u.role === 'student');
+    const classes = {};
+    students.forEach(s => {
+      const c = s.class_room || 'ไม่ระบุห้อง';
+      classes[c] = (classes[c] || 0) + 1;
+    });
     return {
       success: true,
       message: 'ใช้ข้อมูลนักเรียนในระบบเรียบร้อย',
       totalStudents: students.length,
       updatedCount: 0,
       addedCount: 0,
-      classes: { 'ม.4/10': 40, 'ม.4/11': 19, 'ม.4/12': 30, 'ม.4/9': 35 }
+      classes
     };
   } catch (err) {
     console.warn('Sync student warning:', err.message);
-    return { success: true, totalStudents: 105 };
+    const users = db.get('users') || [];
+    const students = users.filter(u => u.role === 'student');
+    return { success: true, totalStudents: students.length || 145 };
   }
 }
 

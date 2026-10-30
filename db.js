@@ -27,7 +27,7 @@ const defaultData = () => {
             "password_hash": "$2a$10$tt3AEdhMKwXSwwZcszqAzujiRxefvKG7PUzzZszZ2yVNmv1y8k9Q2",
             "full_name": "ครูปณิฏฐา บุญยงค์ (ผู้สอน ม.4)",
             "role": "teacher",
-            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Panittha",
+            "avatar": "img/teacher_panittha.jpg",
             "created_at": "2026-09-18T06:09:45.043Z"
       },
       {
@@ -40,7 +40,8 @@ const defaultData = () => {
             "student_id": "21123",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21123",
-            "created_at": "2026-10-26T07:19:26.082Z"
+            "created_at": "2026-10-26T07:19:26.082+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21124",
@@ -52,7 +53,8 @@ const defaultData = () => {
             "student_id": "21124",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21124",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21127",
@@ -64,7 +66,8 @@ const defaultData = () => {
             "student_id": "21127",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21127",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21130",
@@ -76,7 +79,8 @@ const defaultData = () => {
             "student_id": "21130",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21130",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21134",
@@ -88,7 +92,8 @@ const defaultData = () => {
             "student_id": "21134",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21134",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21135",
@@ -100,7 +105,8 @@ const defaultData = () => {
             "student_id": "21135",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21135",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21137",
@@ -112,7 +118,8 @@ const defaultData = () => {
             "student_id": "21137",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21137",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21138",
@@ -124,7 +131,8 @@ const defaultData = () => {
             "student_id": "21138",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21138",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21284",
@@ -136,7 +144,8 @@ const defaultData = () => {
             "student_id": "21284",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21284",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21348",
@@ -148,7 +157,8 @@ const defaultData = () => {
             "student_id": "21348",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21348",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21377",
@@ -160,7 +170,8 @@ const defaultData = () => {
             "student_id": "21377",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21377",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21411",
@@ -172,7 +183,8 @@ const defaultData = () => {
             "student_id": "21411",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21411",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21558",
@@ -184,7 +196,8 @@ const defaultData = () => {
             "student_id": "21558",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21558",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-23551",
@@ -196,7 +209,8 @@ const defaultData = () => {
             "student_id": "23551",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23551",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-23552",
@@ -208,7 +222,8 @@ const defaultData = () => {
             "student_id": "23552",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23552",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-23553",
@@ -220,7 +235,8 @@ const defaultData = () => {
             "student_id": "23553",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23553",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-23554",
@@ -232,7 +248,8 @@ const defaultData = () => {
             "student_id": "23554",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23554",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21101",
@@ -244,7 +261,8 @@ const defaultData = () => {
             "student_id": "21101",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21101",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21147",
@@ -256,7 +274,8 @@ const defaultData = () => {
             "student_id": "21147",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21147",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21149",
@@ -268,7 +287,8 @@ const defaultData = () => {
             "student_id": "21149",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21149",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21150",
@@ -280,7 +300,8 @@ const defaultData = () => {
             "student_id": "21150",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21150",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21154",
@@ -292,7 +313,8 @@ const defaultData = () => {
             "student_id": "21154",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21154",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21156",
@@ -304,7 +326,8 @@ const defaultData = () => {
             "student_id": "21156",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21156",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21157",
@@ -316,7 +339,8 @@ const defaultData = () => {
             "student_id": "21157",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21157",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21160",
@@ -328,7 +352,8 @@ const defaultData = () => {
             "student_id": "21160",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21160",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21161",
@@ -340,7 +365,8 @@ const defaultData = () => {
             "student_id": "21161",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21161",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21187",
@@ -352,7 +378,8 @@ const defaultData = () => {
             "student_id": "21187",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21187",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21374",
@@ -364,7 +391,8 @@ const defaultData = () => {
             "student_id": "21374",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21374",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21388",
@@ -376,7 +404,8 @@ const defaultData = () => {
             "student_id": "21388",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21388",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21393",
@@ -388,7 +417,8 @@ const defaultData = () => {
             "student_id": "21393",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21393",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21403",
@@ -400,7 +430,8 @@ const defaultData = () => {
             "student_id": "21403",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21403",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21422",
@@ -412,7 +443,8 @@ const defaultData = () => {
             "student_id": "21422",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21422",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21431",
@@ -424,7 +456,8 @@ const defaultData = () => {
             "student_id": "21431",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21431",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21437",
@@ -436,7 +469,8 @@ const defaultData = () => {
             "student_id": "21437",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21437",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21445",
@@ -448,7 +482,8 @@ const defaultData = () => {
             "student_id": "21445",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21445",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-23555",
@@ -460,7 +495,8 @@ const defaultData = () => {
             "student_id": "23555",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23555",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-23556",
@@ -472,7 +508,8 @@ const defaultData = () => {
             "student_id": "23556",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23556",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-23557",
@@ -484,7 +521,8 @@ const defaultData = () => {
             "student_id": "23557",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23557",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-23558",
@@ -496,7 +534,8 @@ const defaultData = () => {
             "student_id": "23558",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23558",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-23559",
@@ -508,7 +547,8 @@ const defaultData = () => {
             "student_id": "23559",
             "class_room": "ม.4/10",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23559",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.277688+00:00"
       },
       {
             "id": "u-21133",
@@ -520,7 +560,8 @@ const defaultData = () => {
             "student_id": "21133",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21133",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21139",
@@ -532,7 +573,8 @@ const defaultData = () => {
             "student_id": "21139",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21139",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21209",
@@ -544,7 +586,8 @@ const defaultData = () => {
             "student_id": "21209",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21209",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21276",
@@ -556,7 +599,8 @@ const defaultData = () => {
             "student_id": "21276",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21276",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21351",
@@ -568,7 +612,8 @@ const defaultData = () => {
             "student_id": "21351",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21351",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21353",
@@ -580,7 +625,8 @@ const defaultData = () => {
             "student_id": "21353",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21353",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21354",
@@ -592,7 +638,8 @@ const defaultData = () => {
             "student_id": "21354",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21354",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21355",
@@ -604,7 +651,8 @@ const defaultData = () => {
             "student_id": "21355",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21355",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21357",
@@ -616,7 +664,8 @@ const defaultData = () => {
             "student_id": "21357",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21357",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21383",
@@ -628,7 +677,8 @@ const defaultData = () => {
             "student_id": "21383",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21383",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21412",
@@ -640,7 +690,8 @@ const defaultData = () => {
             "student_id": "21412",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21412",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-23567",
@@ -652,7 +703,8 @@ const defaultData = () => {
             "student_id": "23567",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23567",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-23568",
@@ -664,7 +716,8 @@ const defaultData = () => {
             "student_id": "23568",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23568",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-23569",
@@ -676,7 +729,8 @@ const defaultData = () => {
             "student_id": "23569",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23569",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-23570",
@@ -688,7 +742,8 @@ const defaultData = () => {
             "student_id": "23570",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23570",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21071",
@@ -700,7 +755,8 @@ const defaultData = () => {
             "student_id": "21071",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21071",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21116",
@@ -712,7 +768,8 @@ const defaultData = () => {
             "student_id": "21116",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21116",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21118",
@@ -724,7 +781,8 @@ const defaultData = () => {
             "student_id": "21118",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21118",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21122",
@@ -736,7 +794,8 @@ const defaultData = () => {
             "student_id": "21122",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21122",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21148",
@@ -748,7 +807,8 @@ const defaultData = () => {
             "student_id": "21148",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21148",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21293",
@@ -760,7 +820,8 @@ const defaultData = () => {
             "student_id": "21293",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21293",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21361",
@@ -772,7 +833,8 @@ const defaultData = () => {
             "student_id": "21361",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21361",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21364",
@@ -784,7 +846,8 @@ const defaultData = () => {
             "student_id": "21364",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21364",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21367",
@@ -796,7 +859,8 @@ const defaultData = () => {
             "student_id": "21367",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21367",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21369",
@@ -808,7 +872,8 @@ const defaultData = () => {
             "student_id": "21369",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21369",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21373",
@@ -820,7 +885,8 @@ const defaultData = () => {
             "student_id": "21373",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21373",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21375",
@@ -832,7 +898,8 @@ const defaultData = () => {
             "student_id": "21375",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21375",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21434",
@@ -844,7 +911,8 @@ const defaultData = () => {
             "student_id": "21434",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21434",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21442",
@@ -856,7 +924,8 @@ const defaultData = () => {
             "student_id": "21442",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21442",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-23571",
@@ -868,7 +937,8 @@ const defaultData = () => {
             "student_id": "23571",
             "class_room": "ม.4/12",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23571",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21347",
@@ -880,7 +950,8 @@ const defaultData = () => {
             "student_id": "21347",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21347",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21349",
@@ -892,7 +963,8 @@ const defaultData = () => {
             "student_id": "21349",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21349",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21352",
@@ -904,7 +976,8 @@ const defaultData = () => {
             "student_id": "21352",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21352",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21376",
@@ -916,7 +989,8 @@ const defaultData = () => {
             "student_id": "21376",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21376",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21378",
@@ -928,7 +1002,8 @@ const defaultData = () => {
             "student_id": "21378",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21378",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21379",
@@ -940,7 +1015,8 @@ const defaultData = () => {
             "student_id": "21379",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21379",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21381",
@@ -952,7 +1028,8 @@ const defaultData = () => {
             "student_id": "21381",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21381",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21382",
@@ -964,7 +1041,8 @@ const defaultData = () => {
             "student_id": "21382",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21382",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21385",
@@ -976,7 +1054,8 @@ const defaultData = () => {
             "student_id": "21385",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21385",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:18.996857+00:00"
       },
       {
             "id": "u-21418",
@@ -988,7 +1067,8 @@ const defaultData = () => {
             "student_id": "21418",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21418",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21144",
@@ -1000,7 +1080,8 @@ const defaultData = () => {
             "student_id": "21144",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21144",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21151",
@@ -1012,7 +1093,8 @@ const defaultData = () => {
             "student_id": "21151",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21151",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21158",
@@ -1024,7 +1106,8 @@ const defaultData = () => {
             "student_id": "21158",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21158",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21359",
@@ -1036,7 +1119,8 @@ const defaultData = () => {
             "student_id": "21359",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21359",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21365",
@@ -1048,7 +1132,8 @@ const defaultData = () => {
             "student_id": "21365",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21365",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21387",
@@ -1060,7 +1145,8 @@ const defaultData = () => {
             "student_id": "21387",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21387",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21389",
@@ -1072,7 +1158,8 @@ const defaultData = () => {
             "student_id": "21389",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21389",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21390",
@@ -1084,7 +1171,8 @@ const defaultData = () => {
             "student_id": "21390",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21390",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21391",
@@ -1096,7 +1184,8 @@ const defaultData = () => {
             "student_id": "21391",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21391",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21392",
@@ -1108,7 +1197,8 @@ const defaultData = () => {
             "student_id": "21392",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21392",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21394",
@@ -1120,7 +1210,8 @@ const defaultData = () => {
             "student_id": "21394",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21394",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21397",
@@ -1132,7 +1223,8 @@ const defaultData = () => {
             "student_id": "21397",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21397",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21400",
@@ -1144,7 +1236,8 @@ const defaultData = () => {
             "student_id": "21400",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21400",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21402",
@@ -1156,7 +1249,8 @@ const defaultData = () => {
             "student_id": "21402",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21402",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21404",
@@ -1168,7 +1262,8 @@ const defaultData = () => {
             "student_id": "21404",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21404",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21405",
@@ -1180,7 +1275,8 @@ const defaultData = () => {
             "student_id": "21405",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21405",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21420",
@@ -1192,7 +1288,8 @@ const defaultData = () => {
             "student_id": "21420",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21420",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21429",
@@ -1204,7 +1301,8 @@ const defaultData = () => {
             "student_id": "21429",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21429",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21432",
@@ -1216,7 +1314,8 @@ const defaultData = () => {
             "student_id": "21432",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21432",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21439",
@@ -1228,7 +1327,8 @@ const defaultData = () => {
             "student_id": "21439",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21439",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21443",
@@ -1240,7 +1340,8 @@ const defaultData = () => {
             "student_id": "21443",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21443",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-21444",
@@ -1252,7 +1353,8 @@ const defaultData = () => {
             "student_id": "21444",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21444",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-23548",
@@ -1264,7 +1366,8 @@ const defaultData = () => {
             "student_id": "23548",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23548",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-23549",
@@ -1276,7 +1379,8 @@ const defaultData = () => {
             "student_id": "23549",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23549",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
       },
       {
             "id": "u-23550",
@@ -1288,7 +1392,528 @@ const defaultData = () => {
             "student_id": "23550",
             "class_room": "ม.4/9",
             "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23550",
-            "created_at": "2026-10-26T07:19:26.083Z"
+            "created_at": "2026-10-26T07:19:26.083+00:00",
+            "updated_at": "2026-10-26T07:06:19.529376+00:00"
+      },
+      {
+            "id": "u-20727",
+            "username": "20727",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.SoPTUJ8psjhXkgiQk8UtBOTKjELzjv2",
+            "full_name": "นายอินทร์ภิลักษณ์ บัวเรียง (ม.4/4)",
+            "real_name": "นายอินทร์ภิลักษณ์ บัวเรียง",
+            "role": "student",
+            "student_id": "20727",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=20727",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-21018",
+            "username": "21018",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.0MXDlhXBW2e0ghJ..FqhWWwnNJYneDS",
+            "full_name": "เด็กชายธนวัฒน์ พิณรัตน์ (ม.4/4)",
+            "real_name": "เด็กชายธนวัฒน์ พิณรัตน์",
+            "role": "student",
+            "student_id": "21018",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21018",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-21168",
+            "username": "21168",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.RQX3qBmnKk3S.L.R5E9TIc./n1mosF2",
+            "full_name": "นายปราโมทย์ ตะกิ่มนอก (ม.4/4)",
+            "real_name": "นายปราโมทย์ ตะกิ่มนอก",
+            "role": "student",
+            "student_id": "21168",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21168",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-21413",
+            "username": "21413",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.XR7YE65ye9Vsw8TLY/TepWnoZogyBR6",
+            "full_name": "เด็กชายภูมาธิน ไพรวงค์ (ม.4/4)",
+            "real_name": "เด็กชายภูมาธิน ไพรวงค์",
+            "role": "student",
+            "student_id": "21413",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21413",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23479",
+            "username": "23479",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.5r0PSwpBh4g27kXBTVQrPyzdAZtcQqC",
+            "full_name": "เด็กชายเกียรติคุณ ประสิทธิ์นอก (ม.4/4)",
+            "real_name": "เด็กชายเกียรติคุณ ประสิทธิ์นอก",
+            "role": "student",
+            "student_id": "23479",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23479",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23480",
+            "username": "23480",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.LGp8U0ykrmyF1Xh7lVldOLUzo6NY6Tq",
+            "full_name": "นายณัฐวุฒิ จำปาบุรี (ม.4/4)",
+            "real_name": "นายณัฐวุฒิ จำปาบุรี",
+            "role": "student",
+            "student_id": "23480",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23480",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23481",
+            "username": "23481",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.vydr/9fHdC.DS.xv7Zv/ftVlpaA5nj.",
+            "full_name": "นายปฐวี แถวโสภา (ม.4/4)",
+            "real_name": "นายปฐวี แถวโสภา",
+            "role": "student",
+            "student_id": "23481",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23481",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23482",
+            "username": "23482",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.eFyLsroTiQwORgrFxH.OonglCY3YB1G",
+            "full_name": "นายปภังกร ปานสุวรรณ์ (ม.4/4)",
+            "real_name": "นายปภังกร ปานสุวรรณ์",
+            "role": "student",
+            "student_id": "23482",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23482",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23483",
+            "username": "23483",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.90PcV4W5E/4w7qVNHB88TJmiVlUBi4u",
+            "full_name": "เด็กชายภาณุวัฒน์ แก้วแก่นคูณ (ม.4/4)",
+            "real_name": "เด็กชายภาณุวัฒน์ แก้วแก่นคูณ",
+            "role": "student",
+            "student_id": "23483",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23483",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23484",
+            "username": "23484",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.cTR9th3xn39ca6LBeZqdWjIwbZ1KDRS",
+            "full_name": "นายภานุวัฒน์ ขันทอง (ม.4/4)",
+            "real_name": "นายภานุวัฒน์ ขันทอง",
+            "role": "student",
+            "student_id": "23484",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23484",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23485",
+            "username": "23485",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.IwRtc3lBKkA1lL2uR/QWmrw/6n2Uyo.",
+            "full_name": "นายวัชรากร โคตรโนนกอก (ม.4/4)",
+            "real_name": "นายวัชรากร โคตรโนนกอก",
+            "role": "student",
+            "student_id": "23485",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23485",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-21003",
+            "username": "21003",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.NbgUSUJg7MugACgnouXaq6bKfeR2Gei",
+            "full_name": "นางสาววิภาวี เทพบุตร (ม.4/4)",
+            "real_name": "นางสาววิภาวี เทพบุตร",
+            "role": "student",
+            "student_id": "21003",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21003",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-21006",
+            "username": "21006",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.OtYRt5s8YgVPVAW9E7ICPMmiY9PAxzW",
+            "full_name": "เด็กหญิงสิรินทรา ภูจีรัง (ม.4/4)",
+            "real_name": "เด็กหญิงสิรินทรา ภูจีรัง",
+            "role": "student",
+            "student_id": "21006",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21006",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-21033",
+            "username": "21033",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.ymcT50tKC1rtU7QaqfGne2KSZCSIpu.",
+            "full_name": "นางสาวธัญญารัตน์ บุญอินทร์ (ม.4/4)",
+            "real_name": "นางสาวธัญญารัตน์ บุญอินทร์",
+            "role": "student",
+            "student_id": "21033",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21033",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-21040",
+            "username": "21040",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.h6xKeYS.EBpedkpDsPUGwWrpSXy3J72",
+            "full_name": "นางสาวพิยดา ศิลาอุดม (ม.4/4)",
+            "real_name": "นางสาวพิยดา ศิลาอุดม",
+            "role": "student",
+            "student_id": "21040",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21040",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-21224",
+            "username": "21224",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.IlktOX0NHzAITxTEPP3Pp9bVhjcClDS",
+            "full_name": "นางสาวณัฎฐิชา เศรษฐบุตร (ม.4/4)",
+            "real_name": "นางสาวณัฎฐิชา เศรษฐบุตร",
+            "role": "student",
+            "student_id": "21224",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21224",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-21427",
+            "username": "21427",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.dRiU/u1SSnjQ1j0wyfN8WxMCTnCDjni",
+            "full_name": "นางสาวจุติไตรพร กรองสี (ม.4/4)",
+            "real_name": "นางสาวจุติไตรพร กรองสี",
+            "role": "student",
+            "student_id": "21427",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21427",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-21428",
+            "username": "21428",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.W2vj90BjSQdvMbc7noow0zyZExA6l0C",
+            "full_name": "นางสาวชุติมา จันทร์ทา (ม.4/4)",
+            "real_name": "นางสาวชุติมา จันทร์ทา",
+            "role": "student",
+            "student_id": "21428",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21428",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-21436",
+            "username": "21436",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP..okqSp4QfV//NROK5kKRCILH0VGDMke",
+            "full_name": "นางสาวนารีรัตน์ เหตุเกษ (ม.4/4)",
+            "real_name": "นางสาวนารีรัตน์ เหตุเกษ",
+            "role": "student",
+            "student_id": "21436",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21436",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-21438",
+            "username": "21438",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.3wCrgqd1HA5D1Ij4omSlTdghgJlj.Ty",
+            "full_name": "นางสาวปลื้มฤดี พิทักษ์ (ม.4/4)",
+            "real_name": "นางสาวปลื้มฤดี พิทักษ์",
+            "role": "student",
+            "student_id": "21438",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=21438",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23486",
+            "username": "23486",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.dd0Qt.8OV6SppFYRXhqC2BLCCKiPi6G",
+            "full_name": "นางสาวกชพร บุสทิพย์ (ม.4/4)",
+            "real_name": "นางสาวกชพร บุสทิพย์",
+            "role": "student",
+            "student_id": "23486",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23486",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23487",
+            "username": "23487",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.VcSlEJNgLkjn9/P1Eo39xnbrYkMMMfi",
+            "full_name": "นางสาวกวินตรา หวังยศ (ม.4/4)",
+            "real_name": "นางสาวกวินตรา หวังยศ",
+            "role": "student",
+            "student_id": "23487",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23487",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23488",
+            "username": "23488",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.vI5jPwTLH/aq1TUcoCjCdzXDLDt1ABO",
+            "full_name": "นางสาวขวัญจิรา ไพรัตน์ (ม.4/4)",
+            "real_name": "นางสาวขวัญจิรา ไพรัตน์",
+            "role": "student",
+            "student_id": "23488",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23488",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23489",
+            "username": "23489",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.COvI1tHb8/TlP3niv6a40FiT9DDDn3e",
+            "full_name": "เด็กหญิงจุฬามณี ม่วงคุ้ม (ม.4/4)",
+            "real_name": "เด็กหญิงจุฬามณี ม่วงคุ้ม",
+            "role": "student",
+            "student_id": "23489",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23489",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23490",
+            "username": "23490",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.FGU9jRxTmQhQhl.6u7u.FcX6vnIy2qu",
+            "full_name": "นางสาวฐิตาภา จู (ม.4/4)",
+            "real_name": "นางสาวฐิตาภา จู",
+            "role": "student",
+            "student_id": "23490",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23490",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23491",
+            "username": "23491",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.rwDYC3EgkAsadt.gCvRhr4HArDb88ci",
+            "full_name": "เด็กหญิงธัญลักษณ์ ไชยสนาม (ม.4/4)",
+            "real_name": "เด็กหญิงธัญลักษณ์ ไชยสนาม",
+            "role": "student",
+            "student_id": "23491",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23491",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23492",
+            "username": "23492",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.Egi34em1eV3w4m.FNPcJENh0XPmUAjG",
+            "full_name": "เด็กหญิงนันทิชา ประมวล (ม.4/4)",
+            "real_name": "เด็กหญิงนันทิชา ประมวล",
+            "role": "student",
+            "student_id": "23492",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23492",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23493",
+            "username": "23493",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.x4pR01Ggn6hQmjXv6pLAVDYihXqMx6y",
+            "full_name": "นางสาวปนัดดา ลือปัญญา (ม.4/4)",
+            "real_name": "นางสาวปนัดดา ลือปัญญา",
+            "role": "student",
+            "student_id": "23493",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23493",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23494",
+            "username": "23494",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.tSanHqIg4Pel3KjgjAA7cPknLic2tM2",
+            "full_name": "เด็กหญิงปรียานุช แดงสวัสดิ์ (ม.4/4)",
+            "real_name": "เด็กหญิงปรียานุช แดงสวัสดิ์",
+            "role": "student",
+            "student_id": "23494",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23494",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23495",
+            "username": "23495",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.fDn9JR5YBC4si0Bnpsj43XEUcSSnAou",
+            "full_name": "เด็กหญิงปาริตา ป่ากว้าง (ม.4/4)",
+            "real_name": "เด็กหญิงปาริตา ป่ากว้าง",
+            "role": "student",
+            "student_id": "23495",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23495",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23496",
+            "username": "23496",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.TRG/oCbyAJ2wtxMq4QzvwxuIa3xauPa",
+            "full_name": "นางสาวพิรดา หลอดเข็ม (ม.4/4)",
+            "real_name": "นางสาวพิรดา หลอดเข็ม",
+            "role": "student",
+            "student_id": "23496",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23496",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23497",
+            "username": "23497",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP..opWh7cdihAm97AE6Mf5i4BDJlmRgQ.",
+            "full_name": "นางสาวมธุริน พุทธโคตร (ม.4/4)",
+            "real_name": "นางสาวมธุริน พุทธโคตร",
+            "role": "student",
+            "student_id": "23497",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23497",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23498",
+            "username": "23498",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.HkHOJeVE.icTIWFFml.KZ2sw0CiQiQS",
+            "full_name": "เด็กหญิงรัตติกาล ประเสริฐ (ม.4/4)",
+            "real_name": "เด็กหญิงรัตติกาล ประเสริฐ",
+            "role": "student",
+            "student_id": "23498",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23498",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23499",
+            "username": "23499",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.IAtW.2td1bis..rlaSc6y9BMzaHYsqm",
+            "full_name": "นางสาววชิรญา ดำรงค์สกุลไทย (ม.4/4)",
+            "real_name": "นางสาววชิรญา ดำรงค์สกุลไทย",
+            "role": "student",
+            "student_id": "23499",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23499",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23500",
+            "username": "23500",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.GYxsO.5qaltpzkX3Qqvm913doeOa4x6",
+            "full_name": "นางสาววนิดา สุวรรณสิงห์ (ม.4/4)",
+            "real_name": "นางสาววนิดา สุวรรณสิงห์",
+            "role": "student",
+            "student_id": "23500",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23500",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23501",
+            "username": "23501",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.a7oLFYa6z.p6kcRa1lZ1d1Sd4PKTQ3q",
+            "full_name": "เด็กหญิงสิริกุล บุญไสว (ม.4/4)",
+            "real_name": "เด็กหญิงสิริกุล บุญไสว",
+            "role": "student",
+            "student_id": "23501",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23501",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23502",
+            "username": "23502",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.cIoG2wzbkMhPlalhnX3wjcwpzH7drAe",
+            "full_name": "นางสาวสุทธิดา ป้องประดา (ม.4/4)",
+            "real_name": "นางสาวสุทธิดา ป้องประดา",
+            "role": "student",
+            "student_id": "23502",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23502",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23503",
+            "username": "23503",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.AfQ9c62pNn4ATCH1kZMgZq3H0LfeRN2",
+            "full_name": "นางสาวสุพัตรา เพชรทิพย์ (ม.4/4)",
+            "real_name": "นางสาวสุพัตรา เพชรทิพย์",
+            "role": "student",
+            "student_id": "23503",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23503",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23504",
+            "username": "23504",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.cm.5O2D24.Mly3vSXC7F0yitrD5IVFO",
+            "full_name": "นางสาวอภิญญา ทวีสกุลรัตน์ (ม.4/4)",
+            "real_name": "นางสาวอภิญญา ทวีสกุลรัตน์",
+            "role": "student",
+            "student_id": "23504",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23504",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
+      },
+      {
+            "id": "u-23505",
+            "username": "23505",
+            "password_hash": "$2a$10$NiQD96E6/xt4xs/F153wP.5tl5fUrcHnU0Aaq8Sy8i7/CGZeyn9Y.",
+            "full_name": "นางสาวอริสรา ตันสุรินทร์ (ม.4/4)",
+            "real_name": "นางสาวอริสรา ตันสุรินทร์",
+            "role": "student",
+            "student_id": "23505",
+            "class_room": "ม.4/4",
+            "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=23505",
+            "created_at": "2026-10-30T06:00:42.436Z",
+            "updated_at": "2026-10-30T06:00:42.436Z"
       }
     ],
     modules: [
