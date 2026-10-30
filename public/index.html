@@ -2246,8 +2246,9 @@
         <div class="quiz-modal-header">
           <div class="quiz-modal-header-info">
             <div class="quiz-header-top-row">
-              <span class="proctor-pill"><i class="fa-solid fa-shield-halved"></i> ระบบป้องกันการทุจริต</span>
-              <span class="proctor-pill" style="border-color: #0284c7; background: rgba(2, 132, 199, 0.16); color: #38bdf8;"><i class="fa-solid fa-expand"></i> บังคับเต็มหน้าจอ</span>
+              <span class="proctor-pill" id="proctor-pill-security"><i class="fa-solid fa-shield-halved"></i> ระบบป้องกันการทุจริต</span>
+              <span class="proctor-pill" id="proctor-pill-fullscreen" style="border-color: #0284c7; background: rgba(2, 132, 199, 0.16); color: #38bdf8;"><i class="fa-solid fa-expand"></i> บังคับเต็มหน้าจอ</span>
+              <span class="proctor-pill" id="proctor-pill-learning" style="display: none; border-color: #10b981; background: rgba(16, 185, 129, 0.16); color: #34d399;"><i class="fa-solid fa-book-open"></i> แบบทดสอบเพื่อการเรียนรู้</span>
               <span class="proctor-student-pill" id="quiz-student-identity"><i class="fa-solid fa-user-shield"></i> ผู้สอบ: กำลังโหลด...</span>
             </div>
             <h3 id="quiz-modal-title" class="quiz-modal-title">แบบทดสอบ</h3>
@@ -2447,7 +2448,7 @@
               <i class="fa-solid fa-user mr-1" style="color: var(--thairath-green);"></i> ชื่อผู้ใช้ / รหัสนักเรียน:
             </label>
             <div style="position: relative;">
-              <input type="text" id="login-username" required placeholder="รหัสนักเรียน 5 หลัก (เช่น 21123)" style="width: 100%; padding: 11px 14px 11px 38px; border-radius: var(--radius-md); border: 1.5px solid var(--border-color); background: var(--surface-secondary); color: var(--text-main); font-family: inherit; font-size: 0.9rem; transition: border-color 0.2s;" />
+              <input type="text" id="login-username" required placeholder="รหัสนักเรียน 5 หลัก" style="width: 100%; padding: 11px 14px 11px 38px; border-radius: var(--radius-md); border: 1.5px solid var(--border-color); background: var(--surface-secondary); color: var(--text-main); font-family: inherit; font-size: 0.9rem; transition: border-color 0.2s;" />
               <i class="fa-solid fa-id-badge" style="position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.95rem;"></i>
             </div>
           </div>

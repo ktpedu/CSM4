@@ -5871,7 +5871,11 @@ async function loadQuizzesData() {
             <span class="text-xs text-slate-500 font-bold"><i class="fa-solid fa-stopwatch text-amber-500 mr-1"></i>${q.timeLimitMinutes} นาที</span>
           </div>
           <h3 class="text-base font-bold leading-snug" style="color: var(--text-main); font-family: 'Sarabun', sans-serif;">${escapeHtml(q.title)}</h3>
-          <p class="text-xs" style="color: var(--text-muted); font-family: 'Sarabun', sans-serif;">จำนวนทั้งหมด ${q.questionCount} ข้อ พร้อมตรวจคำตอบและเฉลยทันที (บังคับเต็มหน้าจอ)</p>
+          <p class="text-xs" style="color: var(--text-muted); font-family: 'Sarabun', sans-serif;">
+            ${isAntiCheatQuiz(q)
+              ? `จำนวนทั้งหมด ${q.questionCount} ข้อ • ข้อสอบมาตรฐาน (ระบบตรวจจับการทุจริต & บังคับเต็มหน้าจอ)`
+              : `จำนวนทั้งหมด ${q.questionCount} ข้อ พร้อมตรวจคำตอบและเฉลยทันที (โหมดเรียนรู้ ไม่จำกัดการสลับหน้าจอ)`}
+          </p>
           <div class="flex items-center justify-between text-xs pt-1">
             <span class="text-emerald-500 font-semibold flex items-center gap-1.5">
               <i class="fa-solid fa-lock text-[11px]"></i> ต้องใส่รหัสแบบทดสอบก่อนทำ
@@ -5936,6 +5940,14 @@ function shuffleArray(array) {
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
+}
+
+// Check if quiz requires Anti-Cheat & Fullscreen (Midterm & Final only)
+function isAntiCheatQuiz(quiz) {
+  if (!quiz) return false;
+  const id = String(quiz.id || '').toLowerCase();
+  const cat = String(quiz.category || quiz.type || '').toLowerCase();
+  return id === 'quiz-midterm' || id === 'quiz-final' || cat === 'midterm' || cat === 'final';
 }
 
 // Generate watermark text in background
@@ -6067,22 +6079,23 @@ function recordProctorViolation(reason) {
   }
 }
 
-// Anti-Cheat Window Listeners
+// Anti-Cheat Window Listeners (Active only for Midterm & Final)
 window.addEventListener('blur', () => {
-  if (quizIsActive) {
+  if (quizIsActive && isAntiCheatQuiz(currentQuiz)) {
     recordProctorViolation('สลับออกจากหน้าต่างข้อสอบ');
   }
 });
 
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden && quizIsActive) {
+  if (document.hidden && quizIsActive && isAntiCheatQuiz(currentQuiz)) {
     recordProctorViolation('สลับไปยังแท็บอื่นหรือย่อหน้าต่าง');
   }
 });
 
-// Block key shortcuts inside quiz
+// Block key shortcuts inside quiz (Active only for Midterm & Final)
 window.addEventListener('keydown', (e) => {
   if (!quizIsActive) return;
+  if (!isAntiCheatQuiz(currentQuiz)) return;
   if (
     e.key === 'F12' ||
     (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
@@ -6390,6 +6403,8 @@ async function startProctoredQuiz(rawQuiz) {
     resultCard.setAttribute('data-quiz-theme', 'dark');
   }
 
+  const hasAntiCheat = isAntiCheatQuiz(currentQuiz);
+
   // Reset Anti-Cheat & Timer States
   quizViolationsCount = 0;
   quizIsActive = true;
@@ -6402,16 +6417,33 @@ async function startProctoredQuiz(rawQuiz) {
     identityEl.innerHTML = `<i class="fa-solid fa-user-shield"></i> ผู้สอบ: ${escapeHtml(currentUser.full_name)} (${escapeHtml(currentUser.student_id || currentUser.username)})`;
   }
 
+  // Toggle Proctor Header Pills
+  const pillSec = document.getElementById('proctor-pill-security');
+  const pillFs = document.getElementById('proctor-pill-fullscreen');
+  const pillLearn = document.getElementById('proctor-pill-learning');
+  if (pillSec) pillSec.style.display = hasAntiCheat ? 'inline-flex' : 'none';
+  if (pillFs) pillFs.style.display = hasAntiCheat ? 'inline-flex' : 'none';
+  if (pillLearn) pillLearn.style.display = hasAntiCheat ? 'none' : 'inline-flex';
+
   const violationsBadge = document.getElementById('quiz-violations-badge');
   if (violationsBadge) {
-    violationsBadge.innerHTML = `<i class="fa-solid fa-eye text-emerald-500"></i> สลับหน้าจอ: 0/3 ครั้ง`;
-    violationsBadge.style.color = '';
+    if (hasAntiCheat) {
+      violationsBadge.style.display = 'inline-flex';
+      violationsBadge.innerHTML = `<i class="fa-solid fa-eye text-emerald-500"></i> สลับหน้าจอ: 0/3 ครั้ง`;
+      violationsBadge.style.color = '';
+    } else {
+      violationsBadge.style.display = 'none';
+    }
   }
 
   document.getElementById('quiz-modal-title').innerText = currentQuiz.title;
   const subEl = document.querySelector('.quiz-modal-subtitle');
   if (subEl) {
-    subEl.innerHTML = `<i class="fa-solid fa-circle-info"></i> ข้อสอบ ${currentQuiz.questions.length} ข้อ • เวลาทำข้อสอบ ${currentQuiz.timeLimitMinutes || 30} นาที • ไม่อนุญาตให้สลับหน้าจอ`;
+    if (hasAntiCheat) {
+      subEl.innerHTML = `<i class="fa-solid fa-shield-halved text-amber-400"></i> ข้อสอบ ${currentQuiz.questions.length} ข้อ • เวลาทำข้อสอบ ${currentQuiz.timeLimitMinutes || 30} นาที • ระบบตรวจจับการทุจริต (ไม่อนุญาตให้สลับหน้าจอ)`;
+    } else {
+      subEl.innerHTML = `<i class="fa-solid fa-circle-info text-emerald-400"></i> แบบทดสอบ ${currentQuiz.questions.length} ข้อ • เวลาทำ ${currentQuiz.timeLimitMinutes || 30} นาที • โหมดฝึกฝน (สามารถเปิดเอกสารประกอบได้)`;
+    }
   }
 
   // KEEP FIXED ORIGINAL ORDER (อยู่นิ่ง ไม่สลับสับเปลี่ยนตำแหน่ง)
@@ -6473,9 +6505,13 @@ async function startProctoredQuiz(rawQuiz) {
 
   openModal('modal-take-quiz');
 
-  // Enforce Fullscreen immediately upon launch
-  requestFullscreenSafe();
-  showToast('เริ่มทำแบบทดสอบ (โหมดเต็มหน้าจอ & โหมดมืดถนอมสายตา)', 'success');
+  // Enforce Fullscreen ONLY for Midterm & Final
+  if (hasAntiCheat) {
+    requestFullscreenSafe();
+    showToast('เริ่มทำข้อสอบ (ระบบตรวจจับการทุจริต & โหมดเต็มหน้าจอ)', 'success');
+  } else {
+    showToast('เริ่มทำแบบทดสอบ (โหมดฝึกฝนการเรียนรู้)', 'success');
+  }
 }
 
 async function submitQuizAnswers(isAutoSubmit = false, autoReason = '') {
