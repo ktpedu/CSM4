@@ -1622,6 +1622,93 @@
               </div>
             </div>
           </div>
+
+          <!-- Quiz Attempts & Retake Management (ระบบจัดการผลสอบและสิทธิ์การสอบซ้ำ) -->
+          <div class="card" style="margin-top: 24px; border-top: 4px solid #f59e0b;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 16px;">
+              <div>
+                <h3 style="font-size: 1.18rem; font-weight: 700; display: flex; align-items: center; gap: 10px; color: var(--text-main);">
+                  <i class="fa-solid fa-user-check text-amber-500"></i> จัดการผลการทดสอบ & สิทธิ์การสอบใหม่ (Quiz Retake Control)
+                </h3>
+                <p class="text-xs text-slate-500 mt-1">
+                  นักเรียนสอบได้เพียง 1 ครั้งต่อชุด หากต้องการให้นักเรียนสอบใหม่ คุณครูสามารถคลิก <strong>"ลบข้อมูลเพื่อสอบใหม่"</strong> เพื่อรีเซ็ตผลสอบในฐานข้อมูล
+                </p>
+              </div>
+
+              <!-- Action buttons & Refresh -->
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="loadTeacherQuizAttempts(true)" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.82rem;">
+                  <i class="fa-solid fa-rotate-right"></i> รีเฟรชข้อมูล
+                </button>
+                <button type="button" onclick="promptClassQuizReset()" class="btn btn-danger" style="padding: 6px 14px; font-size: 0.82rem; background: #ef4444; color: white;">
+                  <i class="fa-solid fa-trash-can"></i> รีเซ็ตผลสอบทั้งห้อง
+                </button>
+              </div>
+            </div>
+
+            <!-- Filters -->
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; background: var(--surface-secondary); padding: 12px; border-radius: 12px;" class="border border-slate-200">
+              <div style="flex: 1; min-width: 160px;">
+                <label class="text-xs font-bold text-slate-600 block mb-1">เลือกชุดแบบทดสอบ:</label>
+                <select id="teacher-quiz-filter" onchange="filterTeacherQuizAttempts()" class="w-full text-xs p-2 rounded-lg border border-slate-300 bg-white">
+                  <option value="all">ทั้งหมด ทุกชุดแบบทดสอบ</option>
+                  <option value="quiz-pre-unit1">แบบทดสอบก่อนเรียน หน่วยที่ 1 (10 ข้อ)</option>
+                  <option value="quiz-pre-unit2">แบบทดสอบก่อนเรียน หน่วยที่ 2 (10 ข้อ)</option>
+                  <option value="quiz-unit1">แบบทดสอบท้ายหน่วยที่ 1 (20 ข้อ)</option>
+                  <option value="quiz-unit2">แบบทดสอบท้ายหน่วยที่ 2 (20 ข้อ)</option>
+                  <option value="quiz-midterm">ข้อสอบวัดผลกลางภาค (20 ข้อ)</option>
+                  <option value="quiz-final">ข้อสอบวัดผลปลายภาค (20 ข้อ)</option>
+                </select>
+              </div>
+
+              <div style="flex: 1; min-width: 140px;">
+                <label class="text-xs font-bold text-slate-600 block mb-1">เลือกระดับชั้น/ห้อง:</label>
+                <select id="teacher-classroom-filter" onchange="filterTeacherQuizAttempts()" class="w-full text-xs p-2 rounded-lg border border-slate-300 bg-white">
+                  <option value="all">ทุกห้องเรียน (ม.4/1 - ม.4/10)</option>
+                  <option value="ม.4/1">ม.4/1</option>
+                  <option value="ม.4/2">ม.4/2</option>
+                  <option value="ม.4/3">ม.4/3</option>
+                  <option value="ม.4/4">ม.4/4</option>
+                  <option value="ม.4/10">ม.4/10</option>
+                </select>
+              </div>
+
+              <div style="flex: 1.5; min-width: 200px;">
+                <label class="text-xs font-bold text-slate-600 block mb-1">ค้นหาตามชื่อ หรือรหัสนักเรียน:</label>
+                <div class="relative">
+                  <input type="text" id="teacher-student-search" oninput="filterTeacherQuizAttempts()" placeholder="พิมพ์เลขประจำตัว 5 หลัก หรือชื่อ..." class="w-full text-xs p-2 pl-8 rounded-lg border border-slate-300 bg-white">
+                  <i class="fa-solid fa-search absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div id="teacher-quiz-stats-bar" class="text-xs text-slate-600 font-semibold mb-3 flex items-center justify-between">
+              <span>กำลังโหลดข้อมูลผลการสอบ...</span>
+            </div>
+
+            <!-- Quiz Attempts Table -->
+            <div style="overflow-x: auto; max-height: 480px; overflow-y: auto;" class="border border-slate-200 rounded-xl">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead class="bg-slate-100 text-slate-700 font-bold sticky top-0 z-10">
+                  <tr>
+                    <th class="p-3">รหัส</th>
+                    <th class="p-3">ชื่อ - นามสกุล</th>
+                    <th class="p-3">ห้อง</th>
+                    <th class="p-3">ชุดข้อสอบ</th>
+                    <th class="p-3">คะแนน</th>
+                    <th class="p-3">เวลาที่ใช้</th>
+                    <th class="p-3">ส่งเมื่อ</th>
+                    <th class="p-3 text-center">จัดการสิทธิ์สอบ</th>
+                  </tr>
+                </thead>
+                <tbody id="teacher-quiz-attempts-tbody" class="divide-y divide-slate-100 bg-white">
+                  <!-- Rendered via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -2214,6 +2301,55 @@
             </button>
           </div>
         </form>
+      </div>
+    </div>
+
+    
+    <!-- Quiz Already Taken Notice Modal -->
+    <div id="modal-quiz-already-taken" class="quiz-modal-overlay" style="display: none; z-index: 2300;">
+      <div class="card" style="max-width: 480px; width: 100%; padding: 32px 28px; text-align: center; border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.6); border: 1.5px solid var(--border-color); background: var(--surface-primary);">
+        <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(239, 68, 68, 0.15); color: #ef4444; display: inline-flex; align-items: center; justify-content: center; font-size: 2.2rem; margin-bottom: 16px; border: 2px solid rgba(239, 68, 68, 0.3);">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        
+        <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 8px; color: var(--text-main);">
+          ไม่สามารถทำแบบทดสอบซ้ำได้
+        </h3>
+        <p id="quiz-already-taken-quiz-title" style="font-size: 0.95rem; font-weight: 700; color: #ef4444; margin-bottom: 16px;">
+          <!-- Quiz title inserted by JS -->
+        </p>
+
+        <div style="background: rgba(239, 68, 68, 0.08); border: 1.5px solid rgba(239, 68, 68, 0.3); border-radius: 14px; padding: 14px 16px; margin-bottom: 18px; text-align: center;">
+          <div style="font-weight: 800; font-size: 1rem; color: #dc2626; margin-bottom: 4px;">
+            <i class="fa-solid fa-triangle-exclamation mr-1"></i> สอบไปแล้ว ไม่สามารถสอบได้ จนกว่าครูจะลบฐานข้อมูล
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">
+            ระบบจำกัดสิทธิ์ให้นักเรียนทำข้อสอบแต่ละชุดได้เพียง 1 ครั้งเท่านั้น
+          </div>
+        </div>
+
+        <!-- Attempt Details Card -->
+        <div style="background: var(--surface-secondary); border: 1px solid var(--border-color); border-radius: 14px; padding: 14px; margin-bottom: 20px; font-size: 0.84rem; text-align: left; line-height: 1.8;">
+          <div style="font-weight: 700; color: var(--text-main); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">
+            <i class="fa-solid fa-file-invoice text-emerald-500"></i> ประวัติการส่งผลสอบที่บันทึกไว้ในระบบ:
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span class="text-slate-500">ผู้สอบ:</span>
+            <span id="quiz-already-taken-student" class="font-bold text-slate-800">-</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span class="text-slate-500">คะแนนที่ได้:</span>
+            <span id="quiz-already-taken-score" class="font-bold text-emerald-600">-</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span class="text-slate-500">ส่งข้อสอบเมื่อ:</span>
+            <span id="quiz-already-taken-date" class="font-bold text-slate-700">-</span>
+          </div>
+        </div>
+
+        <button type="button" onclick="closeModal('modal-quiz-already-taken')" class="btn btn-primary w-full py-3 font-bold" style="border-radius: 14px;">
+          รับทราบและปิดหน้าต่าง
+        </button>
       </div>
     </div>
 

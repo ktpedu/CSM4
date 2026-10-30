@@ -131,6 +131,7 @@ CREATE POLICY "Service/Anon Delete Users" ON public.users FOR DELETE USING (true
 CREATE POLICY "Public Read Quiz Attempts" ON public.quiz_attempts FOR SELECT USING (true);
 CREATE POLICY "Public Insert Quiz Attempts" ON public.quiz_attempts FOR INSERT WITH CHECK (true);
 CREATE POLICY "Public Update Quiz Attempts" ON public.quiz_attempts FOR UPDATE USING (true);
+CREATE POLICY "Public Delete Quiz Attempts" ON public.quiz_attempts FOR DELETE USING (true);
 
 -- นโยบาย Submissions: อ่านและส่งงานได้
 CREATE POLICY "Public Read Submissions" ON public.submissions FOR SELECT USING (true);

@@ -615,6 +615,20 @@ app.get('/api/quizzes/:id', authenticateToken, (req, res) => {
   const quiz = db.findOne('quizzes', q => q.id === req.params.id);
   if (!quiz) return res.status(404).json({ error: 'ไม่พบแบบทดสอบนี้' });
 
+  // If student, check if already attempted
+  if (req.user && req.user.role === 'student') {
+    const attempts = db.get('quiz_attempts') || [];
+    const sId = req.user.student_id || req.user.username || req.user.id;
+    const exists = attempts.find(a => a.quiz_id === req.params.id && (a.student_id === sId || a.student_id === req.user.id || a.student_id === req.user.username));
+    if (exists) {
+      return res.status(403).json({
+        error: 'สอบไปแล้ว ไม่สามารถสอบได้ จนกว่าครูจะลบฐานข้อมูล',
+        alreadyTaken: true,
+        attempt: exists
+      });
+    }
+  }
+
   const safeQuestions = quiz.questions.map((q, idx) => ({
     id: q.id || 'q' + idx,
     question: q.question,
@@ -636,6 +650,19 @@ app.post('/api/quizzes/:id/submit', authenticateToken, async (req, res) => {
   const quiz = db.findOne('quizzes', q => q.id === req.params.id);
 
   if (!quiz) return res.status(404).json({ error: 'ไม่พบแบบทดสอบนี้' });
+
+  // Safeguard: do not allow duplicate submission by student
+  if (req.user && req.user.role === 'student') {
+    const attempts = db.get('quiz_attempts') || [];
+    const sId = req.user.student_id || req.user.username || req.user.id;
+    const exists = attempts.find(a => a.quiz_id === req.params.id && (a.student_id === sId || a.student_id === req.user.id || a.student_id === req.user.username));
+    if (exists) {
+      return res.status(403).json({
+        error: 'สอบไปแล้ว ไม่สามารถสอบได้ จนกว่าครูจะลบฐานข้อมูล',
+        alreadyTaken: true
+      });
+    }
+  }
 
   let score = 0;
   const total = quiz.questions.length;
@@ -877,6 +904,39 @@ app.post('/api/admin/sync-retry', authenticateToken, requireRole('admin', 'teach
   } catch (err) {
     res.status(500).json({ error: 'เกิดข้อผิดพลาดในการรันคิว: ' + err.message });
   }
+});
+
+
+// Get student's own attempts
+app.get('/api/quizzes/attempts/my', authenticateToken, (req, res) => {
+  const attempts = db.get('quiz_attempts') || [];
+  const sId = req.user.student_id || req.user.username || req.user.id;
+  const myAttempts = attempts.filter(a => a.student_id === sId || a.student_id === req.user.id || a.student_id === req.user.username);
+  res.json(myAttempts);
+});
+
+// Admin / Teacher get all quiz attempts
+app.get('/api/admin/quiz-attempts', authenticateToken, requireRole('admin', 'teacher'), (req, res) => {
+  const attempts = db.get('quiz_attempts') || [];
+  res.json(attempts.slice().reverse());
+});
+
+// Admin / Teacher delete an attempt
+app.delete('/api/admin/quiz-attempts/:id', authenticateToken, requireRole('admin', 'teacher'), (req, res) => {
+  const attemptId = req.params.id;
+  const deletedCount = db.delete('quiz_attempts', a => a.id === attemptId);
+  res.json({ success: true, deletedCount, message: 'ลบข้อมูลผลสอบเรียบร้อยแล้ว' });
+});
+
+// Admin / Teacher reset quiz for class
+app.post('/api/admin/quiz-attempts/reset-class', authenticateToken, requireRole('admin', 'teacher'), (req, res) => {
+  const { quiz_id, class_room } = req.body;
+  const deletedCount = db.delete('quiz_attempts', a => {
+    const matchQuiz = (!quiz_id || quiz_id === 'all') || a.quiz_id === quiz_id;
+    const matchClass = (!class_room || class_room === 'all') || a.class_room === class_room;
+    return matchQuiz && matchClass;
+  });
+  res.json({ success: true, deletedCount, message: 'รีเซ็ตผลสอบเรียบร้อยแล้ว' });
 });
 
 // Push all historical quiz attempts to Supabase (QUIZZES tab)

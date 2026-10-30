@@ -4,6 +4,8 @@ const SUPABASE_ANON_KEY = 'sb_publishable_2FpUqt7BY0Xk3gNH2Rx95Q_DZ2bOVgM';
 
 // State Management
 let currentUser = null;
+let studentQuizAttemptsCache = null;
+let allTeacherQuizAttempts = [];
 let currentToken = '';
 let activeTab = 'home';
 let currentQuiz = null;
@@ -5861,7 +5863,21 @@ async function loadQuizzesData() {
     const container = document.getElementById('quizzes-container');
     if (!container) return;
 
-    container.innerHTML = quizzes.map(q => `
+    // Fetch student's completed quiz attempts
+    let studentAttempts = [];
+    if (currentUser && currentUser.role === 'student') {
+      try {
+        studentAttempts = await fetchStudentQuizAttempts(true);
+      } catch (e) {
+        console.warn('Error loading student quiz attempts:', e);
+      }
+    }
+
+    container.innerHTML = quizzes.map(q => {
+      const myAttempt = studentAttempts.find(a => a.quiz_id === q.id);
+      const isCompleted = Boolean(myAttempt);
+
+      return `
       <div class="glass-card rounded-3xl p-6 space-y-4 flex flex-col justify-between glass-card-hover border border-slate-200">
         <div class="space-y-3">
           <div class="flex justify-between items-center">
@@ -5877,9 +5893,15 @@ async function loadQuizzesData() {
               : `จำนวนทั้งหมด ${q.questionCount} ข้อ พร้อมตรวจคำตอบและเฉลยทันที`}
           </p>
           <div class="flex items-center justify-between text-xs pt-1">
-            <span class="text-emerald-500 font-semibold flex items-center gap-1.5">
-              <i class="fa-solid fa-lock text-[11px]"></i> ต้องใส่รหัสแบบทดสอบก่อนทำ
-            </span>
+            ${isCompleted ? `
+              <span class="bg-emerald-500/10 text-emerald-600 border border-emerald-500/30 px-2 py-0.5 rounded-md font-bold text-[11px] inline-flex items-center gap-1">
+                <i class="fa-solid fa-circle-check"></i> สอบแล้ว (${myAttempt.score}/${myAttempt.max_score || q.questionCount} คะแนน)
+              </span>
+            ` : `
+              <span class="text-emerald-500 font-semibold flex items-center gap-1.5">
+                <i class="fa-solid fa-lock text-[11px]"></i> ต้องใส่รหัสแบบทดสอบก่อนทำ
+              </span>
+            `}
             ${(currentUser && (currentUser.role === 'teacher' || currentUser.role === 'admin')) ? `
               <span class="bg-amber-500/10 text-amber-500 border border-amber-500/30 px-2 py-0.5 rounded-md font-mono font-bold text-[11px]">
                 รหัส: ${q.passcode || 'unit1'}
@@ -5888,11 +5910,18 @@ async function loadQuizzesData() {
           </div>
         </div>
 
-        <button onclick="openQuizModal('${q.id}')" class="w-full ${q.category === 'midterm' ? 'bg-amber-500 hover:bg-amber-600' : q.category === 'final' ? 'bg-rose-600 hover:bg-rose-700' : q.category === 'pretest' ? 'bg-teal-600 hover:bg-teal-700' : 'bg-blue-600 hover:bg-blue-700'} text-white font-extrabold text-xs py-3 rounded-2xl shadow-md transition">
-          <i class="fa-solid fa-pen-to-square mr-1"></i> เริ่มทำข้อสอบชุดนี้ (${q.questionCount} ข้อ)
-        </button>
+        ${isCompleted ? `
+          <button type="button" onclick="notifyQuizAlreadyTaken('${q.id}')" class="w-full bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600 border border-slate-300 hover:border-rose-300 font-bold text-xs py-3 rounded-2xl transition flex items-center justify-center gap-1.5 shadow-sm cursor-pointer">
+            <i class="fa-solid fa-lock text-rose-500"></i> สอบไปแล้ว (รอครูรีเซ็ต)
+          </button>
+        ` : `
+          <button onclick="openQuizModal('${q.id}')" class="w-full ${q.category === 'midterm' ? 'bg-amber-500 hover:bg-amber-600' : q.category === 'final' ? 'bg-rose-600 hover:bg-rose-700' : q.category === 'pretest' ? 'bg-teal-600 hover:bg-teal-700' : 'bg-blue-600 hover:bg-blue-700'} text-white font-extrabold text-xs py-3 rounded-2xl shadow-md transition">
+            <i class="fa-solid fa-pen-to-square mr-1"></i> เริ่มทำข้อสอบชุดนี้ (${q.questionCount} ข้อ)
+          </button>
+        `}
       </div>
-    `).join('');
+      `;
+    }).join('');
 
   } catch (err) {
     console.error('Quizzes load error:', err);
@@ -6284,6 +6313,16 @@ async function openQuizModal(quizId) {
     openLoginModal();
     return;
   }
+
+  // Check if student has already completed this quiz (1 attempt only)
+  if (currentUser.role === 'student') {
+    const existing = await checkStudentQuizAttempt(quizId);
+    if (existing) {
+      showToast('สอบไปแล้ว ไม่สามารถสอบได้ จนกว่าครูจะลบฐานข้อมูล', 'error');
+      showQuizAlreadyTakenModal(existing, quizId);
+      return;
+    }
+  }
   try {
     let rawQuiz = null;
     if (isStaticOrServerlessHost()) {
@@ -6385,12 +6424,32 @@ function handleQuizPasscodeSubmit(e) {
     return;
   }
   
+  // Check if student already took this quiz
+  if (currentUser && currentUser.role === 'student') {
+    const existing = getStudentAttemptForQuiz(pendingQuizData.id);
+    if (existing) {
+      closeModal('modal-quiz-passcode');
+      showToast('สอบไปแล้ว ไม่สามารถสอบได้ จนกว่าครูจะลบฐานข้อมูล', 'error');
+      showQuizAlreadyTakenModal(existing, pendingQuizData);
+      return;
+    }
+  }
+
   // Correct passcode! Close passcode modal and start proctored quiz in fullscreen
   closeModal('modal-quiz-passcode');
   startProctoredQuiz(pendingQuizData);
 }
 
 async function startProctoredQuiz(rawQuiz) {
+  if (currentUser && currentUser.role === 'student') {
+    const existing = getStudentAttemptForQuiz(rawQuiz.id);
+    if (existing) {
+      showToast('สอบไปแล้ว ไม่สามารถสอบได้ จนกว่าครูจะลบฐานข้อมูล', 'error');
+      showQuizAlreadyTakenModal(existing, rawQuiz);
+      return;
+    }
+  }
+
   currentQuiz = rawQuiz;
 
   // Set quiz eye theme to DARK by default (Standby primary mode)
@@ -6519,6 +6578,17 @@ async function startProctoredQuiz(rawQuiz) {
 async function submitQuizAnswers(isAutoSubmit = false, autoReason = '') {
   if (!currentQuiz || !quizActiveQuestions) return;
 
+  // Safeguard: Do not allow second submission
+  if (currentUser && currentUser.role === 'student') {
+    const existing = getStudentAttemptForQuiz(currentQuiz.id);
+    if (existing) {
+      showToast('สอบไปแล้ว ไม่สามารถสอบได้ จนกว่าครูจะลบฐานข้อมูล', 'error');
+      alert('สอบไปแล้ว ไม่สามารถสอบได้ จนกว่าครูจะลบฐานข้อมูล');
+      closeModal('modal-take-quiz');
+      return;
+    }
+  }
+
   quizIsActive = false;
   stopQuizTimer();
   document.body.style.overflow = '';
@@ -6625,6 +6695,12 @@ async function submitQuizAnswers(isAutoSubmit = false, autoReason = '') {
         answers: answers,
         submitted_at: new Date().toISOString()
       };
+
+      // Update memory cache immediately so student is blocked right away
+      if (currentUser && currentUser.role === 'student') {
+        if (!studentQuizAttemptsCache) studentQuizAttemptsCache = [];
+        studentQuizAttemptsCache.unshift(sbRecord);
+      }
 
       // บันทึกตรงไปยัง Supabase Cloud REST API ตาราง quiz_attempts
       fetch(`${SUPABASE_REST_URL}/quiz_attempts`, {
@@ -6894,6 +6970,9 @@ async function loadTeacherData() {
   } catch (err) {
     console.error('Teacher load error:', err);
   }
+
+  // Load Quiz Attempts for Teacher Management
+  loadTeacherQuizAttempts();
 }
 
 async function replyQuestionPrompt(questionId) {
@@ -7505,5 +7584,363 @@ async function migrateAllToSupabaseUI() {
     }
   } catch (err) {
     showToast(`ย้ายข้อมูลล้มเหลว: ${err.message}`, 'error');
+  }
+}
+
+
+// ====================================================================
+// QUIZ ATTEMPTS & RETAKE RESTRICTION LOGIC
+// "นักเรียนสอบได้แค่ครั้งเดียว หากสอบซ้ำ ให้แจ้งว่า สอบไปแล้ว ไม่สามารถสอบได้ จนกว่าครูจะลบฐานข้อมูล"
+// ====================================================================
+
+// Fetch student attempts from Supabase Cloud (Single Source of Truth)
+async function fetchStudentQuizAttempts(forceRefresh = false) {
+  if (!currentUser) {
+    studentQuizAttemptsCache = [];
+    return [];
+  }
+  // Teachers and Admins have no restriction
+  if (currentUser.role === 'teacher' || currentUser.role === 'admin') {
+    studentQuizAttemptsCache = [];
+    return [];
+  }
+
+  if (studentQuizAttemptsCache && !forceRefresh) {
+    return studentQuizAttemptsCache;
+  }
+
+  const idList = Array.from(new Set([
+    currentUser.student_id,
+    currentUser.username,
+    currentUser.id
+  ].filter(Boolean)));
+
+  let attempts = [];
+
+  // 1. Fetch from Supabase Cloud
+  try {
+    const filterQuery = idList.map(id => `student_id.eq.${encodeURIComponent(id)}`).join(',');
+    const url = `${SUPABASE_REST_URL}/quiz_attempts?or=(${filterQuery})&select=*&order=submitted_at.desc`;
+    const res = await fetch(url, {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    });
+    if (res.ok) {
+      attempts = await res.json();
+    }
+  } catch (err) {
+    console.warn('Supabase fetch student attempts error:', err);
+  }
+
+  // 2. Fallback to API if server host
+  if (attempts.length === 0 && !isStaticOrServerlessHost()) {
+    try {
+      const serverAttempts = await apiFetch('/quizzes/attempts/my');
+      if (Array.isArray(serverAttempts)) {
+        attempts = serverAttempts;
+      }
+    } catch (e) {}
+  }
+
+  // 3. Fallback to localStorage if completely offline
+  if (attempts.length === 0) {
+    try {
+      const localAttempts = JSON.parse(localStorage.getItem('csm4_quiz_attempts') || '[]');
+      attempts = localAttempts.filter(a => idList.includes(String(a.student_id)));
+    } catch (e) {}
+  }
+
+  studentQuizAttemptsCache = attempts;
+  return attempts;
+}
+
+function getStudentAttemptForQuiz(quizId) {
+  if (!currentUser || currentUser.role !== 'student') return null;
+  if (!studentQuizAttemptsCache) return null;
+  return studentQuizAttemptsCache.find(a => a.quiz_id === quizId) || null;
+}
+
+async function checkStudentQuizAttempt(quizId) {
+  if (!currentUser || currentUser.role !== 'student') return null;
+  const attempts = await fetchStudentQuizAttempts(false);
+  return attempts.find(a => a.quiz_id === quizId) || null;
+}
+
+function notifyQuizAlreadyTaken(quizId) {
+  showToast('สอบไปแล้ว ไม่สามารถสอบได้ จนกว่าครูจะลบฐานข้อมูล', 'error');
+  const attempt = getStudentAttemptForQuiz(quizId);
+  showQuizAlreadyTakenModal(attempt, quizId);
+}
+
+function showQuizAlreadyTakenModal(attempt, quizOrQuizId) {
+  const quizTitleEl = document.getElementById('quiz-already-taken-quiz-title');
+  const studentEl = document.getElementById('quiz-already-taken-student');
+  const scoreEl = document.getElementById('quiz-already-taken-score');
+  const dateEl = document.getElementById('quiz-already-taken-date');
+
+  let title = '';
+  if (typeof quizOrQuizId === 'object' && quizOrQuizId) {
+    title = quizOrQuizId.title || quizOrQuizId.id;
+  } else if (typeof quizOrQuizId === 'string') {
+    const q = getOfflineQuizById(quizOrQuizId);
+    title = q ? q.title : quizOrQuizId;
+  }
+
+  if (quizTitleEl) quizTitleEl.innerText = title || 'แบบทดสอบ';
+  if (studentEl) {
+    studentEl.innerText = currentUser ? `${currentUser.full_name} (${currentUser.student_id || currentUser.username})` : '-';
+  }
+  if (scoreEl && attempt) {
+    scoreEl.innerText = `${attempt.score} / ${attempt.max_score || 20} คะแนน (${attempt.percentage}%)`;
+  } else if (scoreEl) {
+    scoreEl.innerText = 'บันทึกแล้วในฐานข้อมูล';
+  }
+  if (dateEl && attempt && attempt.submitted_at) {
+    dateEl.innerText = new Date(attempt.submitted_at).toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' });
+  } else if (dateEl) {
+    dateEl.innerText = '-';
+  }
+
+  openModal('modal-quiz-already-taken');
+}
+
+// --- TEACHER MANAGEMENT OF QUIZ ATTEMPTS & RETAKES ---
+
+async function loadTeacherQuizAttempts(forceRefresh = false) {
+  const tbody = document.getElementById('teacher-quiz-attempts-tbody');
+  const statsBar = document.getElementById('teacher-quiz-stats-bar');
+  if (!tbody) return;
+
+  if (allTeacherQuizAttempts.length === 0 || forceRefresh) {
+    if (statsBar) statsBar.innerHTML = '<span><i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังโหลดข้อมูลผลการสอบจาก Supabase Cloud...</span>';
+    try {
+      const res = await fetch(`${SUPABASE_REST_URL}/quiz_attempts?select=*&order=submitted_at.desc`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      if (res.ok) {
+        allTeacherQuizAttempts = await res.json();
+      }
+    } catch (err) {
+      console.warn('Teacher fetch attempts error:', err);
+    }
+
+    if (allTeacherQuizAttempts.length === 0 && !isStaticOrServerlessHost()) {
+      try {
+        allTeacherQuizAttempts = await apiFetch('/admin/quiz-attempts');
+      } catch (e) {}
+    }
+
+    if (allTeacherQuizAttempts.length === 0) {
+      try {
+        allTeacherQuizAttempts = JSON.parse(localStorage.getItem('csm4_quiz_attempts') || '[]');
+      } catch (e) {}
+    }
+  }
+
+  filterTeacherQuizAttempts();
+}
+
+function filterTeacherQuizAttempts() {
+  const tbody = document.getElementById('teacher-quiz-attempts-tbody');
+  const statsBar = document.getElementById('teacher-quiz-stats-bar');
+  const quizFilter = document.getElementById('teacher-quiz-filter');
+  const classFilter = document.getElementById('teacher-classroom-filter');
+  const searchInput = document.getElementById('teacher-student-search');
+  if (!tbody) return;
+
+  const qVal = quizFilter ? quizFilter.value : 'all';
+  const cVal = classFilter ? classFilter.value : 'all';
+  const sText = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+  let filtered = allTeacherQuizAttempts.filter(att => {
+    if (qVal !== 'all' && att.quiz_id !== qVal) return false;
+    if (cVal !== 'all' && att.class_room !== cVal) return false;
+    if (sText) {
+      const matchId = String(att.student_id || '').toLowerCase().includes(sText);
+      const matchName = String(att.student_name || '').toLowerCase().includes(sText);
+      if (!matchId && !matchName) return false;
+    }
+    return true;
+  });
+
+  if (statsBar) {
+    statsBar.innerHTML = `
+      <span>แสดงทั้งหมด <strong>${filtered.length}</strong> รายการ (จากทั้งหมด ${allTeacherQuizAttempts.length} รายการในฐานข้อมูล)</span>
+      <span class="text-emerald-600 font-bold"><i class="fa-solid fa-cloud-check mr-1"></i> เชื่อมต่อ Supabase Cloud เรียบร้อย</span>
+    `;
+  }
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="8" class="p-8 text-center text-slate-400">
+          <i class="fa-solid fa-inbox text-3xl mb-2 block"></i>
+          ไม่พบรายการผลการสอบตามเงื่อนไขที่เลือก
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  const quizTitleMap = {
+    'quiz-pre-unit1': 'ก่อนเรียน หน่วยที่ 1',
+    'quiz-pre-unit2': 'ก่อนเรียน หน่วยที่ 2',
+    'quiz-unit1': 'ท้ายหน่วยที่ 1',
+    'quiz-unit2': 'ท้ายหน่วยที่ 2',
+    'quiz-midterm': 'กลางภาค',
+    'quiz-final': 'ปลายภาค'
+  };
+
+  tbody.innerHTML = filtered.map(att => {
+    const qTitle = quizTitleMap[att.quiz_id] || att.quiz_id;
+    const timeStr = att.submitted_at ? new Date(att.submitted_at).toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' }) : '-';
+    const percent = att.percentage !== undefined ? att.percentage : (att.max_score ? Math.round((att.score / att.max_score) * 100) : 0);
+    const badgeColor = percent >= 80 ? 'bg-emerald-100 text-emerald-800' : (percent >= 60 ? 'bg-blue-100 text-blue-800' : 'bg-rose-100 text-rose-800');
+
+    return `
+      <tr class="hover:bg-slate-50 border-b border-slate-100 transition">
+        <td class="p-3 font-mono font-bold text-slate-700">${escapeHtml(att.student_id || '-')}</td>
+        <td class="p-3 font-semibold text-slate-800">${escapeHtml(att.student_name || 'ไม่ระบุชื่อ')}</td>
+        <td class="p-3">
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700">${escapeHtml(att.class_room || '-')}</span>
+        </td>
+        <td class="p-3 font-medium text-slate-700">${escapeHtml(qTitle)}</td>
+        <td class="p-3">
+          <span class="px-2 py-0.5 rounded text-[11px] font-bold ${badgeColor}">
+            ${att.score}/${att.max_score || 20} (${percent}%)
+          </span>
+        </td>
+        <td class="p-3 text-slate-500">${escapeHtml(att.time_spent || '-')}</td>
+        <td class="p-3 text-slate-500 text-[11px]">${escapeHtml(timeStr)}</td>
+        <td class="p-3 text-center">
+          <button type="button" 
+            onclick="deleteStudentQuizAttempt('${att.id}', '${escapeHtml(att.student_name || '')}', '${escapeHtml(qTitle)}', '${escapeHtml(att.student_id || '')}', '${escapeHtml(att.quiz_id || '')}')"
+            class="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 hover:text-rose-700 border border-rose-200 hover:border-rose-300 font-bold text-xs transition inline-flex items-center gap-1 shadow-sm">
+            <i class="fa-solid fa-trash-can text-[11px]"></i> ลบให้สอบใหม่
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+async function deleteStudentQuizAttempt(attemptId, studentName, quizTitle, studentId, quizId) {
+  if (!confirm(`ยืนยันการลบผลการสอบของ:\n"${studentName}" (${studentId || '-'})
+ชุด: "${quizTitle}"\n\nเมื่อลบแล้ว นักเรียนจะสามารถเข้าทำแบบทดสอบชุดนี้ใหม่ได้ทันที คุณต้องการดำเนินการต่อหรือไม่?`)) {
+    return;
+  }
+
+  try {
+    showToast('กำลังลบข้อมูลการสอบออกจากฐานข้อมูล...', 'info');
+
+    // 1. DELETE from Supabase Cloud by ID
+    try {
+      await fetch(`${SUPABASE_REST_URL}/quiz_attempts?id=eq.${encodeURIComponent(attemptId)}`, {
+        method: 'DELETE',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+    } catch (sbErr) {
+      console.warn('Supabase delete error:', sbErr);
+    }
+
+    // Also delete by student_id and quiz_id in Supabase
+    if (studentId && quizId) {
+      try {
+        await fetch(`${SUPABASE_REST_URL}/quiz_attempts?student_id=eq.${encodeURIComponent(studentId)}&quiz_id=eq.${encodeURIComponent(quizId)}`, {
+          method: 'DELETE',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+      } catch (e) {}
+    }
+
+    // 2. Delete from local server API if running server.js
+    if (!isStaticOrServerlessHost()) {
+      try {
+        await apiFetch(`/admin/quiz-attempts/${encodeURIComponent(attemptId)}`, 'DELETE');
+      } catch (e) {}
+    }
+
+    // 3. Clean up localStorage
+    try {
+      const currentAttempts = JSON.parse(localStorage.getItem('csm4_quiz_attempts') || '[]');
+      const filtered = currentAttempts.filter(a => a.id !== attemptId && !(a.student_id === studentId && a.quiz_id === quizId));
+      localStorage.setItem('csm4_quiz_attempts', JSON.stringify(filtered));
+    } catch (e) {}
+
+    // Invalidate local cache
+    studentQuizAttemptsCache = null;
+
+    // Immediately update in-memory array for teacher table
+    allTeacherQuizAttempts = allTeacherQuizAttempts.filter(a => a.id !== attemptId && !(a.student_id === studentId && a.quiz_id === quizId));
+    filterTeacherQuizAttempts();
+
+    showToast(`ลบข้อมูลผลสอบของ "${studentName}" สำเร็จ! นักเรียนสามารถสอบใหม่ได้แล้ว`, 'success');
+
+  } catch (err) {
+    console.error('Delete attempt error:', err);
+    showToast('เกิดข้อผิดพลาดในการลบข้อมูล: ' + err.message, 'error');
+  }
+}
+
+async function promptClassQuizReset() {
+  const quizFilter = document.getElementById('teacher-quiz-filter');
+  const classFilter = document.getElementById('teacher-classroom-filter');
+  const quizId = quizFilter ? quizFilter.value : 'all';
+  const classRoom = classFilter ? classFilter.value : 'all';
+
+  if (quizId === 'all' && classRoom === 'all') {
+    alert('กรุณาเลือก "ชุดแบบทดสอบ" หรือ "ห้องเรียน" ที่ต้องการรีเซ็ตก่อน (ไม่สามารถเลือกรีเซ็ตทั้งหมดได้พร้อมกันเพื่อป้องกันความผิดพลาด)');
+    return;
+  }
+
+  const quizText = quizFilter ? quizFilter.options[quizFilter.selectedIndex].text : quizId;
+  const classText = classFilter ? classFilter.options[classFilter.selectedIndex].text : classRoom;
+
+  if (!confirm(`⚠️ ยืนยันการลบผลสอบทั้งห้อง/ชุด:\nชุด: ${quizText}\nห้อง: ${classText}\n\nนักเรียนที่อยู่ในกลุ่มนี้จะสามารถเข้าทำแบบทดสอบใหม่ได้ทั้งหมด คุณแน่ใจหรือไม่?`)) {
+    return;
+  }
+
+  try {
+    showToast('กำลังลบผลสอบตามเงื่อนไข...', 'info');
+
+    let queryParams = [];
+    if (quizId !== 'all') queryParams.push(`quiz_id=eq.${encodeURIComponent(quizId)}`);
+    if (classRoom !== 'all') queryParams.push(`class_room=eq.${encodeURIComponent(classRoom)}`);
+
+    if (queryParams.length > 0) {
+      const url = `${SUPABASE_REST_URL}/quiz_attempts?${queryParams.join('&')}`;
+      await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+    }
+
+    if (!isStaticOrServerlessHost()) {
+      try {
+        await apiFetch('/admin/quiz-attempts/reset-class', 'POST', { quiz_id: quizId, class_room: classRoom });
+      } catch (e) {}
+    }
+
+    studentQuizAttemptsCache = null;
+    showToast('รีเซ็ตผลสอบเรียบร้อยแล้ว นักเรียนสามารถสอบใหม่ได้ทันที', 'success');
+    await loadTeacherQuizAttempts(true);
+
+  } catch (err) {
+    console.error('Batch reset error:', err);
+    showToast('เกิดข้อผิดพลาด: ' + err.message, 'error');
   }
 }
