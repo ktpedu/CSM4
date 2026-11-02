@@ -4903,3 +4903,99 @@ i.fab,
   font-size: 0.95rem !important;
   line-height: 1.5 !important;
 }
+
+/* ==========================================================================
+   STUDENT-FIRST PROFESSIONAL UI & MOBILE BOTTOM NAVIGATION (LMS ENHANCEMENT)
+   ========================================================================== */
+
+/* 1. Mobile Bottom Navigation Bar (iOS / Material 3 style) */
+.mobile-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 62px;
+    background: rgba(15, 23, 42, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    z-index: 2600;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 4px calc(env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.35);
+  }
+
+  .mobile-bottom-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 0.72rem;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 6px 0;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-bottom-btn i {
+    font-size: 1.25rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-bottom-btn:active {
+    transform: scale(0.92);
+  }
+
+  .mobile-bottom-btn.active {
+    color: #10b981;
+  }
+
+  .mobile-bottom-btn.active i {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 2px 6px rgba(16, 185, 129, 0.5));
+  }
+
+  /* Add padding to page bottom so bottom nav doesn't cover content */
+  body {
+    padding-bottom: 74px !important;
+  }
+}
+
+/* 2. Student Quick Access Hub Cards */
+.student-quick-hub-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* iPad Touch Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .glass-card-hover:hover {
+    transform: none;
+  }
+  button, a {
+    min-height: 38px;
+  }
+}

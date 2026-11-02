@@ -281,6 +281,53 @@ function updateAuthUI() {
         btnAnnounce.classList.add('hidden');
       }
     }
+
+    // Update Student Personalized Hub Banner (Logged In)
+    const bannerIcon = document.getElementById('student-banner-icon');
+    const bannerBadge = document.getElementById('student-banner-badge');
+    const bannerTitle = document.getElementById('student-banner-title');
+    const bannerSub = document.getElementById('student-banner-sub');
+    const bannerActions = document.getElementById('student-banner-actions');
+    const mNavProfileText = document.getElementById('m-nav-profile-text');
+
+    if (bannerIcon) bannerIcon.innerText = currentUser.role === 'student' ? '👋' : '👨‍🏫';
+    if (bannerBadge) {
+      bannerBadge.innerText = currentUser.role === 'student' 
+        ? `นักเรียนห้อง ${currentUser.class_room || 'ม.4'} • เลขประจำตัว ${currentUser.username}`
+        : `บัญชี${currentUser.role === 'teacher' ? 'ครูผู้สอน' : 'ผู้ดูแลระบบ'}`;
+      bannerBadge.style.background = currentUser.role === 'student' ? 'rgba(16, 185, 129, 0.25)' : 'rgba(59, 130, 246, 0.25)';
+      bannerBadge.style.color = currentUser.role === 'student' ? '#6ee7b7' : '#93c5fd';
+    }
+    if (bannerTitle) {
+      bannerTitle.innerText = `ยินดีต้อนรับ, ${currentUser.full_name}`;
+    }
+    if (bannerSub) {
+      bannerSub.innerText = currentUser.role === 'student'
+        ? `พร้อมเริ่มบทเรียน ทำใบงาน หรือเข้าสอบออนไลน์ได้ทันที ตรวจสอบผลคะแนนได้ตลอดเวลา`
+        : `คุณกำลังเข้าสู่ระบบในฐานะ${currentUser.role === 'teacher' ? 'ครูผู้สอน' : 'ผู้ดูแลระบบ'} สามารถจัดการคะแนนและตรวจงานได้ที่เมนูระบบจัดการ`;
+    }
+    if (bannerActions) {
+      if (currentUser.role === 'student') {
+        bannerActions.innerHTML = `
+          <button type="button" onclick="switchTab('analytics')" class="btn" style="background: rgba(255,255,255,0.15); color: #ffffff; font-weight: 700; padding: 10px 18px; border-radius: 12px; font-size: 0.88rem; border: 1px solid rgba(255,255,255,0.25); cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-chart-line text-emerald-400"></i> ดูคะแนนของฉัน
+          </button>
+          <button type="button" onclick="logout()" class="btn" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; font-weight: 700; padding: 10px 14px; border-radius: 12px; font-size: 0.88rem; border: 1px solid rgba(239, 68, 68, 0.4); cursor: pointer; display: inline-flex; align-items: center; gap: 6px;" title="ออกจากระบบ">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> ออกจากระบบ
+          </button>
+        `;
+      } else {
+        bannerActions.innerHTML = `
+          <button type="button" onclick="switchTab('teacher')" class="btn" style="background: #10b981; color: #ffffff; font-weight: 700; padding: 10px 18px; border-radius: 12px; font-size: 0.88rem; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);">
+            <i class="fa-solid fa-chalkboard-user"></i> แดชบอร์ดครูผู้สอน
+          </button>
+        `;
+      }
+    }
+    if (mNavProfileText) {
+      mNavProfileText.innerText = currentUser.class_room ? currentUser.class_room : (currentUser.role === 'student' ? 'นักเรียน' : 'ครู');
+    }
+
   } else {
     // Guest State
     if (profileContainer) profileContainer.style.display = 'none';
@@ -293,6 +340,39 @@ function updateAuthUI() {
       btnAnnounce.style.display = 'none';
       btnAnnounce.classList.add('hidden');
     }
+
+    // Reset Student Personalized Hub Banner (Guest)
+    const bannerIcon = document.getElementById('student-banner-icon');
+    const bannerBadge = document.getElementById('student-banner-badge');
+    const bannerTitle = document.getElementById('student-banner-title');
+    const bannerSub = document.getElementById('student-banner-sub');
+    const bannerActions = document.getElementById('student-banner-actions');
+    const mNavProfileText = document.getElementById('m-nav-profile-text');
+
+    if (bannerIcon) bannerIcon.innerText = '🎓';
+    if (bannerBadge) {
+      bannerBadge.innerText = 'ระบบการเรียนรู้ออนไลน์ ม.4';
+      bannerBadge.style.background = 'rgba(16, 185, 129, 0.25)';
+      bannerBadge.style.color = '#6ee7b7';
+    }
+    if (bannerTitle) bannerTitle.innerText = 'ศูนย์การเรียนรู้วิทยาการคำนวณ ม.4 (CS-M4)';
+    if (bannerSub) bannerSub.innerText = 'เลือก 4 เมนูหลักด้านล่าง เพื่อเข้าสู่บทเรียน ทำใบงาน หรือทำแบบทดสอบได้ทันทีในคลิกเดียว';
+    if (bannerActions) {
+      bannerActions.innerHTML = `
+        <button type="button" onclick="openLoginModal()" id="btn-banner-login" class="btn" style="background: #10b981; color: #ffffff; font-weight: 700; padding: 10px 20px; border-radius: 12px; font-size: 0.9rem; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35); display: inline-flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> เข้าสู่ระบบนักเรียน (เลข 5 หลัก)
+        </button>
+      `;
+    }
+    if (mNavProfileText) {
+      mNavProfileText.innerText = 'เข้าสู่ระบบ';
+    }
+  }
+
+  // Hide Management Menu from Students and Guests to keep Top Nav clean & professional
+  const mgmtNav = document.getElementById('nav-group-management-li');
+  if (mgmtNav) {
+    mgmtNav.style.display = (currentUser && (currentUser.role === 'teacher' || currentUser.role === 'admin')) ? 'block' : 'none';
   }
 }
 
@@ -2408,6 +2488,15 @@ function switchTab(tabId) {
   const navLinks = document.getElementById('nav-links');
   if (navLinks && navLinks.classList.contains('mobile-open')) {
     navLinks.classList.remove('mobile-open');
+  }
+
+  // Sync Mobile Bottom Navigation buttons active state
+  document.querySelectorAll('.mobile-bottom-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  const activeMobileBtn = document.getElementById(`m-nav-${tabId}`);
+  if (activeMobileBtn) {
+    activeMobileBtn.classList.add('active');
   }
 
   // Load Tab Specific Data
@@ -8261,5 +8350,28 @@ async function promptClassQuizReset() {
   } catch (err) {
     console.error('Batch reset error:', err);
     showToast('เกิดข้อผิดพลาด: ' + err.message, 'error');
+  }
+}
+
+// --- STUDENT UI & MOBILE NAVIGATION HELPERS ---
+function startDirectQuiz(quizId) {
+  if (!currentUser) {
+    showToast('กรุณาเข้าสู่ระบบก่อนทำแบบทดสอบ', 'info');
+    openLoginModal();
+    return;
+  }
+  switchTab('quizzes');
+  setTimeout(() => {
+    if (typeof openQuizModal === 'function') {
+      openQuizModal(quizId);
+    }
+  }, 400);
+}
+
+function handleMobileProfileClick() {
+  if (currentUser) {
+    toggleUserDropdown();
+  } else {
+    openLoginModal();
   }
 }

@@ -380,6 +380,171 @@
            ==================================================================== -->
       <section id="tab-home" class="tab-content">
         
+        <!-- STUDENT QUICK ACCESS HUB (ศูนย์กลางการเรียนรู้ด่วน - เข้าถึงง่ายที่สุดสำหรับนักเรียน) -->
+        <section class="student-quick-hub-section" style="padding: 16px 0 10px 0; background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, transparent 100%);">
+          <div class="container">
+            
+            <!-- Student Personalized / Welcome Banner -->
+            <div id="student-welcome-banner" style="background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%); color: #ffffff; border-radius: 20px; padding: 22px 26px; margin-bottom: 20px; border: 1.5px solid rgba(16, 185, 129, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.14); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="width: 54px; height: 54px; border-radius: 16px; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0;">
+                  <span id="student-banner-icon">🎓</span>
+                </div>
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
+                    <span id="student-banner-badge" style="background: rgba(16, 185, 129, 0.25); color: #6ee7b7; font-size: 0.72rem; font-weight: 800; padding: 3px 10px; border-radius: 999px; letter-spacing: 0.5px;">
+                      ระบบการเรียนรู้ออนไลน์ ม.4
+                    </span>
+                    <span style="font-size: 0.74rem; color: #94a3b8;">ว 4.2 ม.4/1 • ครูปณิฏฐา บุญยงค์</span>
+                  </div>
+                  <h2 id="student-banner-title" style="font-family: 'Kanit', sans-serif; font-size: 1.35rem; font-weight: 800; margin: 0; color: #ffffff; line-height: 1.3;">
+                    ศูนย์การเรียนรู้วิทยาการคำนวณ ม.4 (CS-M4)
+                  </h2>
+                  <p id="student-banner-sub" style="font-size: 0.86rem; color: #cbd5e1; margin: 4px 0 0 0;">
+                    เลือก 4 เมนูหลักด้านล่าง เพื่อเข้าสู่บทเรียน ทำใบงาน หรือทำแบบทดสอบได้ทันทีในคลิกเดียว
+                  </p>
+                </div>
+              </div>
+
+              <!-- Quick login / student status -->
+              <div id="student-banner-actions" style="display: flex; align-items: center; gap: 10px;">
+                <button type="button" onclick="openLoginModal()" id="btn-banner-login" class="btn" style="background: #10b981; color: #ffffff; font-weight: 700; padding: 10px 20px; border-radius: 12px; font-size: 0.9rem; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35); display: inline-flex; align-items: center; gap: 8px;">
+                  <i class="fa-solid fa-arrow-right-to-bracket"></i> เข้าสู่ระบบนักเรียน (เลข 5 หลัก)
+                </button>
+              </div>
+            </div>
+
+            <!-- 4 ESSENTIAL ACTION TILES (4 ประตูหลักที่นักเรียนใช้งานบ่อยที่สุด) -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 24px;">
+              
+              <!-- Tile 1: บทเรียนดิจิทัล & สไลด์ -->
+              <div class="glass-card-hover" style="background: var(--surface-color); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 6px 20px rgba(0,0,0,0.04);">
+                <div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                    <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.12); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                      <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <span style="font-size: 0.72rem; font-weight: 800; background: rgba(16, 185, 129, 0.1); color: #059669; padding: 3px 10px; border-radius: 999px;">
+                      2 หน่วยการเรียนรู้
+                    </span>
+                  </div>
+                  <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
+                    1. บทเรียนดิจิทัล &amp; สไลด์
+                  </h3>
+                  <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+                    ศึกษาเนื้อหาบทเรียนหน่วยที่ 1-2 พร้อมภาพเวกเตอร์ และสไลด์บรรยายสรุปสาระสำคัญ
+                  </p>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <a href="unit1.html" target="_blank" style="display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: rgba(16, 185, 129, 0.1); color: #047857; border-radius: 10px; font-weight: 700; font-size: 0.82rem; text-decoration: none;">
+                    <span><i class="fa-solid fa-graduation-cap mr-1.5"></i> เข้าเรียน หน่วยที่ 1 (แนวคิดเชิงคำนวณ)</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+                  </a>
+                  <a href="unit2.html" target="_blank" style="display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: rgba(2, 132, 199, 0.1); color: #0284c7; border-radius: 10px; font-weight: 700; font-size: 0.82rem; text-decoration: none;">
+                    <span><i class="fa-solid fa-laptop-code mr-1.5"></i> เข้าเรียน หน่วยที่ 2 (พัฒนาโครงงาน)</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+                  </a>
+                  <button type="button" onclick="openSlideDeck(1)" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 14px; background: #f59e0b; color: white; border-radius: 10px; font-weight: 700; font-size: 0.82rem; border: none; cursor: pointer; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);">
+                    <i class="fa-solid fa-file-powerpoint"></i> สไลด์ประกอบการสอน (Google Slides ↗)
+                  </button>
+                </div>
+              </div>
+
+              <!-- Tile 2: คลังใบงาน & ดาวน์โหลด PDF -->
+              <div class="glass-card-hover" style="background: var(--surface-color); border: 2px solid rgba(2, 132, 199, 0.3); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 6px 20px rgba(0,0,0,0.04);">
+                <div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                    <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(2, 132, 199, 0.12); color: #0284c7; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                      <i class="fa-solid fa-file-pen"></i>
+                    </div>
+                    <span style="font-size: 0.72rem; font-weight: 800; background: rgba(2, 132, 199, 0.1); color: #0284c7; padding: 3px 10px; border-radius: 999px;">
+                      6 ใบงาน (A4 / PDF)
+                    </span>
+                  </div>
+                  <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
+                    2. ใบงาน &amp; ส่งการบ้าน
+                  </h3>
+                  <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+                    ดาวน์โหลดใบงาน PDF ขนาด A4 รองรับการเขียนบน iPad / GoodNotes พร้อมระบบส่งผลงาน
+                  </p>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <a href="worksheets/all_worksheets_m4.pdf" target="_blank" download="รวมใบงาน_วิทยาการคำนวณ_ม4.pdf" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 14px; background: #0284c7; color: white; border-radius: 10px; font-weight: 700; font-size: 0.82rem; text-decoration: none; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.25);">
+                    <i class="fa-solid fa-file-arrow-down"></i> โหลด PDF รวม 6 ฉบับ (สำหรับ iPad)
+                  </a>
+                  <button type="button" onclick="switchTab('worksheets')" style="display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: var(--surface-secondary); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 10px; font-weight: 700; font-size: 0.82rem; cursor: pointer;">
+                    <span><i class="fa-solid fa-layer-group mr-1.5 text-sky-600"></i> ดูคลังใบงานแยกฉบับ (1.1 - 2.3)</span>
+                    <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
+                  </button>
+                  <button type="button" onclick="switchTab('assignments')" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 14px; background: rgba(16, 185, 129, 0.12); color: #059669; border-radius: 10px; font-weight: 700; font-size: 0.82rem; border: 1px solid #10b981; cursor: pointer;">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> ส่งผลงานออนไลน์ (แนบไฟล์/ลิงก์)
+                  </button>
+                </div>
+              </div>
+
+              <!-- Tile 3: แบบทดสอบ & สอบเก็บคะแนน -->
+              <div class="glass-card-hover" style="background: var(--surface-color); border: 2px solid rgba(245, 158, 11, 0.3); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 6px 20px rgba(0,0,0,0.04);">
+                <div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                    <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(245, 158, 11, 0.12); color: #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                      <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <span style="font-size: 0.72rem; font-weight: 800; background: rgba(245, 158, 11, 0.1); color: #d97706; padding: 3px 10px; border-radius: 999px;">
+                      ตรวจผลอัตโนมัติ
+                    </span>
+                  </div>
+                  <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
+                    3. ห้องสอบออนไลน์
+                  </h3>
+                  <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+                    แบบทดสอบก่อนเรียน ท้ายหน่วย กลางภาค และปลายภาค บันทึกคะแนนลง Supabase เรียลไทม์
+                  </p>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <button type="button" onclick="switchTab('quizzes')" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 14px; background: #f59e0b; color: white; border-radius: 10px; font-weight: 700; font-size: 0.85rem; border: none; cursor: pointer; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);">
+                    <i class="fa-solid fa-pen-to-square"></i> เข้าสู่ห้องสอบออนไลน์ (เลือกชุดข้อสอบ)
+                  </button>
+                  <button type="button" onclick="startDirectQuiz('quiz-pre-unit1')" style="display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: rgba(245, 158, 11, 0.1); color: #b45309; border-radius: 10px; font-weight: 700; font-size: 0.82rem; border: none; cursor: pointer;">
+                    <span><i class="fa-solid fa-play mr-1.5"></i> ทำแบบทดสอบก่อนเรียน หน่วยที่ 1</span>
+                    <i class="fa-solid fa-chevron-right" style="font-size: 0.75rem;"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Tile 4: ตรวจสอบคะแนน & สถิติ -->
+              <div class="glass-card-hover" style="background: var(--surface-color); border: 2px solid rgba(99, 102, 241, 0.3); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 6px 20px rgba(0,0,0,0.04);">
+                <div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                    <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(99, 102, 241, 0.12); color: #6366f1; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                      <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <span style="font-size: 0.72rem; font-weight: 800; background: rgba(99, 102, 241, 0.1); color: #4f46e5; padding: 3px 10px; border-radius: 999px;">
+                      สถิติ &amp; ลำดับคะแนน
+                    </span>
+                  </div>
+                  <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
+                    4. คะแนนของฉัน &amp; สถิติ
+                  </h3>
+                  <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+                    ดูคะแนนสอบของตนเอง ตรวจสอบอันดับบน Leaderboard และสถิติภาพรวมการเรียน
+                  </p>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <button type="button" onclick="switchTab('analytics')" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 14px; background: #6366f1; color: white; border-radius: 10px; font-weight: 700; font-size: 0.82rem; border: none; cursor: pointer; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);">
+                    <i class="fa-solid fa-trophy"></i> ดูอันดับและคะแนน (Leaderboard)
+                  </button>
+                  <button type="button" onclick="switchTab('contact')" style="display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: var(--surface-secondary); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 10px; font-weight: 700; font-size: 0.82rem; cursor: pointer;">
+                    <span><i class="fa-solid fa-comments mr-1.5 text-indigo-600"></i> สอบถาม / ปรึกษาครูปณิฏฐา</span>
+                    <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+        
         <!-- THAIRATH STYLE FRONTPAGE SPOTLIGHT & TRENDING GRID -->
         <section style="padding: 24px 0 20px 0;">
           <div class="container">
@@ -983,8 +1148,17 @@
       <!-- ====================================================================
            TAB 2: LESSONS (FULL CURRICULUM)
            ==================================================================== -->
-      <section id="tab-lessons" class="tab-content" style="display: none; padding: 30px 0;">
+      <section id="tab-lessons" class="tab-content" style="display: none; padding: 24px 0 30px 0;">
         <div class="container">
+          <div style="background: rgba(16, 185, 129, 0.08); border-left: 4px solid #10b981; border-radius: 12px; padding: 12px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+            <div style="font-size: 0.84rem; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-lightbulb text-emerald-600" style="font-size: 1.1rem;"></i>
+              <span><strong>วิธีเรียน:</strong> คลิก <strong>"เข้าสู่บทเรียน (ฉบับสมบูรณ์)"</strong> เพื่ออ่านบทเรียนดิจิทัล หรือคลิก <strong>"Google Slides ↗"</strong> เพื่อเปิดสไลด์สรุปประกอบการสอน</span>
+            </div>
+            <a href="https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing" target="_blank" rel="noopener noreferrer" style="background: #f59e0b; color: white; padding: 6px 14px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-file-powerpoint"></i> สไลด์หน่วยที่ 1 ↗
+            </a>
+          </div>
           <div class="thairath-section-header">
             <div>
               <div class="thairath-section-title">
@@ -1379,8 +1553,17 @@
       <!-- ====================================================================
            TAB 5: WORKSHEETS & LEARNING ACTIVITIES
            ==================================================================== -->
-      <section id="tab-worksheets" class="tab-content" style="display: none; padding: 30px 0;">
+      <section id="tab-worksheets" class="tab-content" style="display: none; padding: 24px 0 30px 0;">
         <div class="container">
+          <div style="background: rgba(2, 132, 199, 0.08); border-left: 4px solid #0284c7; border-radius: 12px; padding: 12px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+            <div style="font-size: 0.84rem; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-circle-info text-sky-600" style="font-size: 1.1rem;"></i>
+              <span><strong>สำหรับ iPad:</strong> กดปุ่ม <strong>"โหลด PDF (iPad)"</strong> เพื่อเปิดและบันทึกไฟล์เข้า GoodNotes หรือแอป Files แล้วเขียนส่งได้ทันที</span>
+            </div>
+            <a href="worksheets/all_worksheets_m4.pdf" target="_blank" download="รวมใบงาน_วิทยาการคำนวณ_ม4.pdf" style="background: #0284c7; color: white; padding: 6px 14px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-file-pdf"></i> รวมใบงาน PDF 6 ฉบับ
+            </a>
+          </div>
           <div class="thairath-section-header">
             <div>
               <div class="thairath-section-title">
@@ -1470,8 +1653,17 @@
       <!-- ====================================================================
            TAB 8: QUIZZES & EXAMS
            ==================================================================== -->
-      <section id="tab-quizzes" class="tab-content" style="display: none; padding: 30px 0;">
+      <section id="tab-quizzes" class="tab-content" style="display: none; padding: 24px 0 30px 0;">
         <div class="container">
+          <div style="background: rgba(245, 158, 11, 0.08); border-left: 4px solid #f59e0b; border-radius: 12px; padding: 12px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+            <div style="font-size: 0.84rem; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-shield-halved text-amber-500" style="font-size: 1.1rem;"></i>
+              <span><strong>กติกาการสอบ:</strong> นักเรียนเข้าสอบได้คนละ <strong>1 ครั้งต่อชุด</strong> ระบบตรวจและบันทึกคะแนนลง Supabase Cloud เรียลไทม์ทันทีที่กดส่ง</span>
+            </div>
+            <button type="button" onclick="switchTab('analytics')" class="btn btn-outline" style="padding: 5px 12px; font-size: 0.76rem; font-weight: 700; border-color: #f59e0b; color: #b45309;">
+              <i class="fa-solid fa-trophy mr-1"></i> เช็คอันดับคะแนน
+            </button>
+          </div>
           <div class="thairath-section-header">
             <div>
               <div class="thairath-section-title">
@@ -2758,5 +2950,29 @@
 
     <!-- App JavaScript -->
     <script src="js/app.js?v=3.5"></script>
+
+    <!-- MOBILE & TABLET STICKY BOTTOM NAVIGATION BAR -->
+    <nav id="mobile-bottom-nav" class="mobile-bottom-nav">
+      <button type="button" onclick="switchTab('home')" class="mobile-bottom-btn active" id="m-nav-home">
+        <i class="fa-solid fa-house"></i>
+        <span>หน้าแรก</span>
+      </button>
+      <button type="button" onclick="switchTab('lessons')" class="mobile-bottom-btn" id="m-nav-lessons">
+        <i class="fa-solid fa-book-open"></i>
+        <span>บทเรียน</span>
+      </button>
+      <button type="button" onclick="switchTab('worksheets')" class="mobile-bottom-btn" id="m-nav-worksheets">
+        <i class="fa-solid fa-file-pen"></i>
+        <span>ใบงาน</span>
+      </button>
+      <button type="button" onclick="switchTab('quizzes')" class="mobile-bottom-btn" id="m-nav-quizzes">
+        <i class="fa-solid fa-clipboard-check"></i>
+        <span>สอบ</span>
+      </button>
+      <button type="button" onclick="handleMobileProfileClick()" class="mobile-bottom-btn" id="m-nav-profile">
+        <i class="fa-solid fa-circle-user"></i>
+        <span id="m-nav-profile-text">ผู้ใช้</span>
+      </button>
+    </nav>
   </body>
 </html>
