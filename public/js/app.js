@@ -2262,6 +2262,7 @@ async function handleLogin(username, password) {
     localStorage.setItem('csm4_user', JSON.stringify(currentUser));
     sessionStorage.setItem('csm4_explicit_login', 'true');
 
+    studentQuizAttemptsCache = null;
     updateAuthUI();
     closeModal('modal-login');
     showToast(`เข้าสู่ระบบสำเร็จ ยินดีต้อนรับ ${currentUser.full_name}`, 'success');
@@ -2309,6 +2310,7 @@ function handleLogout() {
   sessionStorage.removeItem('csm4_explicit_login');
   currentUser = null;
   currentToken = '';
+  studentQuizAttemptsCache = null;
   updateAuthUI();
   showToast('ออกจากระบบเรียบร้อยแล้ว', 'info');
   if (activeTab === 'teacher' || activeTab === 'admin') {
@@ -2418,7 +2420,10 @@ function switchTab(tabId) {
   else if (tabId === 'ebook') loadEbookData();
   else if (tabId === 'worksheets') loadWorksheetsData();
   else if (tabId === 'assignments') loadAssignmentsData();
-  else if (tabId === 'quizzes') loadQuizzesData();
+  else if (tabId === 'quizzes') {
+    studentQuizAttemptsCache = null;
+    loadQuizzesData();
+  }
   else if (tabId === 'ct-tools') loadLessonsData();
   else if (tabId === 'teacher') loadTeacherData();
   else if (tabId === 'analytics') loadAnalyticsData();
@@ -7588,13 +7593,16 @@ async function migrateAllToSupabaseUI() {
 }
 
 
+
 // ====================================================================
 // QUIZ ATTEMPTS & RETAKE RESTRICTION LOGIC
 // "นักเรียนสอบได้แค่ครั้งเดียว หากสอบซ้ำ ให้แจ้งว่า สอบไปแล้ว ไม่สามารถสอบได้ จนกว่าครูจะลบฐานข้อมูล"
 // ====================================================================
 
+let currentModalQuizId = null;
+
 // Fetch student attempts from Supabase Cloud (Single Source of Truth)
-async function fetchStudentQuizAttempts(forceRefresh = false) {
+async function fetchStudentQuizAttempts(forceRefresh = true) {
   if (!currentUser) {
     studentQuizAttemptsCache = [];
     return [];
@@ -7616,36 +7624,53 @@ async function fetchStudentQuizAttempts(forceRefresh = false) {
   ].filter(Boolean)));
 
   let attempts = [];
+  let fetchedFromDatabase = false;
 
-  // 1. Fetch from Supabase Cloud
+  // 1. Fetch from Supabase Cloud (Single Source of Truth)
   try {
     const filterQuery = idList.map(id => `student_id.eq.${encodeURIComponent(id)}`).join(',');
     const url = `${SUPABASE_REST_URL}/quiz_attempts?or=(${filterQuery})&select=*&order=submitted_at.desc`;
     const res = await fetch(url, {
+      cache: 'no-store',
       headers: {
         'apikey': SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache'
       }
     });
     if (res.ok) {
       attempts = await res.json();
+      fetchedFromDatabase = true;
+
+      // SYNC LOCALSTORAGE: Purge any deleted attempts from localStorage so it never acts as a zombie block
+      try {
+        const localAttempts = JSON.parse(localStorage.getItem('csm4_quiz_attempts') || '[]');
+        const validQuizIds = new Set((attempts || []).map(a => a.quiz_id));
+        const cleaned = localAttempts.filter(a => {
+          if (!idList.includes(String(a.student_id))) return true;
+          return validQuizIds.has(a.quiz_id);
+        });
+        localStorage.setItem('csm4_quiz_attempts', JSON.stringify(cleaned));
+      } catch (e) {}
     }
   } catch (err) {
     console.warn('Supabase fetch student attempts error:', err);
   }
 
-  // 2. Fallback to API if server host
-  if (attempts.length === 0 && !isStaticOrServerlessHost()) {
+  // 2. Fallback to API if server host (only if Supabase was not reached)
+  if (!fetchedFromDatabase && !isStaticOrServerlessHost()) {
     try {
       const serverAttempts = await apiFetch('/quizzes/attempts/my');
       if (Array.isArray(serverAttempts)) {
         attempts = serverAttempts;
+        fetchedFromDatabase = true;
       }
     } catch (e) {}
   }
 
-  // 3. Fallback to localStorage if completely offline
-  if (attempts.length === 0) {
+  // 3. Fallback to localStorage ONLY if completely offline (database could not be reached)
+  if (!fetchedFromDatabase) {
     try {
       const localAttempts = JSON.parse(localStorage.getItem('csm4_quiz_attempts') || '[]');
       attempts = localAttempts.filter(a => idList.includes(String(a.student_id)));
@@ -7664,14 +7689,23 @@ function getStudentAttemptForQuiz(quizId) {
 
 async function checkStudentQuizAttempt(quizId) {
   if (!currentUser || currentUser.role !== 'student') return null;
-  const attempts = await fetchStudentQuizAttempts(false);
+  const attempts = await fetchStudentQuizAttempts(true);
   return attempts.find(a => a.quiz_id === quizId) || null;
 }
 
-function notifyQuizAlreadyTaken(quizId) {
+async function notifyQuizAlreadyTaken(quizId) {
+  showToast('กำลังตรวจสอบสถานะกับฐานข้อมูลล่าสุด...', 'info');
+  const freshAttempts = await fetchStudentQuizAttempts(true);
+  const stillTaken = freshAttempts.find(a => a.quiz_id === quizId);
+  if (!stillTaken) {
+    showToast('ครูผู้สอนได้ลบข้อมูลออกจากฐานข้อมูลแล้ว คุณสามารถทำแบบทดสอบใหม่ได้ทันที!', 'success');
+    await loadQuizzesData();
+    openQuizModal(quizId);
+    return;
+  }
+
   showToast('สอบไปแล้ว ไม่สามารถสอบได้ จนกว่าครูจะลบฐานข้อมูล', 'error');
-  const attempt = getStudentAttemptForQuiz(quizId);
-  showQuizAlreadyTakenModal(attempt, quizId);
+  showQuizAlreadyTakenModal(stillTaken, quizId);
 }
 
 function showQuizAlreadyTakenModal(attempt, quizOrQuizId) {
@@ -7681,12 +7715,17 @@ function showQuizAlreadyTakenModal(attempt, quizOrQuizId) {
   const dateEl = document.getElementById('quiz-already-taken-date');
 
   let title = '';
+  let qId = '';
   if (typeof quizOrQuizId === 'object' && quizOrQuizId) {
     title = quizOrQuizId.title || quizOrQuizId.id;
+    qId = quizOrQuizId.id;
   } else if (typeof quizOrQuizId === 'string') {
+    qId = quizOrQuizId;
     const q = getOfflineQuizById(quizOrQuizId);
     title = q ? q.title : quizOrQuizId;
   }
+
+  currentModalQuizId = qId;
 
   if (quizTitleEl) quizTitleEl.innerText = title || 'แบบทดสอบ';
   if (studentEl) {
@@ -7697,13 +7736,32 @@ function showQuizAlreadyTakenModal(attempt, quizOrQuizId) {
   } else if (scoreEl) {
     scoreEl.innerText = 'บันทึกแล้วในฐานข้อมูล';
   }
-  if (dateEl && attempt && attempt.submitted_at) {
-    dateEl.innerText = new Date(attempt.submitted_at).toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' });
+  if (dateEl && attempt && (attempt.submitted_at || attempt.completed_at)) {
+    dateEl.innerText = new Date(attempt.submitted_at || attempt.completed_at).toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' });
   } else if (dateEl) {
     dateEl.innerText = '-';
   }
 
   openModal('modal-quiz-already-taken');
+}
+
+async function recheckQuizStatusFromModal() {
+  if (!currentModalQuizId) {
+    closeModal('modal-quiz-already-taken');
+    return;
+  }
+  showToast('กำลังตรวจสอบฐานข้อมูลล่าสุด...', 'info');
+  const freshAttempts = await fetchStudentQuizAttempts(true);
+  const stillTaken = freshAttempts.find(a => a.quiz_id === currentModalQuizId);
+  if (!stillTaken) {
+    closeModal('modal-quiz-already-taken');
+    showToast('ครูผู้สอนได้ลบข้อมูลออกจากฐานข้อมูลแล้ว คุณสามารถทำแบบทดสอบใหม่ได้ทันที!', 'success');
+    await loadQuizzesData();
+    openQuizModal(currentModalQuizId);
+  } else {
+    showToast('ยังพบข้อมูลในฐานข้อมูล ครูผู้สอนยังไม่ได้ลบผลสอบชุดนี้', 'warning');
+    showQuizAlreadyTakenModal(stillTaken, currentModalQuizId);
+  }
 }
 
 // --- TEACHER MANAGEMENT OF QUIZ ATTEMPTS & RETAKES ---
@@ -7717,9 +7775,12 @@ async function loadTeacherQuizAttempts(forceRefresh = false) {
     if (statsBar) statsBar.innerHTML = '<span><i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังโหลดข้อมูลผลการสอบจาก Supabase Cloud...</span>';
     try {
       const res = await fetch(`${SUPABASE_REST_URL}/quiz_attempts?select=*&order=submitted_at.desc`, {
+        cache: 'no-store',
         headers: {
           'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache'
         }
       });
       if (res.ok) {

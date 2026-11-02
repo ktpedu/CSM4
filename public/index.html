@@ -2347,9 +2347,14 @@
           </div>
         </div>
 
-        <button type="button" onclick="closeModal('modal-quiz-already-taken')" class="btn btn-primary w-full py-3 font-bold" style="border-radius: 14px;">
-          รับทราบและปิดหน้าต่าง
-        </button>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <button type="button" onclick="recheckQuizStatusFromModal()" class="btn btn-outline w-full py-2.5 font-bold" style="border-radius: 14px; border-color: #10b981; color: #10b981; background: rgba(16, 185, 129, 0.08);">
+            <i class="fa-solid fa-arrows-rotate mr-1.5"></i> ตรวจสอบสถานะอีกครั้ง (กรณีครูลบข้อมูลแล้ว)
+          </button>
+          <button type="button" onclick="closeModal('modal-quiz-already-taken')" class="btn btn-primary w-full py-3 font-bold" style="border-radius: 14px;">
+            รับทราบและปิดหน้าต่าง
+          </button>
+        </div>
       </div>
     </div>
 
