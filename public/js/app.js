@@ -204,6 +204,10 @@ function closeModal(id) {
     const iframe = document.getElementById('video-iframe');
     if (iframe) iframe.src = '';
   }
+  if (id === 'modal-slide-viewer') {
+    const iframe = document.getElementById('slide-iframe');
+    if (iframe) iframe.src = '';
+  }
 }
 
 // --- AUTHENTICATION & SESSION MANAGEMENT ---
@@ -2811,11 +2815,19 @@ function getUnitsShowcaseHtml() {
                   </div>
                 </div>
 
-                <!-- CTA Action Button -->
-                <div style="padding: 0 24px 24px 24px;">
+                <!-- CTA Action Buttons -->
+                <div style="padding: 0 24px 24px 24px; display: flex; flex-direction: column; gap: 10px;">
                   <a href="unit1.html" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 20px; background: #00b400; color: #ffffff; font-weight: 700; font-size: 0.95rem; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 12px rgba(0,180,0,0.25); transition: all 0.2s;">
                     <i class="fa-solid fa-book-open"></i> เข้าสู่บทเรียน หน่วยที่ 1 (ฉบับสมบูรณ์)
                   </a>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <button onclick="openSlideModal('sld-1')" style="display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px 12px; background: #fef3c7; color: #b45309; border: 1.5px solid #f59e0b; font-weight: 700; font-size: 0.82rem; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
+                      <i class="fa-solid fa-file-powerpoint text-amber-600"></i> สไลด์ในเว็บ
+                    </button>
+                    <a href="https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px 12px; background: #f59e0b; color: #ffffff; font-weight: 700; font-size: 0.82rem; border-radius: 10px; text-decoration: none; transition: all 0.2s; box-shadow: 0 2px 8px rgba(245,158,11,0.25);">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Google Slides ↗
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -2953,11 +2965,14 @@ function getUnitsShowcaseHtml() {
                   </div>
                 </div>
 
-                <!-- CTA Action Button -->
-                <div style="padding: 0 24px 24px 24px;">
+                <!-- CTA Action Buttons -->
+                <div style="padding: 0 24px 24px 24px; display: flex; flex-direction: column; gap: 10px;">
                   <a href="unit2.html" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 20px; background: #0284c7; color: #ffffff; font-weight: 700; font-size: 0.95rem; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 12px rgba(2,132,199,0.25); transition: all 0.2s;">
                     <i class="fa-solid fa-laptop-code"></i> เข้าสู่บทเรียน หน่วยที่ 2 (ฉบับสมบูรณ์)
                   </a>
+                  <button onclick="showToast('สไลด์ประกอบการสอน หน่วยที่ 2 อยู่ระหว่างจัดทำโดยครูผู้สอน จะเปิดให้อ่านเร็วๆ นี้ครับ', 'info')" style="display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px 12px; background: #f1f5f9; color: #64748b; border: 1.5px dashed #cbd5e1; font-weight: 600; font-size: 0.82rem; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
+                    <i class="fa-solid fa-hourglass-half text-slate-400"></i> สไลด์ประกอบการสอน (อยู่ระหว่างจัดทำ)
+                  </button>
                 </div>
               </div>
 
@@ -3045,43 +3060,182 @@ function playLessonVideo(title, url) {
 
 
 // --- 3. MEDIA & PRESENTATION SLIDES ---
+const OFFLINE_SLIDES = [
+  {
+    id: "sld-1",
+    unit: "หน่วยการเรียนรู้ที่ 1",
+    unitNumber: 1,
+    title: "สไลด์ประกอบการสอน: แนวคิดเชิงคำนวณในการพัฒนาโครงงาน",
+    description: "สไลด์บรรยายสรุป 4 องค์ประกอบ: การแยกย่อย (Decomposition), การหารูปแบบ (Pattern), การคิดเชิงนามธรรม (Abstraction) และขั้นตอนวิธี (Algorithm)",
+    slideCount: "Google Slides (พร้อมใช้งาน)",
+    slideUrl: "https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing",
+    embedUrl: "https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/embed?start=false&loop=false&delayms=3000",
+    isReady: true,
+    previewImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80"
+  },
+  {
+    id: "sld-2",
+    unit: "หน่วยการเรียนรู้ที่ 2",
+    unitNumber: 2,
+    title: "สไลด์ประกอบการสอน: การแก้ปัญหาด้วยภาษาคอมพิวเตอร์และการพัฒนาโครงงาน",
+    description: "สรุปวงจรการพัฒนาระบบ SDLC, การเขียนผังงาน (Flowchart) และการทดสอบระบบ (ครูผู้สอนกำลังจัดเตรียมเนื้อหา)",
+    slideCount: "อยู่ระหว่างจัดทำ (เร็วๆ นี้)",
+    slideUrl: "",
+    embedUrl: "",
+    isReady: false,
+    previewImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80"
+  },
+  {
+    id: "sld-3",
+    unit: "หน่วยการเรียนรู้ที่ 3",
+    unitNumber: 3,
+    title: "สไลด์ประกอบการสอน: โครงงานคอมพิวเตอร์เพื่อการแก้ปัญหาชุมชน",
+    description: "แนวทางการเขียนรายงานโครงงาน 5 บท และการนำเสนอผลงาน (ครูผู้สอนกำลังจัดเตรียมเนื้อหา)",
+    slideCount: "อยู่ระหว่างจัดทำ (เร็วๆ นี้)",
+    slideUrl: "",
+    embedUrl: "",
+    isReady: false,
+    previewImage: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600&q=80"
+  }
+];
+
+const OFFLINE_VIDEOS = [
+  {
+    id: "les-101",
+    unit: "หน่วยการเรียนรู้ที่ 1",
+    title: "1.1 แนวคิดเชิงคำนวณ (Computational Thinking)",
+    duration: "5 ชั่วโมง",
+    videoUrl: "https://www.youtube.com/embed/mUXo-E183Sc"
+  },
+  {
+    id: "les-102",
+    unit: "หน่วยการเรียนรู้ที่ 1",
+    title: "1.2 การพัฒนาโครงงานทางด้านเทคโนโลยีสารสนเทศด้วยวงจรการพัฒนาระบบ (SDLC)",
+    duration: "5 ชั่วโมง",
+    videoUrl: "https://www.youtube.com/embed/Fi3_BjVzpqk"
+  },
+  {
+    id: "les-103",
+    unit: "หน่วยการเรียนรู้ที่ 1",
+    title: "1.3 การเขียนรายงานการพัฒนาโครงงาน",
+    duration: "10 ชั่วโมง",
+    videoUrl: "https://www.youtube.com/embed/2_sample_vid3"
+  },
+  {
+    id: "les-201",
+    unit: "หน่วยการเรียนรู้ที่ 2",
+    title: "2.1 กรณีศึกษาที่ 1: โครงงานพัฒนาเว็บไซต์แนะนำการใช้งานห้องสมุด (การวางแผนและวิเคราะห์)",
+    duration: "5 ชั่วโมง",
+    videoUrl: "https://www.youtube.com/embed/2_sample_vid4"
+  },
+  {
+    id: "les-202",
+    unit: "หน่วยการเรียนรู้ที่ 2",
+    title: "2.2 กรณีศึกษาที่ 1: โครงงานพัฒนาเว็บไซต์แนะนำการใช้งานห้องสมุด (การออกแบบ พัฒนา และทดสอบ)",
+    duration: "5 ชั่วโมง",
+    videoUrl: "https://www.youtube.com/embed/2_sample_vid5"
+  },
+  {
+    id: "les-203",
+    unit: "หน่วยการเรียนรู้ที่ 2",
+    title: "2.3 กรณีศึกษาที่ 2: โครงงานพัฒนาโปรแกรมแจ้งเตือนการกินยาผ่านสมาร์ตโฟนหรือแท็บเล็ต (การวางแผนและวิเคราะห์)",
+    duration: "5 ชั่วโมง",
+    videoUrl: "https://www.youtube.com/embed/2_sample_vid6"
+  },
+  {
+    id: "les-204",
+    unit: "หน่วยการเรียนรู้ที่ 2",
+    title: "2.4 กรณีศึกษาที่ 2: โครงงานพัฒนาโปรแกรมแจ้งเตือนการกินยาผ่านสมาร์ตโฟนหรือแท็บเล็ต (การออกแบบ UI และสรุป)",
+    duration: "5 ชั่วโมง",
+    videoUrl: "https://www.youtube.com/embed/2_sample_vid7"
+  }
+];
+
 async function loadMediaData() {
   try {
-    const slides = await apiFetch('/slides');
-    const container = document.getElementById('slides-container');
+    let slides = OFFLINE_SLIDES;
+    try {
+      const serverSlides = await apiFetch('/slides');
+      if (Array.isArray(serverSlides) && serverSlides.length > 0) {
+        slides = serverSlides;
+      }
+    } catch (e) {
+      // Offline fallback used
+    }
 
-    container.innerHTML = slides.map(sld => `
-      <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-amber-300 glass-card-hover flex flex-col justify-between space-y-3">
-        <div class="space-y-2">
-          <span class="text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-0.5 rounded-full">
-            ${sld.unit}
-          </span>
-          <h4 class="font-bold text-sm text-slate-800 leading-snug">${sld.title}</h4>
-          <p class="text-xs text-slate-500">${sld.description}</p>
-        </div>
-        <button onclick="openSlideModal('${sld.id}')" class="w-full bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md flex items-center justify-center gap-1.5">
-          <i class="fa-solid fa-file-powerpoint"></i> เปิดสไลด์บรรยาย (${sld.slideCount} สไลด์)
-        </button>
-      </div>
-    `).join('');
+    const container = document.getElementById('slides-container');
+    if (container) {
+      container.innerHTML = slides.map(sld => {
+        const isReady = sld.isReady !== false && sld.slideUrl;
+        const badgeClass = isReady ? 'bg-amber-50 text-amber-800 border-amber-200' : 'bg-slate-100 text-slate-500 border-slate-200';
+        const readyBadge = isReady 
+          ? '<span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> พร้อมใช้งาน</span>'
+          : '<span class="text-[10px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200 flex items-center gap-1"><i class="fa-solid fa-clock"></i> อยู่ระหว่างจัดทำ</span>';
+
+        const btnClass = isReady 
+          ? 'bg-amber-500 hover:bg-amber-600 text-white cursor-pointer shadow-md active:scale-95' 
+          : 'bg-slate-200 text-slate-500 hover:bg-slate-300 cursor-pointer';
+        const btnText = isReady 
+          ? '<i class="fa-solid fa-file-powerpoint mr-1"></i> เปิดดูสไลด์ (Google Slides)' 
+          : '<i class="fa-solid fa-hourglass-half mr-1"></i> อยู่ระหว่างจัดทำ (เร็วๆ นี้)';
+        const onClickAction = isReady 
+          ? `openSlideModal('${sld.id}')` 
+          : `showToast('สไลด์ประกอบการสอนประจำ${sld.unit} อยู่ระหว่างจัดทำโดยครูผู้สอน จะเปิดให้อ่านเร็วๆ นี้ครับ', 'info')`;
+
+        return `
+          <div class="p-5 rounded-2xl border border-slate-200 bg-white hover:border-amber-400 glass-card-hover flex flex-col justify-between space-y-4" style="transition: all 0.2s; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold ${badgeClass} border px-2.5 py-0.5 rounded-full">
+                  ${sld.unit}
+                </span>
+                ${readyBadge}
+              </div>
+              <h4 class="font-bold text-sm text-slate-800 leading-snug">${sld.title}</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">${sld.description}</p>
+            </div>
+            <div class="space-y-2 pt-1">
+              <button onclick="${onClickAction}" class="w-full ${btnClass} text-xs font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-1.5">
+                ${btnText}
+              </button>
+              ${isReady && sld.slideUrl ? `
+                <a href="${sld.slideUrl}" target="_blank" rel="noopener noreferrer" class="w-full text-center text-[11px] font-semibold text-amber-600 hover:text-amber-800 py-1 hover:underline flex items-center justify-center gap-1">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดใน Google Slides แท็บใหม่ ↗
+                </a>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
 
     // Load video gallery
-    const modules = await apiFetch('/modules');
-    const videosContainer = document.getElementById('videos-container');
-    const allLessons = modules.flatMap(m => m.lessons);
+    let allLessons = OFFLINE_VIDEOS;
+    try {
+      const modules = await apiFetch('/modules');
+      if (Array.isArray(modules) && modules.length > 0) {
+        const lessonsFromModules = modules.flatMap(m => m.lessons || []);
+        if (lessonsFromModules.length > 0) allLessons = lessonsFromModules;
+      }
+    } catch (e) {
+      // Offline fallback used
+    }
 
-    videosContainer.innerHTML = allLessons.map(les => `
-      <div class="p-4 rounded-2xl border border-slate-200 bg-white hover:border-rose-300 glass-card-hover flex flex-col justify-between space-y-3">
-        <div class="space-y-1">
-          <span class="text-[10px] font-bold text-rose-600"><i class="fa-solid fa-play-circle mr-1"></i> วิดีโอสอน</span>
-          <h4 class="font-bold text-xs text-slate-800 line-clamp-2">${les.title}</h4>
-          <p class="text-[11px] text-slate-400"><i class="fa-regular fa-clock mr-1"></i> ${les.duration}</p>
+    const videosContainer = document.getElementById('videos-container');
+    if (videosContainer) {
+      videosContainer.innerHTML = allLessons.map(les => `
+        <div class="p-4 rounded-2xl border border-slate-200 bg-white hover:border-rose-300 glass-card-hover flex flex-col justify-between space-y-3" style="transition: all 0.2s;">
+          <div class="space-y-1">
+            <span class="text-[10px] font-bold text-rose-600"><i class="fa-solid fa-play-circle mr-1"></i> วิดีโอสอน</span>
+            <h4 class="font-bold text-xs text-slate-800 line-clamp-2">${les.title}</h4>
+            <p class="text-[11px] text-slate-400"><i class="fa-regular fa-clock mr-1"></i> ${les.duration || '5 ชั่วโมง'}</p>
+          </div>
+          <button onclick="playLessonVideo('${escapeHtml(les.title)}', '${les.videoUrl}')" class="w-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold py-2 rounded-xl transition shadow-sm flex items-center justify-center gap-1">
+            <i class="fa-solid fa-play mr-1"></i> รับชมวิดีโอการสอนนี้
+          </button>
         </div>
-        <button onclick="playLessonVideo('${les.title}', '${les.videoUrl}')" class="w-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold py-2 rounded-xl transition shadow-sm">
-          <i class="fa-solid fa-play mr-1"></i> รับชมวิดีโอการสอนนี้
-        </button>
-      </div>
-    `).join('');
+      `).join('');
+    }
 
   } catch (err) {
     console.error('Media load error:', err);
@@ -3090,18 +3244,69 @@ async function loadMediaData() {
 
 async function openSlideModal(slideId) {
   try {
-    const slide = await apiFetch(`/slides/${slideId}`);
+    let slide = null;
+    if (typeof OFFLINE_SLIDES !== 'undefined') {
+      slide = OFFLINE_SLIDES.find(s => s.id === slideId || s.unitNumber === Number(slideId));
+    }
+    if (!slide) {
+      try {
+        slide = await apiFetch(`/slides/${slideId}`);
+      } catch (e) {
+        // Fallback
+      }
+    }
+    if (!slide && typeof OFFLINE_SLIDES !== 'undefined') {
+      slide = OFFLINE_SLIDES[0];
+    }
+    if (!slide) {
+      showToast('ไม่พบข้อมูลสไลด์ประกอบการสอน', 'warning');
+      return;
+    }
+
+    if (!slide.isReady && !slide.slideUrl) {
+      showToast(`สไลด์ประกอบการสอนประจำ${slide.unit} อยู่ระหว่างจัดทำโดยครูผู้สอน จะเปิดให้อ่านเร็วๆ นี้ครับ`, 'info');
+      return;
+    }
+
     activeSlideDeck = slide;
     currentSlideIndex = 0;
 
-    document.getElementById('slide-modal-title').innerText = slide.title;
-    document.getElementById('slide-modal-unit').innerText = slide.unit;
+    const titleEl = document.getElementById('slide-modal-title');
+    if (titleEl) titleEl.innerText = slide.title;
+    const unitEl = document.getElementById('slide-modal-unit');
+    if (unitEl) unitEl.innerText = slide.unit;
 
-    renderSlideCard();
+    const extLink = document.getElementById('slide-modal-external-link');
+    if (extLink) {
+      extLink.href = slide.slideUrl || 'https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing';
+    }
+
+    const iframe = document.getElementById('slide-iframe');
+    const iframeContainer = document.getElementById('slide-iframe-container');
+    const cardContainer = document.getElementById('slide-card-container');
+    const cardNav = document.getElementById('slide-card-nav');
+
+    if (slide.embedUrl && iframe) {
+      iframe.src = slide.embedUrl;
+      if (iframeContainer) iframeContainer.style.display = 'block';
+      if (cardContainer) cardContainer.style.display = 'none';
+      if (cardNav) cardNav.style.display = 'none';
+    } else if (slide.slides && slide.slides.length > 0) {
+      if (iframeContainer) iframeContainer.style.display = 'none';
+      if (cardContainer) cardContainer.style.display = 'block';
+      if (cardNav) cardNav.style.display = 'flex';
+      renderSlideCard();
+    }
+
     openModal('modal-slide-viewer');
   } catch (err) {
     console.error('Slide open error:', err);
   }
+}
+
+function openSlideDeck(unitNum = 1) {
+  const targetId = unitNum === 2 ? 'sld-2' : unitNum === 3 ? 'sld-3' : 'sld-1';
+  openSlideModal(targetId);
 }
 
 function renderSlideCard() {
@@ -3109,10 +3314,14 @@ function renderSlideCard() {
   const slide = activeSlideDeck.slides[currentSlideIndex];
   const total = activeSlideDeck.slides.length;
 
-  document.getElementById('slide-page-counter').innerText = `SLIDE ${currentSlideIndex + 1} OF ${total}`;
-  document.getElementById('slide-card-title').innerText = slide.title;
-  document.getElementById('slide-card-note').innerText = slide.note;
-  document.getElementById('slide-indicator').innerText = `${currentSlideIndex + 1} / ${total}`;
+  const counterEl = document.getElementById('slide-page-counter');
+  if (counterEl) counterEl.innerText = `SLIDE ${currentSlideIndex + 1} OF ${total}`;
+  const titleEl = document.getElementById('slide-card-title');
+  if (titleEl) titleEl.innerText = slide.title;
+  const noteEl = document.getElementById('slide-card-note');
+  if (noteEl) noteEl.innerText = slide.note;
+  const indEl = document.getElementById('slide-indicator');
+  if (indEl) indEl.innerText = `${currentSlideIndex + 1} / ${total}`;
 }
 
 function nextSlide() {
@@ -3130,7 +3339,6 @@ function prevSlide() {
     renderSlideCard();
   }
 }
-
 
 // --- 4. E-BOOK READER DATA ---
 async function loadEbookData() {

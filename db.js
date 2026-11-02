@@ -3936,51 +3936,43 @@ const defaultData = () => {
   }
 ],
     slides: [
-      {
-        id: 'sld-1',
-        unit: 'หน่วยการเรียนรู้ที่ 1',
-        title: 'สไลด์ประกอบการสอน: แนวคิดเชิงคำนวณในการพัฒนาโครงงาน (18 สไลด์)',
-        description: 'สไลด์บรรยายสรุป 4 องค์ประกอบ: Decomposition, Pattern, Abstraction, Algorithm และตัวอย่างชีวิตประจำวัน',
-        slideCount: 18,
-        previewImage: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80',
-        slides: [
-          { page: 1, title: 'บทนำสู่แนวคิดเชิงคำนวณ (Computational Thinking)', note: 'ความหมายและนิยามตามหลักสูตรแกนกลาง ตัวชี้วัด ว 4.2 ม.4/1' },
-          { page: 2, title: '1. การแตกย่อยปัญหา (Decomposition)', note: 'การแบ่งปัญหาใหญ่ที่ซับซ้อนให้เป็นปัญหาย่อยๆ เพื่อให้จัดการได้ง่าย' },
-          { page: 3, title: '2. การหารูปแบบ (Pattern Recognition)', note: 'การค้นหาความเหมือน คล้ายคลึง หรือแนวโน้มของสถานการณ์' },
-          { page: 4, title: '3. การคิดเชิงนามธรรม (Abstraction)', note: 'การมุ่งเน้นเฉพาะสาระสำคัญที่จำเป็น และตัดรายละเอียดที่ไม่เกี่ยวข้องออกไป' },
-          { page: 5, title: '4. การออกแบบอัลกอริทึม (Algorithm Design)', note: 'การออกแบบลำดับขั้นตอนคำสั่งอย่างชัดเจน เพื่อนำไปสู่การแก้ปัญหา' }
-        ]
-      },
-      {
-        id: 'sld-2',
-        unit: 'หน่วยการเรียนรู้ที่ 1',
-        title: 'สไลด์ประกอบการสอน: วงจรการพัฒนาระบบสารสนเทศ (SDLC 5 ขั้นตอน)',
-        description: 'เจาะลึก 5 ขั้นตอนการพัฒนาระบบ การจัดทำตารางเวลา Gantt Chart และเค้าโครงรายงานโครงงาน 5 บท',
-        slideCount: 22,
-        previewImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80',
-        slides: [
-          { page: 1, title: 'SDLC (Software Development Life Cycle)', note: 'กระบวนการทำงานเพื่อสร้างระบบซอฟต์แวร์อย่างมีแบบแผนและมาตรฐาน' },
-          { page: 2, title: 'ขั้นตอนที่ 1: การวางแผน (Planning)', note: 'กำหนดขอบเขต วัตถุประสงค์ ทรัพยากร และตารางเวลา (Gantt Chart)' },
-          { page: 3, title: 'ขั้นตอนที่ 2: การวิเคราะห์ (Analysis)', note: 'เก็บรวบรวม Requirement และศึกษาความเป็นไปได้ (Feasibility Study)' },
-          { page: 4, title: 'ขั้นตอนที่ 3: การออกแบบ (Design)', note: 'ออกแบบผังงาน (Flowchart) ผังฐานข้อมูล (ERD) และ UI Mockup' },
-          { page: 5, title: 'ขั้นตอนที่ 4 & 5: พัฒนา ทดสอบ และบำรุงรักษา', note: 'การเขียนโค้ด (Coding) การทดสอบ (Testing) และการดูแลรักษาระบบ (Maintenance)' }
-        ]
-      },
-      {
-        id: 'sld-3',
-        unit: 'หน่วยการเรียนรู้ที่ 2',
-        title: 'สไลด์ประกอบการสอน: การประยุกต์ใช้แนวคิดเชิงคำนวณเพื่อพัฒนาโครงงาน',
-        description: 'การศึกษาความเป็นไปได้ การเขียนผังงาน (Flowchart) การเขียนโค้ด การทดสอบระบบ และการนำเสนอผลงาน',
-        slideCount: 26,
-        previewImage: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600&q=80',
-        slides: [
-          { page: 1, title: 'การเริ่มต้นพัฒนาโครงงาน ม.4', note: 'จากปัญหาในชุมชนสู่การออกแบบนวัตกรรมดิจิทัล' },
-          { page: 2, title: 'สัญลักษณ์มาตรฐานผังงาน (Flowchart Standards)', note: 'Terminal, Process, Decision, Input/Output, Connector' },
-          { page: 3, title: 'การจัดทำรายงานโครงงาน 5 บท', note: 'บทที่ 1 บทนำ, บทที่ 2 ทฤษฎี, บทที่ 3 วิธีดำเนินการ, บทที่ 4 ผลการศึกษา, บทที่ 5 สรุป' },
-          { page: 4, title: 'การทดสอบประสิทธิภาพและ Peer Review', note: 'การประเมินจากผู้เชี่ยวชาญ ครู และเพื่อนนักเรียน' }
-        ]
-      }
-    ],
+    {
+        "id": "sld-1",
+        "unit": "หน่วยการเรียนรู้ที่ 1",
+        "unitNumber": 1,
+        "title": "สไลด์ประกอบการสอน: แนวคิดเชิงคำนวณในการพัฒนาโครงงาน",
+        "description": "สไลด์บรรยายสรุป 4 องค์ประกอบ: การแยกย่อย (Decomposition), การหารูปแบบ (Pattern), การคิดเชิงนามธรรม (Abstraction) และขั้นตอนวิธี (Algorithm)",
+        "slideCount": "Google Slides (พร้อมใช้งาน)",
+        "slideUrl": "https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing",
+        "embedUrl": "https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/embed?start=false&loop=false&delayms=3000",
+        "isReady": true,
+        "previewImage": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80"
+    },
+    {
+        "id": "sld-2",
+        "unit": "หน่วยการเรียนรู้ที่ 2",
+        "unitNumber": 2,
+        "title": "สไลด์ประกอบการสอน: การแก้ปัญหาด้วยภาษาคอมพิวเตอร์และการพัฒนาโครงงาน",
+        "description": "สรุปวงจรการพัฒนาระบบ SDLC, การเขียนผังงาน (Flowchart) และการทดสอบระบบ (ครูผู้สอนกำลังจัดเตรียมเนื้อหา)",
+        "slideCount": "อยู่ระหว่างจัดทำ",
+        "slideUrl": "",
+        "embedUrl": "",
+        "isReady": false,
+        "previewImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80"
+    },
+    {
+        "id": "sld-3",
+        "unit": "หน่วยการเรียนรู้ที่ 3",
+        "unitNumber": 3,
+        "title": "สไลด์ประกอบการสอน: โครงงานคอมพิวเตอร์เพื่อการแก้ปัญหาชุมชน",
+        "description": "แนวทางการเขียนรายงานโครงงาน 5 บท และการนำเสนอผลงาน (ครูผู้สอนกำลังจัดเตรียมเนื้อหา)",
+        "slideCount": "อยู่ระหว่างจัดทำ",
+        "slideUrl": "",
+        "embedUrl": "",
+        "isReady": false,
+        "previewImage": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600&q=80"
+    }
+],
 
     teacher_info: {
       name: 'ครูปณิฏฐา บุญยงค์',
