@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>รวมแบบบันทึกกิจกรรมและใบงาน วิทยาการคำนวณ ม.4 (ฉบับสมบูรณ์)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700;800&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 15mm 18mm 15mm 18mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      font-family: 'Sarabun', 'TH Sarabun New', sans-serif;
+      font-size: 13pt;
+      line-height: 1.45;
+      color: #0f172a;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .page-break {
+      page-break-after: always;
+      break-after: page;
+    }
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 90vh;
+      text-align: center;
+      padding: 40px 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="cover-page page-break">
+    <div style="font-size: 16pt; font-weight: 700; color: #0284c7; margin-bottom: 10px;">โรงเรียนวังน้ำเย็นวิทยาคม</div>
+    <div style="font-size: 13pt; color: #64748b; margin-bottom: 30px;">กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี</div>
+    <div style="border: 3px solid #0f172a; border-radius: 20px; padding: 40px 30px; max-width: 650px; background: #f8fafc; margin-bottom: 40px;">
+      <div style="font-size: 14pt; font-weight: 700; color: #059669; margin-bottom: 12px;">แบบบันทึกกิจกรรมการเรียนรู้และใบงาน (Student Worksheets)</div>
+      <div style="font-family: 'Kanit', sans-serif; font-size: 24pt; font-weight: 800; color: #0f172a; line-height: 1.3; margin-bottom: 16px;">
+        เทคโนโลยี (วิทยาการคำนวณ)<br/>ระดับชั้นมัธยมศึกษาปีที่ 4
+      </div>
+      <div style="font-size: 13pt; color: #475569; font-weight: 600;">
+        ตามมาตรฐานการเรียนรู้และตัวชี้วัด กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี (ว 4.2 ม.4/1)<br/>
+        ฉบับสมบูรณ์ 6 ใบงาน (หน่วยที่ 1 - 2)
+      </div>
+    </div>
+    <div style="font-size: 12.5pt; line-height: 2; border: 1.5px dashed #94a3b8; padding: 16px 30px; border-radius: 12px; min-width: 380px;">
+      <div>ชื่อ-นามสกุล ............................................................................</div>
+      <div>ระดับชั้น มัธยมศึกษาปีที่ 4 / ......... เลขที่ .........</div>
+      <div>ครูผู้สอน: ครูปณิฏฐา บุญยงค์</div>
+    </div>
+  </div>
+
+    <div class="worksheet-section page-break">
+      <div class="page-container">
+    <!-- Header -->
+    <div class="header-box">
+      <div class="header-left">
+        <div class="header-doc-type">แบบบันทึกกิจกรรมการเรียนรู้และใบงานรายวิชาพื้นฐาน</div>
+        <div class="header-title">เทคโนโลยี (วิทยาการคำนวณ) ระดับชั้นมัธยมศึกษาปีที่ 4</div>
+        <div class="header-school">กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี • โรงเรียนวังน้ำเย็นวิทยาคม</div>
+      </div>
+      <div class="score-badge">
+        <div class="score-badge-points">คะแนนเต็ม <strong>10</strong> คะแนน</div>
+        <div class="score-badge-field">ได้คะแนน ............ คะแนน</div>
+      </div>
+    </div>
+
+    <!-- Student Name Form Field -->
+    <div class="student-info-grid">
+      <div>ชื่อ-นามสกุล: ..............................................................</div>
+      <div>ชั้น ม.4 / ........</div>
+      <div>เลขที่: ........</div>
+      <div>วันที่: ....../....../2569</div>
+    </div>
+
+    <!-- Worksheet Title -->
+    <div class="ws-title-box">
+      <div class="ws-main-title">ใบงานที่ 1.1: เรื่อง การประยุกต์ใช้แนวคิดเชิงคำนวณในการแก้ปัญหาบริบทจริง</div>
+      <div class="ws-sub-title">การประยุกต์ใช้ 4 องค์ประกอบของแนวคิดเชิงคำนวณเพื่อแก้ปัญหาในชีวิตประจำวัน • (ว 4.2 ม.4/1)</div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions-box">
+      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนศึกษาสถานการณ์ปัญหาที่กำหนด แล้ววิเคราะห์แก้ปัญหาโดยประยุกต์ใช้ 4 องค์ประกอบของแนวคิดเชิงคำนวณ (Computational Thinking) ให้ครบถ้วน ชัดเจน และสมเหตุสมผลตามหลักวิชาการ
+    </div>
+
+    <!-- Scenario -->
+    <div class="scenario-box">
+      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #059669;"></i> สถานการณ์ปัญหา:</strong><br />
+      ตะวัน ขับรถยนต์ออกไปทำงานในตอนเช้า แต่พบว่ารถยนต์ของตนเองไม่สามารถเดินทางต่อไปถึงที่ทำงานได้ ซึ่งตะวันคิดว่าปัญหาอาจมีสาเหตุมาจาก 2 ประเด็น ได้แก่ ยางแบน หรือน้ำมันรถยนต์ใกล้จะหมด จากประสบการณ์ของตะวัน ในแต่ละครั้งที่รถยนต์มีปัญหา จะต้องจัดการกับยางรถยนต์ที่แบนก่อนเป็นอันดับแรก ซึ่งรถยนต์ยังพอมีน้ำมันเหลืออยู่ ให้นักเรียนช่วยตะวันวิเคราะห์ปัญหาและออกแบบขั้นตอนการแก้ปัญหาโดยประยุกต์ใช้ 4 องค์ประกอบของแนวคิดเชิงคำนวณ
+    </div>
+
+    <!-- Tasks with answer writing spaces -->
+    <div style="margin-top: 16px;">
+      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-pencil" style="color: #059669;"></i> กิจกรรมและประเด็นคำถามที่ต้องตอบ:
+      </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>1. การแยกส่วนประกอบและการย่อยปัญหา (Decomposition)</span>
+          </div>
+          <div class="task-desc">
+            วิเคราะห์และจำแนกปัญหาใหญ่ออกเป็นปัญหาย่อยๆ ที่เป็นอิสระต่อกัน เพื่อให้จัดการและแก้ไขได้อย่างมีประสิทธิภาพ (2.5 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>2. การหารูปแบบของปัญหา (Pattern Recognition)</span>
+          </div>
+          <div class="task-desc">
+            ระบุแบบแผน ความเหมือน หรือความคล้ายคลึงจากประสบการณ์เดิม เพื่อจัดลำดับความเร่งด่วนในการแก้ปัญหา (2.5 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>3. การคิดเชิงนามธรรม (Abstraction)</span>
+          </div>
+          <div class="task-desc">
+            คัดกรองเฉพาะสาระสำคัญที่จำเป็นต่อการแก้ปัญหา และละทิ้งรายละเอียดปลีกย่อยที่ไม่เกี่ยวข้องออกไป (2.5 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>4. การออกแบบขั้นตอนวิธีในการแก้ปัญหา (Algorithm Design)</span>
+          </div>
+          <div class="task-desc">
+            ออกแบบลำดับขั้นตอนการปฏิบัติงานเพื่อแก้ปัญหาอย่างชัดเจน เรียงตามลำดับ ไม่กำกวม และมีจุดสิ้นสุด (2.5 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+    </div>
+
+    <!-- Signature Footer -->
+    <div class="signature-row">
+      <div class="signature-col">
+        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
+        ( ........................................................... )<br />
+        วันที่ ...... / ...... / 2569
+      </div>
+      <div class="signature-col">
+        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
+        ( ครูปณิฏฐา บุญยงค์ )<br />
+        วันที่ ...... / ...... / 2569
+      </div>
+    </div>
+  </div>
+
+    </div>
+  
+    <div class="worksheet-section page-break">
+      <div class="page-container">
+    <!-- Header -->
+    <div class="header-box">
+      <div class="header-left">
+        <div class="header-doc-type">แบบบันทึกกิจกรรมการเรียนรู้และใบงานรายวิชาพื้นฐาน</div>
+        <div class="header-title">เทคโนโลยี (วิทยาการคำนวณ) ระดับชั้นมัธยมศึกษาปีที่ 4</div>
+        <div class="header-school">กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี • โรงเรียนวังน้ำเย็นวิทยาคม</div>
+      </div>
+      <div class="score-badge">
+        <div class="score-badge-points">คะแนนเต็ม <strong>10</strong> คะแนน</div>
+        <div class="score-badge-field">ได้คะแนน ............ คะแนน</div>
+      </div>
+    </div>
+
+    <!-- Student Name Form Field -->
+    <div class="student-info-grid">
+      <div>ชื่อ-นามสกุล: ..............................................................</div>
+      <div>ชั้น ม.4 / ........</div>
+      <div>เลขที่: ........</div>
+      <div>วันที่: ....../....../2569</div>
+    </div>
+
+    <!-- Worksheet Title -->
+    <div class="ws-title-box">
+      <div class="ws-main-title">ใบงานที่ 1.2: เรื่อง การพัฒนาระบบด้วยวงจร SDLC (กรณีศึกษาร้านเบเกอรี)</div>
+      <div class="ws-sub-title">การประยุกต์ใช้วงจรการพัฒนาระบบ 5 ขั้นตอนเพื่อแก้ปัญหาธุรกิจจริง • (ว 4.2 ม.4/1)</div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions-box">
+      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนศึกษาสถานการณ์ของร้าน Bakery Delight และเขียนแผนการพัฒนาระบบสารสนเทศตามขั้นตอนของวงจรการพัฒนาระบบ (SDLC) ทั้ง 5 ขั้นตอนให้ครบถ้วน ชัดเจน และสอดคล้องกับหลักวิศวกรรมซอฟต์แวร์
+    </div>
+
+    <!-- Scenario -->
+    <div class="scenario-box">
+      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #059669;"></i> สถานการณ์ปัญหา:</strong><br />
+      ร้าน Bakery Delight ประสบปัญหายอดขายตกต่ำ สินค้าเบเกอรีเหลือทิ้งจำนวนมากในแต่ละวันเนื่องจากไม่ทราบพฤติกรรมการซื้อที่แท้จริงของลูกค้า และการจัดการสต็อกวัตถุดิบล่าช้าเพราะใช้สมุดจดบันทึกมือ เจ้าของร้านต้องการพัฒนาระบบ POS และระบบบริหารจัดการสต็อกอัจฉริยะเพื่อลดความสูญเสียและเพิ่มยอดขาย ให้นักเรียนวางแผนพัฒนาระบบตามขั้นตอน SDLC ทั้ง 5 ขั้นตอน
+    </div>
+
+    <!-- Tasks with answer writing spaces -->
+    <div style="margin-top: 16px;">
+      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-pencil" style="color: #059669;"></i> กิจกรรมและประเด็นคำถามที่ต้องตอบ:
+      </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>1. ขั้นตอนการวางแผน (Planning)</span>
+          </div>
+          <div class="task-desc">
+            กำหนดเป้าหมาย วัตถุประสงค์ ขอบเขต และศึกษาความเป็นไปได้ (Feasibility Study) ของระบบ (2 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>2. ขั้นตอนการวิเคราะห์ (Analysis)</span>
+          </div>
+          <div class="task-desc">
+            วิเคราะห์ปัญหาในระบบเดิมและระบุข้อกำหนดความต้องการเชิงหน้าที่ (Functional Requirements) (2 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>3. ขั้นตอนการออกแบบ (Design)</span>
+          </div>
+          <div class="task-desc">
+            ออกแบบผังงานการทำงาน (Flowchart) สถาปัตยกรรมระบบ และแบบร่างหน้าจอผู้ใช้ (UI Mockup) (2 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>4. ขั้นตอนการพัฒนาและติดตั้ง (Implementation & Testing)</span>
+          </div>
+          <div class="task-desc">
+            วางแผนการเขียนโปรแกรมและการทดสอบระบบตามมาตรฐาน 4 ระดับ (2 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>5. ขั้นตอนการบำรุงรักษา (Maintenance)</span>
+          </div>
+          <div class="task-desc">
+            กำหนดแนวทางการฝึกอบรมพนักงาน การสำรองข้อมูล และแผนการดูแลรักษาระบบต่อเนื่อง (2 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+    </div>
+
+    <!-- Signature Footer -->
+    <div class="signature-row">
+      <div class="signature-col">
+        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
+        ( ........................................................... )<br />
+        วันที่ ...... / ...... / 2569
+      </div>
+      <div class="signature-col">
+        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
+        ( ครูปณิฏฐา บุญยงค์ )<br />
+        วันที่ ...... / ...... / 2569
+      </div>
+    </div>
+  </div>
+
+    </div>
+  
+    <div class="worksheet-section page-break">
+      <div class="page-container">
+    <!-- Header -->
+    <div class="header-box">
+      <div class="header-left">
+        <div class="header-doc-type">แบบบันทึกกิจกรรมการเรียนรู้และใบงานรายวิชาพื้นฐาน</div>
+        <div class="header-title">เทคโนโลยี (วิทยาการคำนวณ) ระดับชั้นมัธยมศึกษาปีที่ 4</div>
+        <div class="header-school">กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี • โรงเรียนวังน้ำเย็นวิทยาคม</div>
+      </div>
+      <div class="score-badge">
+        <div class="score-badge-points">คะแนนเต็ม <strong>10</strong> คะแนน</div>
+        <div class="score-badge-field">ได้คะแนน ............ คะแนน</div>
+      </div>
+    </div>
+
+    <!-- Student Name Form Field -->
+    <div class="student-info-grid">
+      <div>ชื่อ-นามสกุล: ..............................................................</div>
+      <div>ชั้น ม.4 / ........</div>
+      <div>เลขที่: ........</div>
+      <div>วันที่: ....../....../2569</div>
+    </div>
+
+    <!-- Worksheet Title -->
+    <div class="ws-title-box">
+      <div class="ws-main-title">ใบงานที่ 1.3: เรื่อง การจัดทำเค้าโครงรายงานโครงงาน 5 บท</div>
+      <div class="ws-sub-title">การจัดทำเอกสารรายงานโครงงานคอมพิวเตอร์ตามระเบียบวิธีวิจัยและมาตรฐาน สพฐ. • (ว 4.2 ม.4/1)</div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions-box">
+      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนจัดทำเค้าโครงรายงานโครงงานคอมพิวเตอร์ตามแบบฟอร์มมาตรฐาน 5 บทของ สพฐ. ให้มีความสมบูรณ์ทางวิชาการและครอบคลุมทั้ง 3 ส่วนหลักของรายงาน
+    </div>
+
+    <!-- Scenario -->
+    <div class="scenario-box">
+      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #059669;"></i> สถานการณ์ปัญหา:</strong><br />
+      นักเรียนกลุ่มหนึ่งได้รับอนุมัติหัวข้อโครงงาน "ระบบจัดการขยะรีไซเคิลอัจฉริยะในสถานศึกษา (Smart Recycle Portal)" ครูที่ปรึกษาโครงงานได้มอบหมายให้นักเรียนจัดทำโครงสร้างเค้าโครงรายงาน 5 บทตามมาตรฐานวิชาการของ สพฐ. เพื่อเตรียมพร้อมสำหรับการเขียนเล่มรายงานฉบับสมบูรณ์ ให้นักเรียนร่างองค์ประกอบและสาระสำคัญของแต่ละส่วนตามระเบียบวิธีวิจัย
+    </div>
+
+    <!-- Tasks with answer writing spaces -->
+    <div style="margin-top: 16px;">
+      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-pencil" style="color: #059669;"></i> กิจกรรมและประเด็นคำถามที่ต้องตอบ:
+      </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>1. ส่วนประกอบตอนต้นของรายงาน (Preliminary Section)</span>
+          </div>
+          <div class="task-desc">
+            ระบุองค์ประกอบส่วนนำให้ครบถ้วนตามลำดับมาตรฐาน และเขียนร่างตัวอย่างบทคัดย่อ (Abstract) แบบกระชับ (2 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>2. ส่วนเนื้อหา บทที่ 1 บทนำ และ บทที่ 2 ทฤษฎีที่เกี่ยวข้อง</span>
+          </div>
+          <div class="task-desc">
+            กำหนดความเป็นมา วัตถุประสงค์ ขอบเขต และหัวข้อทฤษฎี/เทคโนโลยีอ้างอิงที่จำเป็น (3 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>3. ส่วนเนื้อหา บทที่ 3, 4 และ 5 (Methodology, Results, Conclusion)</span>
+          </div>
+          <div class="task-desc">
+            อธิบายเครื่องมือที่ใช้ ขั้นตอนวิธีดำเนินงาน รูปแบบการนำเสนอผลการทดลอง และการอภิปรายผล (3 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>4. ส่วนประกอบตอนท้ายและบรรณานุกรม APA 7th Edition</span>
+          </div>
+          <div class="task-desc">
+            เขียนตัวอย่างรายการอ้างอิงบรรณานุกรมรูปแบบ APA 7th Edition จำนวน 2 รายการ และระบุสิ่งที่ต้องมีในภาคผนวก (2 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+    </div>
+
+    <!-- Signature Footer -->
+    <div class="signature-row">
+      <div class="signature-col">
+        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
+        ( ........................................................... )<br />
+        วันที่ ...... / ...... / 2569
+      </div>
+      <div class="signature-col">
+        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
+        ( ครูปณิฏฐา บุญยงค์ )<br />
+        วันที่ ...... / ...... / 2569
+      </div>
+    </div>
+  </div>
+
+    </div>
+  
+    <div class="worksheet-section page-break">
+      <div class="page-container">
+    <!-- Header -->
+    <div class="header-box">
+      <div class="header-left">
+        <div class="header-doc-type">แบบบันทึกกิจกรรมการเรียนรู้และใบงานรายวิชาพื้นฐาน</div>
+        <div class="header-title">เทคโนโลยี (วิทยาการคำนวณ) ระดับชั้นมัธยมศึกษาปีที่ 4</div>
+        <div class="header-school">กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี • โรงเรียนวังน้ำเย็นวิทยาคม</div>
+      </div>
+      <div class="score-badge">
+        <div class="score-badge-points">คะแนนเต็ม <strong>10</strong> คะแนน</div>
+        <div class="score-badge-field">ได้คะแนน ............ คะแนน</div>
+      </div>
+    </div>
+
+    <!-- Student Name Form Field -->
+    <div class="student-info-grid">
+      <div>ชื่อ-นามสกุล: ..............................................................</div>
+      <div>ชั้น ม.4 / ........</div>
+      <div>เลขที่: ........</div>
+      <div>วันที่: ....../....../2569</div>
+    </div>
+
+    <!-- Worksheet Title -->
+    <div class="ws-title-box">
+      <div class="ws-main-title">ใบงานที่ 2.1: เรื่อง การวางแผนและการวิเคราะห์ความต้องการในการพัฒนาโครงงาน</div>
+      <div class="ws-sub-title">การกำหนดวัตถุประสงค์ ขอบเขต และแผนภูมิแกนต์ (กรณีศึกษา StyleHub) • (ว 4.2 ม.4/1)</div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions-box">
+      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนศึกษากรณีศึกษาเว็บไซต์แฟชั่นวัยรุ่น StyleHub แล้วกำหนดวัตถุประสงค์ ขอบเขตระบบ และจัดทำแผนภูมิแกนต์ (Gantt Chart) สำหรับการดำเนินงาน 8 สัปดาห์ให้ถูกต้องและสมบูรณ์
+    </div>
+
+    <!-- Scenario -->
+    <div class="scenario-box">
+      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #0284c7;"></i> สถานการณ์ปัญหา:</strong><br />
+      กลุ่มนักเรียนชั้น ม.4 ต้องการพัฒนาโครงงานเว็บไซต์จำหน่ายเสื้อผ้าวัยรุ่นออนไลน์ภายใต้ชื่อแบรนด์ StyleHub เพื่อแก้ปัญหาความยุ่งยากในการสั่งซื้อเสื้อผ้าผ่านแชตส่วนตัว ซึ่งมักเกิดข้อผิดพลาดในการคำนวณยอดเงิน การส่งสลิปปลอม และสต็อกสินค้าไม่ตรงกับความเป็นจริง ให้นักเรียนวางแผนการพัฒนาโครงงานในระยะเริ่มต้นตามขั้นตอนของ SDLC
+    </div>
+
+    <!-- Tasks with answer writing spaces -->
+    <div style="margin-top: 16px;">
+      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-pencil" style="color: #0284c7;"></i> กิจกรรมและประเด็นคำถามที่ต้องตอบ:
+      </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>1. การกำหนดวัตถุประสงค์ของโครงงาน (Project Objectives)</span>
+          </div>
+          <div class="task-desc">
+            กำหนดวัตถุประสงค์ของโครงงานอย่างน้อย 2 ข้อ ตามหลัก SMART (เฉพาะเจาะจง วัดผลได้ และเป็นไปได้จริง) (3 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>2. การกำหนดขอบเขตและกลุ่มเป้าหมาย (Scope & Target Group)</span>
+          </div>
+          <div class="task-desc">
+            ระบุกลุ่มผู้ใช้งานเป้าหมาย ขอบเขตเชิงหน้าที่ของระบบ และข้อจำกัดในการพัฒนา (3 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>3. แผนการดำเนินงานและทรัพยากร (Gantt Chart & Resources)</span>
+          </div>
+          <div class="task-desc">
+            จัดทำตารางแผนภูมิแกนต์ 8 สัปดาห์ ครอบคลุม 5 ขั้นตอนของ SDLC พร้อมระบุผู้รับผิดชอบและทรัพยากร (4 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+    </div>
+
+    <!-- Signature Footer -->
+    <div class="signature-row">
+      <div class="signature-col">
+        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
+        ( ........................................................... )<br />
+        วันที่ ...... / ...... / 2569
+      </div>
+      <div class="signature-col">
+        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
+        ( ครูปณิฏฐา บุญยงค์ )<br />
+        วันที่ ...... / ...... / 2569
+      </div>
+    </div>
+  </div>
+
+    </div>
+  
+    <div class="worksheet-section page-break">
+      <div class="page-container">
+    <!-- Header -->
+    <div class="header-box">
+      <div class="header-left">
+        <div class="header-doc-type">แบบบันทึกกิจกรรมการเรียนรู้และใบงานรายวิชาพื้นฐาน</div>
+        <div class="header-title">เทคโนโลยี (วิทยาการคำนวณ) ระดับชั้นมัธยมศึกษาปีที่ 4</div>
+        <div class="header-school">กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี • โรงเรียนวังน้ำเย็นวิทยาคม</div>
+      </div>
+      <div class="score-badge">
+        <div class="score-badge-points">คะแนนเต็ม <strong>10</strong> คะแนน</div>
+        <div class="score-badge-field">ได้คะแนน ............ คะแนน</div>
+      </div>
+    </div>
+
+    <!-- Student Name Form Field -->
+    <div class="student-info-grid">
+      <div>ชื่อ-นามสกุล: ..............................................................</div>
+      <div>ชั้น ม.4 / ........</div>
+      <div>เลขที่: ........</div>
+      <div>วันที่: ....../....../2569</div>
+    </div>
+
+    <!-- Worksheet Title -->
+    <div class="ws-title-box">
+      <div class="ws-main-title">ใบงานที่ 2.2: เรื่อง การวิเคราะห์ข้อมูลและออกแบบระบบ (Context Diagram & UI)</div>
+      <div class="ws-sub-title">การวิเคราะห์ข้อกำหนดเชิงหน้าที่และการออกแบบแผนภาพบริบทระบบพาณิชย์อิเล็กทรอนิกส์ • (ว 4.2 ม.4/1)</div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions-box">
+      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนวิเคราะห์ความต้องการเชิงหน้าที่ 8 ฟังก์ชันหลัก ออกแบบแผนภาพบริบท (Context Diagram) และกำหนดขอบเขตข้อมูลนำเข้า-ส่งออกของระบบ StyleHub ให้ถูกต้องตามมาตรฐานวิศวกรรมซอฟต์แวร์
+    </div>
+
+    <!-- Scenario -->
+    <div class="scenario-box">
+      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #0284c7;"></i> สถานการณ์ปัญหา:</strong><br />
+      สืบเนื่องจากโครงงาน StyleHub ในขั้นตอนนี้ทีมผู้พัฒนาต้องเปลี่ยนความต้องการของผู้ใช้ให้กลายเป็นพิมพ์เขียวทางเทคนิค โดยต้องวิเคราะห์ฟังก์ชันการทำงานหลัก 8 ฟังก์ชัน และวาดแผนภาพบริบท (Context Diagram) แสดงการมีปฏิสัมพันธ์ระหว่างระบบกับหน่วยงานภายนอก (External Entities) พร้อมระบุขอบเขตข้อมูลนำเข้าและส่งออก
+    </div>
+
+    <!-- Tasks with answer writing spaces -->
+    <div style="margin-top: 16px;">
+      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-pencil" style="color: #0284c7;"></i> กิจกรรมและประเด็นคำถามที่ต้องตอบ:
+      </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>1. การวิเคราะห์ความต้องการเชิงหน้าที่ 8 ฟังก์ชันหลัก (Functional Requirements)</span>
+          </div>
+          <div class="task-desc">
+            อธิบายรายละเอียดการทำงานของ 8 ฟังก์ชันสำคัญในระบบ StyleHub อย่างกระชับและชัดเจน (4 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>2. การออกแบบแผนภาพบริบท (Context Diagram: DFD Level 0)</span>
+          </div>
+          <div class="task-desc">
+            ระบุกระบวนการหลัก (Process 0), เอนทิตีภายนอก (External Entities) และกระแสข้อมูล (Data Flows) เข้า-ออกจากระบบ (4 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>3. การกำหนดขอบเขตข้อมูลนำเข้า-ส่งออก (Input/Output Boundary)</span>
+          </div>
+          <div class="task-desc">
+            สรุปโครงสร้างข้อมูลนำเข้า (Input) และข้อมูลส่งออก (Output) ที่สำคัญของระบบ (2 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+    </div>
+
+    <!-- Signature Footer -->
+    <div class="signature-row">
+      <div class="signature-col">
+        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
+        ( ........................................................... )<br />
+        วันที่ ...... / ...... / 2569
+      </div>
+      <div class="signature-col">
+        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
+        ( ครูปณิฏฐา บุญยงค์ )<br />
+        วันที่ ...... / ...... / 2569
+      </div>
+    </div>
+  </div>
+
+    </div>
+  
+    <div class="worksheet-section ">
+      <div class="page-container">
+    <!-- Header -->
+    <div class="header-box">
+      <div class="header-left">
+        <div class="header-doc-type">แบบบันทึกกิจกรรมการเรียนรู้และใบงานรายวิชาพื้นฐาน</div>
+        <div class="header-title">เทคโนโลยี (วิทยาการคำนวณ) ระดับชั้นมัธยมศึกษาปีที่ 4</div>
+        <div class="header-school">กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี • โรงเรียนวังน้ำเย็นวิทยาคม</div>
+      </div>
+      <div class="score-badge">
+        <div class="score-badge-points">คะแนนเต็ม <strong>10</strong> คะแนน</div>
+        <div class="score-badge-field">ได้คะแนน ............ คะแนน</div>
+      </div>
+    </div>
+
+    <!-- Student Name Form Field -->
+    <div class="student-info-grid">
+      <div>ชื่อ-นามสกุล: ..............................................................</div>
+      <div>ชั้น ม.4 / ........</div>
+      <div>เลขที่: ........</div>
+      <div>วันที่: ....../....../2569</div>
+    </div>
+
+    <!-- Worksheet Title -->
+    <div class="ws-title-box">
+      <div class="ws-main-title">ใบงานที่ 2.3: เรื่อง การพัฒนาโครงงานเพื่อแก้ปัญหาตามกระบวนการ SDLC ในบริบทจริง</div>
+      <div class="ws-sub-title">การบูรณาการแนวคิดเชิงคำนวณและวงจร SDLC ครบวงจรในการแก้ปัญหาของสถานศึกษาหรือชุมชน • (ว 4.2 ม.4/1)</div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions-box">
+      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนเลือกปัญหาจริงในสถานศึกษาหรือชุมชน (หรือศึกษากรณีศึกษาระบบ Science Lab Portal) แล้วจัดทำแผนพัฒนาโครงงานบูรณาการแนวคิดเชิงคำนวณและ SDLC ครบทั้ง 5 ขั้นตอน พร้อมเกณฑ์วัดความสำเร็จ
+    </div>
+
+    <!-- Scenario -->
+    <div class="scenario-box">
+      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #0284c7;"></i> สถานการณ์ปัญหา:</strong><br />
+      ห้องปฏิบัติการวิทยาศาสตร์ของโรงเรียนวังน้ำเย็นวิทยาคมประสบปัญหาอุปกรณ์ทดลองและสารเคมีสูญหายหรือชำรุดโดยไม่ทราบผู้รับผิดชอบ บันทึกการยืม-คืนด้วยสมุดกระดาษทำให้อ่านลายมือไม่ออกและตรวจเช็กสถานะอุปกรณ์ได้ล่าช้า กลุ่มสาระการเรียนรู้วิทยาศาสตร์ต้องการพัฒนาระบบ "Science Lab Portal" เพื่อบันทึกการยืม-คืนอุปกรณ์ด้วยระบบสแกน QR Code ผ่านสมาร์ตโฟน ให้นักเรียนวางแผนพัฒนาโครงงานนี้อย่างครบวงจร
+    </div>
+
+    <!-- Tasks with answer writing spaces -->
+    <div style="margin-top: 16px;">
+      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-pencil" style="color: #0284c7;"></i> กิจกรรมและประเด็นคำถามที่ต้องตอบ:
+      </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>1. การสำรวจและระบุปัญหา (Problem Identification)</span>
+          </div>
+          <div class="task-desc">
+            ระบุสภาพปัญหา สาเหตุ ผลกระทบ และกลุ่มเป้าหมายผู้ใช้งานในบริบทจริง (2 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>2. การวางแผนและวิเคราะห์ระบบ (Planning & Analysis)</span>
+          </div>
+          <div class="task-desc">
+            กำหนดวัตถุประสงค์ ขอบเขต และข้อกำหนดความต้องการเชิงหน้าที่ของระบบ (2 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>3. การออกแบบระบบและส่วนประสานผู้ใช้ (Design & UI)</span>
+          </div>
+          <div class="task-desc">
+            ออกแบบโครงสร้างฐานข้อมูล ผังงานระบบ และแบบร่างหน้าจอผู้ใช้ (Wireframe) (2 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>4. การพัฒนาและทดสอบระบบ (Implementation & Testing)</span>
+          </div>
+          <div class="task-desc">
+            วางแผนขั้นตอนการเขียนโปรแกรมและการทดสอบระบบเพื่อหาข้อบกพร่อง (2 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+        <div class="task-item">
+          <div class="task-header">
+            <span>5. การประเมินผลและการบำรุงรักษา (Evaluation & Maintenance)</span>
+          </div>
+          <div class="task-desc">
+            กำหนดตัวชี้วัดความสำเร็จของโครงงาน (KPI) และแผนการดูแลรักษาระบบอย่างต่อเนื่อง (2 คะแนน)
+          </div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+      
+    </div>
+
+    <!-- Signature Footer -->
+    <div class="signature-row">
+      <div class="signature-col">
+        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
+        ( ........................................................... )<br />
+        วันที่ ...... / ...... / 2569
+      </div>
+      <div class="signature-col">
+        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
+        ( ครูปณิฏฐา บุญยงค์ )<br />
+        วันที่ ...... / ...... / 2569
+      </div>
+    </div>
+  </div>
+
+    </div>
+  </body></html>

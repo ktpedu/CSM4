@@ -1390,9 +1390,14 @@
                 ใบงานมาตรฐาน 6 ฉบับ ครบทั้ง 2 หน่วยการเรียนรู้ (หน่วยละ 3 ใบงาน • คะแนนเต็ม 10 คะแนนทุกใบงาน) พร้อมระบบเปิดดูฉบับเต็ม พิมพ์ใบงาน A4 และส่งงานออนไลน์
               </div>
             </div>
-            <button onclick="switchTab('assignments')" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.84rem;">
-              <i class="fa-solid fa-cloud-arrow-up"></i> ไปหน้าส่งงาน
-            </button>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <a href="worksheets/all_worksheets_m4.pdf" target="_blank" download="รวมใบงาน_วิทยาการคำนวณ_ม4.pdf" class="btn" style="padding: 6px 14px; font-size: 0.84rem; background: #0284c7; color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; border-radius: 8px;">
+                <i class="fa-solid fa-file-pdf"></i> รวมใบงาน PDF (สำหรับ iPad / พิมพ์)
+              </a>
+              <button onclick="switchTab('assignments')" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.84rem;">
+                <i class="fa-solid fa-cloud-arrow-up"></i> ไปหน้าส่งงาน
+              </button>
+            </div>
           </div>
 
           <!-- Unit Filter Tabs -->
@@ -1663,13 +1668,20 @@
 
               <div style="flex: 1; min-width: 140px;">
                 <label class="text-xs font-bold text-slate-600 block mb-1">เลือกระดับชั้น/ห้อง:</label>
-                <select id="teacher-classroom-filter" onchange="filterTeacherQuizAttempts()" class="w-full text-xs p-2 rounded-lg border border-slate-300 bg-white">
-                  <option value="all">ทุกห้องเรียน (ม.4/1 - ม.4/10)</option>
+                <select id="teacher-classroom-filter" onchange="filterTeacherQuizAttempts()" class="w-full text-xs p-2 rounded-lg border border-slate-300 bg-white font-medium">
+                  <option value="all">ทุกห้องเรียน (ม.4/4, ม.4/9, ม.4/10, ม.4/12)</option>
+                  <option value="ม.4/4">ม.4/4</option>
+                  <option value="ม.4/9">ม.4/9</option>
+                  <option value="ม.4/10">ม.4/10</option>
+                  <option value="ม.4/12">ม.4/12</option>
                   <option value="ม.4/1">ม.4/1</option>
                   <option value="ม.4/2">ม.4/2</option>
                   <option value="ม.4/3">ม.4/3</option>
-                  <option value="ม.4/4">ม.4/4</option>
-                  <option value="ม.4/10">ม.4/10</option>
+                  <option value="ม.4/5">ม.4/5</option>
+                  <option value="ม.4/6">ม.4/6</option>
+                  <option value="ม.4/7">ม.4/7</option>
+                  <option value="ม.4/8">ม.4/8</option>
+                  <option value="ม.4/11">ม.4/11</option>
                 </select>
               </div>
 
@@ -2540,8 +2552,11 @@
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 8px;">
+            <a id="modal-ws-download-pdf-btn" href="worksheets/ws-1-1.pdf" target="_blank" download class="btn" style="background: #0284c7; color: #ffffff; padding: 7px 14px; font-size: 0.8rem; font-weight: 700; text-decoration: none; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-file-arrow-down"></i> โหลด PDF (สำหรับ iPad)
+            </a>
             <button onclick="printCurrentWorksheet()" class="btn btn-outline" style="padding: 7px 14px; font-size: 0.8rem;" title="พิมพ์เอกสารใบงานนี้ (ขนาด A4)">
-              <i class="fa-solid fa-print mr-1"></i> พิมพ์ใบงาน (A4 / PDF)
+              <i class="fa-solid fa-print mr-1"></i> พิมพ์ใบงาน A4
             </button>
             <button onclick="closeModal('modal-worksheet-view')" style="background: none; border: none; font-size: 1.4rem; color: var(--text-muted); cursor: pointer; padding: 4px 8px; line-height: 1;" title="ปิดหน้าต่าง">
               <i class="fa-solid fa-xmark"></i>

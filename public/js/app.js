@@ -3786,9 +3786,9 @@ async function loadWorksheetsData(filterUnit = currentWorksheetFilter) {
               <button onclick="openWorksheetDetail('${escapeHtml(ws.id)}')" class="btn btn-outline" style="padding: 7px 10px; font-size: 0.78rem; font-weight: 700; justify-content: center;">
                 <i class="fa-solid fa-book-open mr-1"></i> เปิดดูฉบับเต็ม
               </button>
-              <button onclick="printWorksheet('${escapeHtml(ws.id)}')" class="btn btn-outline" style="padding: 7px 10px; font-size: 0.78rem; font-weight: 700; justify-content: center; border-color: #0284c7; color: #0284c7;">
-                <i class="fa-solid fa-print mr-1"></i> พิมพ์ใบงาน A4
-              </button>
+              <a href="worksheets/${escapeHtml(ws.id)}.pdf" target="_blank" download="${escapeHtml(ws.code)}_ม4.pdf" class="btn btn-outline" style="padding: 7px 10px; font-size: 0.78rem; font-weight: 700; justify-content: center; border-color: #0284c7; color: #0284c7; text-decoration: none; display: inline-flex; align-items: center;">
+                <i class="fa-solid fa-file-arrow-down mr-1"></i> โหลด PDF (iPad)
+              </a>
             </div>
 
             <button onclick="openSubmitModal('${asgId}', '${escapeHtml(ws.title)}')" class="btn btn-primary" style="width: 100%; padding: 8px 12px; font-size: 0.82rem; font-weight: 700; justify-content: center;">
@@ -3814,6 +3814,12 @@ function openWorksheetDetail(wsId) {
 
   currentActiveWorksheet = ws;
   showAnswerKey = false;
+
+  const pdfBtn = document.getElementById('modal-ws-download-pdf-btn');
+  if (pdfBtn) {
+    pdfBtn.href = `worksheets/${ws.id}.pdf`;
+    pdfBtn.setAttribute('download', `${ws.code}_วิทยาการคำนวณ_ม4.pdf`);
+  }
 
   const isTeacherOrAdmin = Boolean(currentUser && (currentUser.role === 'teacher' || currentUser.role === 'admin'));
   const toggleBtn = document.getElementById('btn-toggle-answer');
@@ -3974,6 +3980,13 @@ function printWorksheet(wsId) {
   const ws = worksheetsCache.find(w => w.id === wsId) || OFFLINE_WORKSHEETS.find(w => w.id === wsId);
   if (!ws) {
     showToast('ไม่พบข้อมูลใบงาน', 'error');
+    return;
+  }
+
+  // If on iPad / iPhone / iOS: open PDF directly so user can Save to Files, GoodNotes, or AirPrint natively
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (isIOS) {
+    window.open(`worksheets/${ws.id}.pdf`, '_blank');
     return;
   }
 
@@ -7184,8 +7197,8 @@ async function loadTeacherData() {
     console.error('Teacher load error:', err);
   }
 
-  // Load Quiz Attempts for Teacher Management
-  loadTeacherQuizAttempts();
+  // Load Quiz Attempts for Teacher Management (Always fetch fresh data)
+  loadTeacherQuizAttempts(true);
 }
 
 async function replyQuestionPrompt(questionId) {
@@ -7974,6 +7987,40 @@ async function recheckQuizStatusFromModal() {
 
 // --- TEACHER MANAGEMENT OF QUIZ ATTEMPTS & RETAKES ---
 
+function populateTeacherClassroomFilter() {
+  const classFilter = document.getElementById('teacher-classroom-filter');
+  if (!classFilter) return;
+
+  const currentVal = classFilter.value || 'all';
+
+  // Count attempts by classroom
+  const counts = {};
+  allTeacherQuizAttempts.forEach(att => {
+    const c = (att.class_room || '').trim();
+    if (c) counts[c] = (counts[c] || 0) + 1;
+  });
+
+  // Base classrooms for this school
+  const baseRooms = ['ม.4/4', 'ม.4/9', 'ม.4/10', 'ม.4/12'];
+  const allRooms = Array.from(new Set([...baseRooms, ...Object.keys(counts)])).sort((a, b) => {
+    const numA = parseInt(a.replace(/\D/g, '')) || 0;
+    const numB = parseInt(b.replace(/\D/g, '')) || 0;
+    return numA - numB;
+  });
+
+  const totalCount = allTeacherQuizAttempts.length;
+  let html = `<option value="all">ทุกห้องเรียน (${baseRooms.join(', ')}) [${totalCount} รายการ]</option>`;
+  allRooms.forEach(room => {
+    const count = counts[room] || 0;
+    html += `<option value="${escapeHtml(room)}">${escapeHtml(room)} (${count} รายการ)</option>`;
+  });
+
+  classFilter.innerHTML = html;
+  if (allRooms.includes(currentVal) || currentVal === 'all') {
+    classFilter.value = currentVal;
+  }
+}
+
 async function loadTeacherQuizAttempts(forceRefresh = false) {
   const tbody = document.getElementById('teacher-quiz-attempts-tbody');
   const statsBar = document.getElementById('teacher-quiz-stats-bar');
@@ -8011,6 +8058,8 @@ async function loadTeacherQuizAttempts(forceRefresh = false) {
     }
   }
 
+  // Dynamically update dropdown with live counts for all classrooms
+  populateTeacherClassroomFilter();
   filterTeacherQuizAttempts();
 }
 
@@ -8028,11 +8077,12 @@ function filterTeacherQuizAttempts() {
 
   let filtered = allTeacherQuizAttempts.filter(att => {
     if (qVal !== 'all' && att.quiz_id !== qVal) return false;
-    if (cVal !== 'all' && att.class_room !== cVal) return false;
+    if (cVal !== 'all' && (att.class_room || '').trim() !== cVal.trim()) return false;
     if (sText) {
       const matchId = String(att.student_id || '').toLowerCase().includes(sText);
       const matchName = String(att.student_name || '').toLowerCase().includes(sText);
-      if (!matchId && !matchName) return false;
+      const matchRoom = String(att.class_room || '').toLowerCase().includes(sText);
+      if (!matchId && !matchName && !matchRoom) return false;
     }
     return true;
   });
