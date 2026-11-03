@@ -4270,18 +4270,24 @@ function renderSubmissionCardHtml(sub, assignments) {
   const asgTitle = sub.assignment_title || (matchedAsg ? matchedAsg.title : sub.assignment_id);
   const maxPts = sub.total_points || (matchedAsg ? (matchedAsg.total_points || matchedAsg.points || 10) : 10);
 
+  const fileInfo = analyzeSubmissionFile(sub.file_url, sub.content);
   let fileLinkHtml = '';
   if (sub.file_url && sub.file_url.startsWith('http')) {
     fileLinkHtml = `
       <a href="${escapeHtml(sub.file_url)}" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-600 font-bold hover:underline inline-flex items-center gap-1.5 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดลิงก์ผลงาน (Drive/Canva/GoodNotes) ↗
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดลิงก์ ${fileInfo.label} ↗
       </a>
     `;
   } else {
     fileLinkHtml = `
-      <button type="button" onclick="openOrDownloadSubmissionFile('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.assignment_id)}')" class="text-xs text-emerald-700 font-bold hover:underline inline-flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-lg border border-emerald-200 cursor-pointer">
-        <i class="fa-solid fa-file-arrow-down"></i> เปิด/ดาวน์โหลดไฟล์ผลงานที่แนบมา
-      </button>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+        <button type="button" onclick="previewSubmissionWork('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.assignment_id)}')" class="text-xs text-emerald-700 font-bold hover:bg-emerald-100 inline-flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-300 cursor-pointer shadow-sm">
+          <i class="fa-solid fa-eye text-emerald-600"></i> เปิดดูผลงาน (${fileInfo.ext.toUpperCase()})
+        </button>
+        <button type="button" onclick="downloadSubmissionFileById('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.class_room)}', '${escapeHtml(sub.assignment_id)}')" class="text-xs text-slate-700 font-semibold hover:bg-slate-100 inline-flex items-center gap-1.5 bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200 cursor-pointer" title="ดาวน์โหลดเก็บลงเครื่อง">
+          <i class="fa-solid fa-download text-slate-500"></i> โหลด .${fileInfo.ext}
+        </button>
+      </div>
     `;
   }
 
@@ -4411,62 +4417,278 @@ async function fetchAllSubmissions(forceFresh = false) {
   return list;
 }
 
-// On-demand file fetcher & downloader (Fetches single file only when clicked -> 500ms, no timeout)
-async function openOrDownloadSubmissionFile(subId, studentName, asgId) {
-  // 1. Check in-memory cache
-  if (submissionFileCache[subId]) {
-    triggerFileDownloadOrOpen(submissionFileCache[subId], studentName, asgId);
+// --- UNIVERSAL FILE DETECTOR & VIEWER SUITE ---
+function analyzeSubmissionFile(fileUrl, contentText) {
+  if (!fileUrl) return { isImage: false, isPdf: false, isHttpLink: false, mime: '', ext: 'bin', label: 'ไม่มีไฟล์แนบ' };
+  
+  if (fileUrl.startsWith('http://') || fileUrl.startsWith('https://')) {
+    let label = 'ลิงก์ภายนอก';
+    if (fileUrl.includes('drive.google.com')) label = 'Google Drive';
+    else if (fileUrl.includes('goodnotes.com')) label = 'GoodNotes';
+    else if (fileUrl.includes('canva.')) label = 'Canva';
+    return { isImage: false, isPdf: false, isHttpLink: true, mime: 'text/html', ext: 'url', label };
+  }
+
+  // Data URL parsing
+  const mimeMatch = fileUrl.match(/^data:([^;]+);base64,/i);
+  const mime = mimeMatch ? mimeMatch[1].toLowerCase() : '';
+
+  // Check from contentText filename if mime is generic
+  const filenameMatch = (contentText || '').match(/\[ไฟล์แนบ:\s*([^\s\]]+)/i);
+  const originalFilename = filenameMatch ? filenameMatch[1] : '';
+
+  if (mime.includes('image/jpeg') || mime.includes('image/jpg') || originalFilename.match(/\.(jpe?g)$/i)) {
+    return { isImage: true, isPdf: false, isHttpLink: false, mime: 'image/jpeg', ext: 'jpg', label: '🖼️ รูปภาพ (JPG)' };
+  }
+  if (mime.includes('image/png') || originalFilename.match(/\.png$/i)) {
+    return { isImage: true, isPdf: false, isHttpLink: false, mime: 'image/png', ext: 'png', label: '🖼️ รูปภาพ (PNG)' };
+  }
+  if (mime.includes('pdf') || originalFilename.match(/\.pdf$/i)) {
+    return { isImage: false, isPdf: true, isHttpLink: false, mime: 'application/pdf', ext: 'pdf', label: '📄 เอกสาร (PDF)' };
+  }
+  if (mime.includes('image/')) {
+    return { isImage: true, isPdf: false, isHttpLink: false, mime, ext: 'jpg', label: '🖼️ รูปภาพ' };
+  }
+
+  return { isImage: false, isPdf: false, isHttpLink: false, mime, ext: 'bin', label: '📁 ไฟล์แนบ' };
+}
+
+function dataUrlToBlob(dataUrl, expectedMime) {
+  const parts = dataUrl.split(',');
+  const mimeMatch = parts[0].match(/:(.*?);/);
+  const mime = expectedMime || (mimeMatch ? mimeMatch[1] : 'application/octet-stream');
+  const bstr = atob(parts[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], { type: mime });
+}
+
+function downloadSubmissionFile(fileUrl, studentName, classRoom, asgId, fileInfo) {
+  if (!fileUrl) return;
+
+  if (fileUrl.startsWith('http')) {
+    window.open(fileUrl, '_blank', 'noopener,noreferrer');
     return;
   }
 
-  // 2. Check localStorage
   try {
-    const localSubs = JSON.parse(localStorage.getItem('csm4_submissions') || '[]');
-    const localMatch = localSubs.find(s => s.id === subId && s.file_url);
-    if (localMatch && localMatch.file_url) {
-      submissionFileCache[subId] = localMatch.file_url;
-      triggerFileDownloadOrOpen(localMatch.file_url, studentName, asgId);
-      return;
-    }
-  } catch (e) {}
+    const info = fileInfo || analyzeSubmissionFile(fileUrl);
+    const blob = dataUrlToBlob(fileUrl, info.mime);
+    const blobUrl = URL.createObjectURL(blob);
 
-  // 3. Fetch from Supabase on demand (fast for a single row)
-  showToast('กำลังโหลดไฟล์งานของนักเรียนจากฐานข้อมูล...', 'info');
-  try {
-    const res = await fetch(`${SUPABASE_REST_URL}/submissions?id=eq.${encodeURIComponent(subId)}&select=file_url`, {
-      headers: {
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-      }
-    });
-    if (!res.ok) throw new Error('ไม่สามารถดึงข้อมูลไฟล์ได้ (HTTP ' + res.status + ')');
-    const data = await res.json();
-    const fileUrl = data[0]?.file_url;
-    if (!fileUrl) {
-      showToast('ไม่พบไฟล์แนบสำหรับรายการนี้ (นักเรียนอาจส่งเฉพาะข้อความ)', 'warning');
-      return;
-    }
-    submissionFileCache[subId] = fileUrl;
-    triggerFileDownloadOrOpen(fileUrl, studentName, asgId);
+    const cleanName = (studentName || 'student')
+      .replace(/[^\u0E00-\u0E7Fa-zA-Z0-9_-]/g, '_')
+      .replace(/_{2,}/g, '_');
+    const cleanRoom = (classRoom || 'm4')
+      .replace(/[^\u0E00-\u0E7Fa-zA-Z0-9_-]/g, '_');
+    const filename = `${cleanName}_${cleanRoom}_${asgId || 'worksheet'}.${info.ext}`;
+
+    const a = document.createElement('a');
+    a.href = blobUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 30000);
+    showToast(`ดาวน์โหลด ${filename} สำเร็จ!`, 'success');
   } catch (err) {
-    console.error('File load error:', err);
-    showToast('เกิดข้อผิดพลาดในการโหลดไฟล์: ' + err.message, 'error');
+    console.error('Download error:', err);
+    showToast('เกิดข้อผิดพลาดในการดาวน์โหลด: ' + err.message, 'error');
   }
 }
 
-function triggerFileDownloadOrOpen(fileUrl, studentName, asgId) {
-  if (fileUrl.startsWith('data:')) {
-    const link = document.createElement('a');
-    link.href = fileUrl;
-    const cleanName = (studentName || 'student_work').replace(/[^a-zA-Z0-9ก-๙_]/g, '_');
-    link.download = `${cleanName}_${asgId || 'worksheet'}.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    showToast('ดาวน์โหลดไฟล์งานสำเร็จ!', 'success');
-  } else {
-    window.open(fileUrl, '_blank', 'noopener,noreferrer');
+async function downloadSubmissionFileById(subId, studentName, classRoom, asgId) {
+  let sub = Array.isArray(allSubmissionsGlobalCache) ? allSubmissionsGlobalCache.find(s => s.id === subId) : null;
+  let fileUrl = sub?.file_url || submissionFileCache[subId];
+
+  if (fileUrl) {
+    const info = analyzeSubmissionFile(fileUrl, sub?.content);
+    downloadSubmissionFile(fileUrl, studentName, classRoom, asgId, info);
+    return;
   }
+
+  showToast('กำลังเตรียมดาวน์โหลดไฟล์...', 'info');
+  try {
+    const res = await fetch(`${SUPABASE_REST_URL}/submissions?id=eq.${encodeURIComponent(subId)}&select=file_url`, {
+      headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+    });
+    if (!res.ok) throw new Error('ไม่สามารถดึงข้อมูลไฟล์ได้');
+    const data = await res.json();
+    fileUrl = data[0]?.file_url;
+    if (!fileUrl) {
+      showToast('ไม่พบไฟล์แนบสำหรับรายการนี้', 'warning');
+      return;
+    }
+    submissionFileCache[subId] = fileUrl;
+    if (sub) sub.file_url = fileUrl;
+    const info = analyzeSubmissionFile(fileUrl, sub?.content);
+    downloadSubmissionFile(fileUrl, studentName, classRoom, asgId, info);
+  } catch (err) {
+    showToast('เกิดข้อผิดพลาด: ' + err.message, 'error');
+  }
+}
+
+function openInNewTab(fileUrl, fileInfo) {
+  if (fileUrl.startsWith('http')) {
+    window.open(fileUrl, '_blank', 'noopener,noreferrer');
+    return;
+  }
+  try {
+    const info = fileInfo || analyzeSubmissionFile(fileUrl);
+    const blob = dataUrlToBlob(fileUrl, info.mime);
+    const blobUrl = URL.createObjectURL(blob);
+    window.open(blobUrl, '_blank', 'noopener,noreferrer');
+  } catch (e) {
+    window.open(fileUrl, '_blank');
+  }
+}
+
+// In-Browser Instant Work Previewer (Opens modal without requiring download to disk)
+async function previewSubmissionWork(subId, studentName, asgId) {
+  let sub = Array.isArray(allSubmissionsGlobalCache) ? allSubmissionsGlobalCache.find(s => s.id === subId) : null;
+  
+  const nameEl = document.getElementById('viewer-student-name');
+  const roomEl = document.getElementById('viewer-student-room');
+  const badgeEl = document.getElementById('viewer-file-type-badge');
+  const asgEl = document.getElementById('viewer-asg-title');
+  const areaEl = document.getElementById('viewer-content-area');
+  const noteEl = document.getElementById('viewer-student-note');
+  const btnDownload = document.getElementById('btn-viewer-download');
+  const btnNewTab = document.getElementById('btn-viewer-new-tab');
+  const btnGrade = document.getElementById('btn-viewer-grade');
+
+  if (nameEl) nameEl.innerText = studentName || sub?.student_name || 'งานนักเรียน';
+  if (roomEl) roomEl.innerText = sub?.class_room || 'ม.4';
+  if (asgEl) asgEl.innerText = sub?.assignment_title || asgId || 'ใบงาน';
+
+  if (noteEl) {
+    if (sub?.content && sub.content.trim()) {
+      noteEl.style.display = 'block';
+      noteEl.innerHTML = `<strong>ข้อความจากนักเรียน:</strong> ${escapeHtml(sub.content)}`;
+    } else {
+      noteEl.style.display = 'none';
+    }
+  }
+
+  if (areaEl) {
+    areaEl.innerHTML = '<div style="color: #94a3b8; font-size: 0.9rem;"><i class="fa-solid fa-circle-notch fa-spin text-2xl mb-2 block text-emerald-400"></i>กำลังโหลดไฟล์งานของนักเรียน...</div>';
+  }
+
+  openModal('modal-view-submission-work');
+
+  // Wire up grade button to open grade modal directly
+  if (btnGrade) {
+    btnGrade.onclick = () => {
+      closeModal('modal-view-submission-work');
+      openGradeModal(subId, studentName, sub?.score || 10);
+    };
+  }
+
+  // Fetch file if not in cache
+  let fileUrl = sub?.file_url || submissionFileCache[subId];
+  if (!fileUrl) {
+    try {
+      const res = await fetch(`${SUPABASE_REST_URL}/submissions?id=eq.${encodeURIComponent(subId)}&select=file_url`, {
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        fileUrl = data[0]?.file_url;
+        if (fileUrl) {
+          submissionFileCache[subId] = fileUrl;
+          if (sub) sub.file_url = fileUrl;
+        }
+      }
+    } catch (e) {
+      console.warn('Preview file fetch error:', e);
+    }
+  }
+
+  if (!fileUrl) {
+    if (areaEl) {
+      areaEl.innerHTML = `
+        <div style="padding: 30px; color: #cbd5e1;">
+          <i class="fa-solid fa-file-circle-xmark text-4xl text-amber-400 mb-3 block"></i>
+          <h4 style="font-weight: 700; margin-bottom: 6px;">ไม่พบไฟล์แนบ</h4>
+          <p style="font-size: 0.85rem; color: #94a3b8;">นักเรียนอาจส่งเฉพาะข้อความคำตอบ หรือส่งงานผ่านลิงก์อื่น</p>
+        </div>
+      `;
+    }
+    if (btnDownload) btnDownload.style.display = 'none';
+    if (btnNewTab) btnNewTab.style.display = 'none';
+    return;
+  }
+
+  // Detect MIME & extension
+  const fileInfo = analyzeSubmissionFile(fileUrl, sub?.content);
+
+  if (badgeEl) {
+    badgeEl.innerText = fileInfo.label;
+    badgeEl.style.background = fileInfo.isImage ? 'rgba(16, 185, 129, 0.2)' : fileInfo.isPdf ? 'rgba(239, 68, 68, 0.2)' : 'rgba(2, 132, 199, 0.2)';
+    badgeEl.style.color = fileInfo.isImage ? '#6ee7b7' : fileInfo.isPdf ? '#fca5a5' : '#7dd3fc';
+  }
+
+  // Setup download button
+  if (btnDownload) {
+    btnDownload.style.display = 'inline-flex';
+    btnDownload.innerHTML = `<i class="fa-solid fa-download"></i> โหลด .${fileInfo.ext}`;
+    btnDownload.onclick = () => {
+      downloadSubmissionFile(fileUrl, studentName || sub?.student_name, sub?.class_room, asgId, fileInfo);
+    };
+  }
+
+  // Setup new tab button
+  if (btnNewTab) {
+    btnNewTab.style.display = 'inline-flex';
+    btnNewTab.onclick = () => {
+      openInNewTab(fileUrl, fileInfo);
+    };
+  }
+
+  // Render preview inside areaEl
+  if (areaEl) {
+    if (fileInfo.isImage) {
+      areaEl.innerHTML = `
+        <div style="max-height: 65vh; overflow: auto; width: 100%; display: flex; justify-content: center; align-items: center;">
+          <img src="${fileUrl}" alt="ผลงานของนักเรียน" style="max-width: 100%; max-height: 65vh; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);" />
+        </div>
+      `;
+    } else if (fileInfo.isPdf) {
+      const pdfBlob = dataUrlToBlob(fileUrl, 'application/pdf');
+      const pdfBlobUrl = URL.createObjectURL(pdfBlob);
+      areaEl.innerHTML = `
+        <object data="${pdfBlobUrl}" type="application/pdf" style="width: 100%; height: 65vh; border-radius: 8px; border: none;">
+          <div style="color: #cbd5e1; padding: 40px 20px;">
+            <i class="fa-solid fa-file-pdf text-4xl text-rose-500 mb-3 block"></i>
+            <p style="font-weight: 700; margin-bottom: 8px;">เบราว์เซอร์ไม่รองรับการแสดงตัวอย่าง PDF ในหน้าต่างนี้</p>
+            <a href="${pdfBlobUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 8px 18px; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> คลิกเปิดไฟล์ PDF ในแท็บใหม่
+            </a>
+          </div>
+        </object>
+      `;
+    } else if (fileInfo.isHttpLink) {
+      areaEl.innerHTML = `
+        <div style="padding: 40px 20px; color: #cbd5e1;">
+          <i class="fa-solid fa-link text-4xl text-sky-400 mb-3 block"></i>
+          <h4 style="font-weight: 700; margin-bottom: 8px;">ลิงก์ผลงานภายนอก (${fileInfo.label})</h4>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 20px; word-break: break-all; max-width: 500px; margin-left: auto; margin-right: auto;">${escapeHtml(fileUrl)}</p>
+          <a href="${escapeHtml(fileUrl)}" target="_blank" rel="noopener noreferrer" class="btn" style="background: #0284c7; color: white; font-weight: 700; padding: 10px 24px; border-radius: 12px; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดดูงานใน ${fileInfo.label} (แท็บใหม่) ↗
+          </a>
+        </div>
+      `;
+    }
+  }
+}
+
+// Backward compatibility alias
+function openOrDownloadSubmissionFile(subId, studentName, asgId) {
+  previewSubmissionWork(subId, studentName, asgId);
 }
 
 async function loadAssignmentsData() {
@@ -4931,17 +5153,23 @@ function openGradeModal(subId, studentName, currentScore) {
     if (asgEl) asgEl.innerText = sub.assignment_title || sub.assignment_id || 'ใบงาน';
     if (contentEl) contentEl.innerText = sub.content || '(ไม่มีข้อความเพิ่มเติม)';
     if (fileContainer) {
+      const fileInfo = analyzeSubmissionFile(sub?.file_url, sub?.content);
       if (sub.file_url && sub.file_url.startsWith('http')) {
         fileContainer.innerHTML = `
           <a href="${escapeHtml(sub.file_url)}" target="_blank" rel="noopener noreferrer" class="btn" style="background: #0284c7; color: white; font-size: 0.8rem; padding: 7px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px;">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดดูไฟล์งานของนักเรียน (Google Drive / ลิงก์ภายนอก) ↗
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดดูไฟล์งานใน ${fileInfo.label} ↗
           </a>
         `;
       } else {
         fileContainer.innerHTML = `
-          <button type="button" onclick="openOrDownloadSubmissionFile('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.assignment_id)}')" class="btn" style="background: #10b981; color: white; font-size: 0.8rem; padding: 7px 14px; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px; border: none; cursor: pointer;">
-            <i class="fa-solid fa-file-arrow-down"></i> เปิด/ดาวน์โหลดไฟล์งานของนักเรียน (PDF/รูปภาพ)
-          </button>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button type="button" onclick="previewSubmissionWork('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.assignment_id)}')" class="btn" style="background: #10b981; color: white; font-size: 0.8rem; padding: 7px 14px; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px; border: none; cursor: pointer;">
+              <i class="fa-solid fa-eye"></i> เปิดดูผลงาน (${fileInfo.ext.toUpperCase()})
+            </button>
+            <button type="button" onclick="downloadSubmissionFileById('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.class_room)}', '${escapeHtml(sub.assignment_id)}')" class="btn btn-outline" style="font-size: 0.8rem; padding: 7px 12px; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px; cursor: pointer;">
+              <i class="fa-solid fa-download"></i> โหลด .${fileInfo.ext}
+            </button>
+          </div>
         `;
       }
     }
@@ -7430,18 +7658,24 @@ function renderTeacherPendingSubmissions() {
       ? new Date(sub.submitted_at).toLocaleString('th-TH', { dateStyle: 'short', timeStyle: 'short' })
       : '';
 
+    const fileInfo = analyzeSubmissionFile(sub.file_url, sub.content);
     let fileBtnHtml = '';
     if (sub.file_url && sub.file_url.startsWith('http')) {
       fileBtnHtml = `
         <a href="${escapeHtml(sub.file_url)}" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-600 font-bold hover:underline inline-flex items-center gap-1.5 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดลิงก์ผลงาน ↗
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดลิงก์ ${fileInfo.label} ↗
         </a>
       `;
     } else {
       fileBtnHtml = `
-        <button type="button" onclick="openOrDownloadSubmissionFile('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.assignment_id)}')" class="text-xs text-emerald-700 font-bold hover:underline inline-flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-lg border border-emerald-200 cursor-pointer">
-          <i class="fa-solid fa-file-arrow-down"></i> เปิด/ดาวน์โหลดไฟล์งาน
-        </button>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+          <button type="button" onclick="previewSubmissionWork('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.assignment_id)}')" class="text-xs text-emerald-700 font-bold hover:bg-emerald-100 inline-flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-300 cursor-pointer shadow-sm">
+            <i class="fa-solid fa-eye text-emerald-600"></i> เปิดดูผลงาน (${fileInfo.ext.toUpperCase()})
+          </button>
+          <button type="button" onclick="downloadSubmissionFileById('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.class_room)}', '${escapeHtml(sub.assignment_id)}')" class="text-xs text-slate-700 font-semibold hover:bg-slate-100 inline-flex items-center gap-1.5 bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200 cursor-pointer" title="ดาวน์โหลดเก็บลงเครื่อง">
+            <i class="fa-solid fa-download text-slate-500"></i> โหลด .${fileInfo.ext}
+          </button>
+        </div>
       `;
     }
 

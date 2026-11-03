@@ -2440,6 +2440,54 @@
       </div>
     </div>
 
+
+    <!-- View Submission Work Modal (ดูผลงานนักเรียนแบบทันที ไม่ต้องดาวน์โหลด) -->
+    <div id="modal-view-submission-work" style="position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 2100; display: none; align-items: center; justify-content: center; padding: 20px;">
+      <div class="card" style="max-width: 960px; width: 100%; max-height: 92vh; display: flex; flex-direction: column; padding: 22px; border-radius: 20px; box-shadow: 0 25px 60px rgba(0,0,0,0.5); background: var(--surface-primary);">
+        
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 14px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <h3 id="viewer-student-name" style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;"></h3>
+              <span id="viewer-student-room" style="background: rgba(2, 132, 199, 0.15); color: #0284c7; font-size: 0.74rem; font-weight: 700; padding: 2px 8px; border-radius: 999px;"></span>
+              <span id="viewer-file-type-badge" style="background: rgba(16, 185, 129, 0.15); color: #059669; font-size: 0.74rem; font-weight: 700; padding: 2px 8px; border-radius: 999px;"></span>
+            </div>
+            <p id="viewer-asg-title" style="font-size: 0.82rem; color: var(--text-muted); margin: 3px 0 0 0;"></p>
+          </div>
+          <button onclick="closeModal('modal-view-submission-work')" style="background: none; border: none; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; padding: 4px 8px;">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Body / Content Area -->
+        <div id="viewer-content-area" style="flex: 1; overflow: auto; display: flex; align-items: center; justify-content: center; background: #0f172a; border-radius: 12px; min-height: 440px; padding: 12px; text-align: center;">
+          <!-- Dynamically filled with image, PDF object, or link -->
+        </div>
+
+        <!-- Student note if any -->
+        <div id="viewer-student-note" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; padding: 8px 12px; background: var(--surface-secondary); border-radius: 8px; border: 1px solid var(--border-color); text-align: left; display: none;"></div>
+
+        <!-- Footer Actions -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 14px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button type="button" id="btn-viewer-download" class="btn" style="background: var(--surface-secondary); color: var(--text-main); border: 1px solid var(--border-color); font-size: 0.82rem; padding: 7px 14px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+              <i class="fa-solid fa-download"></i> ดาวน์โหลดเก็บลงเครื่อง
+            </button>
+            <button type="button" id="btn-viewer-new-tab" class="btn" style="background: rgba(2, 132, 199, 0.15); color: #0284c7; border: 1px solid rgba(2, 132, 199, 0.3); font-size: 0.82rem; padding: 7px 14px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดในแท็บใหม่ ↗
+            </button>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" onclick="closeModal('modal-view-submission-work')" class="btn btn-outline" style="font-size: 0.82rem; padding: 7px 14px;">ปิด</button>
+            <button type="button" id="btn-viewer-grade" class="btn btn-primary" style="font-size: 0.82rem; padding: 7px 16px; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-check-double"></i> ตรวจและให้คะแนน
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
     <!-- Grade Submission Modal -->
     <div id="modal-grade-submission" style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px;">
       <div class="card" style="max-width: 540px; width: 100%; padding: 30px;">
