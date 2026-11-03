@@ -4297,16 +4297,27 @@ function renderSubmissionCardHtml(sub, assignments) {
     <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 mb-3 shadow-sm hover:shadow-md transition">
       <div class="flex items-center justify-between flex-wrap gap-2">
         <span class="font-bold text-xs text-slate-800">${escapeHtml(sub.student_name)} ${sub.class_room ? `<span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-full ml-1">${escapeHtml(sub.class_room)}</span>` : ''}</span>
-        <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${sub.status === 'graded' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700'}">
-          ${sub.status === 'graded' ? `ตรวจแล้ว: ${sub.score}/${maxPts} คะแนน` : 'รอครูตรวจคะแนน'}
+        <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${sub.status === 'graded' ? 'bg-blue-100 text-blue-700' : sub.status === 'returned' ? 'bg-rose-100 text-rose-800 border border-rose-300' : 'bg-amber-100 text-amber-700'}">
+          ${sub.status === 'graded' ? `ตรวจแล้ว: ${sub.score}/${maxPts} คะแนน` : sub.status === 'returned' ? '⚠️ ส่งกลับให้แก้ไข (ขอให้ส่งใหม่)' : 'รอครูตรวจคะแนน'}
         </span>
       </div>
       <p class="text-xs font-semibold text-emerald-700"><i class="fa-solid fa-file-lines mr-1.5"></i>${escapeHtml(asgTitle)}</p>
       <p class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 whitespace-pre-line">${escapeHtml(sub.content || '')}</p>
       ${fileLinkHtml}
       ${sub.feedback ? `
-        <div class="text-xs bg-amber-50 text-amber-900 p-2.5 rounded-xl border border-amber-200">
-          <span class="font-bold block">คำแนะนำจากครู:</span> ${escapeHtml(sub.feedback)}
+        <div class="text-xs ${sub.status === 'returned' ? 'bg-rose-50 text-rose-950 border-rose-300' : 'bg-amber-50 text-amber-900 border-amber-200'} p-3 rounded-xl border">
+          <span class="font-bold block ${sub.status === 'returned' ? 'text-rose-800' : 'text-amber-800'} mb-1">
+            <i class="fa-solid ${sub.status === 'returned' ? 'fa-triangle-exclamation' : 'fa-comment-dots'} mr-1"></i>
+            ${sub.status === 'returned' ? 'ข้อความแจ้งเตือนจากครู (กรุณาแก้ไขตามนี้):' : 'คำแนะนำจากครู:'}
+          </span>
+          <p class="whitespace-pre-line">${escapeHtml(sub.feedback)}</p>
+        </div>
+      ` : ''}
+      ${sub.status === 'returned' && currentUser && currentUser.role === 'student' ? `
+        <div class="pt-1">
+          <button type="button" onclick="openSubmitModal('${escapeHtml(sub.assignment_id)}', '${escapeHtml(asgTitle)}')" class="btn btn-primary" style="background: #f59e0b; border-color: #d97706; font-size: 0.78rem; padding: 7px 16px; border-radius: 10px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+            <i class="fa-solid fa-cloud-arrow-up"></i> แนบไฟล์ส่งงานใหม่ (แก้ไขตามครูแจ้ง)
+          </button>
         </div>
       ` : ''}
       
@@ -4717,9 +4728,27 @@ async function loadAssignmentsData() {
             </button>
           `;
         } else if (currentUser.role === 'student') {
+          let btnText = 'ส่งงาน (Supabase Cloud)';
+          let btnBg = 'bg-emerald-600 hover:bg-emerald-700';
+          let btnIcon = 'fa-upload';
+
+          if (mySub) {
+            if (mySub.status === 'returned') {
+              btnText = 'ส่งงานใหม่ (ครูส่งกลับแก้ไข)';
+              btnBg = 'bg-amber-600 hover:bg-amber-700';
+              btnIcon = 'fa-rotate-left';
+            } else if (mySub.status === 'graded') {
+              btnText = `ส่งแล้ว (ตรวจแล้ว ${mySub.score} คะแนน)`;
+              btnBg = 'bg-blue-600 hover:bg-blue-700';
+              btnIcon = 'fa-check';
+            } else {
+              btnText = 'แก้ไขส่งงาน';
+            }
+          }
+
           actionBtnHtml = `
-            <button onclick="openSubmitModal('${asg.id}', '${escapeHtml(asg.title)}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow-sm transition">
-              <i class="fa-solid fa-upload mr-1"></i> ${mySub ? 'แก้ไขส่งงาน' : 'ส่งงาน (Supabase Cloud)'}
+            <button onclick="openSubmitModal('${asg.id}', '${escapeHtml(asg.title)}')" class="${btnBg} text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow-sm transition">
+              <i class="fa-solid ${btnIcon} mr-1"></i> ${btnText}
             </button>
           `;
         } else {
@@ -5265,6 +5294,141 @@ async function doGradeSubmission() {
   } catch (err) {
     console.error('Grade error:', err);
     showToast('เกิดข้อผิดพลาดในการบันทึกคะแนน: ' + err.message, 'error');
+  }
+}
+
+async function doReturnSubmissionForRevision() {
+  const submission_id = document.getElementById('grade-sub-id').value;
+  let feedback = document.getElementById('grade-feedback-input').value.trim();
+
+  if (!submission_id) return;
+
+  if (!feedback) {
+    const promptFeedback = prompt('กรุณาระบุสิ่งที่นักเรียนต้องแก้ไข หรือเหตุผลที่ให้ส่งใหม่:\n(เช่น "แนบไฟล์ผิด กรุณาแนบไฟล์ใบงานที่ทำเสร็จแล้วส่งใหม่"):');
+    if (!promptFeedback || !promptFeedback.trim()) {
+      showToast('กรุณาระบุข้อเสนอแนะเพื่อให้นักเรียนทราบจุดที่ต้องแก้ไข', 'error');
+      return;
+    }
+    feedback = promptFeedback.trim();
+    document.getElementById('grade-feedback-input').value = feedback;
+  }
+
+  try {
+    showToast('กำลังส่งกลับให้นักเรียนแก้ไข...', 'info');
+
+    // 1. Direct update to Supabase Cloud
+    const sbRes = await fetch(`${SUPABASE_REST_URL}/submissions?id=eq.${encodeURIComponent(submission_id)}`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        score: null,
+        feedback: feedback,
+        status: 'returned',
+        graded_at: new Date().toISOString()
+      })
+    });
+
+    if (!sbRes.ok) {
+      console.warn('Supabase PATCH returned:', sbRes.status);
+    }
+
+    // 2. Server API fallback if not static
+    if (!isStaticOrServerlessHost()) {
+      try {
+        await apiFetch('/submissions/grade', 'POST', {
+          submission_id,
+          score: null,
+          feedback,
+          status: 'returned'
+        });
+      } catch (e) {}
+    }
+
+    // 3. Local and in-memory cache update
+    if (Array.isArray(allSubmissionsGlobalCache)) {
+      const target = allSubmissionsGlobalCache.find(s => s.id === submission_id);
+      if (target) {
+        target.score = null;
+        target.feedback = feedback;
+        target.status = 'returned';
+        target.graded_at = new Date().toISOString();
+      }
+    }
+
+    try {
+      let localSubs = JSON.parse(localStorage.getItem('csm4_submissions') || '[]');
+      const sub = localSubs.find(s => s.id === submission_id);
+      if (sub) {
+        sub.score = null;
+        sub.feedback = feedback;
+        sub.status = 'returned';
+        sub.graded_at = new Date().toISOString();
+        localStorage.setItem('csm4_submissions', JSON.stringify(localSubs));
+      }
+    } catch (e) {}
+
+    closeModal('modal-grade-submission');
+    showToast('ส่งกลับให้นักเรียนแก้ไขเรียบร้อยแล้ว! สถานะอัปเดตบนระบบทันที', 'success');
+
+    // Refresh views
+    if (typeof renderTeacherPendingSubmissions === 'function') renderTeacherPendingSubmissions();
+    if (typeof loadAssignmentsData === 'function') loadAssignmentsData();
+  } catch (err) {
+    console.error('Return submission error:', err);
+    showToast('เกิดข้อผิดพลาดในการส่งกลับ: ' + err.message, 'error');
+  }
+}
+
+async function doDeleteSubmissionPrompt() {
+  const submission_id = document.getElementById('grade-sub-id').value;
+  const studentName = document.getElementById('grade-student-name').innerText;
+
+  if (!submission_id) return;
+
+  const confirmed = confirm(`ยืนยันการลบรายการส่งงานของ "${studentName}" หรือไม่?\n\n- ข้อมูลการส่งงานจะถูกลบออกจากฐานข้อมูล Supabase\n- นักเรียนจะสามารถเข้ามากดส่งงานใหม่ได้ทันที`);
+  if (!confirmed) return;
+
+  try {
+    showToast('กำลังลบข้อมูลส่งงาน...', 'info');
+
+    // 1. Direct delete from Supabase Cloud
+    const sbRes = await fetch(`${SUPABASE_REST_URL}/submissions?id=eq.${encodeURIComponent(submission_id)}`, {
+      method: 'DELETE',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    });
+
+    if (!sbRes.ok) {
+      console.warn('Supabase DELETE returned:', sbRes.status);
+    }
+
+    // 2. Remove from global in-memory cache
+    if (Array.isArray(allSubmissionsGlobalCache)) {
+      allSubmissionsGlobalCache = allSubmissionsGlobalCache.filter(s => s.id !== submission_id);
+    }
+
+    // 3. Remove from localStorage
+    try {
+      let localSubs = JSON.parse(localStorage.getItem('csm4_submissions') || '[]');
+      localSubs = localSubs.filter(s => s.id !== submission_id);
+      localStorage.setItem('csm4_submissions', JSON.stringify(localSubs));
+    } catch (e) {}
+
+    closeModal('modal-grade-submission');
+    showToast(`ลบข้อมูลส่งงานของ ${studentName} เรียบร้อย! นักเรียนสามารถส่งงานใหม่ได้ทันที`, 'success');
+
+    // Refresh views
+    if (typeof renderTeacherPendingSubmissions === 'function') renderTeacherPendingSubmissions();
+    if (typeof loadAssignmentsData === 'function') loadAssignmentsData();
+  } catch (err) {
+    console.error('Delete submission error:', err);
+    showToast('เกิดข้อผิดพลาดในการลบข้อมูล: ' + err.message, 'error');
   }
 }
 
@@ -7644,12 +7808,18 @@ function renderTeacherPendingSubmissions() {
 
   const allItems = allSubmissionsGlobalCache || [];
   const submittedItems = allItems.filter(s => s.status === 'submitted');
+  const returnedItems = allItems.filter(s => s.status === 'returned');
   const gradedItems = allItems.filter(s => s.status === 'graded');
 
   const pendingCount = submittedItems.length;
+  const returnedCount = returnedItems.length;
   const gradedCount = gradedItems.length;
 
-  const targetList = currentTeacherSubmissionsStatus === 'graded' ? gradedItems : submittedItems;
+  const targetList = currentTeacherSubmissionsStatus === 'graded' 
+    ? gradedItems 
+    : currentTeacherSubmissionsStatus === 'returned'
+      ? returnedItems
+      : submittedItems;
 
   // Update Badge & Title
   const badge = document.getElementById('teacher-pending-badge');
@@ -7658,6 +7828,10 @@ function renderTeacherPendingSubmissions() {
       badge.innerText = `${gradedCount} รายการ (ตรวจแล้ว)`;
       badge.style.background = 'rgba(16, 185, 129, 0.15)';
       badge.style.color = '#059669';
+    } else if (currentTeacherSubmissionsStatus === 'returned') {
+      badge.innerText = `${returnedCount} รายการ (ส่งกลับแก้ไข)`;
+      badge.style.background = 'rgba(249, 115, 22, 0.15)';
+      badge.style.color = '#ea580c';
     } else {
       badge.innerText = `${pendingCount} รายการ (รอตรวจ)`;
       badge.style.background = 'rgba(245, 158, 11, 0.15)';
@@ -7667,21 +7841,21 @@ function renderTeacherPendingSubmissions() {
 
   const titleEl = document.getElementById('teacher-submissions-title');
   if (titleEl) {
-    titleEl.innerText = currentTeacherSubmissionsStatus === 'graded' ? 'รายการส่งงานที่ตรวจแล้ว' : 'รายการส่งงานที่รอครูตรวจ';
+    titleEl.innerText = currentTeacherSubmissionsStatus === 'graded' 
+      ? 'รายการส่งงานที่ตรวจแล้ว' 
+      : currentTeacherSubmissionsStatus === 'returned'
+        ? 'รายการส่งงานที่ส่งกลับให้นักเรียนแก้ไข'
+        : 'รายการส่งงานที่รอครูตรวจ';
   }
 
   // Update Toggle Button styles
   const btnSubmitted = document.getElementById('btn-subs-status-submitted');
+  const btnReturned = document.getElementById('btn-subs-status-returned');
   const btnGraded = document.getElementById('btn-subs-status-graded');
-  if (btnSubmitted && btnGraded) {
-    if (currentTeacherSubmissionsStatus === 'submitted') {
-      btnSubmitted.className = 'btn-status-toggle active-submitted';
-      btnGraded.className = 'btn-status-toggle';
-    } else {
-      btnSubmitted.className = 'btn-status-toggle';
-      btnGraded.className = 'btn-status-toggle active-graded';
-    }
-  }
+  
+  if (btnSubmitted) btnSubmitted.className = currentTeacherSubmissionsStatus === 'submitted' ? 'btn-status-toggle active-submitted' : 'btn-status-toggle';
+  if (btnReturned) btnReturned.className = currentTeacherSubmissionsStatus === 'returned' ? 'btn-status-toggle active-returned' : 'btn-status-toggle';
+  if (btnGraded) btnGraded.className = currentTeacherSubmissionsStatus === 'graded' ? 'btn-status-toggle active-graded' : 'btn-status-toggle';
 
   // Render classroom filter buttons based on active status tab
   const filterContainer = document.getElementById('teacher-submissions-filter-container');
@@ -7713,6 +7887,8 @@ function renderTeacherPendingSubmissions() {
   if (filtered.length === 0) {
     if (currentTeacherSubmissionsStatus === 'graded') {
       container.innerHTML = `<p class="text-xs text-slate-400 py-8 text-center"><i class="fa-solid fa-clipboard-check text-slate-400 text-lg block mb-1"></i>ยังไม่มีรายการที่ตรวจแล้วในตัวกรองนี้</p>`;
+    } else if (currentTeacherSubmissionsStatus === 'returned') {
+      container.innerHTML = `<p class="text-xs text-slate-400 py-8 text-center"><i class="fa-solid fa-rotate-left text-slate-400 text-lg block mb-1"></i>ไม่มีรายการที่ส่งกลับให้แก้ไขในตัวกรองนี้</p>`;
     } else {
       container.innerHTML = `<p class="text-xs text-slate-400 py-8 text-center"><i class="fa-solid fa-circle-check text-emerald-500 text-lg block mb-1"></i>ไม่มีงานค้างตรวจในขณะนี้</p>`;
     }
@@ -7725,6 +7901,7 @@ function renderTeacherPendingSubmissions() {
       : '';
 
     const isGraded = sub.status === 'graded';
+    const isReturned = sub.status === 'returned';
     const scoreVal = (sub.score !== undefined && sub.score !== null) ? sub.score : 10;
     const fileInfo = analyzeSubmissionFile(sub.file_url, sub.content);
 
@@ -7748,6 +7925,15 @@ function renderTeacherPendingSubmissions() {
       `;
     }
 
+    let statusBadgeHtml = '';
+    if (isGraded) {
+      statusBadgeHtml = `<span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">ตรวจแล้ว: ${sub.score}/10 คะแนน</span>`;
+    } else if (isReturned) {
+      statusBadgeHtml = `<span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 border border-orange-200"><i class="fa-solid fa-rotate-left mr-1"></i>ส่งกลับแก้ไข</span>`;
+    } else {
+      statusBadgeHtml = `<span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800">รอตรวจ</span>`;
+    }
+
     return `
       <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 shadow-sm transition hover:shadow-md">
         <div class="flex justify-between items-center flex-wrap gap-2">
@@ -7757,14 +7943,18 @@ function renderTeacherPendingSubmissions() {
           </div>
           <div class="flex items-center gap-2">
             <span class="text-[10px] text-slate-400"><i class="fa-regular fa-clock mr-1"></i>${formattedDate}</span>
-            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${isGraded ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
-              ${isGraded ? `ตรวจแล้ว: ${sub.score}/10 คะแนน` : 'รอตรวจ'}
-            </span>
+            ${statusBadgeHtml}
           </div>
         </div>
         <p class="text-xs font-semibold text-emerald-700"><i class="fa-solid fa-book-open mr-1.5"></i>${escapeHtml(sub.assignment_title || sub.assignment_id)}</p>
         <p class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 whitespace-pre-line">${escapeHtml(sub.content || '(ไม่มีรายละเอียดเพิ่มเติม)')}</p>
         
+        ${isReturned && sub.feedback ? `
+          <div class="text-xs bg-orange-50 text-orange-950 p-2.5 rounded-xl border border-orange-200">
+            <strong class="text-orange-800"><i class="fa-solid fa-triangle-exclamation mr-1"></i>แจ้งให้นักเรียนแก้ไข:</strong> ${escapeHtml(sub.feedback)}
+          </div>
+        ` : ''}
+
         ${isGraded && sub.feedback ? `
           <div class="text-xs bg-emerald-50 text-emerald-900 p-2.5 rounded-xl border border-emerald-200">
             <strong>ข้อเสนอแนะครู:</strong> ${escapeHtml(sub.feedback)}
@@ -7773,8 +7963,8 @@ function renderTeacherPendingSubmissions() {
 
         <div class="flex justify-between items-center pt-2 flex-wrap gap-2">
           ${fileBtnHtml}
-          <button type="button" onclick="openGradeModal('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', ${scoreVal})" class="${isGraded ? 'bg-slate-700 hover:bg-slate-800' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md inline-flex items-center gap-1.5 cursor-pointer">
-            <i class="fa-solid ${isGraded ? 'fa-pen-to-square' : 'fa-check-double'}"></i> ${isGraded ? 'แก้ไขคะแนน' : 'ตรวจและให้คะแนน'}
+          <button type="button" onclick="openGradeModal('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', ${isGraded ? scoreVal : 'null'})" class="${isGraded ? 'bg-slate-700 hover:bg-slate-800' : isReturned ? 'bg-orange-600 hover:bg-orange-700' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md inline-flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid ${isGraded ? 'fa-pen-to-square' : isReturned ? 'fa-pen' : 'fa-check-double'}"></i> ${isGraded ? 'แก้ไขคะแนน' : isReturned ? 'จัดการผล/ส่งใหม่' : 'ตรวจและให้คะแนน'}
           </button>
         </div>
       </div>

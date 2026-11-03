@@ -65,6 +65,11 @@
         color: #ffffff !important;
         box-shadow: 0 2px 6px rgba(245, 158, 11, 0.35);
       }
+      .btn-status-toggle.active-returned {
+        background: #f97316 !important;
+        color: #ffffff !important;
+        box-shadow: 0 2px 6px rgba(249, 115, 22, 0.35);
+      }
       .btn-status-toggle.active-graded {
         background: #10b981 !important;
         color: #ffffff !important;
@@ -1828,6 +1833,9 @@
                     <button type="button" id="btn-subs-status-submitted" onclick="setTeacherSubmissionsStatus('submitted')" class="btn-status-toggle active-submitted" style="padding: 4px 12px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; border: none; cursor: pointer; transition: all 0.2s;">
                       <i class="fa-solid fa-clock-rotate-left mr-1"></i> รอตรวจ
                     </button>
+                    <button type="button" id="btn-subs-status-returned" onclick="setTeacherSubmissionsStatus('returned')" class="btn-status-toggle" style="padding: 4px 12px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; border: none; cursor: pointer; transition: all 0.2s;">
+                      <i class="fa-solid fa-rotate-left mr-1"></i> ส่งกลับแก้ไข
+                    </button>
                     <button type="button" id="btn-subs-status-graded" onclick="setTeacherSubmissionsStatus('graded')" class="btn-status-toggle" style="padding: 4px 12px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; border: none; cursor: pointer; transition: all 0.2s;">
                       <i class="fa-solid fa-circle-check mr-1"></i> ตรวจแล้ว
                     </button>
@@ -2540,9 +2548,21 @@
             <textarea id="grade-feedback-input" rows="3" placeholder="เขียนคำแนะนำ ข้อปรับปรุง หรือคำชมเชย..." style="width: 100%; padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-color); font-family: inherit;"></textarea>
           </div>
         </div>
-        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 25px;">
-          <button onclick="closeModal('modal-grade-submission')" class="btn btn-outline">ยกเลิก</button>
-          <button onclick="doGradeSubmission()" class="btn btn-primary">บันทึกผลการประเมิน</button>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 25px; border-top: 1px solid var(--border-color); padding-top: 16px;">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button type="button" onclick="doReturnSubmissionForRevision()" class="btn" style="background: rgba(245, 158, 11, 0.15); color: #d97706; border: 1px solid rgba(245, 158, 11, 0.35); font-size: 0.82rem; padding: 8px 14px; font-weight: 700; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-rotate-left"></i> ส่งกลับให้แก้ไข (ขอให้ส่งใหม่)
+            </button>
+            <button type="button" onclick="doDeleteSubmissionPrompt()" class="btn" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); font-size: 0.82rem; padding: 8px 12px; font-weight: 700; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;" title="ลบข้อมูลส่งงานนี้ออกจากฐานข้อมูลเพื่อให้นักเรียนส่งใหม่ตั้งแต่ต้น">
+              <i class="fa-solid fa-trash-can"></i> ลบเพื่อส่งใหม่
+            </button>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" onclick="closeModal('modal-grade-submission')" class="btn btn-outline" style="font-size: 0.85rem; padding: 8px 16px;">ยกเลิก</button>
+            <button type="button" onclick="doGradeSubmission()" class="btn btn-primary" style="font-size: 0.85rem; padding: 8px 18px; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-check"></i> บันทึกผลการประเมิน
+            </button>
+          </div>
         </div>
       </div>
     </div>
