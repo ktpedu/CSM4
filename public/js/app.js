@@ -4312,7 +4312,7 @@ function renderSubmissionCardHtml(sub, assignments) {
       
       ${isTeacher ? `
         <div class="pt-2 text-right">
-          <button onclick="openGradeModal('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', ${sub.score || 10})" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition shadow-md inline-flex items-center gap-1.5 cursor-pointer">
+          <button onclick="openGradeModal('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', ${(sub.score !== undefined && sub.score !== null) ? sub.score : 10})" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition shadow-md inline-flex items-center gap-1.5 cursor-pointer">
             <i class="fa-solid fa-check-double"></i> ตรวจและให้คะแนน
           </button>
         </div>
@@ -5100,7 +5100,16 @@ async function doSubmitAssignment() {
       } catch (e) {}
     }
 
-    // 5. Always persist to localStorage cache
+    // 5. Always persist to in-memory cache and localStorage
+    if (Array.isArray(allSubmissionsGlobalCache)) {
+      const existIdx = allSubmissionsGlobalCache.findIndex(s => s.id === submissionRecord.id);
+      if (existIdx >= 0) {
+        allSubmissionsGlobalCache[existIdx] = { ...allSubmissionsGlobalCache[existIdx], ...submissionRecord };
+      } else {
+        allSubmissionsGlobalCache.unshift(submissionRecord);
+      }
+    }
+
     try {
       let localSubs = JSON.parse(localStorage.getItem('csm4_submissions') || '[]');
       const existIdx = localSubs.findIndex(s => s.id === submissionRecord.id);
@@ -5122,6 +5131,9 @@ async function doSubmitAssignment() {
     }
 
     loadAssignmentsData();
+    if (typeof renderTeacherPendingSubmissions === 'function') {
+      renderTeacherPendingSubmissions();
+    }
 
   } catch (err) {
     console.error('Submit error:', err);
@@ -5137,7 +5149,7 @@ async function doSubmitAssignment() {
 function openGradeModal(subId, studentName, currentScore) {
   document.getElementById('grade-sub-id').value = subId;
   document.getElementById('grade-student-name').innerText = studentName;
-  document.getElementById('grade-score-input').value = currentScore || 10;
+  document.getElementById('grade-score-input').value = (currentScore !== undefined && currentScore !== null && currentScore !== '') ? currentScore : 10;
   
   const sub = Array.isArray(allSubmissionsGlobalCache) ? allSubmissionsGlobalCache.find(s => s.id === subId) : null;
   const asgEl = document.getElementById('grade-assignment-title');
@@ -5180,10 +5192,16 @@ function openGradeModal(subId, studentName, currentScore) {
 
 async function doGradeSubmission() {
   const submission_id = document.getElementById('grade-sub-id').value;
-  const score = document.getElementById('grade-score-input').value;
+  const scoreRaw = document.getElementById('grade-score-input').value.trim();
   const feedback = document.getElementById('grade-feedback-input').value.trim();
 
   if (!submission_id) return;
+
+  if (scoreRaw === '' || isNaN(scoreRaw) || Number(scoreRaw) < 0 || Number(scoreRaw) > 20) {
+    showToast('กรุณากรอกคะแนนประเมินที่ถูกต้อง (0 - 20 คะแนน)', 'error');
+    return;
+  }
+  const score = Number(scoreRaw);
 
   try {
     showToast('กำลังบันทึกคะแนน...', 'info');
@@ -5197,7 +5215,7 @@ async function doGradeSubmission() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        score: Number(score),
+        score: score,
         feedback: feedback || 'ตรวจเรียบร้อยแล้ว',
         status: 'graded',
         graded_at: new Date().toISOString()
@@ -7607,9 +7625,16 @@ function calculateSDLC() {
 
 // --- 10. TEACHER DASHBOARD DATA ---
 let currentTeacherSubmissionsFilter = 'all';
+let currentTeacherSubmissionsStatus = 'submitted'; // 'submitted' (รอตรวจ) | 'graded' (ตรวจแล้ว)
 
 function filterTeacherSubmissions(room) {
   currentTeacherSubmissionsFilter = room;
+  renderTeacherPendingSubmissions();
+}
+
+function setTeacherSubmissionsStatus(status) {
+  currentTeacherSubmissionsStatus = status;
+  currentTeacherSubmissionsFilter = 'all';
   renderTeacherPendingSubmissions();
 }
 
@@ -7617,15 +7642,52 @@ function renderTeacherPendingSubmissions() {
   const container = document.getElementById('teacher-pending-submissions');
   if (!container) return;
 
-  const pending = (allSubmissionsGlobalCache || []).filter(s => s.status === 'submitted');
-  const badge = document.getElementById('teacher-pending-badge');
-  if (badge) badge.innerText = `${pending.length} รายการ`;
+  const allItems = allSubmissionsGlobalCache || [];
+  const submittedItems = allItems.filter(s => s.status === 'submitted');
+  const gradedItems = allItems.filter(s => s.status === 'graded');
 
-  // Render classroom filter buttons
+  const pendingCount = submittedItems.length;
+  const gradedCount = gradedItems.length;
+
+  const targetList = currentTeacherSubmissionsStatus === 'graded' ? gradedItems : submittedItems;
+
+  // Update Badge & Title
+  const badge = document.getElementById('teacher-pending-badge');
+  if (badge) {
+    if (currentTeacherSubmissionsStatus === 'graded') {
+      badge.innerText = `${gradedCount} รายการ (ตรวจแล้ว)`;
+      badge.style.background = 'rgba(16, 185, 129, 0.15)';
+      badge.style.color = '#059669';
+    } else {
+      badge.innerText = `${pendingCount} รายการ (รอตรวจ)`;
+      badge.style.background = 'rgba(245, 158, 11, 0.15)';
+      badge.style.color = '#d97706';
+    }
+  }
+
+  const titleEl = document.getElementById('teacher-submissions-title');
+  if (titleEl) {
+    titleEl.innerText = currentTeacherSubmissionsStatus === 'graded' ? 'รายการส่งงานที่ตรวจแล้ว' : 'รายการส่งงานที่รอครูตรวจ';
+  }
+
+  // Update Toggle Button styles
+  const btnSubmitted = document.getElementById('btn-subs-status-submitted');
+  const btnGraded = document.getElementById('btn-subs-status-graded');
+  if (btnSubmitted && btnGraded) {
+    if (currentTeacherSubmissionsStatus === 'submitted') {
+      btnSubmitted.className = 'btn-status-toggle active-submitted';
+      btnGraded.className = 'btn-status-toggle';
+    } else {
+      btnSubmitted.className = 'btn-status-toggle';
+      btnGraded.className = 'btn-status-toggle active-graded';
+    }
+  }
+
+  // Render classroom filter buttons based on active status tab
   const filterContainer = document.getElementById('teacher-submissions-filter-container');
   if (filterContainer) {
     const roomCounts = {};
-    pending.forEach(s => {
+    targetList.forEach(s => {
       const r = s.class_room || 'อื่นๆ';
       roomCounts[r] = (roomCounts[r] || 0) + 1;
     });
@@ -7633,7 +7695,7 @@ function renderTeacherPendingSubmissions() {
     const rooms = Object.keys(roomCounts).sort();
     filterContainer.innerHTML = `
       <button type="button" onclick="filterTeacherSubmissions('all')" style="padding: 4px 12px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; border: 1px solid var(--border-color); cursor: pointer; background: ${currentTeacherSubmissionsFilter === 'all' ? 'var(--thairath-green)' : 'var(--surface-secondary)'}; color: ${currentTeacherSubmissionsFilter === 'all' ? '#fff' : 'var(--text-main)'};">
-        ทั้งหมด (${pending.length})
+        ทั้งหมด (${targetList.length})
       </button>
       ${rooms.map(r => `
         <button type="button" onclick="filterTeacherSubmissions('${r}')" style="padding: 4px 12px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; border: 1px solid var(--border-color); cursor: pointer; background: ${currentTeacherSubmissionsFilter === r ? 'var(--thairath-green)' : 'var(--surface-secondary)'}; color: ${currentTeacherSubmissionsFilter === r ? '#fff' : 'var(--text-main)'};">
@@ -7643,13 +7705,17 @@ function renderTeacherPendingSubmissions() {
     `;
   }
 
-  // Filter items
+  // Filter items by classroom
   const filtered = currentTeacherSubmissionsFilter === 'all' 
-    ? pending 
-    : pending.filter(s => (s.class_room || 'อื่นๆ') === currentTeacherSubmissionsFilter);
+    ? targetList 
+    : targetList.filter(s => (s.class_room || 'อื่นๆ') === currentTeacherSubmissionsFilter);
 
   if (filtered.length === 0) {
-    container.innerHTML = `<p class="text-xs text-slate-400 py-8 text-center"><i class="fa-solid fa-circle-check text-emerald-500 text-lg block mb-1"></i>ไม่มีงานค้างตรวจในขณะนี้</p>`;
+    if (currentTeacherSubmissionsStatus === 'graded') {
+      container.innerHTML = `<p class="text-xs text-slate-400 py-8 text-center"><i class="fa-solid fa-clipboard-check text-slate-400 text-lg block mb-1"></i>ยังไม่มีรายการที่ตรวจแล้วในตัวกรองนี้</p>`;
+    } else {
+      container.innerHTML = `<p class="text-xs text-slate-400 py-8 text-center"><i class="fa-solid fa-circle-check text-emerald-500 text-lg block mb-1"></i>ไม่มีงานค้างตรวจในขณะนี้</p>`;
+    }
     return;
   }
 
@@ -7658,7 +7724,10 @@ function renderTeacherPendingSubmissions() {
       ? new Date(sub.submitted_at).toLocaleString('th-TH', { dateStyle: 'short', timeStyle: 'short' })
       : '';
 
+    const isGraded = sub.status === 'graded';
+    const scoreVal = (sub.score !== undefined && sub.score !== null) ? sub.score : 10;
     const fileInfo = analyzeSubmissionFile(sub.file_url, sub.content);
+
     let fileBtnHtml = '';
     if (sub.file_url && sub.file_url.startsWith('http')) {
       fileBtnHtml = `
@@ -7688,15 +7757,24 @@ function renderTeacherPendingSubmissions() {
           </div>
           <div class="flex items-center gap-2">
             <span class="text-[10px] text-slate-400"><i class="fa-regular fa-clock mr-1"></i>${formattedDate}</span>
-            <span class="text-[10px] font-bold bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full">รอตรวจ</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${isGraded ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+              ${isGraded ? `ตรวจแล้ว: ${sub.score}/10 คะแนน` : 'รอตรวจ'}
+            </span>
           </div>
         </div>
         <p class="text-xs font-semibold text-emerald-700"><i class="fa-solid fa-book-open mr-1.5"></i>${escapeHtml(sub.assignment_title || sub.assignment_id)}</p>
         <p class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 whitespace-pre-line">${escapeHtml(sub.content || '(ไม่มีรายละเอียดเพิ่มเติม)')}</p>
+        
+        ${isGraded && sub.feedback ? `
+          <div class="text-xs bg-emerald-50 text-emerald-900 p-2.5 rounded-xl border border-emerald-200">
+            <strong>ข้อเสนอแนะครู:</strong> ${escapeHtml(sub.feedback)}
+          </div>
+        ` : ''}
+
         <div class="flex justify-between items-center pt-2 flex-wrap gap-2">
           ${fileBtnHtml}
-          <button type="button" onclick="openGradeModal('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', 10)" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md inline-flex items-center gap-1.5 cursor-pointer">
-            <i class="fa-solid fa-check-double"></i> ตรวจและให้คะแนน
+          <button type="button" onclick="openGradeModal('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', ${scoreVal})" class="${isGraded ? 'bg-slate-700 hover:bg-slate-800' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md inline-flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid ${isGraded ? 'fa-pen-to-square' : 'fa-check-double'}"></i> ${isGraded ? 'แก้ไขคะแนน' : 'ตรวจและให้คะแนน'}
           </button>
         </div>
       </div>
@@ -7965,17 +8043,46 @@ function openAddUserModal() {
 // --- 13. CONTACT & Q&A DATA ---
 async function loadContactData() {
   try {
-    const questions = await apiFetch('/questions');
+    let questions = [];
+
+    // 1. Fetch directly from Supabase Cloud REST
+    try {
+      const qRes = await fetch(`${SUPABASE_REST_URL}/questions?select=*&order=created_at.desc`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      if (qRes.ok) {
+        questions = await qRes.json();
+      }
+    } catch (sbErr) {
+      console.warn('Supabase questions fetch error:', sbErr);
+    }
+
+    // 2. Fallback to API if not static
+    if ((!questions || questions.length === 0) && !isStaticOrServerlessHost()) {
+      try {
+        questions = await apiFetch('/questions');
+      } catch (e) {}
+    }
+
     const container = document.getElementById('contact-public-questions');
+    if (!container) return;
+
+    if (!questions || questions.length === 0) {
+      container.innerHTML = `<p class="text-xs text-slate-400 py-6 text-center"><i class="fa-solid fa-comments text-slate-300 text-lg block mb-1"></i>ยังไม่มีคำถามจากนักเรียนในขณะนี้</p>`;
+      return;
+    }
 
     container.innerHTML = questions.map(q => `
-      <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2">
+      <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 shadow-sm">
         <div class="flex justify-between items-center text-xs">
-          <span class="font-bold text-slate-800">${escapeHtml(q.student_name)}</span>
-          <span class="text-slate-400">${new Date(q.created_at).toLocaleDateString('th-TH')}</span>
+          <span class="font-bold text-slate-800">${escapeHtml(q.student_name || 'นักเรียน')}</span>
+          <span class="text-slate-400">${q.created_at ? new Date(q.created_at).toLocaleDateString('th-TH') : ''}</span>
         </div>
         <p class="font-bold text-xs text-emerald-700">${escapeHtml(q.subject)}</p>
-        <p class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border">${escapeHtml(q.question)}</p>
+        <p class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">${escapeHtml(q.question)}</p>
         ${q.reply ? `
           <div class="text-xs bg-emerald-50 text-emerald-900 p-2.5 rounded-xl border border-emerald-200">
             <strong>คำตอบจากครู:</strong> ${escapeHtml(q.reply)}
@@ -7998,14 +8105,54 @@ async function submitStudentQuestion() {
     return;
   }
 
+  const studentName = (currentUser && currentUser.full_name) || 'นักเรียน (ไม่ระบุชื่อ)';
+  const studentId = (currentUser && (currentUser.student_id || currentUser.id || currentUser.username)) || 'guest';
+
+  const newQ = {
+    id: 'q-' + Date.now(),
+    student_id: String(studentId),
+    student_name: studentName,
+    subject: subject,
+    question: question,
+    reply: null,
+    replied_by: null,
+    created_at: new Date().toISOString(),
+    status: 'pending'
+  };
+
   try {
-    await apiFetch('/questions', 'POST', { subject, question });
+    // 1. Direct insert to Supabase Cloud REST
+    let savedToSupabase = false;
+    try {
+      const sbRes = await fetch(`${SUPABASE_REST_URL}/questions`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(newQ)
+      });
+      if (sbRes.ok) savedToSupabase = true;
+    } catch (sbErr) {
+      console.warn('Supabase question post error:', sbErr);
+    }
+
+    // 2. Also try API if running on server host
+    if (!isStaticOrServerlessHost()) {
+      try {
+        await apiFetch('/questions', 'POST', { subject, question });
+      } catch (e) {}
+    }
+
     document.getElementById('contact-subject-input').value = '';
     document.getElementById('contact-question-input').value = '';
     showToast('ส่งคำถามถึงครูเรียบร้อยแล้ว! บันทึกลง Supabase สำเร็จ', 'success');
     loadContactData();
   } catch (err) {
     console.error('Submit question error:', err);
+    showToast('เกิดข้อผิดพลาดในการส่งคำถาม: ' + err.message, 'error');
   }
 }
 
@@ -8024,15 +8171,56 @@ async function doCreateAnnouncement() {
     return;
   }
 
+  const authorName = (currentUser && currentUser.full_name) || 'ครูปณิฏฐา บุญยงค์';
+  const newAnc = {
+    id: 'anc-' + Date.now(),
+    title: title,
+    content: content,
+    author: authorName,
+    date: new Date().toISOString().split('T')[0],
+    created_at: new Date().toISOString()
+  };
+
   try {
-    await apiFetch('/announcements', 'POST', { title, content });
+    // 1. Save directly to Supabase Cloud REST
+    try {
+      await fetch(`${SUPABASE_REST_URL}/announcements`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(newAnc)
+      });
+    } catch (e) {
+      console.warn('Supabase announcement save error:', e);
+    }
+
+    // Immediately update in-memory cache and re-render UI
+    if (typeof latestAnnouncementsCache !== 'undefined' && Array.isArray(latestAnnouncementsCache)) {
+      latestAnnouncementsCache.unshift(newAnc);
+      if (typeof renderAnnouncementsUI === 'function') {
+        renderAnnouncementsUI(latestAnnouncementsCache);
+      }
+    }
+
+    // 2. Try server API if not static
+    if (!isStaticOrServerlessHost()) {
+      try {
+        await apiFetch('/announcements', 'POST', { title, content });
+      } catch (e) {}
+    }
+
     closeModal('modal-add-announcement');
     document.getElementById('anc-title-input').value = '';
     document.getElementById('anc-content-input').value = '';
     showToast('สร้างประกาศเรียบร้อยและบันทึกลง Supabase สำเร็จ!', 'success');
-    loadHomeData();
+    if (typeof loadHomeData === 'function') loadHomeData();
   } catch (err) {
     console.error('Announcement create error:', err);
+    showToast('เกิดข้อผิดพลาดในการสร้างประกาศ: ' + err.message, 'error');
   }
 }
 

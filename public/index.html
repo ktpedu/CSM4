@@ -56,6 +56,20 @@
         font-weight: 400 !important;
         font-style: normal !important;
       }
+          .btn-status-toggle {
+        background: transparent;
+        color: var(--text-muted);
+      }
+      .btn-status-toggle.active-submitted {
+        background: #f59e0b !important;
+        color: #ffffff !important;
+        box-shadow: 0 2px 6px rgba(245, 158, 11, 0.35);
+      }
+      .btn-status-toggle.active-graded {
+        background: #10b981 !important;
+        color: #ffffff !important;
+        box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35);
+      }
     </style>
   </head>
   <body>
@@ -1805,10 +1819,21 @@
               <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px;">
                 <h3 style="font-size: 1.15rem; margin: 0; display: flex; align-items: center; gap: 10px; font-weight: 700;">
                   <i class="fa-solid fa-clock-rotate-left" style="color: var(--accent-amber);"></i>
-                  <span>รายการส่งงานที่รอครูตรวจ</span>
+                  <span id="teacher-submissions-title">รายการส่งงานที่รอครูตรวจ</span>
                   <span id="teacher-pending-badge" style="background: rgba(245, 158, 11, 0.15); color: #d97706; font-size: 0.78rem; font-weight: 700; padding: 2px 10px; border-radius: 999px;">0 รายการ</span>
                 </h3>
-                <div id="teacher-submissions-filter-container" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
+                <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                  <!-- Submissions Status Toggle: รอตรวจ vs ตรวจแล้ว -->
+                  <div style="display: inline-flex; background: var(--surface-secondary); padding: 3px; border-radius: 999px; border: 1px solid var(--border-color);">
+                    <button type="button" id="btn-subs-status-submitted" onclick="setTeacherSubmissionsStatus('submitted')" class="btn-status-toggle active-submitted" style="padding: 4px 12px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; border: none; cursor: pointer; transition: all 0.2s;">
+                      <i class="fa-solid fa-clock-rotate-left mr-1"></i> รอตรวจ
+                    </button>
+                    <button type="button" id="btn-subs-status-graded" onclick="setTeacherSubmissionsStatus('graded')" class="btn-status-toggle" style="padding: 4px 12px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; border: none; cursor: pointer; transition: all 0.2s;">
+                      <i class="fa-solid fa-circle-check mr-1"></i> ตรวจแล้ว
+                    </button>
+                  </div>
+                  <div id="teacher-submissions-filter-container" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
+                </div>
               </div>
               <div id="teacher-pending-submissions" style="display: flex; flex-direction: column; gap: 14px; max-height: 600px; overflow-y: auto; padding-right: 4px;">
                 <!-- Rendered via JS -->
