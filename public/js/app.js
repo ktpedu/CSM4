@@ -4266,45 +4266,37 @@ function isMySubmission(sub, user) {
 
 // Helper to render a single submission card
 function renderSubmissionCardHtml(sub, assignments) {
-  const matchedAsg = assignments.find(a => a.id === sub.assignment_id);
+  const matchedAsg = (assignments || []).find(a => a.id === sub.assignment_id);
   const asgTitle = sub.assignment_title || (matchedAsg ? matchedAsg.title : sub.assignment_id);
   const maxPts = sub.total_points || (matchedAsg ? (matchedAsg.total_points || matchedAsg.points || 10) : 10);
 
   let fileLinkHtml = '';
-  if (sub.file_url) {
-    if (sub.file_url.startsWith('data:')) {
-      fileLinkHtml = `
-        <a href="${sub.file_url}" download="${escapeHtml((sub.student_name || 'submission') + '_' + sub.assignment_id)}" class="text-xs text-emerald-600 font-bold hover:underline inline-flex items-center gap-1">
-          <i class="fa-solid fa-file-arrow-down"></i> ดาวน์โหลดไฟล์ผลงานที่แนบมา
-        </a>
-      `;
-    } else if (sub.file_url.startsWith('/uploads/')) {
-      fileLinkHtml = `
-        <a href="${escapeHtml(sub.file_url)}" target="_blank" class="text-xs text-emerald-600 font-bold hover:underline inline-flex items-center gap-1">
-          <i class="fa-solid fa-file-arrow-down"></i> ดาวน์โหลดไฟล์ผลงานของนักเรียน
-        </a>
-      `;
-    } else {
-      fileLinkHtml = `
-        <a href="${escapeHtml(sub.file_url)}" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-600 font-semibold hover:underline inline-flex items-center gap-1">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดลิงก์ผลงาน (Drive/Canva/GitHub)
-        </a>
-      `;
-    }
+  if (sub.file_url && sub.file_url.startsWith('http')) {
+    fileLinkHtml = `
+      <a href="${escapeHtml(sub.file_url)}" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-600 font-bold hover:underline inline-flex items-center gap-1.5 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดลิงก์ผลงาน (Drive/Canva/GoodNotes) ↗
+      </a>
+    `;
+  } else {
+    fileLinkHtml = `
+      <button type="button" onclick="openOrDownloadSubmissionFile('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.assignment_id)}')" class="text-xs text-emerald-700 font-bold hover:underline inline-flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-lg border border-emerald-200 cursor-pointer">
+        <i class="fa-solid fa-file-arrow-down"></i> เปิด/ดาวน์โหลดไฟล์ผลงานที่แนบมา
+      </button>
+    `;
   }
 
   const isTeacher = currentUser && (currentUser.role === 'teacher' || currentUser.role === 'admin');
 
   return `
-    <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 mb-3">
-      <div class="flex items-center justify-between">
-        <span class="font-bold text-xs text-slate-800">${escapeHtml(sub.student_name)} ${sub.class_room ? `(${sub.class_room})` : ''}</span>
-        <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md ${sub.status === 'graded' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700'}">
-          ${sub.status === 'graded' ? `คะแนน: ${sub.score}/${maxPts}` : 'รอครูตรวจคะแนน'}
+    <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 mb-3 shadow-sm hover:shadow-md transition">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <span class="font-bold text-xs text-slate-800">${escapeHtml(sub.student_name)} ${sub.class_room ? `<span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-full ml-1">${escapeHtml(sub.class_room)}</span>` : ''}</span>
+        <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${sub.status === 'graded' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700'}">
+          ${sub.status === 'graded' ? `ตรวจแล้ว: ${sub.score}/${maxPts} คะแนน` : 'รอครูตรวจคะแนน'}
         </span>
       </div>
-      <p class="text-xs font-semibold text-slate-700">${escapeHtml(asgTitle)}</p>
-      <p class="text-xs text-slate-500 bg-slate-50 p-2.5 rounded-xl border border-slate-100 whitespace-pre-line">${escapeHtml(sub.content || '')}</p>
+      <p class="text-xs font-semibold text-emerald-700"><i class="fa-solid fa-file-lines mr-1.5"></i>${escapeHtml(asgTitle)}</p>
+      <p class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 whitespace-pre-line">${escapeHtml(sub.content || '')}</p>
       ${fileLinkHtml}
       ${sub.feedback ? `
         <div class="text-xs bg-amber-50 text-amber-900 p-2.5 rounded-xl border border-amber-200">
@@ -4314,8 +4306,8 @@ function renderSubmissionCardHtml(sub, assignments) {
       
       ${isTeacher ? `
         <div class="pt-2 text-right">
-          <button onclick="openGradeModal('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', ${sub.score || 0})" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl transition">
-            <i class="fa-solid fa-check-double mr-1"></i> ให้คะแนน / เขียน Feedback
+          <button onclick="openGradeModal('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', ${sub.score || 10})" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition shadow-md inline-flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-check-double"></i> ตรวจและให้คะแนน
           </button>
         </div>
       ` : ''}
@@ -4323,19 +4315,26 @@ function renderSubmissionCardHtml(sub, assignments) {
   `;
 }
 
-// Helper to fetch all submissions from Supabase Cloud / local API
-async function fetchAllSubmissions() {
+// Global submissions in-memory cache & file on-demand cache
+let allSubmissionsGlobalCache = [];
+const submissionFileCache = {};
+
+// Helper to fetch all submissions from Supabase Cloud / local API (Optimized to avoid statement timeout)
+async function fetchAllSubmissions(forceFresh = false) {
   let list = [];
   if (!isStaticOrServerlessHost()) {
     try {
       list = await apiFetch('/submissions');
-      if (Array.isArray(list) && list.length > 0) return list;
+      if (Array.isArray(list) && list.length > 0) {
+        allSubmissionsGlobalCache = list;
+        return list;
+      }
     } catch (e) {}
   }
 
-  // Direct fetch from Supabase Cloud
+  // Direct fetch metadata from Supabase Cloud (Excludes massive base64 file_url to prevent 57014 statement timeout)
   try {
-    const sbRes = await fetch(`${SUPABASE_REST_URL}/submissions?select=*&order=submitted_at.desc`, {
+    const sbRes = await fetch(`${SUPABASE_REST_URL}/submissions?select=id,assignment_id,student_id,student_name,class_room,content,score,feedback,status,submitted_at,graded_at&order=submitted_at.desc`, {
       headers: {
         'apikey': SUPABASE_ANON_KEY,
         'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
@@ -4343,24 +4342,131 @@ async function fetchAllSubmissions() {
     });
     if (sbRes.ok) {
       list = await sbRes.json();
+    } else {
+      console.warn('Supabase submissions metadata fetch status:', sbRes.status);
     }
   } catch (sbErr) {
     console.warn('Supabase submissions fetch error:', sbErr);
   }
+
+  // Fetch short HTTP links in parallel (only URLs, e.g. Google Drive / GoodNotes / Canva)
+  try {
+    const linksRes = await fetch(`${SUPABASE_REST_URL}/submissions?file_url=like.http*&select=id,file_url`, {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    });
+    if (linksRes.ok) {
+      const linksData = await linksRes.json();
+      if (Array.isArray(linksData)) {
+        const linkMap = {};
+        linksData.forEach(item => {
+          linkMap[item.id] = item.file_url;
+        });
+        list.forEach(s => {
+          if (linkMap[s.id]) {
+            s.file_url = linkMap[s.id];
+            s.has_file = true;
+          } else if (s.content && (s.content.includes('[ไฟล์แนบ:') || s.content.includes('ส่งงานผ่านระบบออนไลน์'))) {
+            s.has_file = true;
+          }
+        });
+      }
+    }
+  } catch (e) {}
+
+  // Fill in assignment titles from OFFLINE_ASSIGNMENTS if missing
+  list.forEach(s => {
+    if (!s.assignment_title && typeof OFFLINE_ASSIGNMENTS !== 'undefined') {
+      const match = OFFLINE_ASSIGNMENTS.find(a => a.id === s.assignment_id);
+      if (match) {
+        s.assignment_title = match.title;
+      }
+    }
+    // Also attach cached file_url if loaded previously
+    if (submissionFileCache[s.id]) {
+      s.file_url = submissionFileCache[s.id];
+    }
+  });
 
   // Merge with localStorage cached submissions
   try {
     const localSubs = JSON.parse(localStorage.getItem('csm4_submissions') || '[]');
     if (localSubs.length > 0) {
       localSubs.forEach(ls => {
-        if (!list.some(s => s.id === ls.id)) {
+        const existIdx = list.findIndex(s => s.id === ls.id);
+        if (existIdx >= 0) {
+          if (ls.file_url && !list[existIdx].file_url) {
+            list[existIdx].file_url = ls.file_url;
+          }
+        } else {
           list.push(ls);
         }
       });
     }
   } catch (e) {}
 
+  allSubmissionsGlobalCache = list;
   return list;
+}
+
+// On-demand file fetcher & downloader (Fetches single file only when clicked -> 500ms, no timeout)
+async function openOrDownloadSubmissionFile(subId, studentName, asgId) {
+  // 1. Check in-memory cache
+  if (submissionFileCache[subId]) {
+    triggerFileDownloadOrOpen(submissionFileCache[subId], studentName, asgId);
+    return;
+  }
+
+  // 2. Check localStorage
+  try {
+    const localSubs = JSON.parse(localStorage.getItem('csm4_submissions') || '[]');
+    const localMatch = localSubs.find(s => s.id === subId && s.file_url);
+    if (localMatch && localMatch.file_url) {
+      submissionFileCache[subId] = localMatch.file_url;
+      triggerFileDownloadOrOpen(localMatch.file_url, studentName, asgId);
+      return;
+    }
+  } catch (e) {}
+
+  // 3. Fetch from Supabase on demand (fast for a single row)
+  showToast('กำลังโหลดไฟล์งานของนักเรียนจากฐานข้อมูล...', 'info');
+  try {
+    const res = await fetch(`${SUPABASE_REST_URL}/submissions?id=eq.${encodeURIComponent(subId)}&select=file_url`, {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    });
+    if (!res.ok) throw new Error('ไม่สามารถดึงข้อมูลไฟล์ได้ (HTTP ' + res.status + ')');
+    const data = await res.json();
+    const fileUrl = data[0]?.file_url;
+    if (!fileUrl) {
+      showToast('ไม่พบไฟล์แนบสำหรับรายการนี้ (นักเรียนอาจส่งเฉพาะข้อความ)', 'warning');
+      return;
+    }
+    submissionFileCache[subId] = fileUrl;
+    triggerFileDownloadOrOpen(fileUrl, studentName, asgId);
+  } catch (err) {
+    console.error('File load error:', err);
+    showToast('เกิดข้อผิดพลาดในการโหลดไฟล์: ' + err.message, 'error');
+  }
+}
+
+function triggerFileDownloadOrOpen(fileUrl, studentName, asgId) {
+  if (fileUrl.startsWith('data:')) {
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    const cleanName = (studentName || 'student_work').replace(/[^a-zA-Z0-9ก-๙_]/g, '_');
+    link.download = `${cleanName}_${asgId || 'worksheet'}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('ดาวน์โหลดไฟล์งานสำเร็จ!', 'success');
+  } else {
+    window.open(fileUrl, '_blank', 'noopener,noreferrer');
+  }
 }
 
 async function loadAssignmentsData() {
@@ -4810,6 +4916,37 @@ function openGradeModal(subId, studentName, currentScore) {
   document.getElementById('grade-sub-id').value = subId;
   document.getElementById('grade-student-name').innerText = studentName;
   document.getElementById('grade-score-input').value = currentScore || 10;
+  
+  const sub = Array.isArray(allSubmissionsGlobalCache) ? allSubmissionsGlobalCache.find(s => s.id === subId) : null;
+  const asgEl = document.getElementById('grade-assignment-title');
+  const contentEl = document.getElementById('grade-student-content');
+  const fileContainer = document.getElementById('grade-file-action-container');
+  const feedbackInput = document.getElementById('grade-feedback-input');
+
+  if (feedbackInput) {
+    feedbackInput.value = sub?.feedback || '';
+  }
+
+  if (sub) {
+    if (asgEl) asgEl.innerText = sub.assignment_title || sub.assignment_id || 'ใบงาน';
+    if (contentEl) contentEl.innerText = sub.content || '(ไม่มีข้อความเพิ่มเติม)';
+    if (fileContainer) {
+      if (sub.file_url && sub.file_url.startsWith('http')) {
+        fileContainer.innerHTML = `
+          <a href="${escapeHtml(sub.file_url)}" target="_blank" rel="noopener noreferrer" class="btn" style="background: #0284c7; color: white; font-size: 0.8rem; padding: 7px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px;">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดดูไฟล์งานของนักเรียน (Google Drive / ลิงก์ภายนอก) ↗
+          </a>
+        `;
+      } else {
+        fileContainer.innerHTML = `
+          <button type="button" onclick="openOrDownloadSubmissionFile('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.assignment_id)}')" class="btn" style="background: #10b981; color: white; font-size: 0.8rem; padding: 7px 14px; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px; border: none; cursor: pointer;">
+            <i class="fa-solid fa-file-arrow-down"></i> เปิด/ดาวน์โหลดไฟล์งานของนักเรียน (PDF/รูปภาพ)
+          </button>
+        `;
+      }
+    }
+  }
+
   openModal('modal-grade-submission');
 }
 
@@ -4818,41 +4955,55 @@ async function doGradeSubmission() {
   const score = document.getElementById('grade-score-input').value;
   const feedback = document.getElementById('grade-feedback-input').value.trim();
 
+  if (!submission_id) return;
+
   try {
+    showToast('กำลังบันทึกคะแนน...', 'info');
+
     // 1. Direct update to Supabase Cloud
-    try {
-      await fetch(`${SUPABASE_REST_URL}/submissions?id=eq.${encodeURIComponent(submission_id)}`, {
-        method: 'PATCH',
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          score: Number(score),
-          feedback,
-          status: 'graded',
-          graded_at: new Date().toISOString()
-        })
-      });
-    } catch (sbErr) {
-      console.warn('Direct Supabase grade error:', sbErr);
+    const sbRes = await fetch(`${SUPABASE_REST_URL}/submissions?id=eq.${encodeURIComponent(submission_id)}`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        score: Number(score),
+        feedback: feedback || 'ตรวจเรียบร้อยแล้ว',
+        status: 'graded',
+        graded_at: new Date().toISOString()
+      })
+    });
+
+    if (!sbRes.ok) {
+      console.warn('Supabase PATCH returned:', sbRes.status);
     }
 
-    // 2. Server API if running
+    // 2. Server API fallback if not static
     if (!isStaticOrServerlessHost()) {
       try {
         await apiFetch('/submissions/grade', 'POST', { submission_id, score, feedback });
       } catch (e) {}
     }
 
-    // 3. Local cache update
+    // 3. Local and in-memory cache update
+    if (Array.isArray(allSubmissionsGlobalCache)) {
+      const target = allSubmissionsGlobalCache.find(s => s.id === submission_id);
+      if (target) {
+        target.score = Number(score);
+        target.feedback = feedback || 'ตรวจเรียบร้อยแล้ว';
+        target.status = 'graded';
+        target.graded_at = new Date().toISOString();
+      }
+    }
+
     try {
       let localSubs = JSON.parse(localStorage.getItem('csm4_submissions') || '[]');
       const sub = localSubs.find(s => s.id === submission_id);
       if (sub) {
         sub.score = Number(score);
-        sub.feedback = feedback;
+        sub.feedback = feedback || 'ตรวจเรียบร้อยแล้ว';
         sub.status = 'graded';
         sub.graded_at = new Date().toISOString();
         localStorage.setItem('csm4_submissions', JSON.stringify(localSubs));
@@ -4860,11 +5011,14 @@ async function doGradeSubmission() {
     } catch (e) {}
 
     closeModal('modal-grade-submission');
-    showToast('บันทึกคะแนนเรียบร้อย! ระบบบันทึกลง Supabase ทันที', 'success');
-    loadAssignmentsData();
-    if (activeTab === 'teacher') loadTeacherData();
+    showToast('บันทึกคะแนนเรียบร้อย! ข้อมูลอัปเดตลง Supabase ทันที', 'success');
+
+    // Refresh views
+    if (typeof renderTeacherPendingSubmissions === 'function') renderTeacherPendingSubmissions();
+    if (typeof loadAssignmentsData === 'function') loadAssignmentsData();
   } catch (err) {
     console.error('Grade error:', err);
+    showToast('เกิดข้อผิดพลาดในการบันทึกคะแนน: ' + err.message, 'error');
   }
 }
 
@@ -7224,63 +7378,139 @@ function calculateSDLC() {
 
 
 // --- 10. TEACHER DASHBOARD DATA ---
-async function loadTeacherData() {
-  try {
-    const submissions = await fetchAllSubmissions();
-    const pending = submissions.filter(s => s.status === 'submitted');
-    const container = document.getElementById('teacher-pending-submissions');
+let currentTeacherSubmissionsFilter = 'all';
 
-    if (pending.length === 0) {
-      container.innerHTML = `<p class="text-xs text-slate-400 py-6 text-center">ไม่มีงานค้างตรวจในขณะนี้</p>`;
+function filterTeacherSubmissions(room) {
+  currentTeacherSubmissionsFilter = room;
+  renderTeacherPendingSubmissions();
+}
+
+function renderTeacherPendingSubmissions() {
+  const container = document.getElementById('teacher-pending-submissions');
+  if (!container) return;
+
+  const pending = (allSubmissionsGlobalCache || []).filter(s => s.status === 'submitted');
+  const badge = document.getElementById('teacher-pending-badge');
+  if (badge) badge.innerText = `${pending.length} รายการ`;
+
+  // Render classroom filter buttons
+  const filterContainer = document.getElementById('teacher-submissions-filter-container');
+  if (filterContainer) {
+    const roomCounts = {};
+    pending.forEach(s => {
+      const r = s.class_room || 'อื่นๆ';
+      roomCounts[r] = (roomCounts[r] || 0) + 1;
+    });
+
+    const rooms = Object.keys(roomCounts).sort();
+    filterContainer.innerHTML = `
+      <button type="button" onclick="filterTeacherSubmissions('all')" style="padding: 4px 12px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; border: 1px solid var(--border-color); cursor: pointer; background: ${currentTeacherSubmissionsFilter === 'all' ? 'var(--thairath-green)' : 'var(--surface-secondary)'}; color: ${currentTeacherSubmissionsFilter === 'all' ? '#fff' : 'var(--text-main)'};">
+        ทั้งหมด (${pending.length})
+      </button>
+      ${rooms.map(r => `
+        <button type="button" onclick="filterTeacherSubmissions('${r}')" style="padding: 4px 12px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; border: 1px solid var(--border-color); cursor: pointer; background: ${currentTeacherSubmissionsFilter === r ? 'var(--thairath-green)' : 'var(--surface-secondary)'}; color: ${currentTeacherSubmissionsFilter === r ? '#fff' : 'var(--text-main)'};">
+          ${r} (${roomCounts[r]})
+        </button>
+      `).join('')}
+    `;
+  }
+
+  // Filter items
+  const filtered = currentTeacherSubmissionsFilter === 'all' 
+    ? pending 
+    : pending.filter(s => (s.class_room || 'อื่นๆ') === currentTeacherSubmissionsFilter);
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<p class="text-xs text-slate-400 py-8 text-center"><i class="fa-solid fa-circle-check text-emerald-500 text-lg block mb-1"></i>ไม่มีงานค้างตรวจในขณะนี้</p>`;
+    return;
+  }
+
+  container.innerHTML = filtered.map(sub => {
+    const formattedDate = sub.submitted_at 
+      ? new Date(sub.submitted_at).toLocaleString('th-TH', { dateStyle: 'short', timeStyle: 'short' })
+      : '';
+
+    let fileBtnHtml = '';
+    if (sub.file_url && sub.file_url.startsWith('http')) {
+      fileBtnHtml = `
+        <a href="${escapeHtml(sub.file_url)}" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-600 font-bold hover:underline inline-flex items-center gap-1.5 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดลิงก์ผลงาน ↗
+        </a>
+      `;
     } else {
-      container.innerHTML = pending.map(sub => `
-        <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2">
-          <div class="flex justify-between items-center">
-            <span class="font-bold text-sm text-slate-800">${sub.student_name}</span>
-            <span class="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded">รอตรวจ</span>
-          </div>
-          <p class="text-xs font-semibold text-slate-700">${sub.assignment_title}</p>
-          <p class="text-xs text-slate-500 bg-slate-50 p-2.5 rounded-xl border">${sub.content}</p>
-          <div class="flex justify-between items-center pt-2">
-            ${sub.file_url ? (
-              sub.file_url.startsWith('data:') ? `
-                <a href="${sub.file_url}" download="${escapeHtml((sub.student_name || 'งานนักเรียน') + '_' + (sub.assignment_id || 'ใบงาน'))}" class="text-xs text-emerald-600 font-bold hover:underline inline-flex items-center gap-1">
-                  <i class="fa-solid fa-file-arrow-down"></i> เปิด/ดาวน์โหลดไฟล์งาน
-                </a>
-              ` : `
-                <a href="${escapeHtml(sub.file_url)}" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-600 underline font-bold inline-flex items-center gap-1">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดลิงก์ผลงาน
-                </a>
-              `
-            ) : '<span></span>'}
-            <button onclick="openGradeModal('${sub.id}', '${sub.student_name}', 10)" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md">
-              <i class="fa-solid fa-check-double mr-1"></i> ตรวจและให้คะแนน
-            </button>
-          </div>
-        </div>
-      `).join('');
+      fileBtnHtml = `
+        <button type="button" onclick="openOrDownloadSubmissionFile('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.assignment_id)}')" class="text-xs text-emerald-700 font-bold hover:underline inline-flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-lg border border-emerald-200 cursor-pointer">
+          <i class="fa-solid fa-file-arrow-down"></i> เปิด/ดาวน์โหลดไฟล์งาน
+        </button>
+      `;
     }
 
-    // Load questions for teacher
-    const questions = await apiFetch('/questions');
-    const qContainer = document.getElementById('teacher-questions-list');
-    qContainer.innerHTML = questions.map(q => `
-      <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2">
-        <div class="flex justify-between items-center">
-          <span class="font-bold text-xs text-slate-800">${q.student_name}</span>
-          <span class="text-[10px] font-bold px-2 py-0.5 rounded ${q.status === 'replied' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
-            ${q.status === 'replied' ? 'ตอบแล้ว' : 'รอคำตอบ'}
-          </span>
+    return `
+      <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 shadow-sm transition hover:shadow-md">
+        <div class="flex justify-between items-center flex-wrap gap-2">
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-sm text-slate-800">${escapeHtml(sub.student_name)}</span>
+            ${sub.class_room ? `<span class="text-[10px] font-extrabold bg-blue-100 text-blue-800 px-2.5 py-0.5 rounded-full">${escapeHtml(sub.class_room)}</span>` : ''}
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] text-slate-400"><i class="fa-regular fa-clock mr-1"></i>${formattedDate}</span>
+            <span class="text-[10px] font-bold bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full">รอตรวจ</span>
+          </div>
         </div>
-        <p class="font-bold text-xs text-slate-800">${q.subject}</p>
-        <p class="text-xs text-slate-600 bg-slate-50 p-2 rounded-xl">${q.question}</p>
-        ${q.reply ? `<p class="text-xs text-emerald-800 bg-emerald-50 p-2 rounded-xl"><strong>คำตอบของครู:</strong> ${q.reply}</p>` : `
-          <button onclick="replyQuestionPrompt('${q.id}')" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs px-3 py-1.5 rounded-xl transition">
-            <i class="fa-solid fa-reply mr-1"></i> ตอบคำถามนี้
+        <p class="text-xs font-semibold text-emerald-700"><i class="fa-solid fa-book-open mr-1.5"></i>${escapeHtml(sub.assignment_title || sub.assignment_id)}</p>
+        <p class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 whitespace-pre-line">${escapeHtml(sub.content || '(ไม่มีรายละเอียดเพิ่มเติม)')}</p>
+        <div class="flex justify-between items-center pt-2 flex-wrap gap-2">
+          ${fileBtnHtml}
+          <button type="button" onclick="openGradeModal('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', 10)" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md inline-flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-check-double"></i> ตรวจและให้คะแนน
           </button>
-        `}
+        </div>
       </div>
-    `).join('');
+    `;
+  }).join('');
+}
+
+async function loadTeacherData() {
+  try {
+    const submissions = await fetchAllSubmissions(true);
+    renderTeacherPendingSubmissions();
+
+    // Load questions for teacher from Supabase Cloud directly
+    let questions = [];
+    try {
+      const qRes = await fetch(`${SUPABASE_REST_URL}/questions?select=*&order=created_at.desc`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      if (qRes.ok) questions = await qRes.json();
+    } catch (e) {}
+
+    const qContainer = document.getElementById('teacher-questions-list');
+    if (qContainer) {
+      if (questions.length === 0) {
+        qContainer.innerHTML = `<p class="text-xs text-slate-400 py-6 text-center">ไม่มีคำถามจากนักเรียนในขณะนี้</p>`;
+      } else {
+        qContainer.innerHTML = questions.map(q => `
+          <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-xs text-slate-800">${escapeHtml(q.student_name)}</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded ${q.status === 'replied' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                ${q.status === 'replied' ? 'ตอบแล้ว' : 'รอคำตอบ'}
+              </span>
+            </div>
+            <p class="font-bold text-xs text-slate-800">${escapeHtml(q.subject)}</p>
+            <p class="text-xs text-slate-600 bg-slate-50 p-2 rounded-xl">${escapeHtml(q.question)}</p>
+            ${q.reply ? `<p class="text-xs text-emerald-800 bg-emerald-50 p-2 rounded-xl"><strong>คำตอบของครู:</strong> ${escapeHtml(q.reply)}</p>` : `
+              <button onclick="replyQuestionPrompt('${q.id}')" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs px-3 py-1.5 rounded-xl transition">
+                <i class="fa-solid fa-reply mr-1"></i> ตอบคำถามนี้
+              </button>
+            `}
+          </div>
+        `).join('');
+      }
+    }
 
   } catch (err) {
     console.error('Teacher load error:', err);
@@ -7295,11 +7525,26 @@ async function replyQuestionPrompt(questionId) {
   if (!reply) return;
 
   try {
-    await apiFetch('/questions/reply', 'POST', { question_id: questionId, reply });
+    const res = await fetch(`${SUPABASE_REST_URL}/questions?id=eq.${encodeURIComponent(questionId)}`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        reply: reply,
+        replied_by: (currentUser && currentUser.full_name) || 'ครูปณิฏฐา บุญยงค์',
+        status: 'replied',
+        updated_at: new Date().toISOString()
+      })
+    });
+    if (!res.ok) throw new Error('เกิดข้อผิดพลาดในการบันทึกคำตอบ');
     showToast('บันทึกคำตอบลงฐานข้อมูล Supabase สำเร็จ!', 'success');
     loadTeacherData();
   } catch (err) {
     console.error('Reply question error:', err);
+    showToast('เกิดข้อผิดพลาด: ' + err.message, 'error');
   }
 }
 
