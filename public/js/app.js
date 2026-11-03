@@ -4297,23 +4297,23 @@ function renderSubmissionCardHtml(sub, assignments) {
     <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 mb-3 shadow-sm hover:shadow-md transition">
       <div class="flex items-center justify-between flex-wrap gap-2">
         <span class="font-bold text-xs text-slate-800">${escapeHtml(sub.student_name)} ${sub.class_room ? `<span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-full ml-1">${escapeHtml(sub.class_room)}</span>` : ''}</span>
-        <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${sub.status === 'graded' ? 'bg-blue-100 text-blue-700' : sub.status === 'returned' ? 'bg-rose-100 text-rose-800 border border-rose-300' : 'bg-amber-100 text-amber-700'}">
-          ${sub.status === 'graded' ? `ตรวจแล้ว: ${sub.score}/${maxPts} คะแนน` : sub.status === 'returned' ? '⚠️ ส่งกลับให้แก้ไข (ขอให้ส่งใหม่)' : 'รอครูตรวจคะแนน'}
+        <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${sub.status === 'graded' ? 'bg-blue-100 text-blue-700' : (sub.status === 'returned' || sub.status === 'revision_requested') ? 'bg-rose-100 text-rose-800 border border-rose-300' : 'bg-amber-100 text-amber-700'}">
+          ${sub.status === 'graded' ? `ตรวจแล้ว: ${sub.score}/${maxPts} คะแนน` : (sub.status === 'returned' || sub.status === 'revision_requested') ? '⚠️ ส่งกลับให้แก้ไข (ขอให้ส่งใหม่)' : 'รอครูตรวจคะแนน'}
         </span>
       </div>
       <p class="text-xs font-semibold text-emerald-700"><i class="fa-solid fa-file-lines mr-1.5"></i>${escapeHtml(asgTitle)}</p>
       <p class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 whitespace-pre-line">${escapeHtml(sub.content || '')}</p>
       ${fileLinkHtml}
       ${sub.feedback ? `
-        <div class="text-xs ${sub.status === 'returned' ? 'bg-rose-50 text-rose-950 border-rose-300' : 'bg-amber-50 text-amber-900 border-amber-200'} p-3 rounded-xl border">
-          <span class="font-bold block ${sub.status === 'returned' ? 'text-rose-800' : 'text-amber-800'} mb-1">
-            <i class="fa-solid ${sub.status === 'returned' ? 'fa-triangle-exclamation' : 'fa-comment-dots'} mr-1"></i>
-            ${sub.status === 'returned' ? 'ข้อความแจ้งเตือนจากครู (กรุณาแก้ไขตามนี้):' : 'คำแนะนำจากครู:'}
+        <div class="text-xs ${(sub.status === 'returned' || sub.status === 'revision_requested') ? 'bg-rose-50 text-rose-950 border-rose-300' : 'bg-amber-50 text-amber-900 border-amber-200'} p-3 rounded-xl border">
+          <span class="font-bold block ${(sub.status === 'returned' || sub.status === 'revision_requested') ? 'text-rose-800' : 'text-amber-800'} mb-1">
+            <i class="fa-solid ${(sub.status === 'returned' || sub.status === 'revision_requested') ? 'fa-triangle-exclamation' : 'fa-comment-dots'} mr-1"></i>
+            ${(sub.status === 'returned' || sub.status === 'revision_requested') ? 'ข้อความแจ้งเตือนจากครู (กรุณาแก้ไขตามนี้):' : 'คำแนะนำจากครู:'}
           </span>
           <p class="whitespace-pre-line">${escapeHtml(sub.feedback)}</p>
         </div>
       ` : ''}
-      ${sub.status === 'returned' && currentUser && currentUser.role === 'student' ? `
+      ${(sub.status === 'returned' || sub.status === 'revision_requested') && currentUser && currentUser.role === 'student' ? `
         <div class="pt-1">
           <button type="button" onclick="openSubmitModal('${escapeHtml(sub.assignment_id)}', '${escapeHtml(asgTitle)}')" class="btn btn-primary" style="background: #f59e0b; border-color: #d97706; font-size: 0.78rem; padding: 7px 16px; border-radius: 10px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
             <i class="fa-solid fa-cloud-arrow-up"></i> แนบไฟล์ส่งงานใหม่ (แก้ไขตามครูแจ้ง)
@@ -4733,7 +4733,7 @@ async function loadAssignmentsData() {
           let btnIcon = 'fa-upload';
 
           if (mySub) {
-            if (mySub.status === 'returned') {
+            if (mySub.status === 'returned' || mySub.status === 'revision_requested') {
               btnText = 'ส่งงานใหม่ (ครูส่งกลับแก้ไข)';
               btnBg = 'bg-amber-600 hover:bg-amber-700';
               btnIcon = 'fa-rotate-left';
@@ -5316,7 +5316,7 @@ async function doReturnSubmissionForRevision() {
   try {
     showToast('กำลังส่งกลับให้นักเรียนแก้ไข...', 'info');
 
-    // 1. Direct update to Supabase Cloud
+    // 1. Direct update to Supabase Cloud (Must use 'revision_requested' per database constraint)
     const sbRes = await fetch(`${SUPABASE_REST_URL}/submissions?id=eq.${encodeURIComponent(submission_id)}`, {
       method: 'PATCH',
       headers: {
@@ -5327,13 +5327,15 @@ async function doReturnSubmissionForRevision() {
       body: JSON.stringify({
         score: null,
         feedback: feedback,
-        status: 'returned',
+        status: 'revision_requested',
         graded_at: new Date().toISOString()
       })
     });
 
     if (!sbRes.ok) {
-      console.warn('Supabase PATCH returned:', sbRes.status);
+      const errJson = await sbRes.json().catch(() => ({}));
+      console.warn('Supabase PATCH returned:', sbRes.status, errJson);
+      throw new Error(errJson.message || 'บันทึกสถานะไม่สำเร็จ (' + sbRes.status + ')');
     }
 
     // 2. Server API fallback if not static
@@ -5343,7 +5345,7 @@ async function doReturnSubmissionForRevision() {
           submission_id,
           score: null,
           feedback,
-          status: 'returned'
+          status: 'revision_requested'
         });
       } catch (e) {}
     }
@@ -5354,7 +5356,7 @@ async function doReturnSubmissionForRevision() {
       if (target) {
         target.score = null;
         target.feedback = feedback;
-        target.status = 'returned';
+        target.status = 'revision_requested';
         target.graded_at = new Date().toISOString();
       }
     }
@@ -5365,7 +5367,7 @@ async function doReturnSubmissionForRevision() {
       if (sub) {
         sub.score = null;
         sub.feedback = feedback;
-        sub.status = 'returned';
+        sub.status = 'revision_requested';
         sub.graded_at = new Date().toISOString();
         localStorage.setItem('csm4_submissions', JSON.stringify(localSubs));
       }
@@ -7808,7 +7810,7 @@ function renderTeacherPendingSubmissions() {
 
   const allItems = allSubmissionsGlobalCache || [];
   const submittedItems = allItems.filter(s => s.status === 'submitted');
-  const returnedItems = allItems.filter(s => s.status === 'returned');
+  const returnedItems = allItems.filter(s => s.status === 'returned' || s.status === 'revision_requested');
   const gradedItems = allItems.filter(s => s.status === 'graded');
 
   const pendingCount = submittedItems.length;
@@ -7853,9 +7855,18 @@ function renderTeacherPendingSubmissions() {
   const btnReturned = document.getElementById('btn-subs-status-returned');
   const btnGraded = document.getElementById('btn-subs-status-graded');
   
-  if (btnSubmitted) btnSubmitted.className = currentTeacherSubmissionsStatus === 'submitted' ? 'btn-status-toggle active-submitted' : 'btn-status-toggle';
-  if (btnReturned) btnReturned.className = currentTeacherSubmissionsStatus === 'returned' ? 'btn-status-toggle active-returned' : 'btn-status-toggle';
-  if (btnGraded) btnGraded.className = currentTeacherSubmissionsStatus === 'graded' ? 'btn-status-toggle active-graded' : 'btn-status-toggle';
+  if (btnSubmitted) {
+    btnSubmitted.className = currentTeacherSubmissionsStatus === 'submitted' ? 'btn-status-toggle active-submitted' : 'btn-status-toggle';
+    btnSubmitted.innerHTML = `<i class="fa-solid fa-clock-rotate-left mr-1"></i> รอตรวจ (${pendingCount})`;
+  }
+  if (btnReturned) {
+    btnReturned.className = currentTeacherSubmissionsStatus === 'returned' ? 'btn-status-toggle active-returned' : 'btn-status-toggle';
+    btnReturned.innerHTML = `<i class="fa-solid fa-rotate-left mr-1"></i> ส่งกลับแก้ไข (${returnedCount})`;
+  }
+  if (btnGraded) {
+    btnGraded.className = currentTeacherSubmissionsStatus === 'graded' ? 'btn-status-toggle active-graded' : 'btn-status-toggle';
+    btnGraded.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> ตรวจแล้ว (${gradedCount})`;
+  }
 
   // Render classroom filter buttons based on active status tab
   const filterContainer = document.getElementById('teacher-submissions-filter-container');
@@ -7901,7 +7912,7 @@ function renderTeacherPendingSubmissions() {
       : '';
 
     const isGraded = sub.status === 'graded';
-    const isReturned = sub.status === 'returned';
+    const isReturned = sub.status === 'returned' || sub.status === 'revision_requested';
     const scoreVal = (sub.score !== undefined && sub.score !== null) ? sub.score : 10;
     const fileInfo = analyzeSubmissionFile(sub.file_url, sub.content);
 

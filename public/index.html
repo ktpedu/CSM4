@@ -1826,6 +1826,9 @@
                   <i class="fa-solid fa-clock-rotate-left" style="color: var(--accent-amber);"></i>
                   <span id="teacher-submissions-title">รายการส่งงานที่รอครูตรวจ</span>
                   <span id="teacher-pending-badge" style="background: rgba(245, 158, 11, 0.15); color: #d97706; font-size: 0.78rem; font-weight: 700; padding: 2px 10px; border-radius: 999px;">0 รายการ</span>
+                  <button type="button" onclick="loadTeacherData(true)" class="btn btn-outline" style="padding: 2px 10px; font-size: 0.72rem; border-radius: 999px; margin-left: 6px; cursor: pointer;" title="ดึงข้อมูลล่าสุดจาก Supabase Cloud">
+                    <i class="fa-solid fa-arrows-rotate mr-1"></i> รีเฟรช
+                  </button>
                 </h3>
                 <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
                   <!-- Submissions Status Toggle: รอตรวจ vs ตรวจแล้ว -->
