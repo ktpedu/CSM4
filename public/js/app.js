@@ -4325,12 +4325,12 @@ async function loadWorksheetsData(filterUnit = currentWorksheetSubFilter) {
           <div style="display: flex; flex-direction: column; gap: 12px;">
             
             <!-- Ultra High-Contrast Header Row -->
-            <div class="ws-card-header">
-              <span class="ws-card-badge-pill ${badgeClass}">
-                ${isFlow ? '<i class="fa-solid fa-laptop-code mr-1.5"></i>' : '<i class="fa-solid fa-book-bookmark mr-1.5"></i>'} ${escapeHtml(ws.unit)} • ${escapeHtml(ws.code)}
+            <div class="ws-card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px;">
+              <span class="ws-card-badge-pill ${badgeClass}" style="display: inline-flex; align-items: center; font-size: 0.84rem; font-weight: 800; padding: 6px 14px; border-radius: 8px; background: ${isFlow ? '#065f46' : (isUnit2 ? '#0369a1' : '#065f46')} !important; color: #ffffff !important; border: 2px solid ${isFlow ? '#34d399' : (isUnit2 ? '#38bdf8' : '#4ade80')} !important; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                ${isFlow ? '<i class="fa-solid fa-laptop-code mr-1.5" style="color: #6ee7b7;"></i>' : '<i class="fa-solid fa-book-bookmark mr-1.5" style="color: #93c5fd;"></i>'} ${escapeHtml(ws.unit)} • ${escapeHtml(ws.code)}
               </span>
-              <span class="ws-card-points-badge">
-                <i class="fa-solid fa-star mr-1 text-amber-400"></i> เต็ม ${ws.points} คะแนน
+              <span class="ws-card-points-badge" style="display: inline-flex; align-items: center; font-size: 0.84rem; font-weight: 800; padding: 6px 14px; border-radius: 8px; background: #0f172a !important; color: #fde047 !important; border: 2px solid #eab308 !important; box-shadow: 0 2px 8px rgba(234, 179, 8, 0.35); flex-shrink: 0;">
+                <i class="fa-solid fa-star mr-1" style="color: #facc15;"></i> เต็ม ${ws.points} คะแนน
               </span>
             </div>
 
@@ -4969,7 +4969,46 @@ async function fetchAllSubmissions(forceFresh = false) {
 
 // --- UNIVERSAL FILE DETECTOR & VIEWER SUITE ---
 function analyzeSubmissionFile(fileUrl, contentText) {
-  if (!fileUrl) return { isImage: false, isPdf: false, isHttpLink: false, isMultiple: false, mime: '', ext: 'bin', label: 'ไม่มีไฟล์แนบ', files: [] };
+  if (!fileUrl) {
+    if (contentText) {
+      const multiMatch = contentText.match(/\[ไฟล์แนบทั้งหมด\s*(\d+)\s*ไฟล์\]/i);
+      if (multiMatch) {
+        const count = parseInt(multiMatch[1], 10);
+        return {
+          isMultiple: true,
+          filesCount: count,
+          files: [],
+          isImage: false,
+          isPdf: false,
+          isHttpLink: false,
+          mime: 'application/json',
+          ext: 'zip',
+          label: `📁 แนบ ${count} ไฟล์`
+        };
+      }
+      const singleMatch = contentText.match(/\[ไฟล์แนบ:\s*([^\s\]]+)/i);
+      if (singleMatch) {
+        const fname = singleMatch[1];
+        const ext = (fname.split('.').pop() || '').toLowerCase();
+        const isFprg = ext === 'fprg';
+        const isPdf = ext === 'pdf';
+        const isImg = ['png', 'jpg', 'jpeg', 'webp', 'gif'].includes(ext);
+        return {
+          isMultiple: false,
+          filesCount: 1,
+          files: [],
+          isImage: isImg,
+          isPdf: isPdf,
+          isFprg: isFprg,
+          isHttpLink: false,
+          mime: isPdf ? 'application/pdf' : isImg ? `image/${ext}` : isFprg ? 'application/xml' : 'application/octet-stream',
+          ext: ext || 'bin',
+          label: isFprg ? '📊 Flowgorithm (.fprg)' : isImg ? `🖼️ รูปภาพ (${ext.toUpperCase()})` : isPdf ? '📄 เอกสาร (PDF)' : `📁 ไฟล์ ${ext.toUpperCase()}`
+        };
+      }
+    }
+    return { isImage: false, isPdf: false, isHttpLink: false, isMultiple: false, mime: '', ext: 'bin', label: 'ไม่มีไฟล์แนบ', files: [] };
+  }
 
   // Detect Multi-file JSON payload array
   if (typeof fileUrl === 'string' && fileUrl.trim().startsWith('[') && fileUrl.trim().endsWith(']')) {
@@ -5127,13 +5166,15 @@ function renderMultiFileViewer(areaEl, files, sub, asgId, btnDownload, btnNewTab
     const tabs = document.querySelectorAll('.multi-file-tab-btn');
     tabs.forEach((tab, tIdx) => {
       if (tIdx === idx) {
-        tab.style.background = '#10b981';
+        tab.style.background = '#059669';
         tab.style.color = '#ffffff';
-        tab.style.borderColor = '#10b981';
+        tab.style.borderColor = '#34d399';
+        tab.style.boxShadow = '0 2px 10px rgba(16, 185, 129, 0.45)';
       } else {
         tab.style.background = 'rgba(255, 255, 255, 0.08)';
-        tab.style.color = '#e2e8f0';
+        tab.style.color = '#cbd5e1';
         tab.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+        tab.style.boxShadow = 'none';
       }
     });
 
@@ -5147,16 +5188,25 @@ function renderMultiFileViewer(areaEl, files, sub, asgId, btnDownload, btnNewTab
 
     if (isImg) {
       fileContentEl.innerHTML = `
-        <div style="max-height: 52vh; overflow: auto; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
-          <img src="${file.url}" alt="${escapeHtml(file.name)}" style="max-width: 100%; max-height: 48vh; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);" />
-          <div style="font-size: 0.8rem; color: #cbd5e1; font-weight: 700;">${escapeHtml(file.name)} (${(file.size / 1024).toFixed(1)} KB)</div>
+        <div style="max-height: 60vh; overflow: auto; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 4px;">
+          <div style="background: #020617; padding: 10px; border-radius: 12px; border: 1.5px solid #1e293b; max-width: 100%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.6);">
+            <img src="${file.url}" alt="${escapeHtml(file.name)}" style="max-width: 100%; max-height: 52vh; object-fit: contain; border-radius: 6px; cursor: zoom-in;" onclick="openInNewTab('${file.url}', { mime: '${file.type || 'image/png'}' })" title="คลิกเปิดดูรูปขนาดเต็ม" />
+          </div>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <span style="font-size: 0.82rem; color: #38bdf8; font-weight: 700; background: rgba(56, 189, 248, 0.12); padding: 4px 12px; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.3);">
+              <i class="fa-solid fa-image mr-1"></i> ${escapeHtml(file.name)} (${(file.size / 1024).toFixed(1)} KB)
+            </span>
+            <button type="button" onclick="openInNewTab('${file.url}', { mime: '${file.type || 'image/png'}' })" class="btn" style="background: rgba(255,255,255,0.1); color: #ffffff; font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.25); cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-magnifying-glass-plus"></i> ดูรูปขนาดเต็ม (แท็บใหม่)
+            </button>
+          </div>
         </div>
       `;
     } else if (isPdf) {
       const pdfBlob = dataUrlToBlob(file.url, 'application/pdf');
       const pdfBlobUrl = URL.createObjectURL(pdfBlob);
       fileContentEl.innerHTML = `
-        <object data="${pdfBlobUrl}" type="application/pdf" style="width: 100%; height: 52vh; border-radius: 8px; border: none;">
+        <object data="${pdfBlobUrl}" type="application/pdf" style="width: 100%; height: 55vh; border-radius: 8px; border: none;">
           <div style="color: #cbd5e1; padding: 30px 20px;">
             <i class="fa-solid fa-file-pdf text-4xl text-rose-500 mb-2 block"></i>
             <p style="font-weight: 700; margin-bottom: 8px;">${escapeHtml(file.name)}</p>
@@ -5190,7 +5240,7 @@ function renderMultiFileViewer(areaEl, files, sub, asgId, btnDownload, btnNewTab
             ไฟล์ผังงาน Flowgorithm • ${(file.size / 1024).toFixed(1)} KB
           </p>
           <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
-            <button type="button" onclick="downloadSingleFileRecord(window.__currentMultiFiles[${idx}], '${escapeHtml(sub?.student_name)}', '${escapeHtml(sub?.class_room)}', '${escapeHtml(asgId)}')" class="btn btn-primary" style="padding: 8px 18px; font-weight: 700; font-size: 0.84rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+            <button type="button" onclick="downloadSingleFileRecord(window.__currentMultiFiles[${idx}], '${escapeHtml(sub?.student_name)}', '${escapeHtml(sub?.class_room)}', '${escapeHtml(asgId)}', ${idx})" class="btn btn-primary" style="padding: 8px 18px; font-weight: 700; font-size: 0.84rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
               <i class="fa-solid fa-download"></i> ดาวน์โหลด ${escapeHtml(file.name)}
             </button>
             <a href="flowgorithm-guide.html" target="_blank" class="btn" style="background: rgba(2, 132, 199, 0.15); color: #38bdf8; border: 1.5px solid rgba(2, 132, 199, 0.4); padding: 8px 16px; font-weight: 700; font-size: 0.84rem; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; border-radius: 8px;">
@@ -5211,7 +5261,7 @@ function renderMultiFileViewer(areaEl, files, sub, asgId, btnDownload, btnNewTab
           <i class="fa-solid fa-file text-4xl text-blue-400 mb-2 block"></i>
           <h4 style="font-weight: 700; margin-bottom: 6px;">${escapeHtml(file.name)}</h4>
           <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 14px;">ขนาด: ${(file.size / 1024).toFixed(1)} KB</p>
-          <button type="button" onclick="downloadSingleFileRecord(window.__currentMultiFiles[${idx}], '${escapeHtml(sub?.student_name)}', '${escapeHtml(sub?.class_room)}', '${escapeHtml(asgId)}')" class="btn btn-primary" style="padding: 8px 18px;">
+          <button type="button" onclick="downloadSingleFileRecord(window.__currentMultiFiles[${idx}], '${escapeHtml(sub?.student_name)}', '${escapeHtml(sub?.class_room)}', '${escapeHtml(asgId)}', ${idx})" class="btn btn-primary" style="padding: 8px 18px;">
             <i class="fa-solid fa-download mr-1"></i> ดาวน์โหลดไฟล์นี้
           </button>
         </div>
@@ -5219,9 +5269,16 @@ function renderMultiFileViewer(areaEl, files, sub, asgId, btnDownload, btnNewTab
     }
 
     if (btnDownload) {
-      btnDownload.innerHTML = `<i class="fa-solid fa-download"></i> โหลดไฟล์ที่เลือก (${file.ext ? file.ext.toUpperCase() : 'FILE'})`;
+      btnDownload.innerHTML = `<i class="fa-solid fa-download"></i> โหลดไฟล์ที่เลือก (.${ext ? ext.toUpperCase() : 'FILE'})`;
       btnDownload.onclick = () => {
-        downloadSingleFileRecord(file, sub?.student_name, sub?.class_room, asgId);
+        downloadSingleFileRecord(file, sub?.student_name, sub?.class_room, asgId, idx);
+      };
+    }
+
+    if (btnNewTab) {
+      btnNewTab.innerHTML = '<i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดไฟล์นี้ในแท็บใหม่';
+      btnNewTab.onclick = () => {
+        openInNewTab(file.url, { mime: file.type || (isImg ? 'image/png' : 'application/octet-stream') });
       };
     }
   }
@@ -5237,23 +5294,23 @@ function renderMultiFileViewer(areaEl, files, sub, asgId, btnDownload, btnNewTab
         <div style="display: flex; gap: 6px; overflow-x: auto; max-width: 100%; padding-bottom: 4px;">
           ${files.map((f, i) => {
             const ext = (f.ext || '').toLowerCase();
-            const icon = ext === 'fprg' ? 'fa-diagram-project' : ['png','jpg','jpeg'].includes(ext) ? 'fa-image' : ext === 'pdf' ? 'fa-file-pdf' : 'fa-file';
+            const icon = ext === 'fprg' ? 'fa-diagram-project' : ['png','jpg','jpeg','webp'].includes(ext) ? 'fa-image' : ext === 'pdf' ? 'fa-file-pdf' : 'fa-file';
             return `
-              <button type="button" class="multi-file-tab-btn" onclick="window.__currentMultiFileSwitcher(${i})" style="padding: 6px 12px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; border: 1.5px solid transparent; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: all 0.2s;">
+              <button type="button" class="multi-file-tab-btn" onclick="window.__currentMultiFileSwitcher(${i})" style="padding: 7px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; border: 1.5px solid transparent; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: all 0.2s;">
                 <i class="fa-solid ${icon}"></i>
-                <span>${escapeHtml(f.name.length > 22 ? f.name.slice(0, 20) + '...' : f.name)}</span>
+                <span>${i + 1}. ${escapeHtml(f.name.length > 24 ? f.name.slice(0, 22) + '...' : f.name)}</span>
               </button>
             `;
           }).join('')}
         </div>
 
-        <button type="button" onclick="downloadAllSubmissionFiles(window.__currentMultiFiles, '${escapeHtml(sub?.student_name)}', '${escapeHtml(sub?.class_room)}', '${escapeHtml(asgId)}')" class="btn" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: white; font-size: 0.78rem; font-weight: 800; padding: 6px 14px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);">
+        <button type="button" onclick="downloadAllSubmissionFiles(window.__currentMultiFiles, '${escapeHtml(sub?.student_name)}', '${escapeHtml(sub?.class_room)}', '${escapeHtml(asgId)}')" class="btn" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: white; font-size: 0.8rem; font-weight: 800; padding: 7px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);">
           <i class="fa-solid fa-file-zipper"></i> ดาวน์โหลดทุกไฟล์ (${files.length} ไฟล์ .zip)
         </button>
       </div>
 
       <!-- Active File Viewer Area -->
-      <div id="multi-file-active-content" style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 400px;">
+      <div id="multi-file-active-content" style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 420px;">
       </div>
     </div>
   `;

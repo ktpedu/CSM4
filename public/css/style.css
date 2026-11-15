@@ -5367,69 +5367,69 @@ body {
 .ws-card-badge-pill {
   display: inline-flex;
   align-items: center;
-  font-size: 0.8rem;
+  font-size: 0.84rem;
   font-weight: 800;
-  padding: 4px 12px;
-  border-radius: 9999px;
+  padding: 6px 14px;
+  border-radius: 8px;
   letter-spacing: 0.3px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 
 .ws-card-badge-pill.flow {
-  background: #047857 !important;
+  background: #065f46 !important;
   color: #ffffff !important;
-  border: 1.5px solid #34d399 !important;
+  border: 2px solid #34d399 !important;
 }
 
 .ws-card-badge-pill.unit-1 {
-  background: #047857 !important;
+  background: #065f46 !important;
   color: #ffffff !important;
-  border: 1.5px solid #4ade80 !important;
+  border: 2px solid #4ade80 !important;
 }
 
 .ws-card-badge-pill.unit-2 {
-  background: #0284c7 !important;
+  background: #0369a1 !important;
   color: #ffffff !important;
-  border: 1.5px solid #38bdf8 !important;
+  border: 2px solid #38bdf8 !important;
 }
 
 [data-theme="light"] .ws-card-badge-pill.flow {
-  background: #ecfdf5 !important;
-  color: #065f46 !important;
-  border: 1.5px solid #10b981 !important;
+  background: #065f46 !important;
+  color: #ffffff !important;
+  border: 2px solid #10b981 !important;
 }
 
 [data-theme="light"] .ws-card-badge-pill.unit-1 {
-  background: #ecfdf5 !important;
-  color: #065f46 !important;
-  border: 1.5px solid #059669 !important;
+  background: #065f46 !important;
+  color: #ffffff !important;
+  border: 2px solid #059669 !important;
 }
 
 [data-theme="light"] .ws-card-badge-pill.unit-2 {
-  background: #f0f9ff !important;
-  color: #0369a1 !important;
-  border: 1.5px solid #0284c7 !important;
+  background: #0369a1 !important;
+  color: #ffffff !important;
+  border: 2px solid #0284c7 !important;
 }
 
 .ws-card-points-badge {
   display: inline-flex;
   align-items: center;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 800;
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: 8px;
-  background: #1c1917 !important;
+  background: #0f172a !important;
   color: #fde047 !important;
-  border: 1.5px solid #eab308 !important;
-  box-shadow: 0 2px 8px rgba(234, 179, 8, 0.25);
+  border: 2px solid #eab308 !important;
+  box-shadow: 0 2px 8px rgba(234, 179, 8, 0.35);
   flex-shrink: 0;
 }
 
 [data-theme="light"] .ws-card-points-badge {
-  background: #fefce8 !important;
-  color: #854d0e !important;
-  border: 1.5px solid #facc15 !important;
-  box-shadow: none;
+  background: #0f172a !important;
+  color: #fde047 !important;
+  border: 2px solid #facc15 !important;
+  box-shadow: 0 2px 8px rgba(234, 179, 8, 0.25);
 }
 
 .ws-card-subtitle {
