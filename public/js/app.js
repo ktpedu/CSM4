@@ -1,3 +1,13 @@
+
+// Universal Difficulty Tag Stripper (Ensures all difficulty annotations are completely purged)
+function stripDifficultyTags(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/[\(（\[\【]\s*(?:ง่าย|ปานกลาง|ท้าทาย|ระดับง่าย|ระดับปานกลาง|ระดับท้าทาย|ระดับพื้นฐาน|พื้นฐาน\s*[–\-]\s*ปานกลาง|ความยาก[^\)\】\]\n]*)[\)\）\]\】]/gi, '')
+    .replace(/(?:^|\s)(?:ง่าย|ปานกลาง|ท้าทาย)(?:\s|$)/gi, ' ')
+    .trim();
+}
+
 // Supabase Cloud Configuration (Direct Client-Side Integration for 100% Online & File Mode Support)
 const SUPABASE_REST_URL = 'https://fsvlkoqsfmyaxaqxsoiy.supabase.co/rest/v1';
 const SUPABASE_ANON_KEY = 'sb_publishable_2FpUqt7BY0Xk3gNH2Rx95Q_DZ2bOVgM';
@@ -3977,43 +3987,43 @@ const OFFLINE_WORKSHEETS = [
     "tasks": [
       {
         "step": 1,
-        "title": "ข้อ 1 โปรแกรมแปลผลระดับผลการเรียน (3 ทางเลือกขึ้นไป)",
-        "description": "รับคะแนนสอบ: 80–100 แสดง \"ระดับดีเยี่ยม\", 70–79 แสดง \"ระดับดี\", 60–69 แสดง \"ระดับปานกลาง\", 50–59 แสดง \"ระดับผ่าน\", ต่ำกว่า 50 แสดง \"ไม่ผ่าน\"",
-        "sample_answer": "1. เริ่มต้น -> ประกาศตัวแปร: Real score\n2. รับค่า: Input score\n3. ซ้อนเงื่อนไข:\n   • score >= 80 -> Output \"ระดับดีเยี่ยม\"\n   • else if score >= 70 -> Output \"ระดับดี\"\n   • else if score >= 60 -> Output \"ระดับปานกลาง\"\n   • else if score >= 50 -> Output \"ระดับผ่าน\"\n   • else -> Output \"ไม่ผ่าน\"\n4. สิ้นสุด"
+        "title": "ข้อ 1 โปรแกรมแปลผลระดับผลการเรียน",
+        "description": "รับคะแนนสอบ: 80–100 แสดง \"ระดับดีเยี่ยม\", 70–79 แสดง \"ระดับดี\", 60–69 แสดง \"ระดับพอใช้\", 50–59 แสดง \"ระดับผ่าน\", ต่ำกว่า 50 แสดง \"ไม่ผ่าน\"",
+        "sample_answer": "1. เริ่มต้น -> ประกาศตัวแปร: Real score\n2. รับค่า: Input score\n3. ซ้อนเงื่อนไข:\n   • score >= 80 -> Output \"ระดับดีเยี่ยม\"\n   • else if score >= 70 -> Output \"ระดับดี\"\n   • else if score >= 60 -> Output \"ระดับพอใช้\"\n   • else if score >= 50 -> Output \"ระดับผ่าน\"\n   • else -> Output \"ไม่ผ่าน\"\n4. สิ้นสุด"
       },
       {
         "step": 2,
-        "title": "ข้อ 2 โปรแกรมตรวจสอบระดับอุณหภูมิ (3 ทางเลือกขึ้นไป)",
+        "title": "ข้อ 2 โปรแกรมตรวจสอบระดับอุณหภูมิ",
         "description": "รับค่าอุณหภูมิ: ต่ำกว่า 20 แสดง \"อากาศเย็น\", 20–29 แสดง \"อากาศปกติ\", 30–34 แสดง \"อากาศร้อน\", ตั้งแต่ 35 ขึ้นไป แสดง \"อากาศร้อนมาก\"",
         "sample_answer": "1. เริ่มต้น -> ประกาศตัวแปร: Real temp\n2. รับค่า: Input temp\n3. ตรวจสอบเงื่อนไข:\n   • temp >= 35 -> Output \"อากาศร้อนมาก\"\n   • else if temp >= 30 -> Output \"อากาศร้อน\"\n   • else if temp >= 20 -> Output \"อากาศปกติ\"\n   • else -> Output \"อากาศเย็น\"\n4. สิ้นสุด"
       },
       {
         "step": 3,
-        "title": "ข้อ 3 โปรแกรมคำนวณค่าจัดส่งสินค้า (3 ทางเลือกขึ้นไป)",
+        "title": "ข้อ 3 โปรแกรมคำนวณค่าจัดส่งสินค้า",
         "description": "รับน้ำหนักสินค้า (กก.): ไม่เกิน 1 กก. ค่าส่ง 30 บาท, 1-3 กก. ค่าส่ง 50 บาท, 3-5 กก. ค่าส่ง 70 บาท, มากกว่า 5 กก. ค่าส่ง 100 บาท แสดงน้ำหนักและค่าจัดส่ง",
         "sample_answer": "1. เริ่มต้น -> ประกาศตัวแปร: Real weight, shipFee\n2. รับน้ำหนัก: Input weight\n3. ตรวจสอบ:\n   • weight <= 1 -> shipFee = 30\n   • else if weight <= 3 -> shipFee = 50\n   • else if weight <= 5 -> shipFee = 70\n   • else -> shipFee = 100\n4. Output \"น้ำหนัก: \" & weight & \" กก. | ค่าส่ง: \" & shipFee & \" บาท\"\n5. สิ้นสุด"
       },
       {
         "step": 4,
-        "title": "ข้อ 4 โปรแกรมเลือกเมนูเครื่องดื่ม (4 ทางเลือก)",
+        "title": "ข้อ 4 โปรแกรมเลือกเมนูเครื่องดื่ม",
         "description": "รับหมายเลขเมนู: 1 แสดง \"กาแฟ\" 40 บาท, 2 แสดง \"ชาเขียว\" 35 บาท, 3 แสดง \"โกโก้\" 35 บาท, 4 แสดง \"นมสด\" 30 บาท แสดงชื่อเครื่องดื่มและราคา",
         "sample_answer": "1. เริ่มต้น -> ประกาศตัวแปร: Integer menu\n2. รับหมายเลข: Input menu\n3. ตรวจสอบ:\n   • menu == 1 -> Output \"กาแฟ ราคา 40 บาท\"\n   • else if menu == 2 -> Output \"ชาเขียว ราคา 35 บาท\"\n   • else if menu == 3 -> Output \"โกโก้ ราคา 35 บาท\"\n   • else if menu == 4 -> Output \"นมสด ราคา 30 บาท\"\n   • else -> Output \"ไม่มีเมนูนี้ในระบบ\"\n4. สิ้นสุด"
       },
       {
         "step": 5,
-        "title": "ข้อ 5 โปรแกรมคำนวณค่าโดยสารรถโดยสาร (4 ทางเลือก)",
+        "title": "ข้อ 5 โปรแกรมคำนวณค่าโดยสารรถโดยสาร",
         "description": "รับระยะทาง (กม.): ไม่เกิน 5 กม. ค่าโดยสาร 10 บาท, 5-10 กม. 15 บาท, 10-20 กม. 25 บาท, มากกว่า 20 กม. 35 บาท แสดงระยะทางและค่าโดยสาร",
         "sample_answer": "1. เริ่มต้น -> ประกาศตัวแปร: Real dist, fare\n2. รับระยะทาง: Input dist\n3. ตรวจสอบ:\n   • dist <= 5 -> fare = 10\n   • else if dist <= 10 -> fare = 15\n   • else if dist <= 20 -> fare = 25\n   • else -> fare = 35\n4. Output \"ระยะทาง: \" & dist & \" กม. | ค่าโดยสาร: \" & fare & \" บาท\"\n5. สิ้นสุด"
       },
       {
         "step": 6,
-        "title": "ข้อ 6 โปรแกรมคำนวณส่วนลดสมาชิก (4 ทางเลือก)",
+        "title": "ข้อ 6 โปรแกรมคำนวณส่วนลดสมาชิก",
         "description": "รับราคาสินค้าและประเภทสมาชิก: Silver ลด 5%, Gold ลด 10%, Platinum ลด 15%, บุคคลทั่วไป ไม่ลด แสดงประเภทสมาชิก ส่วนลด และราคาสุทธิ",
         "sample_answer": "1. เริ่มต้น -> ประกาศตัวแปร: Real price, discount, netPrice, String member\n2. รับค่า: Input price, member\n3. ตรวจสอบ:\n   • member == \"Platinum\" -> discount = price * 0.15\n   • else if member == \"Gold\" -> discount = price * 0.10\n   • else if member == \"Silver\" -> discount = price * 0.05\n   • else -> discount = 0\n4. netPrice = price - discount\n5. Output \"สมาชิก: \" & member & \" | ส่วนลด: \" & discount & \" บาท | สุทธิ: \" & netPrice & \" บาท\"\n6. สิ้นสุด"
       },
       {
         "step": 7,
-        "title": "ข้อ 7 โปรแกรมแปลงคะแนนเป็นเกรด (5 ทางเลือกขึ้นไป)",
+        "title": "ข้อ 7 โปรแกรมแปลงคะแนนเป็นเกรด",
         "description": "รับคะแนนสอบ แปลงเป็นเกรด: 80–100 ได้เกรด 4, 75–79 ได้ 3.5, 70–74 ได้ 3, 65–69 ได้ 2.5, 60–64 ได้ 2, 55–59 ได้ 1.5, 50–54 ได้ 1, ต่ำกว่า 50 ได้เกรด 0 แสดงคะแนนและเกรด",
         "sample_answer": "1. เริ่มต้น -> ประกาศตัวแปร: Real score, String grade\n2. รับคะแนน: Input score\n3. ซ้อนเงื่อนไข:\n   • score >= 80 -> grade = \"4\"\n   • else if score >= 75 -> grade = \"3.5\"\n   • else if score >= 70 -> grade = \"3\"\n   • else if score >= 65 -> grade = \"2.5\"\n   • else if score >= 60 -> grade = \"2\"\n   • else if score >= 55 -> grade = \"1.5\"\n   • else if score >= 50 -> grade = \"1\"\n   • else -> grade = \"0\"\n4. Output \"คะแนน: \" & score & \" | เกรดที่ได้: \" & grade\n5. สิ้นสุด"
       },
@@ -4100,7 +4110,7 @@ function setWorksheetCategory(category) {
               </a>
             </div>
           </div>
-          <div style="display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.78rem; color: #047857; background: rgba(255,255,255,0.75); padding: 8px 14px; border-radius: 8px;">
+          <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.84rem; color: var(--text-main); background: var(--surface-secondary); border: 1px solid var(--border-color); padding: 10px 16px; border-radius: 10px; font-weight: 600;">
             <span><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> สัญลักษณ์ ANSI Flowchart มาตรฐาน</span>
             <span><i class="fa-solid fa-file-code text-blue-600 mr-1"></i> รองรับไฟล์ .fprg โดยตรง มีระบบตรวจโครงสร้าง XML อัตโนมัติ</span>
             <span><i class="fa-solid fa-file-image text-amber-600 mr-1"></i> รองรับภาพถ่าย/ภาพวาดผังงาน</span>
@@ -4307,8 +4317,11 @@ async function loadWorksheetsData(filterUnit = currentWorksheetSubFilter) {
     container.innerHTML = filtered.map(ws => {
       const isFlow = ws.id && ws.id.startsWith('ws-flow-');
       const isUnit2 = ws.unit_id === 'mod-2' || ws.unit.includes('2');
-      const accentColor = isFlow ? '#059669' : (isUnit2 ? '#0284c7' : 'var(--thairath-green)');
-      const bgLight = isFlow ? 'rgba(16, 185, 129, 0.1)' : (isUnit2 ? 'rgba(2, 132, 199, 0.08)' : 'rgba(0, 180, 0, 0.08)');
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const accentColor = isFlow 
+        ? (isDark ? '#34d399' : '#059669') 
+        : (isUnit2 ? (isDark ? '#38bdf8' : '#0284c7') : (isDark ? '#4ade80' : 'var(--thairath-green)'));
+      const bgLight = isFlow ? 'rgba(16, 185, 129, 0.18)' : (isUnit2 ? 'rgba(2, 132, 199, 0.15)' : 'rgba(0, 180, 0, 0.15)');
       const asgId = ws.asg_id || (ws.id === 'ws-1-1' ? 'asg-1' : ws.id === 'ws-1-2' ? 'asg-2' : ws.id === 'ws-1-3' ? 'asg-3' : ws.id === 'ws-2-1' ? 'asg-4' : ws.id === 'ws-2-2' ? 'asg-5' : ws.id === 'ws-2-3' ? 'asg-6' : ws.id === 'ws-flow-1' ? 'asg-flow-1' : ws.id === 'ws-flow-2' ? 'asg-flow-2' : ws.id === 'ws-flow-3' ? 'asg-flow-3' : 'asg-1');
 
       return `
@@ -4325,7 +4338,7 @@ async function loadWorksheetsData(filterUnit = currentWorksheetSubFilter) {
 
             <div>
               <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px; line-height: 1.35;">
-                ${escapeHtml(ws.title)}
+                ${escapeHtml(stripDifficultyTags(ws.title))}
               </h4>
               <p style="font-size: 0.8rem; color: ${accentColor}; font-weight: 600; margin-bottom: 8px;">
                 ${escapeHtml(ws.subtitle || ws.plan)}
@@ -4336,13 +4349,13 @@ async function loadWorksheetsData(filterUnit = currentWorksheetSubFilter) {
 
               ${isFlow ? `
               <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px;">
-                <span style="font-size: 0.7rem; font-weight: 700; background: rgba(5, 150, 105, 0.08); color: #059669; padding: 2px 7px; border-radius: 5px; border: 1px solid rgba(5, 150, 105, 0.2);">
+                <span style="font-size: 0.76rem; font-weight: 700; background: rgba(16, 185, 129, 0.18); color: #34d399; padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.4);">
                   <i class="fa-solid fa-list-ol mr-1"></i> 10 ข้อปฏิบัติการ
                 </span>
-                <span style="font-size: 0.7rem; font-weight: 700; background: rgba(2, 132, 199, 0.08); color: #0284c7; padding: 2px 7px; border-radius: 5px; border: 1px solid rgba(2, 132, 199, 0.2);">
+                <span style="font-size: 0.76rem; font-weight: 700; background: rgba(56, 189, 248, 0.18); color: #38bdf8; padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.4);">
                   <i class="fa-solid fa-file-code mr-1"></i> Flowgorithm (.fprg)
                 </span>
-                <span style="font-size: 0.7rem; font-weight: 700; background: rgba(245, 158, 11, 0.08); color: #d97706; padding: 2px 7px; border-radius: 5px; border: 1px solid rgba(245, 158, 11, 0.2);">
+                <span style="font-size: 0.76rem; font-weight: 700; background: rgba(251, 191, 36, 0.18); color: #fbbf24; padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(251, 191, 36, 0.4);">
                   <i class="fa-solid fa-image mr-1"></i> รูปภาพผังงาน
                 </span>
               </div>
@@ -4371,7 +4384,7 @@ async function loadWorksheetsData(filterUnit = currentWorksheetSubFilter) {
             </div>
             `}
 
-            <button onclick="openSubmitModal('${asgId}', '${escapeHtml(ws.title)}')" class="btn btn-primary" style="width: 100%; padding: 8px 12px; font-size: 0.82rem; font-weight: 700; justify-content: center; ${isFlow ? 'background: #059669; border-color: #059669;' : ''}">
+            <button onclick="openSubmitModal('${asgId}', '${escapeHtml(stripDifficultyTags(ws.title))}')" class="btn btn-primary" style="width: 100%; padding: 8px 12px; font-size: 0.82rem; font-weight: 700; justify-content: center; ${isFlow ? 'background: #059669; border-color: #059669;' : ''}">
               <i class="fa-solid fa-cloud-arrow-up mr-1"></i> ${isFlow ? 'ส่งผลงานผังงานออนไลน์' : 'ส่งผลงานออนไลน์'}
             </button>
           </div>
@@ -4429,10 +4442,10 @@ function openWorksheetDetail(wsId) {
               <i class="fa-solid fa-chalkboard-user mr-1"></i> ${escapeHtml(ws.plan)}
             </div>
             <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px;">
-              ${escapeHtml(ws.title)}
+              ${escapeHtml(stripDifficultyTags(ws.title))}
             </h4>
             <p style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">
-              ${escapeHtml(ws.subtitle)}
+              ${escapeHtml(stripDifficultyTags(ws.subtitle))}
             </p>
           </div>
           <div style="text-align: right;">
@@ -4473,7 +4486,7 @@ function openWorksheetDetail(wsId) {
             <div style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px;">
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
                 <h6 style="font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin: 0;">
-                  ${escapeHtml(t.title)}
+                  ${escapeHtml(stripDifficultyTags(t.title))}
                 </h6>
                 <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-subtle); background: var(--surface-secondary); padding: 2px 8px; border-radius: 6px;">
                   ข้อที่ ${idx + 1}
@@ -4599,8 +4612,8 @@ function printWorksheet(wsId) {
 
       <!-- Worksheet Title -->
       <div style="text-align: center; margin-bottom: 14px;">
-        <div style="font-size: 14pt; font-weight: bold;">${escapeHtml(ws.title)}</div>
-        <div style="font-size: 11pt; color: #333;">${escapeHtml(ws.subtitle)} • (${escapeHtml(ws.standard || 'มาตรฐาน ว 4.2 ม.4/1')})</div>
+        <div style="font-size: 14pt; font-weight: bold;">${escapeHtml(stripDifficultyTags(ws.title))}</div>
+        <div style="font-size: 11pt; color: #333;">${escapeHtml(stripDifficultyTags(ws.subtitle))} • (${escapeHtml(ws.standard || 'มาตรฐาน ว 4.2 ม.4/1')})</div>
       </div>
 
       <!-- Instructions -->
@@ -4620,7 +4633,7 @@ function printWorksheet(wsId) {
         ${(ws.tasks || []).map((t, idx) => `
           <div style="margin-bottom: 16px; page-break-inside: avoid;">
             <div style="font-weight: bold; font-size: 11pt; margin-bottom: 4px;">
-              ${escapeHtml(t.title)}
+              ${escapeHtml(stripDifficultyTags(t.title))}
             </div>
             <div style="font-size: 10pt; color: #444; margin-bottom: 8px;">
               ${escapeHtml(t.description)}
@@ -5344,16 +5357,16 @@ async function loadAssignmentsData() {
         }
 
         return `
-          <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2">
+          <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2" style="background: var(--surface-color); border: 1px solid var(--border-color);">
             <div class="flex items-center justify-between">
-              <h4 class="font-bold text-sm text-slate-800">${escapeHtml(asg.title)}</h4>
+              <h4 class="font-bold text-sm text-slate-800" style="color: var(--text-main); font-size: 0.98rem; font-weight: 800;">${escapeHtml(asg.title)}</h4>
               <span class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
                 เต็ม ${asg.total_points || asg.points || 10} คะแนน
               </span>
             </div>
-            <p class="text-xs text-slate-600">${escapeHtml(asg.description || asg.desc || '')}</p>
+            <p class="text-xs text-slate-600" style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.6;">${escapeHtml(asg.description || asg.desc || '')}</p>
             <div class="flex items-center justify-between pt-2">
-              <span class="text-[11px] text-slate-400">กำหนดส่ง: ${escapeHtml(asg.due_date || asg.due || '2026-10-15')}</span>
+              <span class="text-[11px] text-slate-400" style="color: var(--text-subtle); font-size: 0.8rem; font-weight: 600;">กำหนดส่ง: ${escapeHtml(asg.due_date || asg.due || '2026-10-15')}</span>
               ${actionBtnHtml}
             </div>
           </div>
