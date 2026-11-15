@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>รวมแบบบันทึกกิจกรรมและใบงาน วิทยาการคำนวณ ม.4 (ฉบับสมบูรณ์)</title>
+  <title>รวมแบบบันทึกกิจกรรมและใบงานทฤษฎี & โครงงาน วิทยาการคำนวณ ม.4 (6 ฉบับ)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700;800&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -10,7 +10,7 @@
   <style>
     @page {
       size: A4 portrait;
-      margin: 15mm 18mm 15mm 18mm;
+      margin: 14mm 16mm 14mm 16mm;
     }
     * {
       box-sizing: border-box;
@@ -19,15 +19,15 @@
     }
     body {
       font-family: 'Sarabun', 'TH Sarabun New', sans-serif;
-      font-size: 13pt;
-      line-height: 1.45;
+      font-size: 12pt;
+      line-height: 1.4;
       color: #0f172a;
       background: #ffffff;
       margin: 0;
       padding: 0;
     }
     .cover-page {
-      height: 100vh;
+      height: 96vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -35,24 +35,132 @@
       text-align: center;
       padding: 40px;
       page-break-after: always;
-      border: 3px double #0f172a;
+      border: 3px double #0284c7;
+      border-radius: 12px;
     }
     .page-break {
       page-break-after: always;
     }
+    .page-container {
+      max-width: 100%;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 0;
+    }
+    .header-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      gap: 14px;
+    }
+    .header-left { flex: 1; }
+    .header-doc-type {
+      font-size: 10pt;
+      font-weight: 700;
+      color: #0284c7;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .header-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: 14pt;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+    .header-school { font-size: 10pt; color: #475569; }
+    .score-badge {
+      background: #0284c715;
+      border: 1.5px solid #0284c7;
+      border-radius: 8px;
+      padding: 6px 14px;
+      text-align: center;
+      min-width: 105px;
+    }
+    .score-badge-points {
+      font-family: 'Kanit', sans-serif;
+      font-size: 13pt;
+      font-weight: 800;
+      color: #0284c7;
+    }
+    .score-badge-label { font-size: 8.5pt; color: #475569; font-weight: 600; }
+    .student-info-bar {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 10px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      font-size: 10pt;
+    }
+    .instructions-box {
+      margin-bottom: 14px;
+      font-size: 10.5pt;
+      background: #f8fafc;
+      border-left: 4px solid #0284c7;
+      padding: 8px 12px;
+      border-radius: 6px;
+      line-height: 1.4;
+    }
+    .scenario-box {
+      margin-bottom: 14px;
+      font-size: 10.5pt;
+      border: 1.5px solid #cbd5e1;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: #f8fafc;
+      line-height: 1.4;
+    }
+    .task-item { margin-bottom: 16px; page-break-inside: avoid; }
+    .task-header {
+      font-weight: 700;
+      font-size: 11pt;
+      color: #0f172a;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .task-desc { font-size: 10pt; color: #334155; margin-bottom: 6px; line-height: 1.35; }
+    .writing-line { border-bottom: 1px dotted #94a3b8; height: 24px; margin-bottom: 2px; }
+    .signature-row {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10pt;
+      page-break-inside: avoid;
+      padding-top: 10px;
+      border-top: 1px solid #e2e8f0;
+    }
+    .signature-col { text-align: center; min-width: 200px; line-height: 1.5; }
   </style>
 </head>
 <body>
   <!-- Cover Page -->
   <div class="cover-page">
-    <div style="font-size: 14pt; font-weight: 700; color: #059669; margin-bottom: 12px;">แบบบันทึกกิจกรรมการเรียนรู้และใบงาน (Student Worksheets)</div>
+    <div style="font-size: 14pt; font-weight: 700; color: #0284c7; margin-bottom: 12px;">แบบบันทึกกิจกรรมการเรียนรู้และใบงาน (Student Worksheets)</div>
     <h1 style="font-family: 'Kanit', sans-serif; font-size: 26pt; font-weight: 800; color: #0f172a; margin: 0 0 16px 0; line-height: 1.3;">
-      รายวิชาวิทยาการคำนวณ (ว31103)<br />ระดับชั้นมัธยมศึกษาปีที่ 4
+      คลังใบงานทฤษฎีและโครงงาน<br />รายวิชาวิทยาการคำนวณ (ว31103) ม.4
     </h1>
-    <div style="font-size: 13pt; color: #475569; max-width: 520px; line-height: 1.6; margin-bottom: 40px;">
-      เอกสารรวบรวมใบงานภาคทฤษฎีและใบงานฝึกปฏิบัติผังงาน (Flowchart) ด้วยโปรแกรม Flowgorithm ครบทั้ง 9 ชุดการเรียนรู้
+    <div style="font-size: 13pt; color: #475569; max-width: 520px; line-height: 1.6; margin-bottom: 30px;">
+      เอกสารรวบรวมใบงานภาคทฤษฎีและโครงงานคอมพิวเตอร์ตามกระบวนการ SDLC ครบทั้ง 6 ฉบับ (หน่วยการเรียนรู้ที่ 1 และ 2)
     </div>
-    <div style="margin-top: 40px; border-top: 1.5px solid #cbd5e1; padding-top: 24px; font-size: 12pt; line-height: 1.8;">
+    <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; border-radius: 12px; padding: 14px 20px; text-align: left; max-width: 480px; font-size: 11pt; color: #0369a1; line-height: 1.6; margin-bottom: 30px;">
+      <strong>สารบัญใบงาน 6 ฉบับเดิม:</strong><br />
+      • <strong>ใบงานที่ 1.1:</strong> การแยกส่วนประกอบและการหารูปแบบ (Decomposition & Pattern Recognition)<br />
+      • <strong>ใบงานที่ 1.2:</strong> การคิดเชิงนามธรรมและการออกแบบขั้นตอนวิธี (Abstraction & Algorithm Design)<br />
+      • <strong>ใบงานที่ 1.3:</strong> กรณีศึกษาการแก้ปัญหาด้วยแนวคิดเชิงคำนวณ (Computational Thinking Case Study)<br />
+      • <strong>ใบงานที่ 2.1:</strong> การกำหนดปัญหาและศึกษาความเป็นไปได้ของโครงงาน (SDLC Step 1)<br />
+      • <strong>ใบงานที่ 2.2:</strong> การออกแบบเชิงวิศวกรรมและวางแผนด้วย Gantt Chart (SDLC Step 2)<br />
+      • <strong>ใบงานที่ 2.3:</strong> การพัฒนาโครงงานเพื่อแก้ปัญหาตาม SDLC ในบริบทจริง (SDLC Step 3-5)
+    </div>
+    <div style="border-top: 1.5px solid #cbd5e1; padding-top: 20px; font-size: 12pt; line-height: 1.8;">
       กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี<br />
       <strong>โรงเรียนกุดชุมวิทยาคม</strong><br />
       สำนักงานเขตพื้นที่การศึกษามัธยมศึกษายโสธร
@@ -62,133 +170,113 @@
     <div class="worksheet-section page-break">
       <div class="page-container">
         
-    <!-- Header -->
     <div class="header-box">
       <div class="header-left">
         <div class="header-doc-type">
           ใบงาน • วิทยาการคำนวณ ม.4
         </div>
-        <div class="header-title">ใบงานที่ 1.1</div>
+        <div class="header-title">ใบงานที่ 1.1: ใบงานที่ 1.1: เรื่อง การประยุกต์ใช้แนวคิดเชิงคำนวณในการแก้ปัญหาบริบทจริง</div>
         <div class="header-school">
           กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี โรงเรียนกุดชุมวิทยาคม
         </div>
       </div>
       <div class="score-badge">
-        <div class="score-badge-points">คะแนนเต็ม 10 คะแนน</div>
-        <div class="score-badge-field">คะแนนที่ได้ ............ คะแนน</div>
+        <div class="score-badge-points">10 คะแนน</div>
+        <div class="score-badge-label">คะแนนเต็ม</div>
       </div>
     </div>
 
-    <!-- Student Info Grid -->
-    <div class="student-info-grid">
-      <div>ชื่อ-สกุล: ............................................................................</div>
-      <div>ชั้น: ม.4 / ........</div>
-      <div>เลขที่: ............</div>
-      <div>วันที่: ...... / ...... / 2569</div>
+    <div class="student-info-bar">
+      <div><strong>ชื่อ-สกุล:</strong> ............................................................</div>
+      <div><strong>ชั้น ม.4 /</strong> ........</div>
+      <div><strong>เลขที่:</strong> ........</div>
+      <div><strong>วันที่:</strong> .... / .... / ........</div>
     </div>
 
-    <!-- Worksheet Title -->
-    <div class="ws-title-box">
-      <div class="ws-main-title">ใบงานที่ 1.1: เรื่อง การประยุกต์ใช้แนวคิดเชิงคำนวณในการแก้ปัญหาบริบทจริง</div>
-      <div class="ws-sub-title">การประยุกต์ใช้ 4 องค์ประกอบของแนวคิดเชิงคำนวณเพื่อแก้ปัญหาในชีวิตประจำวัน • (ว 4.2 ม.4/1)</div>
-    </div>
-
-    <!-- Instructions -->
     <div class="instructions-box">
-      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนศึกษาสถานการณ์ปัญหาที่กำหนด แล้ววิเคราะห์แก้ปัญหาโดยประยุกต์ใช้ 4 องค์ประกอบของแนวคิดเชิงคำนวณ (Computational Thinking) ให้ครบถ้วน ชัดเจน และสมเหตุสมผลตามหลักวิชาการ
+      <strong>คำชี้แจง:</strong> ให้นักเรียนศึกษาสถานการณ์ปัญหาที่กำหนด แล้ววิเคราะห์แก้ปัญหาโดยประยุกต์ใช้ 4 องค์ประกอบของแนวคิดเชิงคำนวณ (Computational Thinking) ให้ครบถ้วน ชัดเจน และสมเหตุสมผลตามหลักวิชาการ
     </div>
 
-    <!-- Scenario -->
+    
     <div class="scenario-box">
-      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #059669;"></i> สถานการณ์ปัญหา:</strong><br />
-      ตะวัน ขับรถยนต์ออกไปทำงานในตอนเช้า แต่พบว่ารถยนต์ของตนเองไม่สามารถเดินทางต่อไปถึงที่ทำงานได้ ซึ่งตะวันคิดว่าปัญหาอาจมีสาเหตุมาจาก 2 ประเด็น ได้แก่ ยางแบน หรือน้ำมันรถยนต์ใกล้จะหมด จากประสบการณ์ของตะวัน ในแต่ละครั้งที่รถยนต์มีปัญหา จะต้องจัดการกับยางรถยนต์ที่แบนก่อนเป็นอันดับแรก ซึ่งรถยนต์ยังพอมีน้ำมันเหลืออยู่ ให้นักเรียนช่วยตะวันวิเคราะห์ปัญหาและออกแบบขั้นตอนการแก้ปัญหาโดยประยุกต์ใช้ 4 องค์ประกอบของแนวคิดเชิงคำนวณ
+      <strong>สถานการณ์ / บริบทการเรียนรู้:</strong> ตะวัน ขับรถยนต์ออกไปทำงานในตอนเช้า แต่พบว่ารถยนต์ของตนเองไม่สามารถเดินทางต่อไปถึงที่ทำงานได้ ซึ่งตะวันคิดว่าปัญหาอาจมีสาเหตุมาจาก 2 ประเด็น ได้แก่ ยางแบน หรือน้ำมันรถยนต์ใกล้จะหมด จากประสบการณ์ของตะวัน ในแต่ละครั้งที่รถยนต์มีปัญหา จะต้องจัดการกับยางรถยนต์ที่แบนก่อนเป็นอันดับแรก ซึ่งรถยนต์ยังพอมีน้ำมันเหลืออยู่ ให้นักเรียนช่วยตะวันวิเคราะห์ปัญหาและออกแบบขั้นตอนการแก้ปัญหาโดยประยุกต์ใช้ 4 องค์ประกอบของแนวคิดเชิงคำนวณ
     </div>
-
     
 
-    <!-- Tasks -->
-    <div style="margin-top: 16px;">
-      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-pencil" style="color: #059669;"></i> ภารกิจและโจทย์ฝึกปฏิบัติ (10 ข้อ):
+    <div class="tasks-container">
+      
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #059669; font-weight: 700;">ข้อที่ 1:</span>
+          <span>undefined</span>
+        </div>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
+          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
+        </div>
       </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>1. การแยกส่วนประกอบและการย่อยปัญหา (Decomposition)</span>
-          </div>
-          <div class="task-desc">
-            วิเคราะห์และจำแนกปัญหาใหญ่ออกเป็นปัญหาย่อยๆ ที่เป็นอิสระต่อกัน เพื่อให้จัดการและแก้ไขได้อย่างมีประสิทธิภาพ (2.5 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #059669; font-weight: 700;">ข้อที่ 2:</span>
+          <span>undefined</span>
         </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>2. การหารูปแบบของปัญหา (Pattern Recognition)</span>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
           </div>
-          <div class="task-desc">
-            ระบุแบบแผน ความเหมือน หรือความคล้ายคลึงจากประสบการณ์เดิม เพื่อจัดลำดับความเร่งด่วนในการแก้ปัญหา (2.5 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
         </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>3. การคิดเชิงนามธรรม (Abstraction)</span>
-          </div>
-          <div class="task-desc">
-            คัดกรองเฉพาะสาระสำคัญที่จำเป็นต่อการแก้ปัญหา และละทิ้งรายละเอียดปลีกย่อยที่ไม่เกี่ยวข้องออกไป (2.5 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+      </div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #059669; font-weight: 700;">ข้อที่ 3:</span>
+          <span>undefined</span>
         </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>4. การออกแบบขั้นตอนวิธีในการแก้ปัญหา (Algorithm Design)</span>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
           </div>
-          <div class="task-desc">
-            ออกแบบลำดับขั้นตอนการปฏิบัติงานเพื่อแก้ปัญหาอย่างชัดเจน เรียงตามลำดับ ไม่กำกวม และมีจุดสิ้นสุด (2.5 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
         </div>
-      
+      </div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #059669; font-weight: 700;">ข้อที่ 4:</span>
+          <span>undefined</span>
+        </div>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
+          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
+        </div>
+      </div>
+    
     </div>
 
-    <!-- Rubric -->
-    
-    <div style="margin-top: 20px; font-size: 10pt; color: #475569; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; line-height: 1.5;">
-      <strong><i class="fa-solid fa-award text-emerald-600 mr-1"></i> เกณฑ์การประเมินผลงาน:</strong><br />
-      เกณฑ์การประเมินแบบรูบริกส์ (Analytic Rubric) คะแนนเต็ม 10 คะแนน:<br />1. การแยกส่วนประกอบ (2.5 คะแนน): จำแนกปัญหาย่อยได้ครบถ้วนและตรงประเด็น (ดีเยี่ยม 2.5 | ดี 2.0 | พอใช้ 1.5 | ปรับปรุง 1.0)<br />2. การหารูปแบบ (2.5 คะแนน): เชื่อมโยงประสบการณ์และจัดลำดับความเร่งด่วนได้สมเหตุสมผล (ดีเยี่ยม 2.5 | ดี 2.0 | พอใช้ 1.5 | ปรับปรุง 1.0)<br />3. การคิดเชิงนามธรรม (2.5 คะแนน): คัดแยกสาระสำคัญและตัดรายละเอียดที่ไม่จำเป็นได้อย่างชัดเจน (ดีเยี่ยม 2.5 | ดี 2.0 | พอใช้ 1.5 | ปรับปรุง 1.0)<br />4. การออกแบบขั้นตอนวิธี (2.5 คะแนน): ลำดับขั้นตอนเป็นระบบ ชัดเจน ปฏิบัติได้จริง และมีจุดสิ้นสุด (ดีเยี่ยม 2.5 | ดี 2.0 | พอใช้ 1.5 | ปรับปรุง 1.0)
-    </div>
-    
-
-    <!-- Signature Footer -->
     <div class="signature-row">
       <div class="signature-col">
-        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
-        ( ........................................................... )<br />
-        วันที่ ...... / ...... / 2569
+        ลงชื่อ ............................................................ นักเรียนผู้ส่งงาน<br />
+        (............................................................)<br />
+        วันที่ ......../......../............
       </div>
       <div class="signature-col">
-        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
-        ( ครูปณิฏฐา บุญยงค์ )<br />
-        วันที่ ...... / ...... / 2569
+        ลงชื่อ ............................................................ ครูผู้สอน/ผู้ตรวจ<br />
+        (นางสาวปณิฏฐา บุญยงค์)<br />
+        ผลการประเมิน: [ &nbsp; ] ผ่าน &nbsp; [ &nbsp; ] ปรับปรุง &nbsp; คะแนนได้: ........ / 10
       </div>
     </div>
   
@@ -198,147 +286,128 @@
     <div class="worksheet-section page-break">
       <div class="page-container">
         
-    <!-- Header -->
     <div class="header-box">
       <div class="header-left">
         <div class="header-doc-type">
           ใบงาน • วิทยาการคำนวณ ม.4
         </div>
-        <div class="header-title">ใบงานที่ 1.2</div>
+        <div class="header-title">ใบงานที่ 1.2: ใบงานที่ 1.2: เรื่อง การพัฒนาระบบด้วยวงจร SDLC (กรณีศึกษาร้านเบเกอรี)</div>
         <div class="header-school">
           กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี โรงเรียนกุดชุมวิทยาคม
         </div>
       </div>
       <div class="score-badge">
-        <div class="score-badge-points">คะแนนเต็ม 10 คะแนน</div>
-        <div class="score-badge-field">คะแนนที่ได้ ............ คะแนน</div>
+        <div class="score-badge-points">10 คะแนน</div>
+        <div class="score-badge-label">คะแนนเต็ม</div>
       </div>
     </div>
 
-    <!-- Student Info Grid -->
-    <div class="student-info-grid">
-      <div>ชื่อ-สกุล: ............................................................................</div>
-      <div>ชั้น: ม.4 / ........</div>
-      <div>เลขที่: ............</div>
-      <div>วันที่: ...... / ...... / 2569</div>
+    <div class="student-info-bar">
+      <div><strong>ชื่อ-สกุล:</strong> ............................................................</div>
+      <div><strong>ชั้น ม.4 /</strong> ........</div>
+      <div><strong>เลขที่:</strong> ........</div>
+      <div><strong>วันที่:</strong> .... / .... / ........</div>
     </div>
 
-    <!-- Worksheet Title -->
-    <div class="ws-title-box">
-      <div class="ws-main-title">ใบงานที่ 1.2: เรื่อง การพัฒนาระบบด้วยวงจร SDLC (กรณีศึกษาร้านเบเกอรี)</div>
-      <div class="ws-sub-title">การประยุกต์ใช้วงจรการพัฒนาระบบ 5 ขั้นตอนเพื่อแก้ปัญหาธุรกิจจริง • (ว 4.2 ม.4/1)</div>
-    </div>
-
-    <!-- Instructions -->
     <div class="instructions-box">
-      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนศึกษาสถานการณ์ของร้าน Bakery Delight และเขียนแผนการพัฒนาระบบสารสนเทศตามขั้นตอนของวงจรการพัฒนาระบบ (SDLC) ทั้ง 5 ขั้นตอนให้ครบถ้วน ชัดเจน และสอดคล้องกับหลักวิศวกรรมซอฟต์แวร์
+      <strong>คำชี้แจง:</strong> ให้นักเรียนศึกษาสถานการณ์ของร้าน Bakery Delight และเขียนแผนการพัฒนาระบบสารสนเทศตามขั้นตอนของวงจรการพัฒนาระบบ (SDLC) ทั้ง 5 ขั้นตอนให้ครบถ้วน ชัดเจน และสอดคล้องกับหลักวิศวกรรมซอฟต์แวร์
     </div>
 
-    <!-- Scenario -->
+    
     <div class="scenario-box">
-      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #059669;"></i> สถานการณ์ปัญหา:</strong><br />
-      ร้าน Bakery Delight ประสบปัญหายอดขายตกต่ำ สินค้าเบเกอรีเหลือทิ้งจำนวนมากในแต่ละวันเนื่องจากไม่ทราบพฤติกรรมการซื้อที่แท้จริงของลูกค้า และการจัดการสต็อกวัตถุดิบล่าช้าเพราะใช้สมุดจดบันทึกมือ เจ้าของร้านต้องการพัฒนาระบบ POS และระบบบริหารจัดการสต็อกอัจฉริยะเพื่อลดความสูญเสียและเพิ่มยอดขาย ให้นักเรียนวางแผนพัฒนาระบบตามขั้นตอน SDLC ทั้ง 5 ขั้นตอน
+      <strong>สถานการณ์ / บริบทการเรียนรู้:</strong> ร้าน Bakery Delight ประสบปัญหายอดขายตกต่ำ สินค้าเบเกอรีเหลือทิ้งจำนวนมากในแต่ละวันเนื่องจากไม่ทราบพฤติกรรมการซื้อที่แท้จริงของลูกค้า และการจัดการสต็อกวัตถุดิบล่าช้าเพราะใช้สมุดจดบันทึกมือ เจ้าของร้านต้องการพัฒนาระบบ POS และระบบบริหารจัดการสต็อกอัจฉริยะเพื่อลดความสูญเสียและเพิ่มยอดขาย ให้นักเรียนวางแผนพัฒนาระบบตามขั้นตอน SDLC ทั้ง 5 ขั้นตอน
     </div>
-
     
 
-    <!-- Tasks -->
-    <div style="margin-top: 16px;">
-      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-pencil" style="color: #059669;"></i> ภารกิจและโจทย์ฝึกปฏิบัติ (10 ข้อ):
+    <div class="tasks-container">
+      
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #059669; font-weight: 700;">ข้อที่ 1:</span>
+          <span>undefined</span>
+        </div>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
+          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
+        </div>
       </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>1. ขั้นตอนการวางแผน (Planning)</span>
-          </div>
-          <div class="task-desc">
-            กำหนดเป้าหมาย วัตถุประสงค์ ขอบเขต และศึกษาความเป็นไปได้ (Feasibility Study) ของระบบ (2 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #059669; font-weight: 700;">ข้อที่ 2:</span>
+          <span>undefined</span>
         </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>2. ขั้นตอนการวิเคราะห์ (Analysis)</span>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
           </div>
-          <div class="task-desc">
-            วิเคราะห์ปัญหาในระบบเดิมและระบุข้อกำหนดความต้องการเชิงหน้าที่ (Functional Requirements) (2 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
         </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>3. ขั้นตอนการออกแบบ (Design)</span>
-          </div>
-          <div class="task-desc">
-            ออกแบบผังงานการทำงาน (Flowchart) สถาปัตยกรรมระบบ และแบบร่างหน้าจอผู้ใช้ (UI Mockup) (2 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+      </div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #059669; font-weight: 700;">ข้อที่ 3:</span>
+          <span>undefined</span>
         </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>4. ขั้นตอนการพัฒนาและติดตั้ง (Implementation & Testing)</span>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
           </div>
-          <div class="task-desc">
-            วางแผนการเขียนโปรแกรมและการทดสอบระบบตามมาตรฐาน 4 ระดับ (2 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
         </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>5. ขั้นตอนการบำรุงรักษา (Maintenance)</span>
-          </div>
-          <div class="task-desc">
-            กำหนดแนวทางการฝึกอบรมพนักงาน การสำรองข้อมูล และแผนการดูแลรักษาระบบต่อเนื่อง (2 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+      </div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #059669; font-weight: 700;">ข้อที่ 4:</span>
+          <span>undefined</span>
         </div>
-      
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
+          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
+        </div>
+      </div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #059669; font-weight: 700;">ข้อที่ 5:</span>
+          <span>undefined</span>
+        </div>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
+          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
+        </div>
+      </div>
+    
     </div>
 
-    <!-- Rubric -->
-    
-    <div style="margin-top: 20px; font-size: 10pt; color: #475569; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; line-height: 1.5;">
-      <strong><i class="fa-solid fa-award text-emerald-600 mr-1"></i> เกณฑ์การประเมินผลงาน:</strong><br />
-      เกณฑ์การประเมินแบบรูบริกส์ (Analytic Rubric) คะแนนเต็ม 10 คะแนน (5 ด้าน ด้านละ 2 คะแนน):<br />1. การวางแผน (2 คะแนน): กำหนดเป้าหมาย ขอบเขต และศึกษาความเป็นไปได้ชัดเจน (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)<br />2. การวิเคราะห์ (2 คะแนน): ระบุปัญหาเดิมและความต้องการระบบได้ตรงประเด็น (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)<br />3. การออกแบบ (2 คะแนน): ออกแบบผังงานและหน้าจอ UI ได้ถูกต้องตามหลักการ (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)<br />4. การพัฒนาและทดสอบ (2 คะแนน): กำหนดแผนการพัฒนาและการทดสอบ 4 ระดับได้สมบูรณ์ (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)<br />5. การบำรุงรักษา (2 คะแนน): แผนการอบรม การสำรองข้อมูล และการดูแลรักษาระบบปฏิบัติได้จริง (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)
-    </div>
-    
-
-    <!-- Signature Footer -->
     <div class="signature-row">
       <div class="signature-col">
-        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
-        ( ........................................................... )<br />
-        วันที่ ...... / ...... / 2569
+        ลงชื่อ ............................................................ นักเรียนผู้ส่งงาน<br />
+        (............................................................)<br />
+        วันที่ ......../......../............
       </div>
       <div class="signature-col">
-        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
-        ( ครูปณิฏฐา บุญยงค์ )<br />
-        วันที่ ...... / ...... / 2569
+        ลงชื่อ ............................................................ ครูผู้สอน/ผู้ตรวจ<br />
+        (นางสาวปณิฏฐา บุญยงค์)<br />
+        ผลการประเมิน: [ &nbsp; ] ผ่าน &nbsp; [ &nbsp; ] ปรับปรุง &nbsp; คะแนนได้: ........ / 10
       </div>
     </div>
   
@@ -348,133 +417,113 @@
     <div class="worksheet-section page-break">
       <div class="page-container">
         
-    <!-- Header -->
     <div class="header-box">
       <div class="header-left">
         <div class="header-doc-type">
           ใบงาน • วิทยาการคำนวณ ม.4
         </div>
-        <div class="header-title">ใบงานที่ 1.3</div>
+        <div class="header-title">ใบงานที่ 1.3: ใบงานที่ 1.3: เรื่อง การจัดทำเค้าโครงรายงานโครงงาน 5 บท</div>
         <div class="header-school">
           กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี โรงเรียนกุดชุมวิทยาคม
         </div>
       </div>
       <div class="score-badge">
-        <div class="score-badge-points">คะแนนเต็ม 10 คะแนน</div>
-        <div class="score-badge-field">คะแนนที่ได้ ............ คะแนน</div>
+        <div class="score-badge-points">10 คะแนน</div>
+        <div class="score-badge-label">คะแนนเต็ม</div>
       </div>
     </div>
 
-    <!-- Student Info Grid -->
-    <div class="student-info-grid">
-      <div>ชื่อ-สกุล: ............................................................................</div>
-      <div>ชั้น: ม.4 / ........</div>
-      <div>เลขที่: ............</div>
-      <div>วันที่: ...... / ...... / 2569</div>
+    <div class="student-info-bar">
+      <div><strong>ชื่อ-สกุล:</strong> ............................................................</div>
+      <div><strong>ชั้น ม.4 /</strong> ........</div>
+      <div><strong>เลขที่:</strong> ........</div>
+      <div><strong>วันที่:</strong> .... / .... / ........</div>
     </div>
 
-    <!-- Worksheet Title -->
-    <div class="ws-title-box">
-      <div class="ws-main-title">ใบงานที่ 1.3: เรื่อง การจัดทำเค้าโครงรายงานโครงงาน 5 บท</div>
-      <div class="ws-sub-title">การจัดทำเอกสารรายงานโครงงานคอมพิวเตอร์ตามระเบียบวิธีวิจัยและมาตรฐาน สพฐ. • (ว 4.2 ม.4/1)</div>
-    </div>
-
-    <!-- Instructions -->
     <div class="instructions-box">
-      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนจัดทำเค้าโครงรายงานโครงงานคอมพิวเตอร์ตามแบบฟอร์มมาตรฐาน 5 บทของ สพฐ. ให้มีความสมบูรณ์ทางวิชาการและครอบคลุมทั้ง 3 ส่วนหลักของรายงาน
+      <strong>คำชี้แจง:</strong> ให้นักเรียนจัดทำเค้าโครงรายงานโครงงานคอมพิวเตอร์ตามแบบฟอร์มมาตรฐาน 5 บทของ สพฐ. ให้มีความสมบูรณ์ทางวิชาการและครอบคลุมทั้ง 3 ส่วนหลักของรายงาน
     </div>
 
-    <!-- Scenario -->
+    
     <div class="scenario-box">
-      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #059669;"></i> สถานการณ์ปัญหา:</strong><br />
-      นักเรียนกลุ่มหนึ่งได้รับอนุมัติหัวข้อโครงงาน "ระบบจัดการขยะรีไซเคิลอัจฉริยะในสถานศึกษา (Smart Recycle Portal)" ครูที่ปรึกษาโครงงานได้มอบหมายให้นักเรียนจัดทำโครงสร้างเค้าโครงรายงาน 5 บทตามมาตรฐานวิชาการของ สพฐ. เพื่อเตรียมพร้อมสำหรับการเขียนเล่มรายงานฉบับสมบูรณ์ ให้นักเรียนร่างองค์ประกอบและสาระสำคัญของแต่ละส่วนตามระเบียบวิธีวิจัย
+      <strong>สถานการณ์ / บริบทการเรียนรู้:</strong> นักเรียนกลุ่มหนึ่งได้รับอนุมัติหัวข้อโครงงาน "ระบบจัดการขยะรีไซเคิลอัจฉริยะในสถานศึกษา (Smart Recycle Portal)" ครูที่ปรึกษาโครงงานได้มอบหมายให้นักเรียนจัดทำโครงสร้างเค้าโครงรายงาน 5 บทตามมาตรฐานวิชาการของ สพฐ. เพื่อเตรียมพร้อมสำหรับการเขียนเล่มรายงานฉบับสมบูรณ์ ให้นักเรียนร่างองค์ประกอบและสาระสำคัญของแต่ละส่วนตามระเบียบวิธีวิจัย
     </div>
-
     
 
-    <!-- Tasks -->
-    <div style="margin-top: 16px;">
-      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-pencil" style="color: #059669;"></i> ภารกิจและโจทย์ฝึกปฏิบัติ (10 ข้อ):
+    <div class="tasks-container">
+      
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #059669; font-weight: 700;">ข้อที่ 1:</span>
+          <span>undefined</span>
+        </div>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
+          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
+        </div>
       </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>1. ส่วนประกอบตอนต้นของรายงาน (Preliminary Section)</span>
-          </div>
-          <div class="task-desc">
-            ระบุองค์ประกอบส่วนนำให้ครบถ้วนตามลำดับมาตรฐาน และเขียนร่างตัวอย่างบทคัดย่อ (Abstract) แบบกระชับ (2 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #059669; font-weight: 700;">ข้อที่ 2:</span>
+          <span>undefined</span>
         </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>2. ส่วนเนื้อหา บทที่ 1 บทนำ และ บทที่ 2 ทฤษฎีที่เกี่ยวข้อง</span>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
           </div>
-          <div class="task-desc">
-            กำหนดความเป็นมา วัตถุประสงค์ ขอบเขต และหัวข้อทฤษฎี/เทคโนโลยีอ้างอิงที่จำเป็น (3 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
         </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>3. ส่วนเนื้อหา บทที่ 3, 4 และ 5 (Methodology, Results, Conclusion)</span>
-          </div>
-          <div class="task-desc">
-            อธิบายเครื่องมือที่ใช้ ขั้นตอนวิธีดำเนินงาน รูปแบบการนำเสนอผลการทดลอง และการอภิปรายผล (3 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+      </div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #059669; font-weight: 700;">ข้อที่ 3:</span>
+          <span>undefined</span>
         </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>4. ส่วนประกอบตอนท้ายและบรรณานุกรม APA 7th Edition</span>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
           </div>
-          <div class="task-desc">
-            เขียนตัวอย่างรายการอ้างอิงบรรณานุกรมรูปแบบ APA 7th Edition จำนวน 2 รายการ และระบุสิ่งที่ต้องมีในภาคผนวก (2 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
         </div>
-      
+      </div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #059669; font-weight: 700;">ข้อที่ 4:</span>
+          <span>undefined</span>
+        </div>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
+          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
+        </div>
+      </div>
+    
     </div>
 
-    <!-- Rubric -->
-    
-    <div style="margin-top: 20px; font-size: 10pt; color: #475569; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; line-height: 1.5;">
-      <strong><i class="fa-solid fa-award text-emerald-600 mr-1"></i> เกณฑ์การประเมินผลงาน:</strong><br />
-      เกณฑ์การประเมินแบบรูบริกส์ (Analytic Rubric) คะแนนเต็ม 10 คะแนน:<br />1. ส่วนประกอบตอนต้น (2 คะแนน): โครงสร้างส่วนนำและบทคัดย่อถูกต้องตามแบบแผนวิชาการ (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)<br />2. บทที่ 1 และ 2 (3 คะแนน): ความเป็นมา วัตถุประสงค์ ขอบเขต และทฤษฎีอ้างอิงสมบูรณ์ (ดีมาก 3.0 | ดี 2.5 | พอใช้ 2.0 | ปรับปรุง 1.0)<br />3. บทที่ 3, 4 และ 5 (3 คะแนน): วิธีดำเนินงาน การแสดงผลลัพธ์ และการสรุปอภิปรายผลเป็นระบบ (ดีมาก 3.0 | ดี 2.5 | พอใช้ 2.0 | ปรับปรุง 1.0)<br />4. ส่วนท้ายและบรรณานุกรม (2 คะแนน): รูปแบบ APA 7th ถูกต้องและภาคผนวกครบถ้วน (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)
-    </div>
-    
-
-    <!-- Signature Footer -->
     <div class="signature-row">
       <div class="signature-col">
-        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
-        ( ........................................................... )<br />
-        วันที่ ...... / ...... / 2569
+        ลงชื่อ ............................................................ นักเรียนผู้ส่งงาน<br />
+        (............................................................)<br />
+        วันที่ ......../......../............
       </div>
       <div class="signature-col">
-        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
-        ( ครูปณิฏฐา บุญยงค์ )<br />
-        วันที่ ...... / ...... / 2569
+        ลงชื่อ ............................................................ ครูผู้สอน/ผู้ตรวจ<br />
+        (นางสาวปณิฏฐา บุญยงค์)<br />
+        ผลการประเมิน: [ &nbsp; ] ผ่าน &nbsp; [ &nbsp; ] ปรับปรุง &nbsp; คะแนนได้: ........ / 10
       </div>
     </div>
   
@@ -484,119 +533,98 @@
     <div class="worksheet-section page-break">
       <div class="page-container">
         
-    <!-- Header -->
     <div class="header-box">
       <div class="header-left">
         <div class="header-doc-type">
           ใบงาน • วิทยาการคำนวณ ม.4
         </div>
-        <div class="header-title">ใบงานที่ 2.1</div>
+        <div class="header-title">ใบงานที่ 2.1: ใบงานที่ 2.1: เรื่อง การวางแผนและการวิเคราะห์ความต้องการในการพัฒนาโครงงาน</div>
         <div class="header-school">
           กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี โรงเรียนกุดชุมวิทยาคม
         </div>
       </div>
       <div class="score-badge">
-        <div class="score-badge-points">คะแนนเต็ม 10 คะแนน</div>
-        <div class="score-badge-field">คะแนนที่ได้ ............ คะแนน</div>
+        <div class="score-badge-points">10 คะแนน</div>
+        <div class="score-badge-label">คะแนนเต็ม</div>
       </div>
     </div>
 
-    <!-- Student Info Grid -->
-    <div class="student-info-grid">
-      <div>ชื่อ-สกุล: ............................................................................</div>
-      <div>ชั้น: ม.4 / ........</div>
-      <div>เลขที่: ............</div>
-      <div>วันที่: ...... / ...... / 2569</div>
+    <div class="student-info-bar">
+      <div><strong>ชื่อ-สกุล:</strong> ............................................................</div>
+      <div><strong>ชั้น ม.4 /</strong> ........</div>
+      <div><strong>เลขที่:</strong> ........</div>
+      <div><strong>วันที่:</strong> .... / .... / ........</div>
     </div>
 
-    <!-- Worksheet Title -->
-    <div class="ws-title-box">
-      <div class="ws-main-title">ใบงานที่ 2.1: เรื่อง การวางแผนและการวิเคราะห์ความต้องการในการพัฒนาโครงงาน</div>
-      <div class="ws-sub-title">การกำหนดวัตถุประสงค์ ขอบเขต และแผนภูมิแกนต์ (กรณีศึกษา StyleHub) • (ว 4.2 ม.4/1)</div>
-    </div>
-
-    <!-- Instructions -->
     <div class="instructions-box">
-      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนศึกษากรณีศึกษาเว็บไซต์แฟชั่นวัยรุ่น StyleHub แล้วกำหนดวัตถุประสงค์ ขอบเขตระบบ และจัดทำแผนภูมิแกนต์ (Gantt Chart) สำหรับการดำเนินงาน 8 สัปดาห์ให้ถูกต้องและสมบูรณ์
+      <strong>คำชี้แจง:</strong> ให้นักเรียนศึกษากรณีศึกษาเว็บไซต์แฟชั่นวัยรุ่น StyleHub แล้วกำหนดวัตถุประสงค์ ขอบเขตระบบ และจัดทำแผนภูมิแกนต์ (Gantt Chart) สำหรับการดำเนินงาน 8 สัปดาห์ให้ถูกต้องและสมบูรณ์
     </div>
 
-    <!-- Scenario -->
+    
     <div class="scenario-box">
-      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #0284c7;"></i> สถานการณ์ปัญหา:</strong><br />
-      กลุ่มนักเรียนชั้น ม.4 ต้องการพัฒนาโครงงานเว็บไซต์จำหน่ายเสื้อผ้าวัยรุ่นออนไลน์ภายใต้ชื่อแบรนด์ StyleHub เพื่อแก้ปัญหาความยุ่งยากในการสั่งซื้อเสื้อผ้าผ่านแชตส่วนตัว ซึ่งมักเกิดข้อผิดพลาดในการคำนวณยอดเงิน การส่งสลิปปลอม และสต็อกสินค้าไม่ตรงกับความเป็นจริง ให้นักเรียนวางแผนการพัฒนาโครงงานในระยะเริ่มต้นตามขั้นตอนของ SDLC
+      <strong>สถานการณ์ / บริบทการเรียนรู้:</strong> กลุ่มนักเรียนชั้น ม.4 ต้องการพัฒนาโครงงานเว็บไซต์จำหน่ายเสื้อผ้าวัยรุ่นออนไลน์ภายใต้ชื่อแบรนด์ StyleHub เพื่อแก้ปัญหาความยุ่งยากในการสั่งซื้อเสื้อผ้าผ่านแชตส่วนตัว ซึ่งมักเกิดข้อผิดพลาดในการคำนวณยอดเงิน การส่งสลิปปลอม และสต็อกสินค้าไม่ตรงกับความเป็นจริง ให้นักเรียนวางแผนการพัฒนาโครงงานในระยะเริ่มต้นตามขั้นตอนของ SDLC
     </div>
-
     
 
-    <!-- Tasks -->
-    <div style="margin-top: 16px;">
-      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-pencil" style="color: #0284c7;"></i> ภารกิจและโจทย์ฝึกปฏิบัติ (10 ข้อ):
+    <div class="tasks-container">
+      
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #0284c7; font-weight: 700;">ข้อที่ 1:</span>
+          <span>undefined</span>
+        </div>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
+          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
+        </div>
       </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>1. การกำหนดวัตถุประสงค์ของโครงงาน (Project Objectives)</span>
-          </div>
-          <div class="task-desc">
-            กำหนดวัตถุประสงค์ของโครงงานอย่างน้อย 2 ข้อ ตามหลัก SMART (เฉพาะเจาะจง วัดผลได้ และเป็นไปได้จริง) (3 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #0284c7; font-weight: 700;">ข้อที่ 2:</span>
+          <span>undefined</span>
         </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>2. การกำหนดขอบเขตและกลุ่มเป้าหมาย (Scope & Target Group)</span>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
           </div>
-          <div class="task-desc">
-            ระบุกลุ่มผู้ใช้งานเป้าหมาย ขอบเขตเชิงหน้าที่ของระบบ และข้อจำกัดในการพัฒนา (3 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
         </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>3. แผนการดำเนินงานและทรัพยากร (Gantt Chart & Resources)</span>
-          </div>
-          <div class="task-desc">
-            จัดทำตารางแผนภูมิแกนต์ 8 สัปดาห์ ครอบคลุม 5 ขั้นตอนของ SDLC พร้อมระบุผู้รับผิดชอบและทรัพยากร (4 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+      </div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #0284c7; font-weight: 700;">ข้อที่ 3:</span>
+          <span>undefined</span>
         </div>
-      
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
+          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
+        </div>
+      </div>
+    
     </div>
 
-    <!-- Rubric -->
-    
-    <div style="margin-top: 20px; font-size: 10pt; color: #475569; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; line-height: 1.5;">
-      <strong><i class="fa-solid fa-award text-emerald-600 mr-1"></i> เกณฑ์การประเมินผลงาน:</strong><br />
-      เกณฑ์การประเมินแบบรูบริกส์ (Analytic Rubric) คะแนนเต็ม 10 คะแนน:<br />1. วัตถุประสงค์โครงงาน (3 คะแนน): ชัดเจน สอดคล้องกับหลัก SMART และวัดผลสัมฤทธิ์ได้ (ดีเยี่ยม 3.0 | ดี 2.0 | พอใช้ 1.5 | ปรับปรุง 1.0)<br />2. ขอบเขตและกลุ่มเป้าหมาย (3 คะแนน): กำหนดกลุ่มเป้าหมายและฟังก์ชันงานระบบได้ชัดเจนและเป็นไปได้ (ดีเยี่ยม 3.0 | ดี 2.0 | พอใช้ 1.5 | ปรับปรุง 1.0)<br />3. แผนงาน Gantt Chart (4 คะแนน): ตารางเวลา 8 สัปดาห์ครอบคลุม SDLC จัดสรรบทบาทและทรัพยากรสมบูรณ์ (ดีเยี่ยม 4.0 | ดี 3.0 | พอใช้ 2.0 | ปรับปรุง 1.0)
-    </div>
-    
-
-    <!-- Signature Footer -->
     <div class="signature-row">
       <div class="signature-col">
-        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
-        ( ........................................................... )<br />
-        วันที่ ...... / ...... / 2569
+        ลงชื่อ ............................................................ นักเรียนผู้ส่งงาน<br />
+        (............................................................)<br />
+        วันที่ ......../......../............
       </div>
       <div class="signature-col">
-        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
-        ( ครูปณิฏฐา บุญยงค์ )<br />
-        วันที่ ...... / ...... / 2569
+        ลงชื่อ ............................................................ ครูผู้สอน/ผู้ตรวจ<br />
+        (นางสาวปณิฏฐา บุญยงค์)<br />
+        ผลการประเมิน: [ &nbsp; ] ผ่าน &nbsp; [ &nbsp; ] ปรับปรุง &nbsp; คะแนนได้: ........ / 10
       </div>
     </div>
   
@@ -606,921 +634,98 @@
     <div class="worksheet-section page-break">
       <div class="page-container">
         
-    <!-- Header -->
     <div class="header-box">
       <div class="header-left">
         <div class="header-doc-type">
           ใบงาน • วิทยาการคำนวณ ม.4
         </div>
-        <div class="header-title">ใบงานที่ 2.2</div>
+        <div class="header-title">ใบงานที่ 2.2: ใบงานที่ 2.2: เรื่อง การวิเคราะห์ข้อมูลและออกแบบระบบ (Context Diagram & UI)</div>
         <div class="header-school">
           กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี โรงเรียนกุดชุมวิทยาคม
         </div>
       </div>
       <div class="score-badge">
-        <div class="score-badge-points">คะแนนเต็ม 10 คะแนน</div>
-        <div class="score-badge-field">คะแนนที่ได้ ............ คะแนน</div>
+        <div class="score-badge-points">10 คะแนน</div>
+        <div class="score-badge-label">คะแนนเต็ม</div>
       </div>
     </div>
 
-    <!-- Student Info Grid -->
-    <div class="student-info-grid">
-      <div>ชื่อ-สกุล: ............................................................................</div>
-      <div>ชั้น: ม.4 / ........</div>
-      <div>เลขที่: ............</div>
-      <div>วันที่: ...... / ...... / 2569</div>
+    <div class="student-info-bar">
+      <div><strong>ชื่อ-สกุล:</strong> ............................................................</div>
+      <div><strong>ชั้น ม.4 /</strong> ........</div>
+      <div><strong>เลขที่:</strong> ........</div>
+      <div><strong>วันที่:</strong> .... / .... / ........</div>
     </div>
 
-    <!-- Worksheet Title -->
-    <div class="ws-title-box">
-      <div class="ws-main-title">ใบงานที่ 2.2: เรื่อง การวิเคราะห์ข้อมูลและออกแบบระบบ (Context Diagram & UI)</div>
-      <div class="ws-sub-title">การวิเคราะห์ข้อกำหนดเชิงหน้าที่และการออกแบบแผนภาพบริบทระบบพาณิชย์อิเล็กทรอนิกส์ • (ว 4.2 ม.4/1)</div>
-    </div>
-
-    <!-- Instructions -->
     <div class="instructions-box">
-      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนวิเคราะห์ความต้องการเชิงหน้าที่ 8 ฟังก์ชันหลัก ออกแบบแผนภาพบริบท (Context Diagram) และกำหนดขอบเขตข้อมูลนำเข้า-ส่งออกของระบบ StyleHub ให้ถูกต้องตามมาตรฐานวิศวกรรมซอฟต์แวร์
+      <strong>คำชี้แจง:</strong> ให้นักเรียนวิเคราะห์ความต้องการเชิงหน้าที่ 8 ฟังก์ชันหลัก ออกแบบแผนภาพบริบท (Context Diagram) และกำหนดขอบเขตข้อมูลนำเข้า-ส่งออกของระบบ StyleHub ให้ถูกต้องตามมาตรฐานวิศวกรรมซอฟต์แวร์
     </div>
 
-    <!-- Scenario -->
+    
     <div class="scenario-box">
-      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #0284c7;"></i> สถานการณ์ปัญหา:</strong><br />
-      สืบเนื่องจากโครงงาน StyleHub ในขั้นตอนนี้ทีมผู้พัฒนาต้องเปลี่ยนความต้องการของผู้ใช้ให้กลายเป็นพิมพ์เขียวทางเทคนิค โดยต้องวิเคราะห์ฟังก์ชันการทำงานหลัก 8 ฟังก์ชัน และวาดแผนภาพบริบท (Context Diagram) แสดงการมีปฏิสัมพันธ์ระหว่างระบบกับหน่วยงานภายนอก (External Entities) พร้อมระบุขอบเขตข้อมูลนำเข้าและส่งออก
+      <strong>สถานการณ์ / บริบทการเรียนรู้:</strong> สืบเนื่องจากโครงงาน StyleHub ในขั้นตอนนี้ทีมผู้พัฒนาต้องเปลี่ยนความต้องการของผู้ใช้ให้กลายเป็นพิมพ์เขียวทางเทคนิค โดยต้องวิเคราะห์ฟังก์ชันการทำงานหลัก 8 ฟังก์ชัน และวาดแผนภาพบริบท (Context Diagram) แสดงการมีปฏิสัมพันธ์ระหว่างระบบกับหน่วยงานภายนอก (External Entities) พร้อมระบุขอบเขตข้อมูลนำเข้าและส่งออก
     </div>
-
     
 
-    <!-- Tasks -->
-    <div style="margin-top: 16px;">
-      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-pencil" style="color: #0284c7;"></i> ภารกิจและโจทย์ฝึกปฏิบัติ (10 ข้อ):
-      </div>
+    <div class="tasks-container">
       
-        <div class="task-item">
-          <div class="task-header">
-            <span>1. การวิเคราะห์ความต้องการเชิงหน้าที่ 8 ฟังก์ชันหลัก (Functional Requirements)</span>
-          </div>
-          <div class="task-desc">
-            อธิบายรายละเอียดการทำงานของ 8 ฟังก์ชันสำคัญในระบบ StyleHub อย่างกระชับและชัดเจน (4 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #0284c7; font-weight: 700;">ข้อที่ 1:</span>
+          <span>undefined</span>
         </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>2. การออกแบบแผนภาพบริบท (Context Diagram: DFD Level 0)</span>
-          </div>
-          <div class="task-desc">
-            ระบุกระบวนการหลัก (Process 0), เอนทิตีภายนอก (External Entities) และกระแสข้อมูล (Data Flows) เข้า-ออกจากระบบ (4 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-        </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>3. การกำหนดขอบเขตข้อมูลนำเข้า-ส่งออก (Input/Output Boundary)</span>
-          </div>
-          <div class="task-desc">
-            สรุปโครงสร้างข้อมูลนำเข้า (Input) และข้อมูลส่งออก (Output) ที่สำคัญของระบบ (2 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-        </div>
-      
-    </div>
-
-    <!-- Rubric -->
-    
-    <div style="margin-top: 20px; font-size: 10pt; color: #475569; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; line-height: 1.5;">
-      <strong><i class="fa-solid fa-award text-emerald-600 mr-1"></i> เกณฑ์การประเมินผลงาน:</strong><br />
-      เกณฑ์การประเมินแบบรูบริกส์ (Analytic Rubric) คะแนนเต็ม 10 คะแนน:<br />1. วิเคราะห์ 8 ฟังก์ชันหลัก (4 คะแนน): ครบถ้วน ถูกต้อง ชัดเจนตามหลัก Functional Requirements (ดีเยี่ยม 4.0 | ดี 3.0 | พอใช้ 2.0 | ปรับปรุง 1.0)<br />2. Context Diagram (4 คะแนน): ระบุ Process 0, Entities และ Data Flows เข้า-ออกได้ถูกต้องตามหลักสัญลักษณ์ DFD (ดีเยี่ยม 4.0 | ดี 3.0 | พอใช้ 2.0 | ปรับปรุง 1.0)<br />3. ขอบเขต Input/Output (2 คะแนน): จำแนกข้อมูลนำเข้าและส่งออกได้ถูกต้องสอดคล้องกับระบบ (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)
-    </div>
-    
-
-    <!-- Signature Footer -->
-    <div class="signature-row">
-      <div class="signature-col">
-        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
-        ( ........................................................... )<br />
-        วันที่ ...... / ...... / 2569
-      </div>
-      <div class="signature-col">
-        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
-        ( ครูปณิฏฐา บุญยงค์ )<br />
-        วันที่ ...... / ...... / 2569
-      </div>
-    </div>
-  
-      </div>
-    </div>
-    
-    <div class="worksheet-section page-break">
-      <div class="page-container">
         
-    <!-- Header -->
-    <div class="header-box">
-      <div class="header-left">
-        <div class="header-doc-type">
-          ใบงาน • วิทยาการคำนวณ ม.4
-        </div>
-        <div class="header-title">ใบงานที่ 2.3</div>
-        <div class="header-school">
-          กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี โรงเรียนกุดชุมวิทยาคม
-        </div>
-      </div>
-      <div class="score-badge">
-        <div class="score-badge-points">คะแนนเต็ม 10 คะแนน</div>
-        <div class="score-badge-field">คะแนนที่ได้ ............ คะแนน</div>
-      </div>
-    </div>
-
-    <!-- Student Info Grid -->
-    <div class="student-info-grid">
-      <div>ชื่อ-สกุล: ............................................................................</div>
-      <div>ชั้น: ม.4 / ........</div>
-      <div>เลขที่: ............</div>
-      <div>วันที่: ...... / ...... / 2569</div>
-    </div>
-
-    <!-- Worksheet Title -->
-    <div class="ws-title-box">
-      <div class="ws-main-title">ใบงานที่ 2.3: เรื่อง การพัฒนาโครงงานเพื่อแก้ปัญหาตามกระบวนการ SDLC ในบริบทจริง</div>
-      <div class="ws-sub-title">การบูรณาการแนวคิดเชิงคำนวณและวงจร SDLC ครบวงจรในการแก้ปัญหาของสถานศึกษาหรือชุมชน • (ว 4.2 ม.4/1)</div>
-    </div>
-
-    <!-- Instructions -->
-    <div class="instructions-box">
-      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนเลือกปัญหาจริงในสถานศึกษาหรือชุมชน (หรือศึกษากรณีศึกษาระบบ Science Lab Portal) แล้วจัดทำแผนพัฒนาโครงงานบูรณาการแนวคิดเชิงคำนวณและ SDLC ครบทั้ง 5 ขั้นตอน พร้อมเกณฑ์วัดความสำเร็จ
-    </div>
-
-    <!-- Scenario -->
-    <div class="scenario-box">
-      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #0284c7;"></i> สถานการณ์ปัญหา:</strong><br />
-      ห้องปฏิบัติการวิทยาศาสตร์ของโรงเรียนวังน้ำเย็นวิทยาคมประสบปัญหาอุปกรณ์ทดลองและสารเคมีสูญหายหรือชำรุดโดยไม่ทราบผู้รับผิดชอบ บันทึกการยืม-คืนด้วยสมุดกระดาษทำให้อ่านลายมือไม่ออกและตรวจเช็กสถานะอุปกรณ์ได้ล่าช้า กลุ่มสาระการเรียนรู้วิทยาศาสตร์ต้องการพัฒนาระบบ "Science Lab Portal" เพื่อบันทึกการยืม-คืนอุปกรณ์ด้วยระบบสแกน QR Code ผ่านสมาร์ตโฟน ให้นักเรียนวางแผนพัฒนาโครงงานนี้อย่างครบวงจร
-    </div>
-
-    
-
-    <!-- Tasks -->
-    <div style="margin-top: 16px;">
-      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-pencil" style="color: #0284c7;"></i> ภารกิจและโจทย์ฝึกปฏิบัติ (10 ข้อ):
-      </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>1. การสำรวจและระบุปัญหา (Problem Identification)</span>
-          </div>
-          <div class="task-desc">
-            ระบุสภาพปัญหา สาเหตุ ผลกระทบ และกลุ่มเป้าหมายผู้ใช้งานในบริบทจริง (2 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-        </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>2. การวางแผนและวิเคราะห์ระบบ (Planning & Analysis)</span>
-          </div>
-          <div class="task-desc">
-            กำหนดวัตถุประสงค์ ขอบเขต และข้อกำหนดความต้องการเชิงหน้าที่ของระบบ (2 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-        </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>3. การออกแบบระบบและส่วนประสานผู้ใช้ (Design & UI)</span>
-          </div>
-          <div class="task-desc">
-            ออกแบบโครงสร้างฐานข้อมูล ผังงานระบบ และแบบร่างหน้าจอผู้ใช้ (Wireframe) (2 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-        </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>4. การพัฒนาและทดสอบระบบ (Implementation & Testing)</span>
-          </div>
-          <div class="task-desc">
-            วางแผนขั้นตอนการเขียนโปรแกรมและการทดสอบระบบเพื่อหาข้อบกพร่อง (2 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-        </div>
-      
-        <div class="task-item">
-          <div class="task-header">
-            <span>5. การประเมินผลและการบำรุงรักษา (Evaluation & Maintenance)</span>
-          </div>
-          <div class="task-desc">
-            กำหนดตัวชี้วัดความสำเร็จของโครงงาน (KPI) และแผนการดูแลรักษาระบบอย่างต่อเนื่อง (2 คะแนน)
-          </div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-          <div class="writing-line"></div>
-        </div>
-      
-    </div>
-
-    <!-- Rubric -->
-    
-    <div style="margin-top: 20px; font-size: 10pt; color: #475569; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; line-height: 1.5;">
-      <strong><i class="fa-solid fa-award text-emerald-600 mr-1"></i> เกณฑ์การประเมินผลงาน:</strong><br />
-      เกณฑ์การประเมินแบบรูบริกส์ (Analytic Rubric) คะแนนเต็ม 10 คะแนน (5 ด้าน ด้านละ 2 คะแนน):<br />1. สำรวจและระบุปัญหา (2 คะแนน): วิเคราะห์ปัญหา สาเหตุ ผลกระทบ และกลุ่มเป้าหมายได้ชัดเจน (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)<br />2. วางแผนและวิเคราะห์ (2 คะแนน): กำหนดวัตถุประสงค์ ขอบเขต และฟังก์ชันงานได้สมบูรณ์ (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)<br />3. ออกแบบระบบและ UI (2 คะแนน): ออกแบบฐานข้อมูล ผังงาน และ Wireframe ได้ถูกต้องตามหลักวิชาชีพ (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)<br />4. พัฒนาและทดสอบ (2 คะแนน): กำหนดแผนการพัฒนาและการทดสอบระบบรอบด้าน (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)<br />5. ประเมินผลและบำรุงรักษา (2 คะแนน): กำหนดตัวชี้วัด KPI ชัดเจนและแผนบำรุงรักษาปฏิบัติได้จริง (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)
-    </div>
-    
-
-    <!-- Signature Footer -->
-    <div class="signature-row">
-      <div class="signature-col">
-        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
-        ( ........................................................... )<br />
-        วันที่ ...... / ...... / 2569
-      </div>
-      <div class="signature-col">
-        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
-        ( ครูปณิฏฐา บุญยงค์ )<br />
-        วันที่ ...... / ...... / 2569
-      </div>
-    </div>
-  
-      </div>
-    </div>
-    
-    <div class="worksheet-section page-break">
-      <div class="page-container">
         
-    <!-- Header -->
-    <div class="header-box">
-      <div class="header-left">
-        <div class="header-doc-type">
-          ใบงานปฏิบัติ • วิทยาการคำนวณ ม.4
-        </div>
-        <div class="header-title">ใบงานปฏิบัติที่ 1.4</div>
-        <div class="header-school">
-          กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี โรงเรียนกุดชุมวิทยาคม
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
+          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
         </div>
       </div>
-      <div class="score-badge">
-        <div class="score-badge-points">คะแนนเต็ม 10 คะแนน</div>
-        <div class="score-badge-field">คะแนนที่ได้ ............ คะแนน</div>
-      </div>
-    </div>
-
-    <!-- Student Info Grid -->
-    <div class="student-info-grid">
-      <div>ชื่อ-สกุล: ............................................................................</div>
-      <div>ชั้น: ม.4 / ........</div>
-      <div>เลขที่: ............</div>
-      <div>วันที่: ...... / ...... / 2569</div>
-    </div>
-
-    <!-- Worksheet Title -->
-    <div class="ws-title-box">
-      <div class="ws-main-title">ใบงานปฏิบัติที่ 1.4: การออกแบบผังงานแบบลำดับ (Sequence Flowchart)</div>
-      <div class="ws-sub-title">การออกแบบขั้นตอนวิธีและการเขียนผังงานแบบลำดับ (Sequence) ด้วย Flowgorithm จำนวน 10 ข้อ • (ว 4.2 ม.4/1)</div>
-    </div>
-
-    <!-- Instructions -->
-    <div class="instructions-box">
-      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนอ่านสถานการณ์ที่กำหนดให้ทั้ง 10 ข้อ วิเคราะห์ขั้นตอนการทำงาน และเขียนผังงานแบบลำดับ (Sequence Flowchart) โดยใช้โปรแกรม Flowgorithm หรือวาดผังงานด้วยสัญลักษณ์มาตรฐาน ANSI ให้ถูกต้อง จากนั้นบันทึกเป็นไฟล์ Flowgorithm (.fprg) หรือส่งออกเป็นรูปภาพ (.png, .jpg) เพื่ออัปโหลดส่งในระบบ
-    </div>
-
-    <!-- Scenario -->
-    <div class="scenario-box">
-      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #0284c7;"></i> สถานการณ์ปัญหา:</strong><br />
-      การออกแบบผังงานแบบลำดับ (Sequence Flowchart) เป็นการทำงานที่มีลำดับการประมวลผลจากบนลงล่างอย่างเป็นเส้นตรง ไม่มีการข้ามขั้นตอนและไม่มีการวนซ้ำ เหมาะสำหรับงานคำนวณสูตรคณิตศาสตร์และประมวลผลทั่วไป ให้นักเรียนฝึกออกแบบขั้นตอนวิธีและผังงานแก้ปัญหา 10 สถานการณ์
-    </div>
-
     
-    <!-- Flowgorithm Lab Guide Tip -->
-    <div style="background: rgba(2, 132, 199, 0.08); border: 1.5px solid #0284c7; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 10.5pt; color: #0f172a; line-height: 1.5;">
-      <strong><i class="fa-solid fa-laptop-code text-blue-600 mr-1"></i> คำแนะนำในการส่งงาน:</strong>
-      นักเรียนสามารถสร้างและจำลองผังงานในคอมพิวเตอร์ด้วยโปรแกรม <strong>Flowgorithm</strong> จากนั้นกดบันทึกเป็นไฟล์ <strong>.fprg</strong> หรือคลิกเมนู <em>เครื่องมือ (Tools) &gt; บันทึกภาพผังงาน (Save Image)</em> เพื่อนำไฟล์รูปภาพผังงาน (.png, .jpg) มาอัปโหลดส่งบนเว็บไซต์บทเรียนออนไลน์ หรือวาดลงในกรอบแบบฝึกหัดด้านล่าง
-    </div>
-    
-
-    <!-- Tasks -->
-    <div style="margin-top: 16px;">
-      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-pencil" style="color: #0284c7;"></i> ภารกิจและโจทย์ฝึกปฏิบัติ (10 ข้อ):
-      </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 1 โปรแกรมคำนวณพื้นที่สี่เหลี่ยมผืนผ้า (ง่าย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับค่าความกว้าง (width) และความยาว (length) จากนั้นคำนวณพื้นที่ด้วยสูตร: พื้นที่ = กว้าง × ยาว และแสดงผลลัพธ์พื้นที่ที่คำนวณได้
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #0284c7; font-weight: 700;">ข้อที่ 2:</span>
+          <span>undefined</span>
         </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 2 โปรแกรมคำนวณค่าเฉลี่ยคะแนนสอบ (ง่าย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับคะแนนสอบ 3 วิชา ได้แก่ คณิตศาสตร์, วิทยาศาสตร์ และภาษาอังกฤษ จากนั้นคำนวณค่าเฉลี่ย: ค่าเฉลี่ย = ผลรวมคะแนน ÷ 3 และแสดงผลคะแนนเฉลี่ย
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 3 โปรแกรมคำนวณอายุ (ง่าย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับปี พ.ศ. เกิด ของผู้ใช้ จากนั้นนำปีปัจจุบัน พ.ศ. 2569 ลบด้วยปีเกิด: อายุ = 2569 − ปีเกิด และแสดงผลอายุของผู้ใช้
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 4 โปรแกรมคำนวณราคาสินค้ารวม (ง่าย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับชื่อสินค้า, ราคาต่อชิ้น และจำนวนสินค้าที่ซื้อ จากนั้นคำนวณราคารวม: ราคารวม = ราคาต่อชิ้น × จำนวน และแสดงชื่อสินค้า จำนวน และราคาสุทธิ
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 5 โปรแกรมแปลงอุณหภูมิ (ปานกลาง)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับค่าอุณหภูมิหน่วยองศาเซลเซียส (celsius) จากนั้นแปลงเป็นองศาฟาเรนไฮต์: F = (C × 9/5) + 32 และแสดงผลลัพธ์
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 6 โปรแกรมคำนวณค่าไฟฟ้า (ปานกลาง)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับจำนวนหน่วยไฟฟ้าที่ใช้ และราคาค่าไฟฟ้าต่อหน่วย จากนั้นคำนวณ: ค่าไฟฟ้า = จำนวนหน่วย × ราคาต่อหน่วย และแสดงจำนวนหน่วยพร้อมยอดเงินที่ต้องชำระ
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 7 โปรแกรมคำนวณ BMI (ดัชนีมวลกาย) (ปานกลาง)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับน้ำหนักตัว (กก.) และส่วนสูง (เมตร) จากผู้ใช้ จากนั้นคำนวณดัชนีมวลกาย: BMI = น้ำหนัก ÷ (ส่วนสูง × ส่วนสูง) และแสดงผลลัพธ์
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 8 โปรแกรมคำนวณเงินทอน (ปานกลาง)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับราคาสินค้าและจำนวนเงินที่ลูกค้าจ่าย คำนวณเงินทอน: เงินทอน = เงินที่จ่าย − ราคาสินค้า และแสดงราคาสินค้า เงินที่รับมา และเงินทอน
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 9 โปรแกรมคำนวณระยะทางการเดินทาง (ท้าทาย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับความเร็วเฉลี่ย (กม./ชม.) และเวลาในการเดินทาง (ชั่วโมง) จากนั้นคำนวณระยะทาง: ระยะทาง = ความเร็ว × เวลา และแสดงผลลัพธ์
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 10 โปรแกรมคำนวณเงินเดือนสุทธิ (ท้าทาย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับชื่อพนักงาน เงินเดือน และค่าล่วงเวลา นำเงินเดือนรวมค่าล่วงเวลา แล้วหักค่าใช้จ่ายประจำเดือน 1,000 บาท: เงินเดือนสุทธิ = เงินเดือน + ค่าล่วงเวลา − 1,000 แสดงชื่อและเงินเดือนสุทธิ
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-    </div>
-
-    <!-- Rubric -->
-    
-    <div style="margin-top: 20px; font-size: 10pt; color: #475569; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; line-height: 1.5;">
-      <strong><i class="fa-solid fa-award text-emerald-600 mr-1"></i> เกณฑ์การประเมินผลงาน:</strong><br />
-      เกณฑ์การประเมินแบบรูบริกส์ (Analytic Rubric) คะแนนเต็ม 10 คะแนน (ข้อละ 1 คะแนน):<br />1. การใช้สัญลักษณ์ผังงาน ANSI ถูกต้องตามหน้าที่ (เริ่ม/จบ, รับค่า, ประมวลผล, แสดงผล) (0.5 คะแนน/ข้อ)<br />2. ความถูกต้องของลำดับขั้นตอน สูตรการคำนวณ และทิศทางลูกศรเชื่อมโยง (0.5 คะแนน/ข้อ)
-    </div>
-    
-
-    <!-- Signature Footer -->
-    <div class="signature-row">
-      <div class="signature-col">
-        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
-        ( ........................................................... )<br />
-        วันที่ ...... / ...... / 2569
-      </div>
-      <div class="signature-col">
-        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
-        ( ครูปณิฏฐา บุญยงค์ )<br />
-        วันที่ ...... / ...... / 2569
-      </div>
-    </div>
-  
-      </div>
-    </div>
-    
-    <div class="worksheet-section page-break">
-      <div class="page-container">
         
-    <!-- Header -->
-    <div class="header-box">
-      <div class="header-left">
-        <div class="header-doc-type">
-          ใบงานปฏิบัติ • วิทยาการคำนวณ ม.4
-        </div>
-        <div class="header-title">ใบงานปฏิบัติที่ 1.5</div>
-        <div class="header-school">
-          กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี โรงเรียนกุดชุมวิทยาคม
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
+          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
         </div>
       </div>
-      <div class="score-badge">
-        <div class="score-badge-points">คะแนนเต็ม 10 คะแนน</div>
-        <div class="score-badge-field">คะแนนที่ได้ ............ คะแนน</div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #0284c7; font-weight: 700;">ข้อที่ 3:</span>
+          <span>undefined</span>
+        </div>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
+          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
+        </div>
       </div>
-    </div>
-
-    <!-- Student Info Grid -->
-    <div class="student-info-grid">
-      <div>ชื่อ-สกุล: ............................................................................</div>
-      <div>ชั้น: ม.4 / ........</div>
-      <div>เลขที่: ............</div>
-      <div>วันที่: ...... / ...... / 2569</div>
-    </div>
-
-    <!-- Worksheet Title -->
-    <div class="ws-title-box">
-      <div class="ws-main-title">ใบงานปฏิบัติที่ 1.5: การออกแบบผังงานแบบมีเงื่อนไข (Selection Flowchart)</div>
-      <div class="ws-sub-title">การออกแบบผังงานการตัดสินใจแบบ 2 ทางเลือก (If-Then-Else) ด้วย Flowgorithm จำนวน 10 ข้อ • (ว 4.2 ม.4/1)</div>
-    </div>
-
-    <!-- Instructions -->
-    <div class="instructions-box">
-      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนอ่านสถานการณ์ที่กำหนดให้ทั้ง 10 ข้อ วิเคราะห์ลำดับขั้นตอนการทำงาน และเขียนผังงานโดยใช้สัญลักษณ์มาตรฐาน ANSI พร้อมระบุเงื่อนไขและการแตกกิ่ง True (จริง) และ False (เท็จ) ให้ถูกต้อง โดยใช้โปรแกรม Flowgorithm หรือวาดผังงาน จากนั้นอัปโหลดไฟล์ Flowgorithm (.fprg) หรือรูปภาพ (.png, .jpg) ส่งในระบบ
-    </div>
-
-    <!-- Scenario -->
-    <div class="scenario-box">
-      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #0284c7;"></i> สถานการณ์ปัญหา:</strong><br />
-      การออกแบบผังงานแบบมีเงื่อนไข (Selection Flowchart) มีจุดตัดสินใจ (Decision Symbol) สี่เหลี่ยมขนมเปียกปูน เพื่อตรวจสอบเงื่อนไขทางตรรกศาสตร์ และแยกสายการทำงานออกเป็น 2 ทิศทาง คือ กรณีเงื่อนไขเป็นจริง (True) และกรณีเงื่อนไขเป็นเท็จ (False) ให้นักเรียนฝึกออกแบบระบบตัดสินใจ 10 สถานการณ์
-    </div>
-
     
-    <!-- Flowgorithm Lab Guide Tip -->
-    <div style="background: rgba(2, 132, 199, 0.08); border: 1.5px solid #0284c7; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 10.5pt; color: #0f172a; line-height: 1.5;">
-      <strong><i class="fa-solid fa-laptop-code text-blue-600 mr-1"></i> คำแนะนำในการส่งงาน:</strong>
-      นักเรียนสามารถสร้างและจำลองผังงานในคอมพิวเตอร์ด้วยโปรแกรม <strong>Flowgorithm</strong> จากนั้นกดบันทึกเป็นไฟล์ <strong>.fprg</strong> หรือคลิกเมนู <em>เครื่องมือ (Tools) &gt; บันทึกภาพผังงาน (Save Image)</em> เพื่อนำไฟล์รูปภาพผังงาน (.png, .jpg) มาอัปโหลดส่งบนเว็บไซต์บทเรียนออนไลน์ หรือวาดลงในกรอบแบบฝึกหัดด้านล่าง
-    </div>
-    
-
-    <!-- Tasks -->
-    <div style="margin-top: 16px;">
-      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-pencil" style="color: #0284c7;"></i> ภารกิจและโจทย์ฝึกปฏิบัติ (10 ข้อ):
-      </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 1 ระบบตรวจสอบการสอบผ่าน (ง่าย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับคะแนนสอบจากผู้ใช้ หากได้คะแนนตั้งแต่ 50 คะแนนขึ้นไป (คะแนน ≥ 50) แสดงข้อความ "สอบผ่าน" หากต่ำกว่า 50 แสดง "สอบไม่ผ่าน"
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 2 ระบบตรวจสอบอายุผู้มีสิทธิเลือกตั้ง (ง่าย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับอายุของบุคคล หากมีอายุตั้งแต่ 18 ปีขึ้นไป (อายุ ≥ 18) แสดงข้อความ "มีสิทธิเลือกตั้ง" หากต่ำกว่า 18 แสดง "ไม่มีสิทธิเลือกตั้ง"
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 3 ระบบคำนวณส่วนลดสินค้า (ง่าย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            หากลูกค้าซื้อสินค้าตั้งแต่ 1,000 บาทขึ้นไป (ราคา ≥ 1,000) ได้รับส่วนลด 10% หากไม่ถึง 1,000 ไม่ได้รับส่วนลด คำนวณราคาสุทธิที่ต้องจ่าย
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 4 ระบบตรวจสอบอุณหภูมิ (ง่าย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับค่าอุณหภูมิภายในห้องเรียน หากอุณหภูมิมากกว่า 30 องศาเซลเซียส (อุณหภูมิ > 30) แสดง "อากาศร้อน" หากไม่เกิน 30 แสดง "อุณหภูมิปกติ"
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 5 ระบบตรวจสอบเลขคู่และเลขคี่ (ปานกลาง)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับจำนวนเต็มจากผู้ใช้ ตรวจสอบว่าหารด้วย 2 เหลือเศษ 0 หรือไม่ (จำนวน MOD 2 = 0) หากเป็น 0 แสดง "เลขคู่" หากมีเศษ แสดง "เลขคี่"
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 6 ระบบตรวจสอบรหัสผ่าน (ปานกลาง)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            กำหนดรหัสผ่านถูกต้องคือ 123456 เมื่อผู้ใช้ป้อนรหัสผ่าน หากตรงกันแสดง "เข้าสู่ระบบสำเร็จ" หากไม่ตรงแสดง "รหัสผ่านไม่ถูกต้อง"
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 7 ระบบตรวจสอบระดับน้ำในถัง (ปานกลาง)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับค่าระดับน้ำจากเซนเซอร์ หากระดับน้ำต่ำกว่า 20 เซนติเมตร (ระดับน้ำ < 20) เปิดปั๊มน้ำ หากตั้งแต่ 20 ซม. ขึ้นไป ให้ปิดปั๊มน้ำ
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 8 ระบบตรวจสอบการเข้าแถวของนักเรียน (ปานกลาง)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับเวลาที่นักเรียนมาถึง หากมาถึงก่อนหรือเวลา 07.50 น. (เวลา ≤ 07:50) แสดง "มาทันเวลา" หากมาหลัง 07.50 น. แสดง "มาสาย"
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 9 ระบบควบคุมพัดลมอัตโนมัติ (ท้าทาย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับค่าอุณหภูมิจากเซนเซอร์ หากอุณหภูมิตั้งแต่ 28 องศาเซลเซียสขึ้นไป (อุณหภูมิ ≥ 28) ให้เปิดพัดลม หากต่ำกว่า 28 ให้ปิดพัดลม พร้อมแสดงสถานะ
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 10 ระบบตรวจสอบยอดเงินคงเหลือ (ท้าทาย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับยอดเงินคงเหลือและจำนวนเงินที่ต้องการถอน หากเงินถอน ≤ ยอดคงเหลือ แสดง "ถอนเงินสำเร็จ" และแสดงยอดเงินคงเหลือใหม่ หากเงินถอน > ยอดคงเหลือ แสดง "ยอดเงินไม่เพียงพอ"
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
     </div>
 
-    <!-- Rubric -->
-    
-    <div style="margin-top: 20px; font-size: 10pt; color: #475569; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; line-height: 1.5;">
-      <strong><i class="fa-solid fa-award text-emerald-600 mr-1"></i> เกณฑ์การประเมินผลงาน:</strong><br />
-      เกณฑ์การประเมินแบบรูบริกส์ (Analytic Rubric) คะแนนเต็ม 10 คะแนน (ข้อละ 1 คะแนน):<br />1. การระบุเงื่อนไขในสัญลักษณ์ Decision ถูกต้องตามตรรกะข้อกำหนด (0.5 คะแนน/ข้อ)<br />2. การเชื่อมโยงเส้นทางการทำงานกิ่ง True และ False ชัดเจน และจุดรวมเส้นทางสมบูรณ์ (0.5 คะแนน/ข้อ)
-    </div>
-    
-
-    <!-- Signature Footer -->
     <div class="signature-row">
       <div class="signature-col">
-        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
-        ( ........................................................... )<br />
-        วันที่ ...... / ...... / 2569
+        ลงชื่อ ............................................................ นักเรียนผู้ส่งงาน<br />
+        (............................................................)<br />
+        วันที่ ......../......../............
       </div>
       <div class="signature-col">
-        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
-        ( ครูปณิฏฐา บุญยงค์ )<br />
-        วันที่ ...... / ...... / 2569
+        ลงชื่อ ............................................................ ครูผู้สอน/ผู้ตรวจ<br />
+        (นางสาวปณิฏฐา บุญยงค์)<br />
+        ผลการประเมิน: [ &nbsp; ] ผ่าน &nbsp; [ &nbsp; ] ปรับปรุง &nbsp; คะแนนได้: ........ / 10
       </div>
     </div>
   
@@ -1530,323 +735,128 @@
     <div class="worksheet-section ">
       <div class="page-container">
         
-    <!-- Header -->
     <div class="header-box">
       <div class="header-left">
         <div class="header-doc-type">
-          ใบงานปฏิบัติ • วิทยาการคำนวณ ม.4
+          ใบงาน • วิทยาการคำนวณ ม.4
         </div>
-        <div class="header-title">ใบงานปฏิบัติที่ 1.6</div>
+        <div class="header-title">ใบงานที่ 2.3: ใบงานที่ 2.3: เรื่อง การพัฒนาโครงงานเพื่อแก้ปัญหาตามกระบวนการ SDLC ในบริบทจริง</div>
         <div class="header-school">
           กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี โรงเรียนกุดชุมวิทยาคม
         </div>
       </div>
       <div class="score-badge">
-        <div class="score-badge-points">คะแนนเต็ม 10 คะแนน</div>
-        <div class="score-badge-field">คะแนนที่ได้ ............ คะแนน</div>
+        <div class="score-badge-points">10 คะแนน</div>
+        <div class="score-badge-label">คะแนนเต็ม</div>
       </div>
     </div>
 
-    <!-- Student Info Grid -->
-    <div class="student-info-grid">
-      <div>ชื่อ-สกุล: ............................................................................</div>
-      <div>ชั้น: ม.4 / ........</div>
-      <div>เลขที่: ............</div>
-      <div>วันที่: ...... / ...... / 2569</div>
+    <div class="student-info-bar">
+      <div><strong>ชื่อ-สกุล:</strong> ............................................................</div>
+      <div><strong>ชั้น ม.4 /</strong> ........</div>
+      <div><strong>เลขที่:</strong> ........</div>
+      <div><strong>วันที่:</strong> .... / .... / ........</div>
     </div>
 
-    <!-- Worksheet Title -->
-    <div class="ws-title-box">
-      <div class="ws-main-title">ใบงานปฏิบัติที่ 1.6: การเขียนผังงานแบบหลายทางเลือก (Multiple Alternatives Flowchart)</div>
-      <div class="ws-sub-title">การออกแบบผังงานเงื่อนไขซับซ้อนหลายทางเลือก (Nested Selection / Multi-Branch) ด้วย Flowgorithm จำนวน 10 ข้อ • (ว 4.2 ม.4/1)</div>
-    </div>
-
-    <!-- Instructions -->
     <div class="instructions-box">
-      <strong><i class="fa-solid fa-circle-info mr-1" style="color: #f59e0b;"></i> คำชี้แจง:</strong> ให้นักเรียนอ่านสถานการณ์ที่กำหนดให้ทั้ง 10 ข้อ วิเคราะห์เงื่อนไขและทางเลือกในการทำงาน จากนั้นเขียนผังงาน (Flowchart) โดยต้องมีทางเลือกอย่างน้อย 3 ทางเลือกขึ้นไป พร้อมแสดงผลลัพธ์ให้ถูกต้อง โดยใช้โปรแกรม Flowgorithm หรือวาดผังงานมาตรฐาน ANSI จากนั้นบันทึกเป็นไฟล์ Flowgorithm (.fprg) หรือส่งออกเป็นรูปภาพ (.png, .jpg) เพื่ออัปโหลดส่งในระบบ
+      <strong>คำชี้แจง:</strong> ให้นักเรียนเลือกปัญหาจริงในสถานศึกษาหรือชุมชน (หรือศึกษากรณีศึกษาระบบ Science Lab Portal) แล้วจัดทำแผนพัฒนาโครงงานบูรณาการแนวคิดเชิงคำนวณและ SDLC ครบทั้ง 5 ขั้นตอน พร้อมเกณฑ์วัดความสำเร็จ
     </div>
 
-    <!-- Scenario -->
+    
     <div class="scenario-box">
-      <strong><i class="fa-solid fa-lightbulb mr-1" style="color: #0284c7;"></i> สถานการณ์ปัญหา:</strong><br />
-      การเขียนผังงานแบบหลายทางเลือก (Multiple Alternatives Flowchart) มีการตรวจสอบเงื่อนไขที่ซับซ้อนหรือต่อเนื่องกันเป็นลำดับขั้น (Nested If) เพื่อเลือกการปฏิบัติงานที่มีตั้งแต่ 3 ทางเลือกขึ้นไป ให้นักเรียนฝึกวิเคราะห์โจทย์และเขียนผังงาน 10 สถานการณ์
-    </div>
-
-    
-    <!-- Flowgorithm Lab Guide Tip -->
-    <div style="background: rgba(2, 132, 199, 0.08); border: 1.5px solid #0284c7; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 10.5pt; color: #0f172a; line-height: 1.5;">
-      <strong><i class="fa-solid fa-laptop-code text-blue-600 mr-1"></i> คำแนะนำในการส่งงาน:</strong>
-      นักเรียนสามารถสร้างและจำลองผังงานในคอมพิวเตอร์ด้วยโปรแกรม <strong>Flowgorithm</strong> จากนั้นกดบันทึกเป็นไฟล์ <strong>.fprg</strong> หรือคลิกเมนู <em>เครื่องมือ (Tools) &gt; บันทึกภาพผังงาน (Save Image)</em> เพื่อนำไฟล์รูปภาพผังงาน (.png, .jpg) มาอัปโหลดส่งบนเว็บไซต์บทเรียนออนไลน์ หรือวาดลงในกรอบแบบฝึกหัดด้านล่าง
+      <strong>สถานการณ์ / บริบทการเรียนรู้:</strong> ห้องปฏิบัติการวิทยาศาสตร์ของโรงเรียนวังน้ำเย็นวิทยาคมประสบปัญหาอุปกรณ์ทดลองและสารเคมีสูญหายหรือชำรุดโดยไม่ทราบผู้รับผิดชอบ บันทึกการยืม-คืนด้วยสมุดกระดาษทำให้อ่านลายมือไม่ออกและตรวจเช็กสถานะอุปกรณ์ได้ล่าช้า กลุ่มสาระการเรียนรู้วิทยาศาสตร์ต้องการพัฒนาระบบ "Science Lab Portal" เพื่อบันทึกการยืม-คืนอุปกรณ์ด้วยระบบสแกน QR Code ผ่านสมาร์ตโฟน ให้นักเรียนวางแผนพัฒนาโครงงานนี้อย่างครบวงจร
     </div>
     
 
-    <!-- Tasks -->
-    <div style="margin-top: 16px;">
-      <div style="font-family: 'Kanit', sans-serif; font-size: 12.5pt; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-pencil" style="color: #0284c7;"></i> ภารกิจและโจทย์ฝึกปฏิบัติ (10 ข้อ):
+    <div class="tasks-container">
+      
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #0284c7; font-weight: 700;">ข้อที่ 1:</span>
+          <span>undefined</span>
+        </div>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
+          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
+        </div>
       </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 1 โปรแกรมแปลผลระดับผลการเรียน (3 ทางเลือกขึ้นไป)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับคะแนนสอบ: 80–100 แสดง "ระดับดีเยี่ยม", 70–79 แสดง "ระดับดี", 60–69 แสดง "ระดับปานกลาง", 50–59 แสดง "ระดับผ่าน", ต่ำกว่า 50 แสดง "ไม่ผ่าน"
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #0284c7; font-weight: 700;">ข้อที่ 2:</span>
+          <span>undefined</span>
         </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 2 โปรแกรมตรวจสอบระดับอุณหภูมิ (3 ทางเลือกขึ้นไป)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
           </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับค่าอุณหภูมิ: ต่ำกว่า 20 แสดง "อากาศเย็น", 20–29 แสดง "อากาศปกติ", 30–34 แสดง "อากาศร้อน", ตั้งแต่ 35 ขึ้นไป แสดง "อากาศร้อนมาก"
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
         </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 3 โปรแกรมคำนวณค่าจัดส่งสินค้า (3 ทางเลือกขึ้นไป)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับน้ำหนักสินค้า (กก.): ไม่เกิน 1 กก. ค่าส่ง 30 บาท, 1-3 กก. ค่าส่ง 50 บาท, 3-5 กก. ค่าส่ง 70 บาท, มากกว่า 5 กก. ค่าส่ง 100 บาท แสดงน้ำหนักและค่าจัดส่ง
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
+      </div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #0284c7; font-weight: 700;">ข้อที่ 3:</span>
+          <span>undefined</span>
         </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 4 โปรแกรมเลือกเมนูเครื่องดื่ม (4 ทางเลือก)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
           </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับหมายเลขเมนู: 1 แสดง "กาแฟ" 40 บาท, 2 แสดง "ชาเขียว" 35 บาท, 3 แสดง "โกโก้" 35 บาท, 4 แสดง "นมสด" 30 บาท แสดงชื่อเครื่องดื่มและราคา
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
         </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 5 โปรแกรมคำนวณค่าโดยสารรถโดยสาร (4 ทางเลือก)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับระยะทาง (กม.): ไม่เกิน 5 กม. ค่าโดยสาร 10 บาท, 5-10 กม. 15 บาท, 10-20 กม. 25 บาท, มากกว่า 20 กม. 35 บาท แสดงระยะทางและค่าโดยสาร
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
+      </div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #0284c7; font-weight: 700;">ข้อที่ 4:</span>
+          <span>undefined</span>
         </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 6 โปรแกรมคำนวณส่วนลดสมาชิก (4 ทางเลือก)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
           </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับราคาสินค้าและประเภทสมาชิก: Silver ลด 5%, Gold ลด 10%, Platinum ลด 15%, บุคคลทั่วไป ไม่ลด แสดงประเภทสมาชิก ส่วนลด และราคาสุทธิ
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
         </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 7 โปรแกรมแปลงคะแนนเป็นเกรด (5 ทางเลือกขึ้นไป)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับคะแนนสอบ แปลงเป็นเกรด: 80–100 ได้เกรด 4, 75–79 ได้ 3.5, 70–74 ได้ 3, 65–69 ได้ 2.5, 60–64 ได้ 2, 55–59 ได้ 1.5, 50–54 ได้ 1, ต่ำกว่า 50 ได้เกรด 0 แสดงคะแนนและเกรด
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
+      </div>
+    
+      <div class="task-item">
+        <div class="task-header">
+          <span style="color: #0284c7; font-weight: 700;">ข้อที่ 5:</span>
+          <span>undefined</span>
         </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 8 โปรแกรมคำนวณค่าบริการอินเทอร์เน็ต (ท้าทาย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
+        
+        
+        <div class="student-work-area">
+          <div style="font-size: 9.5pt; font-weight: 600; color: #64748b; margin-bottom: 4px;">
+            พื้นที่บันทึกคำตอบ / ผลการวิเคราะห์:
           </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับหมายเลขแพ็กเกจ: 1 ความเร็ว 100 Mbps (399 บ./ด.), 2 ความเร็ว 300 Mbps (599 บ./ด.), 3 ความเร็ว 500 Mbps (799 บ./ด.), 4 ความเร็ว 1 Gbps (999 บ./ด.) แสดงชื่อ ความเร็ว และค่าบริการ
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
+          <div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div><div class="writing-line"></div>
         </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 9 โปรแกรมคำนวณค่าจอดรถ (ท้าทาย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            รับชั่วโมงจอดรถ: ไม่เกิน 1 ชม. ฟรี, 1-3 ชม. คิด 20 บาท, 3-5 ชม. คิด 40 บาท, มากกว่า 5 ชม. คิด 60 บาท แสดงชั่วโมงและค่าจอดรถที่ต้องชำระ
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
-        <div class="task-item" style="margin-bottom: 22px; page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; background: #ffffff;">
-          <div class="task-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 10px;">
-            <span style="font-size: 11.5pt; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-code-branch" style="color: #0284c7; margin-right: 6px;"></i>ข้อ 10 โปรแกรมระบบตู้จำหน่ายสินค้าอัตโนมัติ (ท้าทาย)</span>
-            <span style="font-size: 9pt; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 3px 10px; border-radius: 9999px;">1.0 คะแนน</span>
-          </div>
-          <div class="task-desc" style="font-size: 11pt; color: #1e293b; margin-bottom: 12px; line-height: 1.5; background: #f8fafc; padding: 10px 12px; border-radius: 6px; border-left: 3.5px solid #0284c7;">
-            เมนู 1 น้ำเปล่า 10 บ., 2 น้ำอัดลม 15 บ., 3 นมกล่อง 12 บ., 4 ขนมปัง 20 บ., 5 มันฝรั่งทอด 25 บ. รับหมายเลขสินค้าและเงินที่ชำระ (เงินจ่าย ≥ ราคา) คำนวณเงินทอน แสดงสินค้า ราคา และเงินทอน
-          </div>
-          
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div><strong>ข้อมูลนำเข้า (Input):</strong> ...........................................................</div>
-            <div><strong>ข้อมูลส่งออก (Output):</strong> ...........................................................</div>
-          </div>
-          <div style="font-size: 10pt; color: #475569; margin-bottom: 10px;">
-            <strong>การประมวลผล / เงื่อนไข (Process / Decision):</strong> ............................................................................................................
-          </div>
-
-          <div style="border: 1.5px dashed #cbd5e1; border-radius: 8px; background: #fafafa; padding: 20px 14px; text-align: center; min-height: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #94a3b8; font-size: 10pt;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 18pt; color: #94a3b8; margin-bottom: 6px;"></i>
-            <span>[ พื้นที่เขียนผังงาน Flowchart หรือบันทึกชื่อไฟล์ Flowgorithm / ภาพผังงานที่แนบส่ง ]</span>
-            <span style="font-size: 8.5pt; color: #64748b; margin-top: 4px;">* หากส่งผ่านระบบ: บันทึกไฟล์ <strong>.fprg</strong> หรือรูปภาพ <strong>.png/.jpg</strong> แล้วอัปโหลดส่งในเว็บ *</span>
-          </div>
-        </div>
-      
+      </div>
+    
     </div>
 
-    <!-- Rubric -->
-    
-    <div style="margin-top: 20px; font-size: 10pt; color: #475569; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; line-height: 1.5;">
-      <strong><i class="fa-solid fa-award text-emerald-600 mr-1"></i> เกณฑ์การประเมินผลงาน:</strong><br />
-      เกณฑ์การประเมินแบบรูบริกส์ (Analytic Rubric) คะแนนเต็ม 10 คะแนน (ข้อละ 1 คะแนน):<br />1. การจัดลำดับเงื่อนไข (Conditional Hierarchy) และครอบคลุมทุกช่วงค่าอย่างไม่กำกวม (0.5 คะแนน/ข้อ)<br />2. ความถูกต้องของโครงสร้างผังงานหลายทางเลือก (Nested Decision) และการแสดงผลลัพธ์ (0.5 คะแนน/ข้อ)
-    </div>
-    
-
-    <!-- Signature Footer -->
     <div class="signature-row">
       <div class="signature-col">
-        ลงชื่อ ........................................................... นักเรียนผู้ส่งงาน<br />
-        ( ........................................................... )<br />
-        วันที่ ...... / ...... / 2569
+        ลงชื่อ ............................................................ นักเรียนผู้ส่งงาน<br />
+        (............................................................)<br />
+        วันที่ ......../......../............
       </div>
       <div class="signature-col">
-        ลงชื่อ ........................................................... ครูผู้ประเมิน<br />
-        ( ครูปณิฏฐา บุญยงค์ )<br />
-        วันที่ ...... / ...... / 2569
+        ลงชื่อ ............................................................ ครูผู้สอน/ผู้ตรวจ<br />
+        (นางสาวปณิฏฐา บุญยงค์)<br />
+        ผลการประเมิน: [ &nbsp; ] ผ่าน &nbsp; [ &nbsp; ] ปรับปรุง &nbsp; คะแนนได้: ........ / 10
       </div>
     </div>
   

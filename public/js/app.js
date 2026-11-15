@@ -2511,7 +2511,7 @@ function switchTab(tabId) {
   if (tabId === 'lessons') loadLessonsData();
   else if (tabId === 'media') loadMediaData();
   else if (tabId === 'ebook') loadEbookData();
-  else if (tabId === 'worksheets') loadWorksheetsData();
+  else if (tabId === 'worksheets') setWorksheetCategory(currentWorksheetCategory || 'theory');
   else if (tabId === 'assignments') loadAssignmentsData();
   else if (tabId === 'quizzes') {
     studentQuizAttemptsCache = null;
@@ -3527,6 +3527,7 @@ let showAnswerKey = false;
 const OFFLINE_WORKSHEETS = [
   {
     "id": "ws-1-1",
+    "category": "theory",
     "unit_id": "mod-1",
     "unit": "หน่วยการเรียนรู้ที่ 1",
     "code": "ใบงานที่ 1.1",
@@ -3571,6 +3572,7 @@ const OFFLINE_WORKSHEETS = [
   },
   {
     "id": "ws-1-2",
+    "category": "theory",
     "unit_id": "mod-1",
     "unit": "หน่วยการเรียนรู้ที่ 1",
     "code": "ใบงานที่ 1.2",
@@ -3621,6 +3623,7 @@ const OFFLINE_WORKSHEETS = [
   },
   {
     "id": "ws-1-3",
+    "category": "theory",
     "unit_id": "mod-1",
     "unit": "หน่วยการเรียนรู้ที่ 1",
     "code": "ใบงานที่ 1.3",
@@ -3665,6 +3668,7 @@ const OFFLINE_WORKSHEETS = [
   },
   {
     "id": "ws-2-1",
+    "category": "theory",
     "unit_id": "mod-2",
     "unit": "หน่วยการเรียนรู้ที่ 2",
     "code": "ใบงานที่ 2.1",
@@ -3703,6 +3707,7 @@ const OFFLINE_WORKSHEETS = [
   },
   {
     "id": "ws-2-2",
+    "category": "theory",
     "unit_id": "mod-2",
     "unit": "หน่วยการเรียนรู้ที่ 2",
     "code": "ใบงานที่ 2.2",
@@ -3741,6 +3746,7 @@ const OFFLINE_WORKSHEETS = [
   },
   {
     "id": "ws-2-3",
+    "category": "theory",
     "unit_id": "mod-2",
     "unit": "หน่วยการเรียนรู้ที่ 2",
     "code": "ใบงานที่ 2.3",
@@ -3791,8 +3797,9 @@ const OFFLINE_WORKSHEETS = [
   },
   {
     "id": "ws-flow-1",
-    "unit_id": "mod-1",
-    "unit": "หน่วยการเรียนรู้ที่ 1",
+    "category": "practical",
+    "unit_id": "practical",
+    "unit": "ใบงานปฏิบัติการ",
     "code": "ใบงานปฏิบัติที่ 1.4",
     "title": "ใบงานปฏิบัติที่ 1.4: การออกแบบผังงานแบบลำดับ (Sequence Flowchart)",
     "subtitle": "การออกแบบขั้นตอนวิธีและการเขียนผังงานแบบลำดับ (Sequence) ด้วย Flowgorithm จำนวน 10 ข้อ",
@@ -3871,8 +3878,9 @@ const OFFLINE_WORKSHEETS = [
   },
   {
     "id": "ws-flow-2",
-    "unit_id": "mod-1",
-    "unit": "หน่วยการเรียนรู้ที่ 1",
+    "category": "practical",
+    "unit_id": "practical",
+    "unit": "ใบงานปฏิบัติการ",
     "code": "ใบงานปฏิบัติที่ 1.5",
     "title": "ใบงานปฏิบัติที่ 1.5: การออกแบบผังงานแบบมีเงื่อนไข (Selection Flowchart)",
     "subtitle": "การออกแบบผังงานการตัดสินใจแบบ 2 ทางเลือก (If-Then-Else) ด้วย Flowgorithm จำนวน 10 ข้อ",
@@ -3951,8 +3959,9 @@ const OFFLINE_WORKSHEETS = [
   },
   {
     "id": "ws-flow-3",
-    "unit_id": "mod-1",
-    "unit": "หน่วยการเรียนรู้ที่ 1",
+    "category": "practical",
+    "unit_id": "practical",
+    "unit": "ใบงานปฏิบัติการ",
     "code": "ใบงานปฏิบัติที่ 1.6",
     "title": "ใบงานปฏิบัติที่ 1.6: การเขียนผังงานแบบหลายทางเลือก (Multiple Alternatives Flowchart)",
     "subtitle": "การออกแบบผังงานเงื่อนไขซับซ้อนหลายทางเลือก (Nested Selection / Multi-Branch) ด้วย Flowgorithm จำนวน 10 ข้อ",
@@ -4032,16 +4041,212 @@ const OFFLINE_WORKSHEETS = [
 ];
 
 // Filter worksheets by unit
+
+
+// =========================================================================
+// WORKSHEETS CATEGORY SEPARATION (THEORY VS PRACTICAL - EDGE AI STYLE)
+// =========================================================================
+let currentWorksheetCategory = 'theory'; // 'theory' | 'practical' | 'all'
+let currentWorksheetSubFilter = 'all';
+
+function setWorksheetCategory(category) {
+  currentWorksheetCategory = category;
+  currentWorksheetSubFilter = 'all';
+
+  // 1. Update Category Buttons UI
+  const btnTheory = document.getElementById('ws-cat-btn-theory');
+  const btnPractical = document.getElementById('ws-cat-btn-practical');
+  const btnAll = document.getElementById('ws-cat-btn-all');
+
+  if (btnTheory) {
+    btnTheory.className = 'ws-cat-pill' + (category === 'theory' ? ' active theory' : '');
+  }
+  if (btnPractical) {
+    btnPractical.className = 'ws-cat-pill' + (category === 'practical' ? ' active practical' : '');
+  }
+  if (btnAll) {
+    btnAll.className = 'ws-cat-pill' + (category === 'all' ? ' active' : '');
+  }
+
+  // 2. Render Dynamic Banner
+  const bannerContainer = document.getElementById('ws-category-banner');
+  if (bannerContainer) {
+    if (category === 'practical') {
+      bannerContainer.innerHTML = `
+        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.12) 100%); border: 1.5px solid rgba(16, 185, 129, 0.3); border-radius: 16px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.05);">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 44px; height: 44px; border-radius: 12px; background: #059669; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                <i class="fa-solid fa-diagram-project"></i>
+              </div>
+              <div>
+                <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin: 0 0 2px 0;">
+                  ห้องปฏิบัติการออกแบบผังงาน (Flowchart & Flowgorithm Lab)
+                </h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">
+                  ฝึกทักษะการแก้ปัญหา 30 ข้อโจทย์จริง • รองรับการส่งไฟล์โปรแกรม Flowgorithm (.fprg) และภาพถ่ายผังงาน
+                </p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <a href="http://flowgorithm.org/download/index.html" target="_blank" rel="noopener noreferrer" style="background: #059669; color: white; padding: 7px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-download"></i> ดาวน์โหลด Flowgorithm ↗
+              </a>
+              <a href="flowgorithm-guide.html" target="_blank" style="background: rgba(5, 150, 105, 0.12); color: #059669; border: 1px solid rgba(5, 150, 105, 0.3); padding: 7px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-book-open"></i> คู่มือการใช้งาน
+              </a>
+              <a href="worksheets/all_flowchart_worksheets_m4.pdf" target="_blank" download="รวมใบงานปฏิบัติการผังงาน_ม4.pdf" style="background: #0284c7; color: white; padding: 7px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-file-pdf"></i> รวมใบงานปฏิบัติการ PDF (30 ข้อ)
+              </a>
+            </div>
+          </div>
+          <div style="display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.78rem; color: #047857; background: rgba(255,255,255,0.75); padding: 8px 14px; border-radius: 8px;">
+            <span><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> สัญลักษณ์ ANSI Flowchart มาตรฐาน</span>
+            <span><i class="fa-solid fa-file-code text-blue-600 mr-1"></i> รองรับไฟล์ .fprg โดยตรง มีระบบตรวจโครงสร้าง XML อัตโนมัติ</span>
+            <span><i class="fa-solid fa-file-image text-amber-600 mr-1"></i> รองรับภาพถ่าย/ภาพวาดผังงาน</span>
+          </div>
+        </div>
+      `;
+    } else {
+      // Default: Theory mode
+      bannerContainer.innerHTML = `
+        <div style="background: rgba(2, 132, 199, 0.08); border-left: 4px solid #0284c7; border-radius: 12px; padding: 12px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+          <div style="font-size: 0.84rem; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-circle-info text-sky-600" style="font-size: 1.1rem;"></i>
+            <span><strong>สำหรับ iPad:</strong> กดปุ่ม <strong>"โหลด PDF (iPad)"</strong> เพื่อเปิดและบันทึกไฟล์เข้า GoodNotes หรือแอป Files แล้วเขียนส่งได้ทันที</span>
+          </div>
+          <a href="worksheets/all_worksheets_m4.pdf" target="_blank" download="รวมใบงานทฤษฎี_วิทยาการคำนวณ_ม4.pdf" style="background: #0284c7; color: white; padding: 6px 14px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-file-pdf"></i> รวมใบงานทฤษฎี PDF 6 ฉบับ
+          </a>
+        </div>
+      `;
+    }
+  }
+
+  // 3. Render Header Area
+  const headerContainer = document.getElementById('ws-header-area');
+  if (headerContainer) {
+    if (category === 'practical') {
+      headerContainer.innerHTML = `
+        <div>
+          <div class="thairath-section-title">
+            <i class="fa-solid fa-laptop-code text-emerald-600"></i> ห้องปฏิบัติการ & ใบงานแบบปฏิบัติ (Flowchart Lab)
+          </div>
+          <div class="thairath-section-subtitle">
+            ใบงานฝึกทักษะการออกแบบผังงาน 3 ชุด รวม 30 โจทย์ปัญหา (แบบลำดับ • แบบเงื่อนไข • แบบหลายทางเลือก) พร้อมเกณฑ์รูบริกส์ข้อละ 1 คะแนน
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <a href="worksheets/all_flowchart_worksheets_m4.pdf" target="_blank" download="รวมใบงานปฏิบัติการผังงาน_ม4.pdf" class="btn" style="padding: 6px 14px; font-size: 0.84rem; background: #059669; color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; border-radius: 8px;">
+            <i class="fa-solid fa-file-pdf"></i> รวมใบงานปฏิบัติการ PDF (30 ข้อ)
+          </a>
+          <button onclick="switchTab('assignments'); filterAssignmentsCategory('practical');" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.84rem; background: #059669; border-color: #059669;">
+            <i class="fa-solid fa-cloud-arrow-up"></i> ไปหน้าส่งงานปฏิบัติ
+          </button>
+        </div>
+      `;
+    } else if (category === 'all') {
+      headerContainer.innerHTML = `
+        <div>
+          <div class="thairath-section-title">
+            <i class="fa-solid fa-layer-group text-slate-600"></i> คลังใบงานวิทยาการคำนวณ ม.4 ทั้งหมด (9 ฉบับ)
+          </div>
+          <div class="thairath-section-subtitle">
+            ใบงานภาคทฤษฎีและโครงงาน 6 ฉบับเดิม และใบงานแบบปฏิบัติการผังงาน Flowgorithm 3 ชุด รวม 30 ข้อ
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <a href="worksheets/all_worksheets_m4.pdf" target="_blank" download="รวมใบงานทฤษฎี_วิทยาการคำนวณ_ม4.pdf" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.84rem; font-weight: 700;">
+            <i class="fa-solid fa-file-pdf text-sky-600 mr-1"></i> โหลดทฤษฎี (6 ฉบับ)
+          </a>
+          <a href="worksheets/all_flowchart_worksheets_m4.pdf" target="_blank" download="รวมใบงานปฏิบัติการผังงาน_ม4.pdf" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.84rem; font-weight: 700; border-color: #059669; color: #059669;">
+            <i class="fa-solid fa-file-pdf mr-1"></i> โหลดปฏิบัติการ (30 ข้อ)
+          </a>
+        </div>
+      `;
+    } else {
+      headerContainer.innerHTML = `
+        <div>
+          <div class="thairath-section-title">
+            <i class="fa-solid fa-file-lines text-sky-600"></i> คลังใบงานทฤษฎี & โครงงาน (Theory & Project Worksheets)
+          </div>
+          <div class="thairath-section-subtitle">
+            ใบงานมาตรฐาน 6 ฉบับเดิม ครบทั้ง 2 หน่วยการเรียนรู้ (หน่วยละ 3 ใบงาน • คะแนนเต็ม 10 คะแนนทุกใบงาน) สำหรับฝึกกระบวนการคิดและพัฒนาโครงงาน
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <a href="worksheets/all_worksheets_m4.pdf" target="_blank" download="รวมใบงานทฤษฎี_วิทยาการคำนวณ_ม4.pdf" class="btn" style="padding: 6px 14px; font-size: 0.84rem; background: #0284c7; color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; border-radius: 8px;">
+            <i class="fa-solid fa-file-pdf"></i> รวมใบงานทฤษฎี PDF 6 ฉบับ
+          </a>
+          <button onclick="switchTab('assignments'); filterAssignmentsCategory('theory');" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.84rem;">
+            <i class="fa-solid fa-cloud-arrow-up"></i> ไปหน้าส่งงาน
+          </button>
+        </div>
+      `;
+    }
+  }
+
+  // 4. Render Dynamic Sub-filters
+  const subfilterContainer = document.getElementById('ws-subfilter-container');
+  if (subfilterContainer) {
+    if (category === 'practical') {
+      subfilterContainer.innerHTML = `
+        <button onclick="filterWorksheets('all')" class="btn-ws-filter active" id="btn-ws-filter-all">
+          <i class="fa-solid fa-layer-group mr-1.5"></i> ทุกชุดปฏิบัติการ (3 ชุด / 30 ข้อ)
+        </button>
+        <button onclick="filterWorksheets('ws-flow-1')" class="btn-ws-filter" id="btn-ws-filter-ws-flow-1">
+          <i class="fa-solid fa-arrow-down-long mr-1.5" style="color: #10b981;"></i> Lab 1: ผังงานแบบลำดับ (10 ข้อ)
+        </button>
+        <button onclick="filterWorksheets('ws-flow-2')" class="btn-ws-filter" id="btn-ws-filter-ws-flow-2">
+          <i class="fa-solid fa-code-branch mr-1.5" style="color: #059669;"></i> Lab 2: ผังงานแบบเงื่อนไข (10 ข้อ)
+        </button>
+        <button onclick="filterWorksheets('ws-flow-3')" class="btn-ws-filter" id="btn-ws-filter-ws-flow-3">
+          <i class="fa-solid fa-network-wired mr-1.5" style="color: #047857;"></i> Lab 3: ผังงานหลายทางเลือก (10 ข้อ)
+        </button>
+      `;
+    } else if (category === 'all') {
+      subfilterContainer.innerHTML = `
+        <button onclick="filterWorksheets('all')" class="btn-ws-filter active" id="btn-ws-filter-all">
+          <i class="fa-solid fa-layer-group mr-1.5"></i> ทั้งหมด (9 ฉบับ)
+        </button>
+        <button onclick="filterWorksheets('cat-theory')" class="btn-ws-filter" id="btn-ws-filter-cat-theory">
+          <i class="fa-solid fa-file-lines mr-1.5 text-sky-600"></i> ใบงานทฤษฎี & โครงงาน (6 ฉบับ)
+        </button>
+        <button onclick="filterWorksheets('cat-practical')" class="btn-ws-filter" id="btn-ws-filter-cat-practical">
+          <i class="fa-solid fa-laptop-code mr-1.5 text-emerald-600"></i> ใบงานแบบปฏิบัติ Flowchart (3 ชุด)
+        </button>
+      `;
+    } else {
+      subfilterContainer.innerHTML = `
+        <button onclick="filterWorksheets('all')" class="btn-ws-filter active" id="btn-ws-filter-all">
+          <i class="fa-solid fa-layer-group mr-1.5"></i> ทุกหน่วยการเรียนรู้ (6 ใบงานเดิม)
+        </button>
+        <button onclick="filterWorksheets('mod-1')" class="btn-ws-filter" id="btn-ws-filter-mod-1">
+          <i class="fa-solid fa-lightbulb mr-1.5" style="color: #10b981;"></i> หน่วยที่ 1: แนวคิดเชิงคำนวณ (3 ใบงาน)
+        </button>
+        <button onclick="filterWorksheets('mod-2')" class="btn-ws-filter" id="btn-ws-filter-mod-2">
+          <i class="fa-solid fa-laptop-code mr-1.5" style="color: #0284c7;"></i> หน่วยที่ 2: การพัฒนาโครงงาน (3 ใบงาน)
+        </button>
+      `;
+    }
+  }
+
+  // 5. Load Worksheets Data
+  loadWorksheetsData('all');
+}
+
+
+// Filter worksheets by unit / sub-filter
 function filterWorksheets(unitKey) {
-  currentWorksheetFilter = unitKey;
+  currentWorksheetSubFilter = unitKey;
   document.querySelectorAll('.btn-ws-filter').forEach(btn => btn.classList.remove('active'));
   const activeBtn = document.getElementById(`btn-ws-filter-${unitKey}`);
   if (activeBtn) activeBtn.classList.add('active');
   loadWorksheetsData(unitKey);
 }
 
-// Load Worksheets Data
-async function loadWorksheetsData(filterUnit = currentWorksheetFilter) {
+// Load Worksheets Data (Separated Categories)
+async function loadWorksheetsData(filterUnit = currentWorksheetSubFilter) {
   try {
     let data;
     if (isStaticOrServerlessHost()) {
@@ -4056,12 +4261,37 @@ async function loadWorksheetsData(filterUnit = currentWorksheetFilter) {
     }
 
     worksheetsCache = data;
+    const bannerContainer = document.getElementById('ws-category-banner');
+    if (bannerContainer && !bannerContainer.innerHTML.trim()) {
+      setWorksheetCategory(currentWorksheetCategory || 'theory');
+      return;
+    }
     const container = document.getElementById('worksheets-grid');
     if (!container) return;
 
+    // 1. Filter by Primary Category
     let filtered = data;
+    if (currentWorksheetCategory === 'theory') {
+      filtered = data.filter(w => w.category === 'theory' || (!w.id.startsWith('ws-flow-') && w.unit_id !== 'practical'));
+    } else if (currentWorksheetCategory === 'practical') {
+      filtered = data.filter(w => w.category === 'practical' || w.id.startsWith('ws-flow-') || w.unit_id === 'practical');
+    }
+
+    // 2. Filter by Sub-filter
     if (filterUnit && filterUnit !== 'all') {
-      filtered = data.filter(w => w.unit_id === filterUnit || (filterUnit === 'mod-1' && w.unit.includes('1')) || (filterUnit === 'mod-2' && w.unit.includes('2')));
+      if (filterUnit === 'cat-theory') {
+        filtered = filtered.filter(w => w.category === 'theory' || !w.id.startsWith('ws-flow-'));
+      } else if (filterUnit === 'cat-practical') {
+        filtered = filtered.filter(w => w.category === 'practical' || w.id.startsWith('ws-flow-'));
+      } else if (filterUnit.startsWith('ws-flow-')) {
+        filtered = filtered.filter(w => w.id === filterUnit);
+      } else if (filterUnit === 'mod-1') {
+        filtered = filtered.filter(w => (w.unit_id === 'mod-1' || w.unit.includes('1')) && !w.id.startsWith('ws-flow-'));
+      } else if (filterUnit === 'mod-2') {
+        filtered = filtered.filter(w => (w.unit_id === 'mod-2' || w.unit.includes('2')) && !w.id.startsWith('ws-flow-'));
+      } else {
+        filtered = filtered.filter(w => w.unit_id === filterUnit);
+      }
     }
 
     if (filtered.length === 0) {
@@ -4075,17 +4305,18 @@ async function loadWorksheetsData(filterUnit = currentWorksheetFilter) {
     }
 
     container.innerHTML = filtered.map(ws => {
+      const isFlow = ws.id && ws.id.startsWith('ws-flow-');
       const isUnit2 = ws.unit_id === 'mod-2' || ws.unit.includes('2');
-      const accentColor = isUnit2 ? '#0284c7' : 'var(--thairath-green)';
-      const bgLight = isUnit2 ? 'rgba(2, 132, 199, 0.08)' : 'rgba(0, 180, 0, 0.08)';
-      const asgId = ws.asg_id || (ws.id === 'ws-1-1' ? 'asg-1' : ws.id === 'ws-1-2' ? 'asg-2' : ws.id === 'ws-1-3' ? 'asg-3' : ws.id === 'ws-2-1' ? 'asg-4' : ws.id === 'ws-2-2' ? 'asg-5' : 'asg-6');
+      const accentColor = isFlow ? '#059669' : (isUnit2 ? '#0284c7' : 'var(--thairath-green)');
+      const bgLight = isFlow ? 'rgba(16, 185, 129, 0.1)' : (isUnit2 ? 'rgba(2, 132, 199, 0.08)' : 'rgba(0, 180, 0, 0.08)');
+      const asgId = ws.asg_id || (ws.id === 'ws-1-1' ? 'asg-1' : ws.id === 'ws-1-2' ? 'asg-2' : ws.id === 'ws-1-3' ? 'asg-3' : ws.id === 'ws-2-1' ? 'asg-4' : ws.id === 'ws-2-2' ? 'asg-5' : ws.id === 'ws-2-3' ? 'asg-6' : ws.id === 'ws-flow-1' ? 'asg-flow-1' : ws.id === 'ws-flow-2' ? 'asg-flow-2' : ws.id === 'ws-flow-3' ? 'asg-flow-3' : 'asg-1');
 
       return `
-        <div class="ws-card ${isUnit2 ? 'unit-2' : ''}">
+        <div class="ws-card ${isFlow ? 'practical' : (isUnit2 ? 'unit-2' : '')}">
           <div style="display: flex; flex-direction: column; gap: 12px;">
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
               <span style="font-size: 0.72rem; font-weight: 700; background: ${bgLight}; color: ${accentColor}; padding: 3px 10px; border-radius: 9999px; border: 1px solid ${accentColor}33;">
-                ${escapeHtml(ws.unit)} • ${escapeHtml(ws.code)}
+                ${isFlow ? '<i class="fa-solid fa-laptop-code mr-1"></i>' : ''} ${escapeHtml(ws.unit)} • ${escapeHtml(ws.code)}
               </span>
               <span style="font-size: 0.75rem; font-extrabold; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 3px 8px; border-radius: 6px; font-weight: 800;">
                 เต็ม ${ws.points} คะแนน
@@ -4102,6 +4333,20 @@ async function loadWorksheetsData(filterUnit = currentWorksheetFilter) {
               <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                 ${escapeHtml(ws.scenario || ws.instructions)}
               </p>
+
+              ${isFlow ? `
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px;">
+                <span style="font-size: 0.7rem; font-weight: 700; background: rgba(5, 150, 105, 0.08); color: #059669; padding: 2px 7px; border-radius: 5px; border: 1px solid rgba(5, 150, 105, 0.2);">
+                  <i class="fa-solid fa-list-ol mr-1"></i> 10 ข้อปฏิบัติการ
+                </span>
+                <span style="font-size: 0.7rem; font-weight: 700; background: rgba(2, 132, 199, 0.08); color: #0284c7; padding: 2px 7px; border-radius: 5px; border: 1px solid rgba(2, 132, 199, 0.2);">
+                  <i class="fa-solid fa-file-code mr-1"></i> Flowgorithm (.fprg)
+                </span>
+                <span style="font-size: 0.7rem; font-weight: 700; background: rgba(245, 158, 11, 0.08); color: #d97706; padding: 2px 7px; border-radius: 5px; border: 1px solid rgba(245, 158, 11, 0.2);">
+                  <i class="fa-solid fa-image mr-1"></i> รูปภาพผังงาน
+                </span>
+              </div>
+              ` : ''}
             </div>
           </div>
 
@@ -4115,13 +4360,13 @@ async function loadWorksheetsData(filterUnit = currentWorksheetFilter) {
               <button onclick="openWorksheetDetail('${escapeHtml(ws.id)}')" class="btn btn-outline" style="padding: 7px 10px; font-size: 0.78rem; font-weight: 700; justify-content: center;">
                 <i class="fa-solid fa-book-open mr-1"></i> เปิดดูฉบับเต็ม
               </button>
-              <a href="worksheets/${escapeHtml(ws.id)}.pdf" target="_blank" download="${escapeHtml(ws.code)}_ม4.pdf" class="btn btn-outline" style="padding: 7px 10px; font-size: 0.78rem; font-weight: 700; justify-content: center; border-color: #0284c7; color: #0284c7; text-decoration: none; display: inline-flex; align-items: center;">
-                <i class="fa-solid fa-file-arrow-down mr-1"></i> โหลด PDF (iPad)
+              <a href="worksheets/${escapeHtml(ws.id)}.pdf" target="_blank" download="${escapeHtml(ws.code)}_ม4.pdf" class="btn btn-outline" style="padding: 7px 10px; font-size: 0.78rem; font-weight: 700; justify-content: center; border-color: ${isFlow ? '#059669' : '#0284c7'}; color: ${isFlow ? '#059669' : '#0284c7'}; text-decoration: none; display: inline-flex; align-items: center;">
+                <i class="fa-solid fa-file-arrow-down mr-1"></i> โหลด PDF (${isFlow ? 'ปฏิบัติ' : 'iPad'})
               </a>
             </div>
 
-            <button onclick="openSubmitModal('${asgId}', '${escapeHtml(ws.title)}')" class="btn btn-primary" style="width: 100%; padding: 8px 12px; font-size: 0.82rem; font-weight: 700; justify-content: center;">
-              <i class="fa-solid fa-cloud-arrow-up mr-1"></i> ส่งผลงานออนไลน์
+            <button onclick="openSubmitModal('${asgId}', '${escapeHtml(ws.title)}')" class="btn btn-primary" style="width: 100%; padding: 8px 12px; font-size: 0.82rem; font-weight: 700; justify-content: center; ${isFlow ? 'background: #059669; border-color: #059669;' : ''}">
+              <i class="fa-solid fa-cloud-arrow-up mr-1"></i> ${isFlow ? 'ส่งผลงานผังงานออนไลน์' : 'ส่งผลงานออนไลน์'}
             </button>
           </div>
         </div>
@@ -4132,6 +4377,7 @@ async function loadWorksheetsData(filterUnit = currentWorksheetFilter) {
     console.error('Worksheets load error:', err);
   }
 }
+
 
 // Open Worksheet Detail Modal
 function openWorksheetDetail(wsId) {
@@ -4422,6 +4668,7 @@ function submitCurrentWorksheet() {
 const OFFLINE_ASSIGNMENTS = [
   {
     id: 'asg-1',
+    category: 'theory',
     unit: 'mod-1',
     title: 'ใบงานที่ 1.1: เรื่อง การประยุกต์ใช้แนวคิดเชิงคำนวณในการแก้ปัญหาบริบทจริง',
     description: 'การประยุกต์ใช้ 4 องค์ประกอบของแนวคิดเชิงคำนวณเพื่อแก้ปัญหาในชีวิตประจำวัน',
@@ -4430,6 +4677,7 @@ const OFFLINE_ASSIGNMENTS = [
   },
   {
     id: 'asg-2',
+    category: 'theory',
     unit: 'mod-1',
     title: 'ใบงานที่ 1.2: เรื่อง การพัฒนาระบบด้วยวงจร SDLC (กรณีศึกษาร้านเบเกอรี)',
     description: 'การประยุกต์ใช้วงจรการพัฒนาระบบ 5 ขั้นตอนเพื่อแก้ปัญหาธุรกิจจริง',
@@ -4438,6 +4686,7 @@ const OFFLINE_ASSIGNMENTS = [
   },
   {
     id: 'asg-3',
+    category: 'theory',
     unit: 'mod-1',
     title: 'ใบงานที่ 1.3: เรื่อง การจัดทำเค้าโครงรายงานโครงงาน 5 บท',
     description: 'จัดทำเค้าโครงโครงงาน (Project Proposal) และโครงสร้างรายงาน 5 บทมาตรฐานวิชาการ',
@@ -4446,6 +4695,7 @@ const OFFLINE_ASSIGNMENTS = [
   },
   {
     id: 'asg-4',
+    category: 'theory',
     unit: 'mod-2',
     title: 'ใบงานที่ 2.1: เรื่อง การวางแผนและการวิเคราะห์ความต้องการในการพัฒนาโครงงาน',
     description: 'การกำหนดวัตถุประสงค์ ขอบเขต และแผนภูมิแกนต์ (กรณีศึกษา StyleHub)',
@@ -4454,6 +4704,7 @@ const OFFLINE_ASSIGNMENTS = [
   },
   {
     id: 'asg-5',
+    category: 'theory',
     unit: 'mod-2',
     title: 'ใบงานที่ 2.2: เรื่อง การวิเคราะห์ข้อมูลและออกแบบระบบ (Context Diagram & UI)',
     description: 'การวิเคราะห์ข้อกำหนดเชิงหน้าที่และการออกแบบแผนภาพบริบทระบบพาณิชย์อิเล็กทรอนิกส์',
@@ -4462,6 +4713,7 @@ const OFFLINE_ASSIGNMENTS = [
   },
   {
     id: 'asg-6',
+    category: 'theory',
     unit: 'mod-2',
     title: 'ใบงานที่ 2.3: เรื่อง การพัฒนาโครงงานเพื่อแก้ปัญหาตามกระบวนการ SDLC ในบริบทจริง',
     description: 'การบูรณาการแนวคิดเชิงคำนวณและวงจร SDLC ครบวงจรในการแก้ปัญหาของสถานศึกษาหรือชุมชน',
@@ -4471,7 +4723,8 @@ const OFFLINE_ASSIGNMENTS = [
 ,
   {
     id: 'asg-flow-1',
-    unit: 'mod-1',
+    category: 'practical',
+    unit: 'practical',
     ws_id: 'ws-flow-1',
     title: 'ใบงานปฏิบัติที่ 1.4: การออกแบบผังงานแบบลำดับ (Sequence Flowchart)',
     description: 'ฝึกออกแบบและเขียนผังงานแบบลำดับ 10 ข้อ ด้วยโปรแกรม Flowgorithm หรือวาดผังงาน (ส่งเป็นไฟล์ .fprg หรือภาพถ่ายผังงาน)',
@@ -4480,7 +4733,8 @@ const OFFLINE_ASSIGNMENTS = [
   },
   {
     id: 'asg-flow-2',
-    unit: 'mod-1',
+    category: 'practical',
+    unit: 'practical',
     ws_id: 'ws-flow-2',
     title: 'ใบงานปฏิบัติที่ 1.5: การออกแบบผังงานแบบมีเงื่อนไข (Selection Flowchart)',
     description: 'ฝึกออกแบบผังงานแบบมีเงื่อนไขตัดสินใจ True/False 10 ข้อ ด้วยโปรแกรม Flowgorithm หรือวาดผังงาน (ส่งเป็นไฟล์ .fprg หรือภาพถ่ายผังงาน)',
@@ -4489,7 +4743,8 @@ const OFFLINE_ASSIGNMENTS = [
   },
   {
     id: 'asg-flow-3',
-    unit: 'mod-1',
+    category: 'practical',
+    unit: 'practical',
     ws_id: 'ws-flow-3',
     title: 'ใบงานปฏิบัติที่ 1.6: การเขียนผังงานแบบหลายทางเลือก (Multiple Alternatives Flowchart)',
     description: 'ฝึกออกแบบผังงานเงื่อนไขซับซ้อนหลายทางเลือก 10 ข้อ ด้วยโปรแกรม Flowgorithm หรือวาดผังงาน (ส่งเป็นไฟล์ .fprg หรือภาพถ่ายผังงาน)',
@@ -5031,7 +5286,14 @@ async function loadAssignmentsData() {
     // 1. Render Left Column: Assignments list
     const asgContainer = document.getElementById('assignments-list');
     if (asgContainer) {
-      asgContainer.innerHTML = assignments.map(asg => {
+      let filteredAssignments = assignments;
+      if (currentAssignmentCategory === 'theory') {
+        filteredAssignments = assignments.filter(a => a.category === 'theory' || (!a.id.startsWith('asg-flow-') && a.unit !== 'practical'));
+      } else if (currentAssignmentCategory === 'practical') {
+        filteredAssignments = assignments.filter(a => a.category === 'practical' || a.id.startsWith('asg-flow-') || a.unit === 'practical');
+      }
+
+      asgContainer.innerHTML = filteredAssignments.map(asg => {
         const mySub = (currentUser && currentUser.role === 'student') ? submissions.find(s => s.assignment_id === asg.id && isMySubmission(s, currentUser)) : null;
 
         let actionBtnHtml = '';

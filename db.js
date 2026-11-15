@@ -2357,7 +2357,8 @@ const defaultData = () => {
   },
   {
     "id": "asg-flow-1",
-    "unit": "mod-1",
+    "category": "practical",
+    "unit": "practical",
     "title": "ใบงานปฏิบัติที่ 1.4: การออกแบบผังงานแบบลำดับ (Sequence Flowchart)",
     "desc": "ฝึกออกแบบและเขียนผังงานแบบลำดับ 10 ข้อ ด้วยโปรแกรม Flowgorithm หรือวาดผังงาน (ส่งเป็นไฟล์ .fprg หรือภาพถ่ายผังงาน)",
     "dueDate": "2026-11-20",
@@ -2369,7 +2370,8 @@ const defaultData = () => {
   },
   {
     "id": "asg-flow-2",
-    "unit": "mod-1",
+    "category": "practical",
+    "unit": "practical",
     "title": "ใบงานปฏิบัติที่ 1.5: การออกแบบผังงานแบบมีเงื่อนไข (Selection Flowchart)",
     "desc": "ฝึกออกแบบผังงานแบบมีเงื่อนไขตัดสินใจ True/False 10 ข้อ ด้วยโปรแกรม Flowgorithm หรือวาดผังงาน (ส่งเป็นไฟล์ .fprg หรือภาพถ่ายผังงาน)",
     "dueDate": "2026-11-25",
@@ -2381,7 +2383,8 @@ const defaultData = () => {
   },
   {
     "id": "asg-flow-3",
-    "unit": "mod-1",
+    "category": "practical",
+    "unit": "practical",
     "title": "ใบงานปฏิบัติที่ 1.6: การเขียนผังงานแบบหลายทางเลือก (Multiple Alternatives Flowchart)",
     "desc": "ฝึกออกแบบผังงานเงื่อนไขซับซ้อนหลายทางเลือก 10 ข้อ ด้วยโปรแกรม Flowgorithm หรือวาดผังงาน (ส่งเป็นไฟล์ .fprg หรือภาพถ่ายผังงาน)",
     "dueDate": "2026-11-30",
@@ -3708,6 +3711,7 @@ const defaultData = () => {
     worksheets: [
   {
     "id": "ws-1-1",
+    "category": "theory",
     "unit_id": "mod-1",
     "unit": "หน่วยการเรียนรู้ที่ 1",
     "code": "ใบงานที่ 1.1",
@@ -3752,6 +3756,7 @@ const defaultData = () => {
   },
   {
     "id": "ws-1-2",
+    "category": "theory",
     "unit_id": "mod-1",
     "unit": "หน่วยการเรียนรู้ที่ 1",
     "code": "ใบงานที่ 1.2",
@@ -3802,6 +3807,7 @@ const defaultData = () => {
   },
   {
     "id": "ws-1-3",
+    "category": "theory",
     "unit_id": "mod-1",
     "unit": "หน่วยการเรียนรู้ที่ 1",
     "code": "ใบงานที่ 1.3",
@@ -3846,6 +3852,7 @@ const defaultData = () => {
   },
   {
     "id": "ws-2-1",
+    "category": "theory",
     "unit_id": "mod-2",
     "unit": "หน่วยการเรียนรู้ที่ 2",
     "code": "ใบงานที่ 2.1",
@@ -3884,6 +3891,7 @@ const defaultData = () => {
   },
   {
     "id": "ws-2-2",
+    "category": "theory",
     "unit_id": "mod-2",
     "unit": "หน่วยการเรียนรู้ที่ 2",
     "code": "ใบงานที่ 2.2",
@@ -3922,6 +3930,7 @@ const defaultData = () => {
   },
   {
     "id": "ws-2-3",
+    "category": "theory",
     "unit_id": "mod-2",
     "unit": "หน่วยการเรียนรู้ที่ 2",
     "code": "ใบงานที่ 2.3",
@@ -3972,8 +3981,9 @@ const defaultData = () => {
   },
   {
     "id": "ws-flow-1",
-    "unit_id": "mod-1",
-    "unit": "หน่วยการเรียนรู้ที่ 1",
+    "category": "practical",
+    "unit_id": "practical",
+    "unit": "ใบงานปฏิบัติการ",
     "code": "ใบงานปฏิบัติที่ 1.4",
     "title": "ใบงานปฏิบัติที่ 1.4: การออกแบบผังงานแบบลำดับ (Sequence Flowchart)",
     "subtitle": "การออกแบบขั้นตอนวิธีและการเขียนผังงานแบบลำดับ (Sequence) ด้วย Flowgorithm จำนวน 10 ข้อ",
@@ -4052,8 +4062,9 @@ const defaultData = () => {
   },
   {
     "id": "ws-flow-2",
-    "unit_id": "mod-1",
-    "unit": "หน่วยการเรียนรู้ที่ 1",
+    "category": "practical",
+    "unit_id": "practical",
+    "unit": "ใบงานปฏิบัติการ",
     "code": "ใบงานปฏิบัติที่ 1.5",
     "title": "ใบงานปฏิบัติที่ 1.5: การออกแบบผังงานแบบมีเงื่อนไข (Selection Flowchart)",
     "subtitle": "การออกแบบผังงานการตัดสินใจแบบ 2 ทางเลือก (If-Then-Else) ด้วย Flowgorithm จำนวน 10 ข้อ",
@@ -4132,8 +4143,9 @@ const defaultData = () => {
   },
   {
     "id": "ws-flow-3",
-    "unit_id": "mod-1",
-    "unit": "หน่วยการเรียนรู้ที่ 1",
+    "category": "practical",
+    "unit_id": "practical",
+    "unit": "ใบงานปฏิบัติการ",
     "code": "ใบงานปฏิบัติที่ 1.6",
     "title": "ใบงานปฏิบัติที่ 1.6: การเขียนผังงานแบบหลายทางเลือก (Multiple Alternatives Flowchart)",
     "subtitle": "การออกแบบผังงานเงื่อนไขซับซ้อนหลายทางเลือก (Nested Selection / Multi-Branch) ด้วย Flowgorithm จำนวน 10 ข้อ",
@@ -4212,8 +4224,9 @@ const defaultData = () => {
   },
   {
     "id": "ws-flow-1",
-    "unit_id": "mod-1",
-    "unit": "หน่วยการเรียนรู้ที่ 1",
+    "category": "practical",
+    "unit_id": "practical",
+    "unit": "ใบงานปฏิบัติการ",
     "code": "ใบงานปฏิบัติที่ 1.4",
     "title": "ใบงานปฏิบัติที่ 1.4: การออกแบบผังงานแบบลำดับ (Sequence Flowchart)",
     "subtitle": "การออกแบบขั้นตอนวิธีและการเขียนผังงานแบบลำดับ (Sequence) ด้วย Flowgorithm จำนวน 10 ข้อ",
@@ -4292,8 +4305,9 @@ const defaultData = () => {
   },
   {
     "id": "ws-flow-2",
-    "unit_id": "mod-1",
-    "unit": "หน่วยการเรียนรู้ที่ 1",
+    "category": "practical",
+    "unit_id": "practical",
+    "unit": "ใบงานปฏิบัติการ",
     "code": "ใบงานปฏิบัติที่ 1.5",
     "title": "ใบงานปฏิบัติที่ 1.5: การออกแบบผังงานแบบมีเงื่อนไข (Selection Flowchart)",
     "subtitle": "การออกแบบผังงานการตัดสินใจแบบ 2 ทางเลือก (If-Then-Else) ด้วย Flowgorithm จำนวน 10 ข้อ",
@@ -4372,8 +4386,9 @@ const defaultData = () => {
   },
   {
     "id": "ws-flow-3",
-    "unit_id": "mod-1",
-    "unit": "หน่วยการเรียนรู้ที่ 1",
+    "category": "practical",
+    "unit_id": "practical",
+    "unit": "ใบงานปฏิบัติการ",
     "code": "ใบงานปฏิบัติที่ 1.6",
     "title": "ใบงานปฏิบัติที่ 1.6: การเขียนผังงานแบบหลายทางเลือก (Multiple Alternatives Flowchart)",
     "subtitle": "การออกแบบผังงานเงื่อนไขซับซ้อนหลายทางเลือก (Nested Selection / Multi-Branch) ด้วย Flowgorithm จำนวน 10 ข้อ",

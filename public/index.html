@@ -312,21 +312,27 @@
               <i class="fa-solid fa-chevron-down drop-arrow"></i>
             </button>
             <div class="thairath-dropdown-panel">
-              <a href="javascript:void(0)" onclick="switchTab('worksheets')" class="thairath-drop-link" id="nav-worksheets">
-                <div class="drop-icon bg-blue-light"><i class="fa-solid fa-file-pen"></i></div>
+              <a href="javascript:void(0)" onclick="switchTab('worksheets'); if (typeof setWorksheetCategory === 'function') setWorksheetCategory('theory');" class="thairath-drop-link" id="nav-worksheets">
+                <div class="drop-icon bg-blue-light"><i class="fa-solid fa-file-lines text-sky-600"></i></div>
                 <div class="drop-text">
-                  <span class="drop-title">คลังใบงานวิทยาการคำนวณ</span>
-                  <span class="drop-desc">ใบงาน 6 ฉบับ ครบ 2 หน่วย (หน่วยละ 3 ใบงาน • เต็ม 10 คะแนนทุกใบงาน)</span>
+                  <span class="drop-title">คลังใบงานทฤษฎี & โครงงาน (6 ฉบับเดิม)</span>
+                  <span class="drop-desc">ใบงานมาตรฐาน 6 ฉบับ ครบ 2 หน่วยการเรียนรู้ (เต็ม 10 คะแนนทุกใบงาน)</span>
+                </div>
+              </a>
+              <a href="javascript:void(0)" onclick="switchTab('worksheets'); if (typeof setWorksheetCategory === 'function') setWorksheetCategory('practical');" class="thairath-drop-link" id="nav-worksheets-practical">
+                <div class="drop-icon bg-emerald-light"><i class="fa-solid fa-laptop-code text-emerald-600"></i></div>
+                <div class="drop-text">
+                  <span class="drop-title">ใบงานแบบปฏิบัติ (Flowchart Lab 3 ชุด)</span>
+                  <span class="drop-desc">ฝึกเขียนผังงานด้วย Flowgorithm 30 โจทย์ปัญหา พร้อมส่งไฟล์ .fprg หรือรูป</span>
                 </div>
               </a>
               <a href="javascript:void(0)" onclick="switchTab('assignments')" class="thairath-drop-link" id="nav-assignments">
-                <div class="drop-icon bg-emerald-light"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                <div class="drop-icon bg-purple-light" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;"><i class="fa-solid fa-cloud-arrow-up"></i></div>
                 <div class="drop-text">
                   <span class="drop-title">ระบบส่งภาระงานและโครงงาน</span>
                   <span class="drop-desc">ส่งไฟล์ผลงาน (ขนาดสูงสุด 25MB) หรือแนบลิงก์ผลงาน</span>
                 </div>
               </a>
-
             </div>
           </li>
 
@@ -1576,45 +1582,38 @@
            ==================================================================== -->
       <section id="tab-worksheets" class="tab-content" style="display: none; padding: 24px 0 30px 0;">
         <div class="container">
-          <div style="background: rgba(2, 132, 199, 0.08); border-left: 4px solid #0284c7; border-radius: 12px; padding: 12px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
-            <div style="font-size: 0.84rem; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
-              <i class="fa-solid fa-circle-info text-sky-600" style="font-size: 1.1rem;"></i>
-              <span><strong>สำหรับ iPad:</strong> กดปุ่ม <strong>"โหลด PDF (iPad)"</strong> เพื่อเปิดและบันทึกไฟล์เข้า GoodNotes หรือแอป Files แล้วเขียนส่งได้ทันที</span>
-            </div>
-            <a href="worksheets/all_worksheets_m4.pdf" target="_blank" download="รวมใบงาน_วิทยาการคำนวณ_ม4.pdf" style="background: #0284c7; color: white; padding: 6px 14px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-              <i class="fa-solid fa-file-pdf"></i> รวมใบงาน PDF 6 ฉบับ
-            </a>
-          </div>
-          <div class="thairath-section-header">
-            <div>
-              <div class="thairath-section-title">
-                <i class="fa-solid fa-file-pen text-amber-600"></i> คลังใบงานวิทยาการคำนวณ ม.4
-              </div>
-              <div class="thairath-section-subtitle">
-                ใบงานมาตรฐาน 6 ฉบับ ครบทั้ง 2 หน่วยการเรียนรู้ (หน่วยละ 3 ใบงาน • คะแนนเต็ม 10 คะแนนทุกใบงาน) พร้อมระบบเปิดดูฉบับเต็ม พิมพ์ใบงาน A4 และส่งงานออนไลน์
-              </div>
-            </div>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              <a href="worksheets/all_worksheets_m4.pdf" target="_blank" download="รวมใบงาน_วิทยาการคำนวณ_ม4.pdf" class="btn" style="padding: 6px 14px; font-size: 0.84rem; background: #0284c7; color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; border-radius: 8px;">
-                <i class="fa-solid fa-file-pdf"></i> รวมใบงาน PDF (สำหรับ iPad / พิมพ์)
-              </a>
-              <button onclick="switchTab('assignments')" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.84rem;">
-                <i class="fa-solid fa-cloud-arrow-up"></i> ไปหน้าส่งงาน
-              </button>
-            </div>
+          
+          <!-- Category Switcher (Edge AI Style) -->
+          <div style="background: var(--surface-card, #ffffff); border: 1px solid var(--border-color); border-radius: 16px; padding: 6px; margin-bottom: 22px; display: inline-flex; gap: 8px; flex-wrap: wrap; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
+            <button id="ws-cat-btn-theory" onclick="setWorksheetCategory('theory')" class="ws-cat-pill active theory">
+              <i class="fa-solid fa-file-lines text-sky-600"></i>
+              <span>1. ใบงานทฤษฎี & โครงงาน</span>
+              <span style="font-size: 0.72rem; padding: 2px 8px; border-radius: 999px; background: rgba(2, 132, 199, 0.12); color: #0284c7; font-weight: 800;">6 ฉบับเดิม</span>
+            </button>
+            <button id="ws-cat-btn-practical" onclick="setWorksheetCategory('practical')" class="ws-cat-pill">
+              <i class="fa-solid fa-laptop-code text-emerald-600"></i>
+              <span>2. ใบงานแบบปฏิบัติ (Flowchart Lab)</span>
+              <span style="font-size: 0.72rem; padding: 2px 8px; border-radius: 999px; background: rgba(16, 185, 129, 0.15); color: #059669; font-weight: 800;">3 ชุด / 30 ข้อ</span>
+            </button>
+            <button id="ws-cat-btn-all" onclick="setWorksheetCategory('all')" class="ws-cat-pill">
+              <i class="fa-solid fa-layer-group text-slate-500"></i>
+              <span>ดูทั้งหมด (9 ฉบับ)</span>
+            </button>
           </div>
 
-          <!-- Unit Filter Tabs -->
-          <div style="display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;">
-            <button onclick="filterWorksheets('all')" class="btn-ws-filter active" id="btn-ws-filter-all">
-              <i class="fa-solid fa-layer-group mr-1.5"></i> ทุกหน่วยการเรียนรู้ (6 ใบงาน)
-            </button>
-            <button onclick="filterWorksheets('mod-1')" class="btn-ws-filter" id="btn-ws-filter-mod-1">
-              <i class="fa-solid fa-lightbulb mr-1.5" style="color: #10b981;"></i> หน่วยที่ 1: แนวคิดเชิงคำนวณ (3 ใบงาน)
-            </button>
-            <button onclick="filterWorksheets('mod-2')" class="btn-ws-filter" id="btn-ws-filter-mod-2">
-              <i class="fa-solid fa-laptop-code mr-1.5" style="color: #0284c7;"></i> หน่วยที่ 2: การพัฒนาโครงงาน (3 ใบงาน)
-            </button>
+          <!-- Dynamic Banner Area (iPad / Flowgorithm Lab) -->
+          <div id="ws-category-banner">
+            <!-- Rendered via JS -->
+          </div>
+
+          <!-- Section Header Area (Dynamic) -->
+          <div id="ws-header-area" class="thairath-section-header">
+            <!-- Rendered via JS -->
+          </div>
+
+          <!-- Sub-Filter Tabs (Dynamic: Unit 1/2 vs Lab 1/2/3) -->
+          <div id="ws-subfilter-container" style="display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;">
+            <!-- Rendered via JS -->
           </div>
 
           <!-- Worksheets Grid -->
@@ -1644,9 +1643,24 @@
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
             <div class="card">
-              <h3 style="font-size: 1.15rem; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; font-weight: 700;">
-                <i class="fa-solid fa-list-check" style="color: var(--accent-emerald);"></i> รายการใบงานที่มอบหมาย
-              </h3>
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; flex-wrap: wrap;">
+                <h3 style="font-size: 1.15rem; margin: 0; display: flex; align-items: center; gap: 10px; font-weight: 700;">
+                  <i class="fa-solid fa-list-check" style="color: var(--accent-emerald);"></i> รายการใบงานที่มอบหมาย
+                </h3>
+              </div>
+              
+              <!-- Category Filter in Assignments Tab -->
+              <div style="display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap;">
+                <button type="button" id="asg-filter-btn-theory" onclick="filterAssignmentsCategory('theory')" class="btn-asg-filter active">
+                  <i class="fa-solid fa-file-lines mr-1 text-sky-600"></i> ทฤษฎี & โครงงาน (6)
+                </button>
+                <button type="button" id="asg-filter-btn-practical" onclick="filterAssignmentsCategory('practical')" class="btn-asg-filter">
+                  <i class="fa-solid fa-laptop-code mr-1 text-emerald-600"></i> ปฏิบัติการ Flowchart (3)
+                </button>
+                <button type="button" id="asg-filter-btn-all" onclick="filterAssignmentsCategory('all')" class="btn-asg-filter">
+                  <i class="fa-solid fa-layer-group mr-1 text-slate-500"></i> ทั้งหมด (9)
+                </button>
+              </div>
               <div id="assignments-list" style="display: flex; flex-direction: column; gap: 14px;">
                 <!-- Rendered via JS -->
               </div>
@@ -1845,7 +1859,20 @@
                       <i class="fa-solid fa-circle-check mr-1"></i> ตรวจแล้ว
                     </button>
                   </div>
-                  <div id="teacher-submissions-filter-container" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
+                  <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
+                    <div id="teacher-submissions-cat-filter" style="display: inline-flex; background: var(--surface-secondary); padding: 3px; border-radius: 999px; border: 1px solid var(--border-color); margin-right: 4px;">
+                      <button type="button" id="btn-t-subs-cat-all" onclick="filterTeacherSubmissionsCategory('all')" style="padding: 3px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; border: none; cursor: pointer; background: var(--thairath-green); color: #fff;">
+                        ทั้งหมด
+                      </button>
+                      <button type="button" id="btn-t-subs-cat-theory" onclick="filterTeacherSubmissionsCategory('theory')" style="padding: 3px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; border: none; cursor: pointer; background: transparent; color: var(--text-muted);">
+                        📄 ทฤษฎี (6)
+                      </button>
+                      <button type="button" id="btn-t-subs-cat-practical" onclick="filterTeacherSubmissionsCategory('practical')" style="padding: 3px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; border: none; cursor: pointer; background: transparent; color: var(--text-muted);">
+                        💻 ผังงาน (3)
+                      </button>
+                    </div>
+                    <div id="teacher-submissions-filter-container" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
+                  </div>
                 </div>
               </div>
               <div id="teacher-pending-submissions" style="display: flex; flex-direction: column; gap: 14px; max-height: 600px; overflow-y: auto; padding-right: 4px;">
