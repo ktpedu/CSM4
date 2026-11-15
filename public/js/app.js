@@ -3803,7 +3803,7 @@ const OFFLINE_WORKSHEETS = [
         "sample_answer": "• ตัวชี้วัดความสำเร็จ (KPI):\n  1) อัตราอุปกรณ์สูญหายลดลงเป็น 0 ชิ้น ตลอด 1 ภาคเรียน\n  2) ความพึงพอใจของครูผู้ดูแลห้องแล็บและนักเรียนอยู่ในระดับมากที่สุด (คะแนนเฉลี่ย >= 4.50 จาก 5.00)\n• แผนการบำรุงรักษา: สำรองข้อมูลฐานข้อมูลทุกสิ้นสัปดาห์, ทำความสะอาดและพิมพ์เปลี่ยนสติกเกอร์ QR Code ที่ชำรุดทุกสิ้นภาคเรียน, และปรับปรุงสิทธิ์การเข้าถึงของผู้ใช้งานทุกปีการศึกษา"
       }
     ],
-    "rubric": "เกณฑ์การประเมินแบบรูบริกส์ (Analytic Rubric) คะแนนเต็ม 10 คะแนน (5 ด้าน ด้านละ 2 คะแนน):\n1. สำรวจและระบุปัญหา (2 คะแนน): วิเคราะห์ปัญหา สาเหตุ ผลกระทบ และกลุ่มเป้าหมายได้ชัดเจน (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)\n2. วางแผนและวิเคราะห์ (2 คะแนน): กำหนดวัตถุประสงค์ ขอบเขต และฟังก์ชันงานได้สมบูรณ์ (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)\n3. ออกแบบระบบและ UI (2 คะแนน): ออกแบบฐานข้อมูล ผังงาน และ Wireframe ได้ถูกต้องตามหลักวิชาชีพ (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)\n4. พัฒนาและทดสอบ (2 คะแนน): กำหนดแผนการพัฒนาและการทดสอบระบบรอบด้าน (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)\n5. ประเมินผลและบำรุงรักษา (2 คะแนน): กำหนดตัวชี้วัด KPI ชัดเจนและแผนบำรุงรักษาปฏิบัติได้จริง (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)"
+    "rubric": "เกณฑ์การประเมินแบบรูบริกส์ (Analytic Rubric) คะแนนเต็ม 10 คะแนน (5 ด้าน ด้านละ 2 คะแนน):\n1. สำรวจและระบุปัญหา (2 คะแนน): วิเคราะห์ปัญหา สาเหตุ ผลกระทบ และกลุ่มเป้าหมายได้ชัดเจน (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)\n2. วางแผนและวิเคราะห์ (2 คะแนน): กำหนดวัตถุประสงค์ ขอบเขต และฟังก์ชันงานได้สมบูรณ์ (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)\n3. ออกแบบระบบและ UI (2 คะแนน): ออกแบบฐานข้อมูล ผังงาน และ Wireframe ได้ถูกต้องตามหลักวิชาชีพ (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)\n4. พัฒนาและทดสอบ (2 คะแนน): กำหนดแผนการพัฒนาและการทดสอบระบบรอบด้าน (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)\n5. ประเมินผลและบำรุงรักษา (2 คะแนน): กำหนดตัวชี้วัด KPI ชัดเจนและแผนบำรุงรักษาปฏิบัติได้จริง (ดีมาก 2.0 | ดี 1.5 | พอใช้ 1.0 | ปรับปรุง 0.5)"
   },
   {
     "id": "ws-flow-1",
@@ -4821,10 +4821,10 @@ function renderSubmissionCardHtml(sub, assignments) {
     fileLinkHtml = `
       <div style="display: flex; gap: 6px; flex-wrap: wrap;">
         <button type="button" onclick="previewSubmissionWork('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.assignment_id)}')" class="text-xs text-emerald-700 font-bold hover:bg-emerald-100 inline-flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-300 cursor-pointer shadow-sm">
-          <i class="fa-solid fa-eye text-emerald-600"></i> เปิดดูผลงาน (${fileInfo.ext.toUpperCase()})
+          <i class="fa-solid fa-eye text-emerald-600"></i> ${fileInfo.isMultiple ? `เปิดดูผลงาน (${fileInfo.filesCount} ไฟล์)` : `เปิดดูผลงาน (${fileInfo.ext.toUpperCase()})`}
         </button>
         <button type="button" onclick="downloadSubmissionFileById('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.class_room)}', '${escapeHtml(sub.assignment_id)}')" class="text-xs text-slate-700 font-semibold hover:bg-slate-100 inline-flex items-center gap-1.5 bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200 cursor-pointer" title="ดาวน์โหลดเก็บลงเครื่อง">
-          <i class="fa-solid fa-download text-slate-500"></i> โหลด .${fileInfo.ext}
+          <i class="fa-solid fa-download text-slate-500"></i> ${fileInfo.isMultiple ? 'โหลดทั้งหมด (.zip)' : `โหลด .${fileInfo.ext}`}
         </button>
       </div>
     `;
@@ -4969,7 +4969,29 @@ async function fetchAllSubmissions(forceFresh = false) {
 
 // --- UNIVERSAL FILE DETECTOR & VIEWER SUITE ---
 function analyzeSubmissionFile(fileUrl, contentText) {
-  if (!fileUrl) return { isImage: false, isPdf: false, isHttpLink: false, mime: '', ext: 'bin', label: 'ไม่มีไฟล์แนบ' };
+  if (!fileUrl) return { isImage: false, isPdf: false, isHttpLink: false, isMultiple: false, mime: '', ext: 'bin', label: 'ไม่มีไฟล์แนบ', files: [] };
+
+  // Detect Multi-file JSON payload array
+  if (typeof fileUrl === 'string' && fileUrl.trim().startsWith('[') && fileUrl.trim().endsWith(']')) {
+    try {
+      const parsed = JSON.parse(fileUrl);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        const types = [...new Set(parsed.map(f => (f.ext || '').toUpperCase()).filter(Boolean))];
+        const typesStr = types.length > 0 ? ` (${types.join(', ')})` : '';
+        return {
+          isMultiple: true,
+          filesCount: parsed.length,
+          files: parsed,
+          isImage: false,
+          isPdf: false,
+          isHttpLink: false,
+          mime: 'application/json',
+          ext: 'zip',
+          label: `📁 แนบ ${parsed.length} ไฟล์${typesStr}`
+        };
+      }
+    } catch (e) {}
+  }
   
   if (fileUrl.startsWith('http://') || fileUrl.startsWith('https://')) {
     let label = 'ลิงก์ภายนอก';
@@ -5021,6 +5043,224 @@ function dataUrlToBlob(dataUrl, expectedMime) {
   return new Blob([u8arr], { type: mime });
 }
 
+
+// Download a single record from multi-file array
+function downloadSingleFileRecord(file, studentName, classRoom, asgId, index) {
+  if (!file || !file.url) return;
+  try {
+    const ext = file.ext || (file.name.split('.').pop() || 'bin').toLowerCase();
+    const mime = file.type || (ext === 'pdf' ? 'application/pdf' : ext === 'fprg' ? 'application/xml' : ['png','jpg','jpeg'].includes(ext) ? `image/${ext}` : 'application/octet-stream');
+    const blob = dataUrlToBlob(file.url, mime);
+    const blobUrl = URL.createObjectURL(blob);
+
+    const filename = file.name || `file_${index || 1}.${ext}`;
+    const a = document.createElement('a');
+    a.href = blobUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 30000);
+    showToast(`ดาวน์โหลด ${filename} สำเร็จ!`, 'success');
+  } catch (err) {
+    console.error('Download error:', err);
+    showToast('เกิดข้อผิดพลาดในการดาวน์โหลด: ' + err.message, 'error');
+  }
+}
+
+// Download all files in a multi-file submission (ZIP or batch)
+async function downloadAllSubmissionFiles(files, studentName, classRoom, asgId) {
+  if (!Array.isArray(files) || files.length === 0) return;
+
+  const cleanName = (studentName || 'student').replace(/[^\u0E00-\u0E7Fa-zA-Z0-9_-]/g, '_');
+  const cleanRoom = (classRoom || 'm4').replace(/[^\u0E00-\u0E7Fa-zA-Z0-9_-]/g, '_');
+  const basePrefix = `${cleanName}_${cleanRoom}_${asgId || 'worksheet'}`;
+
+  // If JSZip is available, package into a single ZIP file!
+  if (typeof JSZip !== 'undefined') {
+    showToast('กำลังบีบอัดไฟล์ ZIP สำหรับดาวน์โหลด...', 'info');
+    try {
+      const zip = new JSZip();
+      for (let i = 0; i < files.length; i++) {
+        const f = files[i];
+        const fname = f.name || `file_${i+1}.${f.ext || 'bin'}`;
+        if (f.url && f.url.startsWith('data:')) {
+          const b64Data = f.url.split(',')[1];
+          zip.file(fname, b64Data, { base64: true });
+        }
+      }
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      const zipUrl = URL.createObjectURL(zipBlob);
+      const a = document.createElement('a');
+      a.href = zipUrl;
+      a.download = `${basePrefix}_all_files.zip`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(zipUrl), 30000);
+      showToast(`ดาวน์โหลด ${basePrefix}_all_files.zip สำเร็จ!`, 'success');
+      return;
+    } catch (zipErr) {
+      console.warn('Zip creation failed, fallback to sequential download:', zipErr);
+    }
+  }
+
+  // Fallback: download each file
+  for (let i = 0; i < files.length; i++) {
+    const f = files[i];
+    setTimeout(() => {
+      downloadSingleFileRecord(f, studentName, classRoom, asgId, i + 1);
+    }, i * 300);
+  }
+}
+
+// Multi-file Viewer renderer
+function renderMultiFileViewer(areaEl, files, sub, asgId, btnDownload, btnNewTab) {
+  let activeIdx = 0;
+
+  function updateView(idx) {
+    activeIdx = idx;
+    const file = files[idx];
+    if (!file) return;
+
+    // Update tab styles
+    const tabs = document.querySelectorAll('.multi-file-tab-btn');
+    tabs.forEach((tab, tIdx) => {
+      if (tIdx === idx) {
+        tab.style.background = '#10b981';
+        tab.style.color = '#ffffff';
+        tab.style.borderColor = '#10b981';
+      } else {
+        tab.style.background = 'rgba(255, 255, 255, 0.08)';
+        tab.style.color = '#e2e8f0';
+        tab.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+      }
+    });
+
+    const fileContentEl = document.getElementById('multi-file-active-content');
+    if (!fileContentEl) return;
+
+    const ext = (file.ext || (file.name ? file.name.split('.').pop() : '')).toLowerCase();
+    const isImg = ['png', 'jpg', 'jpeg', 'webp', 'gif'].includes(ext) || (file.url && file.url.startsWith('data:image/'));
+    const isPdf = ext === 'pdf' || (file.url && file.url.startsWith('data:application/pdf'));
+    const isFprg = ext === 'fprg' || (file.name && file.name.endsWith('.fprg'));
+
+    if (isImg) {
+      fileContentEl.innerHTML = `
+        <div style="max-height: 52vh; overflow: auto; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+          <img src="${file.url}" alt="${escapeHtml(file.name)}" style="max-width: 100%; max-height: 48vh; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);" />
+          <div style="font-size: 0.8rem; color: #cbd5e1; font-weight: 700;">${escapeHtml(file.name)} (${(file.size / 1024).toFixed(1)} KB)</div>
+        </div>
+      `;
+    } else if (isPdf) {
+      const pdfBlob = dataUrlToBlob(file.url, 'application/pdf');
+      const pdfBlobUrl = URL.createObjectURL(pdfBlob);
+      fileContentEl.innerHTML = `
+        <object data="${pdfBlobUrl}" type="application/pdf" style="width: 100%; height: 52vh; border-radius: 8px; border: none;">
+          <div style="color: #cbd5e1; padding: 30px 20px;">
+            <i class="fa-solid fa-file-pdf text-4xl text-rose-500 mb-2 block"></i>
+            <p style="font-weight: 700; margin-bottom: 8px;">${escapeHtml(file.name)}</p>
+            <a href="${pdfBlobUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 8px 18px; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> คลิกเปิดไฟล์ PDF ในแท็บใหม่
+            </a>
+          </div>
+        </object>
+      `;
+    } else if (isFprg) {
+      let previewCode = '';
+      try {
+        if (file.url && file.url.startsWith('data:')) {
+          const b64 = file.url.split(',')[1];
+          if (b64) {
+            const decoded = atob(b64);
+            if (decoded && (decoded.includes('<flowgorithm') || decoded.includes('<?xml'))) {
+              previewCode = decoded.slice(0, 3000);
+            }
+          }
+        }
+      } catch (e) {}
+
+      fileContentEl.innerHTML = `
+        <div style="padding: 16px; color: #cbd5e1; max-width: 720px; margin: 0 auto; text-align: center;">
+          <div style="width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, #0284c7, #2563eb); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 10px; box-shadow: 0 4px 16px rgba(2, 132, 199, 0.4);">
+            <i class="fa-solid fa-diagram-project"></i>
+          </div>
+          <h4 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 4px;">${escapeHtml(file.name)}</h4>
+          <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 12px;">
+            ไฟล์ผังงาน Flowgorithm • ${(file.size / 1024).toFixed(1)} KB
+          </p>
+          <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
+            <button type="button" onclick="downloadSingleFileRecord(window.__currentMultiFiles[${idx}], '${escapeHtml(sub?.student_name)}', '${escapeHtml(sub?.class_room)}', '${escapeHtml(asgId)}')" class="btn btn-primary" style="padding: 8px 18px; font-weight: 700; font-size: 0.84rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+              <i class="fa-solid fa-download"></i> ดาวน์โหลด ${escapeHtml(file.name)}
+            </button>
+            <a href="flowgorithm-guide.html" target="_blank" class="btn" style="background: rgba(2, 132, 199, 0.15); color: #38bdf8; border: 1.5px solid rgba(2, 132, 199, 0.4); padding: 8px 16px; font-weight: 700; font-size: 0.84rem; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; border-radius: 8px;">
+              <i class="fa-solid fa-book-open"></i> คู่มือ Flowgorithm ↗
+            </a>
+          </div>
+          ${previewCode ? `
+            <div style="text-align: left; background: #020617; border: 1px solid #1e293b; border-radius: 10px; padding: 10px 14px; font-family: monospace; font-size: 0.74rem; color: #94a3b8; max-height: 200px; overflow: auto; white-space: pre-wrap; line-height: 1.45;">
+              <div style="color: #38bdf8; font-weight: 700; margin-bottom: 4px; border-bottom: 1px solid #1e293b; padding-bottom: 2px;">โครงสร้างไฟล์ Flowgorithm XML (.fprg):</div>
+              ${escapeHtml(previewCode)}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    } else {
+      fileContentEl.innerHTML = `
+        <div style="padding: 30px; text-align: center; color: #cbd5e1;">
+          <i class="fa-solid fa-file text-4xl text-blue-400 mb-2 block"></i>
+          <h4 style="font-weight: 700; margin-bottom: 6px;">${escapeHtml(file.name)}</h4>
+          <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 14px;">ขนาด: ${(file.size / 1024).toFixed(1)} KB</p>
+          <button type="button" onclick="downloadSingleFileRecord(window.__currentMultiFiles[${idx}], '${escapeHtml(sub?.student_name)}', '${escapeHtml(sub?.class_room)}', '${escapeHtml(asgId)}')" class="btn btn-primary" style="padding: 8px 18px;">
+            <i class="fa-solid fa-download mr-1"></i> ดาวน์โหลดไฟล์นี้
+          </button>
+        </div>
+      `;
+    }
+
+    if (btnDownload) {
+      btnDownload.innerHTML = `<i class="fa-solid fa-download"></i> โหลดไฟล์ที่เลือก (${file.ext ? file.ext.toUpperCase() : 'FILE'})`;
+      btnDownload.onclick = () => {
+        downloadSingleFileRecord(file, sub?.student_name, sub?.class_room, asgId);
+      };
+    }
+  }
+
+  window.__currentMultiFiles = files;
+  window.__currentMultiFileSwitcher = updateView;
+
+  areaEl.innerHTML = `
+    <div style="display: flex; flex-direction: column; width: 100%; height: 100%; gap: 10px;">
+      
+      <!-- Multi-file Tabs Bar -->
+      <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1e293b; padding-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; gap: 6px; overflow-x: auto; max-width: 100%; padding-bottom: 4px;">
+          ${files.map((f, i) => {
+            const ext = (f.ext || '').toLowerCase();
+            const icon = ext === 'fprg' ? 'fa-diagram-project' : ['png','jpg','jpeg'].includes(ext) ? 'fa-image' : ext === 'pdf' ? 'fa-file-pdf' : 'fa-file';
+            return `
+              <button type="button" class="multi-file-tab-btn" onclick="window.__currentMultiFileSwitcher(${i})" style="padding: 6px 12px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; border: 1.5px solid transparent; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: all 0.2s;">
+                <i class="fa-solid ${icon}"></i>
+                <span>${escapeHtml(f.name.length > 22 ? f.name.slice(0, 20) + '...' : f.name)}</span>
+              </button>
+            `;
+          }).join('')}
+        </div>
+
+        <button type="button" onclick="downloadAllSubmissionFiles(window.__currentMultiFiles, '${escapeHtml(sub?.student_name)}', '${escapeHtml(sub?.class_room)}', '${escapeHtml(asgId)}')" class="btn" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: white; font-size: 0.78rem; font-weight: 800; padding: 6px 14px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);">
+          <i class="fa-solid fa-file-zipper"></i> ดาวน์โหลดทุกไฟล์ (${files.length} ไฟล์ .zip)
+        </button>
+      </div>
+
+      <!-- Active File Viewer Area -->
+      <div id="multi-file-active-content" style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 400px;">
+      </div>
+    </div>
+  `;
+
+  updateView(0);
+}
+
 function downloadSubmissionFile(fileUrl, studentName, classRoom, asgId, fileInfo) {
   if (!fileUrl) return;
 
@@ -5062,7 +5302,11 @@ async function downloadSubmissionFileById(subId, studentName, classRoom, asgId) 
 
   if (fileUrl) {
     const info = analyzeSubmissionFile(fileUrl, sub?.content);
-    downloadSubmissionFile(fileUrl, studentName, classRoom, asgId, info);
+    if (info.isMultiple) {
+      downloadAllSubmissionFiles(info.files, studentName || sub?.student_name, classRoom || sub?.class_room, asgId);
+    } else {
+      downloadSubmissionFile(fileUrl, studentName || sub?.student_name, classRoom || sub?.class_room, asgId, info);
+    }
     return;
   }
 
@@ -5081,7 +5325,11 @@ async function downloadSubmissionFileById(subId, studentName, classRoom, asgId) 
     submissionFileCache[subId] = fileUrl;
     if (sub) sub.file_url = fileUrl;
     const info = analyzeSubmissionFile(fileUrl, sub?.content);
-    downloadSubmissionFile(fileUrl, studentName, classRoom, asgId, info);
+    if (info.isMultiple) {
+      downloadAllSubmissionFiles(info.files, studentName || sub?.student_name, classRoom || sub?.class_room, asgId);
+    } else {
+      downloadSubmissionFile(fileUrl, studentName || sub?.student_name, classRoom || sub?.class_room, asgId, info);
+    }
   } catch (err) {
     showToast('เกิดข้อผิดพลาด: ' + err.message, 'error');
   }
@@ -5190,7 +5438,7 @@ async function previewSubmissionWork(subId, studentName, asgId) {
   // Setup download button
   if (btnDownload) {
     btnDownload.style.display = 'inline-flex';
-    btnDownload.innerHTML = `<i class="fa-solid fa-download"></i> โหลด .${fileInfo.ext}`;
+    btnDownload.innerHTML = `<i class="fa-solid fa-download"></i> ${fileInfo.isMultiple ? 'โหลดทั้งหมด (.zip)' : `โหลด .${fileInfo.ext}`}`;
     btnDownload.onclick = () => {
       downloadSubmissionFile(fileUrl, studentName || sub?.student_name, sub?.class_room, asgId, fileInfo);
     };
@@ -5204,7 +5452,18 @@ async function previewSubmissionWork(subId, studentName, asgId) {
     };
   }
 
-  // Render preview inside areaEl
+  
+  // If multi-file, delegate to multi-file renderer!
+  if (fileInfo.isMultiple) {
+    if (badgeEl) {
+      badgeEl.innerText = fileInfo.label;
+      badgeEl.style.background = 'rgba(2, 132, 199, 0.2)';
+      badgeEl.style.color = '#7dd3fc';
+    }
+    renderMultiFileViewer(areaEl, fileInfo.files, sub, asgId, btnDownload, btnNewTab);
+    return;
+  }
+// Render preview inside areaEl
   if (areaEl) {
     if (fileInfo.isImage) {
       areaEl.innerHTML = `
@@ -5444,9 +5703,10 @@ async function loadAssignmentsData() {
   }
 }
 
-// --- PRO ASSIGNMENT SUBMISSION & UPLOAD HELPERS ---
+// --- PRO MULTI-FILE ASSIGNMENT SUBMISSION & UPLOAD SYSTEM ---
 let currentSubmitMode = 'upload';
-let currentSelectedFile = null;
+let currentSelectedFiles = [];
+let currentSelectedFile = null; // backward compatibility
 
 function switchSubmitMode(mode) {
   currentSubmitMode = mode;
@@ -5469,8 +5729,11 @@ function switchSubmitMode(mode) {
 }
 
 function handleFileSelect(event) {
-  const file = event.target.files && event.target.files[0];
-  if (file) setUploadFile(file);
+  const files = event.target.files;
+  if (files && files.length > 0) {
+    addUploadFiles(Array.from(files));
+  }
+  event.target.value = '';
 }
 
 function handleDragOver(event) {
@@ -5489,32 +5752,170 @@ function handleDrop(event) {
   event.preventDefault();
   const dz = document.getElementById('dropzone');
   if (dz) dz.classList.remove('dragover');
-  const file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
-  if (file) setUploadFile(file);
-}
-
-function setUploadFile(file) {
-  if (file.size > 25 * 1024 * 1024) {
-    showToast('ไฟล์มีขนาดใหญ่เกิน 25MB กรุณาเลือกไฟล์ที่มีขนาดเล็กลง', 'error');
-    return;
+  const files = event.dataTransfer && event.dataTransfer.files;
+  if (files && files.length > 0) {
+    addUploadFiles(Array.from(files));
   }
-  currentSelectedFile = file;
-
-  const card = document.getElementById('selected-file-card');
-  const nameEl = document.getElementById('selected-file-name');
-  const sizeEl = document.getElementById('selected-file-size');
-
-  if (nameEl) nameEl.innerText = file.name;
-  if (sizeEl) sizeEl.innerText = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
-  if (card) card.style.display = 'flex';
 }
 
-function clearSelectedFile() {
+function addUploadFiles(newFiles) {
+  let addedCount = 0;
+  for (const file of newFiles) {
+    if (file.size > 25 * 1024 * 1024) {
+      showToast(`ไฟล์ "${file.name}" มีขนาดใหญ่เกิน 25MB`, 'error');
+      continue;
+    }
+    const isDup = currentSelectedFiles.some(f => f.name === file.name && f.size === file.size);
+    if (!isDup) {
+      currentSelectedFiles.push(file);
+      addedCount++;
+    }
+  }
+  currentSelectedFile = currentSelectedFiles[0] || null;
+  renderSelectedFilesList();
+  if (addedCount > 0) {
+    showToast(`แนบไฟล์สำเร็จ ${addedCount} ไฟล์ (รวมทั้งหมด ${currentSelectedFiles.length} ไฟล์)`, 'success');
+  }
+}
+
+function removeSelectedFile(index) {
+  if (index >= 0 && index < currentSelectedFiles.length) {
+    const removed = currentSelectedFiles.splice(index, 1);
+    currentSelectedFile = currentSelectedFiles[0] || null;
+    renderSelectedFilesList();
+    if (removed[0]) {
+      showToast(`นำไฟล์ "${removed[0].name}" ออกแล้ว`, 'info');
+    }
+  }
+}
+
+function clearSelectedFiles() {
+  currentSelectedFiles = [];
   currentSelectedFile = null;
   const input = document.getElementById('submit-file-input');
   if (input) input.value = '';
-  const card = document.getElementById('selected-file-card');
-  if (card) card.style.display = 'none';
+  renderSelectedFilesList();
+}
+
+function clearSelectedFile() {
+  clearSelectedFiles();
+}
+
+function renderSelectedFilesList() {
+  const container = document.getElementById('selected-files-container');
+  const listEl = document.getElementById('selected-files-list');
+  const countBadge = document.getElementById('selected-files-count-badge');
+
+  if (!container || !listEl) return;
+
+  if (currentSelectedFiles.length === 0) {
+    container.style.display = 'none';
+    listEl.innerHTML = '';
+    return;
+  }
+
+  container.style.display = 'block';
+
+  let totalBytes = 0;
+  listEl.innerHTML = currentSelectedFiles.map((file, idx) => {
+    totalBytes += file.size;
+    const sizeStr = file.size < 1024 * 1024 
+      ? (file.size / 1024).toFixed(1) + ' KB' 
+      : (file.size / (1024 * 1024)).toFixed(2) + ' MB';
+
+    const ext = (file.name.split('.').pop() || '').toLowerCase();
+    let iconClass = 'fa-file-lines text-slate-400';
+    let iconBg = 'rgba(100, 116, 139, 0.15)';
+    if (ext === 'fprg') {
+      iconClass = 'fa-diagram-project text-blue-500';
+      iconBg = 'rgba(2, 132, 199, 0.15)';
+    } else if (['png', 'jpg', 'jpeg', 'webp', 'gif'].includes(ext)) {
+      iconClass = 'fa-file-image text-emerald-500';
+      iconBg = 'rgba(16, 185, 129, 0.15)';
+    } else if (ext === 'pdf') {
+      iconClass = 'fa-file-pdf text-rose-500';
+      iconBg = 'rgba(239, 68, 68, 0.15)';
+    } else if (['zip', 'rar', '7z'].includes(ext)) {
+      iconClass = 'fa-file-zipper text-amber-500';
+      iconBg = 'rgba(245, 158, 11, 0.15)';
+    }
+
+    return `
+      <div style="display: flex; align-items: center; justify-content: space-between; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 12px; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 10px; overflow: hidden; flex: 1;">
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: ${iconBg}; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem;">
+            <i class="fa-solid ${iconClass}"></i>
+          </div>
+          <div style="overflow: hidden; text-align: left; flex: 1;">
+            <div style="font-weight: 700; font-size: 0.84rem; color: var(--text-main); white-space: nowrap; text-overflow: ellipsis; overflow: hidden;" title="${escapeHtml(file.name)}">
+              ${escapeHtml(file.name)}
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-subtle);">
+              ${sizeStr} • <span style="text-transform: uppercase; font-weight: 600;">${escapeHtml(ext)}</span>
+            </div>
+          </div>
+        </div>
+        <button type="button" onclick="removeSelectedFile(${idx})" style="background: none; border: none; cursor: pointer; padding: 6px; color: #ef4444; border-radius: 6px; transition: background 0.2s;" title="ลบไฟล์นี้">
+          <i class="fa-solid fa-trash-can" style="font-size: 0.95rem;"></i>
+        </button>
+      </div>
+    `;
+  }).join('');
+
+  const totalStr = totalBytes < 1024 * 1024 
+    ? (totalBytes / 1024).toFixed(1) + ' KB' 
+    : (totalBytes / (1024 * 1024)).toFixed(2) + ' MB';
+
+  if (countBadge) {
+    countBadge.innerHTML = `<i class="fa-solid fa-paperclip mr-1"></i> แนบแล้ว ${currentSelectedFiles.length} ไฟล์ (ขนาดรวม ${totalStr})`;
+  }
+}
+
+// Client-side image compressor (draws to offscreen canvas if > 1.5MB to save Supabase payload limit)
+async function compressImageFile(file) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+        const maxDimension = 1920;
+
+        if (width > maxDimension || height > maxDimension) {
+          if (width > height) {
+            height = Math.round((height * maxDimension) / width);
+            width = maxDimension;
+          } else {
+            width = Math.round((width * maxDimension) / height);
+            height = maxDimension;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+        resolve(dataUrl);
+      };
+      img.onerror = () => resolve(e.target.result);
+      img.src = e.target.result;
+    };
+    reader.onerror = () => resolve('');
+    reader.readAsDataURL(file);
+  });
+}
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(new Error('ไม่สามารถอ่านไฟล์ได้'));
+    reader.readAsDataURL(file);
+  });
 }
 
 function checkDriveUrl(url) {
@@ -5573,71 +5974,61 @@ async function doSubmitAssignment() {
 
   // 1. Process File Upload or Link Mode
   if (currentSubmitMode === 'upload') {
-    if (!currentSelectedFile && !content) {
+    if (currentSelectedFiles.length === 0 && !content) {
       showToast('กรุณาเลือกไฟล์ที่ต้องการส่ง หรือพิมพ์รายละเอียดงาน', 'error');
       return;
     }
 
-    if (currentSelectedFile) {
+    if (currentSelectedFiles.length > 0) {
       try {
         if (submitBtn) {
           submitBtn.disabled = true;
           submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-1"></i> กำลังเตรียมไฟล์...';
         }
         if (progressWrap) progressWrap.style.display = 'block';
-        if (progressBar) progressBar.style.width = '35%';
-        if (progressPct) progressPct.innerText = '35%';
-        if (progressText) progressText.innerText = 'กำลังประมวลผลไฟล์...';
 
-        let uploadedViaServer = false;
+        const fileRecords = [];
+        const total = currentSelectedFiles.length;
 
-        // Try local server endpoint if not running on file:// protocol
-        if (!isStaticOrServerlessHost()) {
-          try {
-            const formData = new FormData();
-            formData.append('file', currentSelectedFile);
+        for (let i = 0; i < total; i++) {
+          const file = currentSelectedFiles[i];
+          const pct = Math.round(((i + 0.5) / total) * 90);
+          if (progressBar) progressBar.style.width = pct + '%';
+          if (progressPct) progressPct.innerText = pct + '%';
+          if (progressText) progressText.innerText = `กำลังประมวลผลไฟล์ (${i + 1}/${total}): ${file.name}`;
 
-            const res = await fetch('/api/submissions/upload', {
-              method: 'POST',
-              headers: { 'Authorization': 'Bearer ' + currentToken },
-              body: formData
-            });
-            if (res.ok) {
-              const uploadData = await res.json();
-              if (uploadData && uploadData.file_url) {
-                file_url = uploadData.file_url;
-                uploadedViaServer = true;
-              }
-            }
-          } catch (e) {
-            console.warn('Server upload not reachable, using Data URL fallback:', e);
+          let fileDataUrl = '';
+          const isLargeImage = file.type && file.type.startsWith('image/') && file.size > 1.5 * 1024 * 1024;
+          if (isLargeImage) {
+            fileDataUrl = await compressImageFile(file);
+          } else {
+            fileDataUrl = await readFileAsDataUrl(file);
           }
-        }
 
-        // Offline / file:// protocol fallback: Read file as Base64 Data URL
-        if (!uploadedViaServer) {
-          if (progressBar) progressBar.style.width = '70%';
-          if (progressPct) progressPct.innerText = '70%';
-          if (progressText) progressText.innerText = 'กำลังเตรียมส่งข้อมูลขึ้น Supabase Cloud...';
-
-          const dataUrl = await new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = () => reject(new Error('ไม่สามารถอ่านไฟล์ได้'));
-            reader.readAsDataURL(currentSelectedFile);
+          fileRecords.push({
+            name: file.name,
+            size: file.size,
+            type: file.type || 'application/octet-stream',
+            ext: (file.name.split('.').pop() || '').toLowerCase(),
+            url: fileDataUrl
           });
-          file_url = dataUrl;
         }
 
         if (progressBar) progressBar.style.width = '100%';
         if (progressPct) progressPct.innerText = '100%';
-        if (progressText) progressText.innerText = 'ประมวลผลไฟล์เสร็จสมบูรณ์!';
+        if (progressText) progressText.innerText = 'ประมวลผลไฟล์ทั้งหมดเสร็จสมบูรณ์!';
 
-        const fileNote = `[ไฟล์แนบ: ${currentSelectedFile.name} (${(currentSelectedFile.size / (1024 * 1024)).toFixed(2)} MB)]`;
-        if (!content) {
-          content = `ส่งไฟล์ผลงาน ${fileNote}`;
-        } else if (!content.includes(currentSelectedFile.name)) {
-          content = `${content}\n${fileNote}`;
+        if (fileRecords.length === 1) {
+          file_url = fileRecords[0].url;
+          const fileNote = `[ไฟล์แนบ: ${fileRecords[0].name} (${(fileRecords[0].size / 1024).toFixed(1)} KB)]`;
+          if (!content) content = `ส่งไฟล์ผลงาน ${fileNote}`;
+          else if (!content.includes(fileRecords[0].name)) content = `${content}\n${fileNote}`;
+        } else {
+          file_url = JSON.stringify(fileRecords);
+          const fileNotes = fileRecords.map((f, i) => `${i + 1}) ${f.name} (${(f.size / 1024).toFixed(1)} KB)`).join('\n');
+          const summaryNote = `[ไฟล์แนบทั้งหมด ${fileRecords.length} ไฟล์]:\n${fileNotes}`;
+          if (!content) content = summaryNote;
+          else content = `${content}\n\n${summaryNote}`;
         }
 
       } catch (uploadErr) {
@@ -5723,48 +6114,54 @@ async function doSubmitAssignment() {
     }
 
     // 5. Always persist to in-memory cache and localStorage
+    submissionFileCache[subId] = file_url;
+    let localSubs = JSON.parse(localStorage.getItem('csm4_submissions') || '[]');
+    const existIdx = localSubs.findIndex(s => s.id === subId);
+    if (existIdx >= 0) {
+      localSubs[existIdx] = { ...localSubs[existIdx], ...submissionRecord };
+    } else {
+      localSubs.unshift(submissionRecord);
+    }
+    localStorage.setItem('csm4_submissions', JSON.stringify(localSubs));
+
+    // Update global memory array
     if (Array.isArray(allSubmissionsGlobalCache)) {
-      const existIdx = allSubmissionsGlobalCache.findIndex(s => s.id === submissionRecord.id);
-      if (existIdx >= 0) {
-        allSubmissionsGlobalCache[existIdx] = { ...allSubmissionsGlobalCache[existIdx], ...submissionRecord };
+      const gIdx = allSubmissionsGlobalCache.findIndex(s => s.id === subId);
+      if (gIdx >= 0) {
+        allSubmissionsGlobalCache[gIdx] = { ...allSubmissionsGlobalCache[gIdx], ...submissionRecord };
       } else {
         allSubmissionsGlobalCache.unshift(submissionRecord);
       }
     }
 
-    try {
-      let localSubs = JSON.parse(localStorage.getItem('csm4_submissions') || '[]');
-      const existIdx = localSubs.findIndex(s => s.id === submissionRecord.id);
-      if (existIdx >= 0) {
-        localSubs[existIdx] = { ...localSubs[existIdx], ...submissionRecord };
-      } else {
-        localSubs.unshift(submissionRecord);
-      }
-      localStorage.setItem('csm4_submissions', JSON.stringify(localSubs));
-    } catch (e) {}
-
-    // 6. UI feedback and close modal
+    // UI feedback
+    const fileCount = currentSelectedFiles.length;
+    showToast(
+      fileCount > 1
+        ? `ส่งงานพร้อมแนบ ${fileCount} ไฟล์เรียบร้อยแล้ว!`
+        : 'ส่งงานเรียบร้อยแล้ว! ผลงานถูกบันทึกลงระบบแล้ว',
+      'success'
+    );
     closeModal('modal-submit-assignment');
 
-    if (savedToSupabase) {
-      showToast('ส่งงานสำเร็จเรียบร้อย! ระบบบันทึกลงฐานข้อมูล Supabase Cloud แล้ว', 'success');
-    } else {
-      showToast('ส่งงานสำเร็จและบันทึกในระบบเรียบร้อย (ระบบจะซิงค์ขึ้น Supabase อัตโนมัติ)', 'success');
+    // Refresh assignments/submissions tab if active
+    if (activeTab === 'assignments') {
+      loadAssignmentsData();
+      loadSubmissionsData();
     }
-
-    loadAssignmentsData();
-    if (typeof renderTeacherPendingSubmissions === 'function') {
-      renderTeacherPendingSubmissions();
+    if (currentUser && currentUser.role === 'teacher') {
+      loadTeacherSubmissions();
     }
 
   } catch (err) {
     console.error('Submit error:', err);
-    showToast('เกิดข้อผิดพลาดในการส่งงาน: ' + (err.message || 'โปรดลองอีกครั้ง'), 'error');
+    showToast('เกิดข้อผิดพลาดในการส่งงาน: ' + err.message, 'error');
   } finally {
     if (submitBtn) {
       submitBtn.disabled = false;
       submitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-1"></i> ยืนยันส่งงาน (Supabase Cloud)';
     }
+    if (progressWrap) progressWrap.style.display = 'none';
   }
 }
 
@@ -5798,7 +6195,7 @@ function openGradeModal(subId, studentName, currentScore) {
         fileContainer.innerHTML = `
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <button type="button" onclick="previewSubmissionWork('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.assignment_id)}')" class="btn" style="background: #10b981; color: white; font-size: 0.8rem; padding: 7px 14px; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px; border: none; cursor: pointer;">
-              <i class="fa-solid fa-eye"></i> เปิดดูผลงาน (${fileInfo.ext.toUpperCase()})
+              <i class="fa-solid fa-eye"></i> ${fileInfo.isMultiple ? `เปิดดูผลงาน (${fileInfo.filesCount} ไฟล์)` : `เปิดดูผลงาน (${fileInfo.ext.toUpperCase()})`}
             </button>
             <button type="button" onclick="downloadSubmissionFileById('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.class_room)}', '${escapeHtml(sub.assignment_id)}')" class="btn btn-outline" style="font-size: 0.8rem; padding: 7px 12px; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px; cursor: pointer;">
               <i class="fa-solid fa-download"></i> โหลด .${fileInfo.ext}
@@ -8520,10 +8917,10 @@ function renderTeacherPendingSubmissions() {
       fileBtnHtml = `
         <div style="display: flex; gap: 6px; flex-wrap: wrap;">
           <button type="button" onclick="previewSubmissionWork('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.assignment_id)}')" class="text-xs text-emerald-700 font-bold hover:bg-emerald-100 inline-flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-300 cursor-pointer shadow-sm">
-            <i class="fa-solid fa-eye text-emerald-600"></i> เปิดดูผลงาน (${fileInfo.ext.toUpperCase()})
+            <i class="fa-solid fa-eye text-emerald-600"></i> ${fileInfo.isMultiple ? `เปิดดูผลงาน (${fileInfo.filesCount} ไฟล์)` : `เปิดดูผลงาน (${fileInfo.ext.toUpperCase()})`}
           </button>
           <button type="button" onclick="downloadSubmissionFileById('${escapeHtml(sub.id)}', '${escapeHtml(sub.student_name)}', '${escapeHtml(sub.class_room)}', '${escapeHtml(sub.assignment_id)}')" class="text-xs text-slate-700 font-semibold hover:bg-slate-100 inline-flex items-center gap-1.5 bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200 cursor-pointer" title="ดาวน์โหลดเก็บลงเครื่อง">
-            <i class="fa-solid fa-download text-slate-500"></i> โหลด .${fileInfo.ext}
+            <i class="fa-solid fa-download text-slate-500"></i> ${fileInfo.isMultiple ? 'โหลดทั้งหมด (.zip)' : `โหลด .${fileInfo.ext}`}
           </button>
         </div>
       `;

@@ -5545,3 +5545,49 @@ body {
   --primary-dark: #4ade80 !important;
   --primary-light: #86efac !important;
 }
+
+
+/* ==========================================================
+   MULTI-FILE UPLOADER & PREVIEWER STYLES
+   ========================================================== */
+#selected-files-list::-webkit-scrollbar {
+  width: 5px;
+}
+#selected-files-list::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.multi-file-tab-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  font-family: inherit;
+}
+.multi-file-tab-btn:hover {
+  background: rgba(16, 185, 129, 0.25) !important;
+  color: #ffffff !important;
+  border-color: #10b981 !important;
+}
+.multi-file-tab-btn.active {
+  background: #10b981 !important;
+  color: #ffffff !important;
+  border-color: #10b981 !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+}
+
+[data-theme="light"] .multi-file-tab-btn {
+  background: #f1f5f9;
+  color: #334155;
+  border: 1.5px solid #cbd5e1;
+}
+[data-theme="light"] .multi-file-tab-btn:hover {
+  background: #e0f2fe !important;
+  color: #0284c7 !important;
+  border-color: #0284c7 !important;
+}
+[data-theme="light"] .multi-file-tab-btn.active {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  border-color: #0284c7 !important;
+}
