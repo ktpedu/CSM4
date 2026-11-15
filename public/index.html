@@ -38,7 +38,7 @@
     </script>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v=4.4" />
+    <link rel="stylesheet" href="css/style.css?v=5.0" />
       <style>
       /* Ensure Font Awesome icons ALWAYS render correctly and never get overridden */
       .fa-solid, .fas, i.fa-solid, i.fas {
@@ -2520,8 +2520,8 @@
     <div id="modal-view-submission-work" style="position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 2100; display: none; align-items: center; justify-content: center; padding: 20px;">
       <div class="card" style="max-width: 960px; width: 100%; max-height: 92vh; display: flex; flex-direction: column; padding: 22px; border-radius: 20px; box-shadow: 0 25px 60px rgba(0,0,0,0.5); background: var(--surface-primary);">
         
-        <!-- Header -->
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 14px;">
+        <!-- Header with Student Info and Next/Prev Navigation -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 12px; gap: 10px; flex-wrap: wrap;">
           <div>
             <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
               <h3 id="viewer-student-name" style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;"></h3>
@@ -2530,9 +2530,20 @@
             </div>
             <p id="viewer-asg-title" style="font-size: 0.82rem; color: var(--text-muted); margin: 3px 0 0 0;"></p>
           </div>
-          <button onclick="closeModal('modal-view-submission-work')" style="background: none; border: none; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; padding: 4px 8px;">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
+
+          <!-- Student Navigation Controls for Teachers -->
+          <div id="viewer-nav-container" style="display: flex; align-items: center; gap: 6px;">
+            <button type="button" id="btn-viewer-prev" onclick="navigateViewerSubmission(-1)" class="btn" style="background: var(--surface-secondary); color: var(--text-main); border: 1px solid var(--border-color); font-size: 0.78rem; padding: 6px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 4px; cursor: pointer;" title="ตรวจคนก่อนหน้า">
+              <i class="fa-solid fa-chevron-left"></i> ก่อนหน้า
+            </button>
+            <span id="viewer-nav-counter" style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); padding: 4px 10px; background: rgba(0,0,0,0.2); border-radius: 6px; border: 1px solid var(--border-color);">1 / 1</span>
+            <button type="button" id="btn-viewer-next" onclick="navigateViewerSubmission(1)" class="btn" style="background: var(--surface-secondary); color: var(--text-main); border: 1px solid var(--border-color); font-size: 0.78rem; padding: 6px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 4px; cursor: pointer;" title="ตรวจคนถัดไป">
+              ถัดไป <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <button onclick="closeModal('modal-view-submission-work')" style="background: none; border: none; font-size: 1.4rem; color: var(--text-muted); cursor: pointer; padding: 4px 8px; margin-left: 6px;" title="ปิด">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
         </div>
 
         <!-- Body / Content Area -->
@@ -2543,19 +2554,63 @@
         <!-- Student note if any -->
         <div id="viewer-student-note" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; padding: 8px 12px; background: var(--surface-secondary); border-radius: 8px; border: 1px solid var(--border-color); text-align: left; display: none;"></div>
 
-        <!-- Footer Actions -->
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 14px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+        <!-- Integrated Teacher Quick-Grading Toolbar -->
+        <div id="viewer-teacher-grading-bar" style="display: none; background: #0b1322; border: 1.5px solid #1e293b; border-radius: 12px; padding: 12px 16px; margin-top: 10px;">
+          <input type="hidden" id="viewer-sub-id" />
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+              
+              <!-- Quick Score Chips & Input -->
+              <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                <span style="font-size: 0.82rem; font-weight: 800; color: #94a3b8;"><i class="fa-solid fa-star text-amber-400 mr-1"></i> ให้คะแนน:</span>
+                <button type="button" onclick="setViewerQuickScore(10)" class="quick-score-btn" data-score="10" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 800; border-radius: 6px; border: 1px solid rgba(16,185,129,0.4); background: rgba(16,185,129,0.15); color: #34d399; cursor: pointer;">10 เต็ม</button>
+                <button type="button" onclick="setViewerQuickScore(9)" class="quick-score-btn" data-score="9" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 800; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #cbd5e1; cursor: pointer;">9</button>
+                <button type="button" onclick="setViewerQuickScore(8)" class="quick-score-btn" data-score="8" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 800; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #cbd5e1; cursor: pointer;">8</button>
+                <button type="button" onclick="setViewerQuickScore(7)" class="quick-score-btn" data-score="7" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 800; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #cbd5e1; cursor: pointer;">7</button>
+                <div style="display: inline-flex; align-items: center; gap: 4px; margin-left: 4px;">
+                  <input type="number" id="viewer-inline-score-input" min="0" max="20" value="10" style="width: 58px; padding: 4px 8px; border-radius: 6px; border: 1.5px solid #10b981; font-weight: 800; font-size: 0.95rem; text-align: center; color: #ffffff; background: #0f172a;">
+                  <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 700;">/ 10</span>
+                </div>
+              </div>
+
+              <!-- Quick Feedback Presets -->
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <button type="button" onclick="setViewerQuickFeedback('ยอดเยี่ยม ผังงานถูกต้องและสัญลักษณ์ ANSI ครบถ้วน')" style="font-size: 0.74rem; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #cbd5e1; cursor: pointer;">👍 ถูกต้องสมบูรณ์</button>
+                <button type="button" onclick="setViewerQuickFeedback('ผังงานดีมาก มีการคำนวณและแสดงผลครบถ้วน')" style="font-size: 0.74rem; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #cbd5e1; cursor: pointer;">💡 ครบถ้วน</button>
+                <button type="button" onclick="setViewerQuickFeedback('กรุณาตรวจสอบทิศทางลูกศร Flowline ให้ชี้ถูกทิศทาง')" style="font-size: 0.74rem; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #cbd5e1; cursor: pointer;">⚠️ ทิศทางลูกศร</button>
+              </div>
+            </div>
+
+            <!-- Feedback Input & Action Buttons -->
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+              <input type="text" id="viewer-inline-feedback-input" placeholder="พิมพ์ข้อเสนอแนะ หรือคลิกเลือกข้อความสำเร็จรูปข้างบน..." style="flex: 1; min-width: 220px; padding: 8px 12px; border-radius: 8px; border: 1px solid #334155; font-size: 0.84rem; color: #ffffff; background: #0f172a;" />
+              
+              <button type="button" onclick="doViewerSaveGrade(false)" class="btn" style="background: #059669; color: white; font-size: 0.82rem; font-weight: 700; padding: 8px 14px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer;">
+                <i class="fa-solid fa-floppy-disk"></i> บันทึก
+              </button>
+              <button type="button" onclick="doViewerSaveGrade(true)" class="btn" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: white; font-size: 0.82rem; font-weight: 700; padding: 8px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer; box-shadow: 0 2px 10px rgba(2, 132, 199, 0.35);">
+                บันทึก & คนถัดไป <i class="fa-solid fa-arrow-right"></i>
+              </button>
+              <button type="button" onclick="doViewerReturnRevision()" class="btn" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); font-size: 0.8rem; font-weight: 700; padding: 8px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;" title="ส่งกลับให้นักเรียนแก้ไข">
+                <i class="fa-solid fa-rotate-left"></i> ส่งกลับแก้ไข
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Actions (Download & Quick controls) -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 12px; border-top: 1px solid var(--border-color); padding-top: 10px;">
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button type="button" id="btn-viewer-download" class="btn" style="background: var(--surface-secondary); color: var(--text-main); border: 1px solid var(--border-color); font-size: 0.82rem; padding: 7px 14px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+            <button type="button" id="btn-viewer-download" class="btn" style="background: var(--surface-secondary); color: var(--text-main); border: 1px solid var(--border-color); font-size: 0.8rem; padding: 6px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
               <i class="fa-solid fa-download"></i> ดาวน์โหลดเก็บลงเครื่อง
             </button>
-            <button type="button" id="btn-viewer-new-tab" class="btn" style="background: rgba(2, 132, 199, 0.15); color: #0284c7; border: 1px solid rgba(2, 132, 199, 0.3); font-size: 0.82rem; padding: 7px 14px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+            <button type="button" id="btn-viewer-new-tab" class="btn" style="background: rgba(2, 132, 199, 0.15); color: #0284c7; border: 1px solid rgba(2, 132, 199, 0.3); font-size: 0.8rem; padding: 6px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
               <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดในแท็บใหม่ ↗
             </button>
           </div>
           <div style="display: flex; gap: 8px;">
-            <button type="button" onclick="closeModal('modal-view-submission-work')" class="btn btn-outline" style="font-size: 0.82rem; padding: 7px 14px;">ปิด</button>
-            <button type="button" id="btn-viewer-grade" class="btn btn-primary" style="font-size: 0.82rem; padding: 7px 16px; display: inline-flex; align-items: center; gap: 6px;">
+            <button type="button" onclick="closeModal('modal-view-submission-work')" class="btn btn-outline" style="font-size: 0.8rem; padding: 6px 14px;">ปิดหน้าต่าง</button>
+            <button type="button" id="btn-viewer-grade" class="btn btn-primary" style="font-size: 0.8rem; padding: 6px 14px; display: none; align-items: center; gap: 6px;">
               <i class="fa-solid fa-check-double"></i> ตรวจและให้คะแนน
             </button>
           </div>
@@ -3095,7 +3150,7 @@
 
     <!-- App JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="js/app.js?v=4.4"></script>
+    <script src="js/app.js?v=5.0"></script>
 
     <!-- MOBILE & TABLET STICKY BOTTOM NAVIGATION BAR -->
     <nav id="mobile-bottom-nav" class="mobile-bottom-nav">

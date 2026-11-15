@@ -5591,3 +5591,49 @@ body {
   color: #ffffff !important;
   border-color: #0284c7 !important;
 }
+
+
+/* ==========================================================
+   TEACHER VIEWER & IN-MODAL GRADING SUITE (PROFESSIONAL LMS)
+   ========================================================== */
+#viewer-teacher-grading-bar {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.quick-score-btn {
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.quick-score-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.15);
+}
+
+#btn-viewer-prev:hover:not(:disabled),
+#btn-viewer-next:hover:not(:disabled) {
+  background: var(--surface-primary) !important;
+  border-color: #10b981 !important;
+  color: #10b981 !important;
+}
+
+[data-theme="light"] #viewer-teacher-grading-bar {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+[data-theme="light"] #viewer-inline-score-input,
+[data-theme="light"] #viewer-inline-feedback-input {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Cleaner, professional worksheet card aesthetics */
+.ws-card {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.ws-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}

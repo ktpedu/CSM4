@@ -4346,15 +4346,15 @@ async function loadWorksheetsData(filterUnit = currentWorksheetSubFilter) {
               </p>
 
               ${isFlow ? `
-              <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px;">
-                <span style="font-size: 0.78rem; font-weight: 800; background: rgba(16, 185, 129, 0.22); color: #34d399; padding: 4px 10px; border-radius: 6px; border: 1.5px solid #10b981;">
-                  <i class="fa-solid fa-list-ol mr-1"></i> 10 ข้อปฏิบัติการ
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px;">
+                <span style="font-size: 0.76rem; font-weight: 700; background: rgba(15, 23, 42, 0.6); color: #cbd5e1; padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); display: inline-flex; align-items: center; gap: 5px;">
+                  <i class="fa-solid fa-list-check" style="color: #34d399;"></i> 10 ข้อปฏิบัติการ
                 </span>
-                <span style="font-size: 0.78rem; font-weight: 800; background: rgba(56, 189, 248, 0.22); color: #38bdf8; padding: 4px 10px; border-radius: 6px; border: 1.5px solid #0284c7;">
-                  <i class="fa-solid fa-file-code mr-1"></i> Flowgorithm (.fprg)
+                <span style="font-size: 0.76rem; font-weight: 700; background: rgba(15, 23, 42, 0.6); color: #cbd5e1; padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); display: inline-flex; align-items: center; gap: 5px;">
+                  <i class="fa-solid fa-file-code" style="color: #38bdf8;"></i> Flowgorithm (.fprg)
                 </span>
-                <span style="font-size: 0.78rem; font-weight: 800; background: rgba(251, 191, 36, 0.22); color: #fbbf24; padding: 4px 10px; border-radius: 6px; border: 1.5px solid #f59e0b;">
-                  <i class="fa-solid fa-image mr-1"></i> รูปภาพผังงาน
+                <span style="font-size: 0.76rem; font-weight: 700; background: rgba(15, 23, 42, 0.6); color: #cbd5e1; padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); display: inline-flex; align-items: center; gap: 5px;">
+                  <i class="fa-solid fa-image" style="color: #fbbf24;"></i> รูปภาพผังงาน
                 </span>
               </div>
               ` : ''}
@@ -5436,6 +5436,78 @@ async function previewSubmissionWork(subId, studentName, asgId) {
 
   if (areaEl) {
     areaEl.innerHTML = '<div style="color: #94a3b8; font-size: 0.9rem;"><i class="fa-solid fa-circle-notch fa-spin text-2xl mb-2 block text-emerald-400"></i>กำลังโหลดไฟล์งานของนักเรียน...</div>';
+  }
+
+  // Handle Teacher Navigation & Integrated Grading Toolbar Setup
+  const isTeacher = currentUser && (currentUser.role === 'teacher' || currentUser.role === 'admin');
+  const navContainer = document.getElementById('viewer-nav-container');
+  const gradingBar = document.getElementById('viewer-teacher-grading-bar');
+  const navCounter = document.getElementById('viewer-nav-counter');
+  const prevBtn = document.getElementById('btn-viewer-prev');
+  const nextBtn = document.getElementById('btn-viewer-next');
+
+  if (isTeacher) {
+    // Resolve active navigation list
+    if (Array.isArray(window.__teacherCurrentFilteredSubmissions) && window.__teacherCurrentFilteredSubmissions.some(s => s.id === subId)) {
+      window.currentViewerSubmissionList = window.__teacherCurrentFilteredSubmissions;
+    } else if (Array.isArray(allSubmissionsGlobalCache)) {
+      window.currentViewerSubmissionList = allSubmissionsGlobalCache.filter(s => s.status === 'submitted');
+      if (window.currentViewerSubmissionList.length === 0) window.currentViewerSubmissionList = [...allSubmissionsGlobalCache];
+    } else {
+      window.currentViewerSubmissionList = [];
+    }
+
+    let foundIdx = window.currentViewerSubmissionList.findIndex(s => s.id === subId);
+    if (foundIdx === -1) {
+      if (sub) {
+        window.currentViewerSubmissionList.push(sub);
+        foundIdx = window.currentViewerSubmissionList.length - 1;
+      } else {
+        foundIdx = 0;
+      }
+    }
+    window.currentViewerSubIndex = foundIdx;
+
+    if (navContainer) navContainer.style.display = 'flex';
+    if (navCounter) navCounter.innerText = `${foundIdx + 1} / ${window.currentViewerSubmissionList.length}`;
+    if (prevBtn) {
+      prevBtn.disabled = foundIdx <= 0;
+      prevBtn.style.opacity = foundIdx <= 0 ? '0.4' : '1';
+    }
+    if (nextBtn) {
+      nextBtn.disabled = foundIdx >= window.currentViewerSubmissionList.length - 1;
+      nextBtn.style.opacity = foundIdx >= window.currentViewerSubmissionList.length - 1 ? '0.4' : '1';
+    }
+
+    if (gradingBar) {
+      gradingBar.style.display = 'block';
+      const hiddenSubId = document.getElementById('viewer-sub-id');
+      const scoreInput = document.getElementById('viewer-inline-score-input');
+      const feedbackInput = document.getElementById('viewer-inline-feedback-input');
+
+      if (hiddenSubId) hiddenSubId.value = subId;
+      if (scoreInput) scoreInput.value = (sub?.score !== undefined && sub?.score !== null) ? sub.score : 10;
+      if (feedbackInput) feedbackInput.value = sub?.feedback || '';
+
+      const currentScore = Number(scoreInput ? scoreInput.value : 10);
+      document.querySelectorAll('.quick-score-btn').forEach(btn => {
+        if (Number(btn.dataset.score) === currentScore) {
+          btn.style.background = 'rgba(16, 185, 129, 0.25)';
+          btn.style.borderColor = '#10b981';
+          btn.style.color = '#34d399';
+        } else {
+          btn.style.background = 'rgba(255, 255, 255, 0.06)';
+          btn.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+          btn.style.color = '#cbd5e1';
+        }
+      });
+    }
+
+    if (btnGrade) btnGrade.style.display = 'none';
+  } else {
+    if (navContainer) navContainer.style.display = 'none';
+    if (gradingBar) gradingBar.style.display = 'none';
+    if (btnGrade) btnGrade.style.display = 'none';
   }
 
   openModal('modal-view-submission-work');
@@ -8942,6 +9014,9 @@ function renderTeacherPendingSubmissions() {
     ? targetList 
     : targetList.filter(s => (s.class_room || 'อื่นๆ') === currentTeacherSubmissionsFilter);
 
+  // Cache currently viewed teacher list for seamless next/prev navigation in viewer modal
+  window.__teacherCurrentFilteredSubmissions = filtered;
+
   if (filtered.length === 0) {
     if (currentTeacherSubmissionsStatus === 'graded') {
       container.innerHTML = `<p class="text-xs text-slate-400 py-8 text-center"><i class="fa-solid fa-clipboard-check text-slate-400 text-lg block mb-1"></i>ยังไม่มีรายการที่ตรวจแล้วในตัวกรองนี้</p>`;
@@ -10288,5 +10363,185 @@ function handleMobileProfileClick() {
     toggleUserDropdown();
   } else {
     openLoginModal();
+  }
+}
+
+
+// --- TEACHER SUBMISSION VIEWER NAVIGATION & IN-MODAL GRADING SUITE ---
+function navigateViewerSubmission(delta) {
+  if (!Array.isArray(window.currentViewerSubmissionList) || window.currentViewerSubmissionList.length === 0) return;
+  const newIdx = (window.currentViewerSubIndex || 0) + delta;
+  if (newIdx >= 0 && newIdx < window.currentViewerSubmissionList.length) {
+    const nextSub = window.currentViewerSubmissionList[newIdx];
+    window.currentViewerSubIndex = newIdx;
+    previewSubmissionWork(nextSub.id, nextSub.student_name, nextSub.assignment_id);
+  }
+}
+
+function setViewerQuickScore(score) {
+  const scoreInput = document.getElementById('viewer-inline-score-input');
+  if (scoreInput) scoreInput.value = score;
+  document.querySelectorAll('.quick-score-btn').forEach(btn => {
+    if (Number(btn.dataset.score) === score) {
+      btn.style.background = 'rgba(16, 185, 129, 0.25)';
+      btn.style.borderColor = '#10b981';
+      btn.style.color = '#34d399';
+    } else {
+      btn.style.background = 'rgba(255, 255, 255, 0.06)';
+      btn.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+      btn.style.color = '#cbd5e1';
+    }
+  });
+}
+
+function setViewerQuickFeedback(text) {
+  const fbInput = document.getElementById('viewer-inline-feedback-input');
+  if (fbInput) {
+    fbInput.value = text;
+    fbInput.focus();
+  }
+}
+
+async function doViewerSaveGrade(andNext = false) {
+  const subId = document.getElementById('viewer-sub-id').value;
+  const scoreRaw = document.getElementById('viewer-inline-score-input').value.trim();
+  const feedback = document.getElementById('viewer-inline-feedback-input').value.trim();
+
+  if (!subId) return;
+  if (scoreRaw === '' || isNaN(scoreRaw) || Number(scoreRaw) < 0 || Number(scoreRaw) > 20) {
+    showToast('กรุณากรอกคะแนนประเมินที่ถูกต้อง (0 - 20 คะแนน)', 'error');
+    return;
+  }
+  const score = Number(scoreRaw);
+
+  try {
+    showToast('กำลังบันทึกคะแนน...', 'info');
+
+    // 1. Direct update to Supabase Cloud
+    await fetch(`${SUPABASE_REST_URL}/submissions?id=eq.${encodeURIComponent(subId)}`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        score: score,
+        feedback: feedback || 'ตรวจเรียบร้อยแล้ว',
+        status: 'graded',
+        graded_at: new Date().toISOString()
+      })
+    }).catch(e => console.warn('Supabase PATCH error:', e));
+
+    // 2. Server API fallback if not static
+    if (!isStaticOrServerlessHost()) {
+      try {
+        await apiFetch('/submissions/grade', 'POST', { submission_id: subId, score, feedback });
+      } catch (e) {}
+    }
+
+    // 3. Update global in-memory cache
+    if (Array.isArray(allSubmissionsGlobalCache)) {
+      const target = allSubmissionsGlobalCache.find(s => s.id === subId);
+      if (target) {
+        target.score = score;
+        target.feedback = feedback || 'ตรวจเรียบร้อยแล้ว';
+        target.status = 'graded';
+        target.graded_at = new Date().toISOString();
+      }
+    }
+
+    // 4. Update localStorage
+    try {
+      let localSubs = JSON.parse(localStorage.getItem('csm4_submissions') || '[]');
+      const s = localSubs.find(item => item.id === subId);
+      if (s) {
+        s.score = score;
+        s.feedback = feedback || 'ตรวจเรียบร้อยแล้ว';
+        s.status = 'graded';
+        s.graded_at = new Date().toISOString();
+        localStorage.setItem('csm4_submissions', JSON.stringify(localSubs));
+      }
+    } catch (e) {}
+
+    showToast(`บันทึกคะแนน ${score} คะแนนเรียบร้อย!`, 'success');
+
+    // Refresh background tables
+    if (typeof renderTeacherPendingSubmissions === 'function') renderTeacherPendingSubmissions();
+    if (typeof loadAssignmentsData === 'function') loadAssignmentsData();
+
+    // 5. Navigate to Next student if requested!
+    if (andNext) {
+      const nextIdx = (window.currentViewerSubIndex || 0) + 1;
+      if (Array.isArray(window.currentViewerSubmissionList) && nextIdx < window.currentViewerSubmissionList.length) {
+        navigateViewerSubmission(1);
+      } else {
+        showToast('🎉 ตรวจครบทุกผลงานในรายการแล้ว!', 'success');
+        closeModal('modal-view-submission-work');
+      }
+    }
+  } catch (err) {
+    console.error('Viewer grade error:', err);
+    showToast('เกิดข้อผิดพลาดในการบันทึกคะแนน', 'error');
+  }
+}
+
+async function doViewerReturnRevision() {
+  const subId = document.getElementById('viewer-sub-id').value;
+  let feedback = document.getElementById('viewer-inline-feedback-input').value.trim();
+
+  if (!subId) return;
+  if (!feedback) {
+    const promptFeedback = prompt('กรุณาระบุสิ่งที่นักเรียนต้องแก้ไข หรือเหตุผลที่ให้ส่งใหม่:\n(เช่น "แนบไฟล์ผิด กรุณาแนบไฟล์ผังงานที่สมบูรณ์"):');
+    if (!promptFeedback || !promptFeedback.trim()) {
+      showToast('กรุณาระบุข้อเสนอแนะเพื่อให้เด็กทราบจุดแก้ไข', 'error');
+      return;
+    }
+    feedback = promptFeedback.trim();
+    document.getElementById('viewer-inline-feedback-input').value = feedback;
+  }
+
+  try {
+    showToast('กำลังส่งกลับให้นักเรียนแก้ไข...', 'info');
+
+    await fetch(`${SUPABASE_REST_URL}/submissions?id=eq.${encodeURIComponent(subId)}`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        score: null,
+        feedback: feedback,
+        status: 'revision_requested',
+        graded_at: new Date().toISOString()
+      })
+    }).catch(e => console.warn('Supabase revision PATCH error:', e));
+
+    if (Array.isArray(allSubmissionsGlobalCache)) {
+      const target = allSubmissionsGlobalCache.find(s => s.id === subId);
+      if (target) {
+        target.score = null;
+        target.feedback = feedback;
+        target.status = 'revision_requested';
+        target.graded_at = new Date().toISOString();
+      }
+    }
+
+    showToast('ส่งกลับให้นักเรียนแก้ไขเรียบร้อย!', 'success');
+
+    if (typeof renderTeacherPendingSubmissions === 'function') renderTeacherPendingSubmissions();
+    if (typeof loadAssignmentsData === 'function') loadAssignmentsData();
+
+    const nextIdx = (window.currentViewerSubIndex || 0) + 1;
+    if (Array.isArray(window.currentViewerSubmissionList) && nextIdx < window.currentViewerSubmissionList.length) {
+      navigateViewerSubmission(1);
+    } else {
+      closeModal('modal-view-submission-work');
+    }
+  } catch (err) {
+    console.error('Viewer return revision error:', err);
+    showToast('เกิดข้อผิดพลาดในการส่งกลับแก้ไข', 'error');
   }
 }
