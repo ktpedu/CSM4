@@ -4317,45 +4317,43 @@ async function loadWorksheetsData(filterUnit = currentWorksheetSubFilter) {
     container.innerHTML = filtered.map(ws => {
       const isFlow = ws.id && ws.id.startsWith('ws-flow-');
       const isUnit2 = ws.unit_id === 'mod-2' || ws.unit.includes('2');
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      const accentColor = isFlow 
-        ? (isDark ? '#34d399' : '#059669') 
-        : (isUnit2 ? (isDark ? '#38bdf8' : '#0284c7') : (isDark ? '#4ade80' : 'var(--thairath-green)'));
-      const bgLight = isFlow ? 'rgba(16, 185, 129, 0.18)' : (isUnit2 ? 'rgba(2, 132, 199, 0.15)' : 'rgba(0, 180, 0, 0.15)');
+      const badgeClass = isFlow ? 'flow' : (isUnit2 ? 'unit-2' : 'unit-1');
       const asgId = ws.asg_id || (ws.id === 'ws-1-1' ? 'asg-1' : ws.id === 'ws-1-2' ? 'asg-2' : ws.id === 'ws-1-3' ? 'asg-3' : ws.id === 'ws-2-1' ? 'asg-4' : ws.id === 'ws-2-2' ? 'asg-5' : ws.id === 'ws-2-3' ? 'asg-6' : ws.id === 'ws-flow-1' ? 'asg-flow-1' : ws.id === 'ws-flow-2' ? 'asg-flow-2' : ws.id === 'ws-flow-3' ? 'asg-flow-3' : 'asg-1');
 
       return `
         <div class="ws-card ${isFlow ? 'practical' : (isUnit2 ? 'unit-2' : '')}">
           <div style="display: flex; flex-direction: column; gap: 12px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-              <span style="font-size: 0.72rem; font-weight: 700; background: ${bgLight}; color: ${accentColor}; padding: 3px 10px; border-radius: 9999px; border: 1px solid ${accentColor}33;">
-                ${isFlow ? '<i class="fa-solid fa-laptop-code mr-1"></i>' : ''} ${escapeHtml(ws.unit)} • ${escapeHtml(ws.code)}
+            
+            <!-- Ultra High-Contrast Header Row -->
+            <div class="ws-card-header">
+              <span class="ws-card-badge-pill ${badgeClass}">
+                ${isFlow ? '<i class="fa-solid fa-laptop-code mr-1.5"></i>' : '<i class="fa-solid fa-book-bookmark mr-1.5"></i>'} ${escapeHtml(ws.unit)} • ${escapeHtml(ws.code)}
               </span>
-              <span style="font-size: 0.75rem; font-extrabold; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 3px 8px; border-radius: 6px; font-weight: 800;">
-                เต็ม ${ws.points} คะแนน
+              <span class="ws-card-points-badge">
+                <i class="fa-solid fa-star mr-1 text-amber-400"></i> เต็ม ${ws.points} คะแนน
               </span>
             </div>
 
             <div>
-              <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px; line-height: 1.35;">
+              <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px; line-height: 1.4;">
                 ${escapeHtml(stripDifficultyTags(ws.title))}
               </h4>
-              <p style="font-size: 0.8rem; color: ${accentColor}; font-weight: 600; margin-bottom: 8px;">
-                ${escapeHtml(ws.subtitle || ws.plan)}
+              <p class="ws-card-subtitle">
+                ${escapeHtml(stripDifficultyTags(ws.subtitle || ws.plan))}
               </p>
-              <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+              <p class="ws-card-desc">
                 ${escapeHtml(ws.scenario || ws.instructions)}
               </p>
 
               ${isFlow ? `
-              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px;">
-                <span style="font-size: 0.76rem; font-weight: 700; background: rgba(16, 185, 129, 0.18); color: #34d399; padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.4);">
+              <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px;">
+                <span style="font-size: 0.78rem; font-weight: 800; background: rgba(16, 185, 129, 0.22); color: #34d399; padding: 4px 10px; border-radius: 6px; border: 1.5px solid #10b981;">
                   <i class="fa-solid fa-list-ol mr-1"></i> 10 ข้อปฏิบัติการ
                 </span>
-                <span style="font-size: 0.76rem; font-weight: 700; background: rgba(56, 189, 248, 0.18); color: #38bdf8; padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.4);">
+                <span style="font-size: 0.78rem; font-weight: 800; background: rgba(56, 189, 248, 0.22); color: #38bdf8; padding: 4px 10px; border-radius: 6px; border: 1.5px solid #0284c7;">
                   <i class="fa-solid fa-file-code mr-1"></i> Flowgorithm (.fprg)
                 </span>
-                <span style="font-size: 0.76rem; font-weight: 700; background: rgba(251, 191, 36, 0.18); color: #fbbf24; padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(251, 191, 36, 0.4);">
+                <span style="font-size: 0.78rem; font-weight: 800; background: rgba(251, 191, 36, 0.22); color: #fbbf24; padding: 4px 10px; border-radius: 6px; border: 1.5px solid #f59e0b;">
                   <i class="fa-solid fa-image mr-1"></i> รูปภาพผังงาน
                 </span>
               </div>
@@ -4363,29 +4361,29 @@ async function loadWorksheetsData(filterUnit = currentWorksheetSubFilter) {
             </div>
           </div>
 
-          <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 10px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; color: var(--text-subtle);">
-              <span><i class="fa-regular fa-calendar mr-1"></i> กำหนดส่ง: ${escapeHtml(ws.due)}</span>
-              <span style="font-weight: 700; color: var(--text-muted);"><i class="fa-solid fa-bookmark mr-1 text-amber-500"></i> ${escapeHtml(ws.standard || 'ว 4.2 ม.4/1')}</span>
+          <div class="ws-card-footer">
+            <div class="ws-card-meta-row">
+              <span><i class="fa-regular fa-calendar-days mr-1.5 text-sky-400"></i> กำหนดส่ง: ${escapeHtml(ws.due)}</span>
+              <span style="font-weight: 700; color: #fbbf24;"><i class="fa-solid fa-bookmark mr-1"></i> ${escapeHtml(ws.standard || 'ว 4.2 ม.4/1')}</span>
             </div>
 
             ${isFlow ? `
-            <button onclick="openWorksheetDetail('${escapeHtml(ws.id)}')" class="btn btn-outline" style="width: 100%; padding: 8px 12px; font-size: 0.82rem; font-weight: 700; justify-content: center; border-color: #059669; color: #059669;">
-              <i class="fa-solid fa-book-open mr-1.5"></i> เปิดดูฉบับเต็ม (โจทย์ 10 ข้อ)
+            <button onclick="openWorksheetDetail('${escapeHtml(ws.id)}')" class="ws-card-btn-open">
+              <i class="fa-solid fa-book-open mr-2"></i> เปิดดูฉบับเต็ม (โจทย์ 10 ข้อ)
             </button>
             ` : `
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-              <button onclick="openWorksheetDetail('${escapeHtml(ws.id)}')" class="btn btn-outline" style="padding: 7px 10px; font-size: 0.78rem; font-weight: 700; justify-content: center;">
+              <button onclick="openWorksheetDetail('${escapeHtml(ws.id)}')" class="btn btn-outline" style="padding: 9px 12px; font-size: 0.82rem; font-weight: 800; justify-content: center;">
                 <i class="fa-solid fa-book-open mr-1"></i> เปิดดูฉบับเต็ม
               </button>
-              <a href="worksheets/${escapeHtml(ws.id)}.pdf" target="_blank" download="${escapeHtml(ws.code)}_ม4.pdf" class="btn btn-outline" style="padding: 7px 10px; font-size: 0.78rem; font-weight: 700; justify-content: center; border-color: #0284c7; color: #0284c7; text-decoration: none; display: inline-flex; align-items: center;">
+              <a href="worksheets/${escapeHtml(ws.id)}.pdf" target="_blank" download="${escapeHtml(ws.code)}_ม4.pdf" class="btn btn-outline" style="padding: 9px 12px; font-size: 0.82rem; font-weight: 800; justify-content: center; border-color: #0284c7; color: #0284c7; text-decoration: none; display: inline-flex; align-items: center;">
                 <i class="fa-solid fa-file-arrow-down mr-1"></i> โหลด PDF (iPad)
               </a>
             </div>
             `}
 
-            <button onclick="openSubmitModal('${asgId}', '${escapeHtml(stripDifficultyTags(ws.title))}')" class="btn btn-primary" style="width: 100%; padding: 8px 12px; font-size: 0.82rem; font-weight: 700; justify-content: center; ${isFlow ? 'background: #059669; border-color: #059669;' : ''}">
-              <i class="fa-solid fa-cloud-arrow-up mr-1"></i> ${isFlow ? 'ส่งผลงานผังงานออนไลน์' : 'ส่งผลงานออนไลน์'}
+            <button onclick="openSubmitModal('${asgId}', '${escapeHtml(stripDifficultyTags(ws.title))}')" class="ws-card-btn-submit">
+              <i class="fa-solid fa-cloud-arrow-up mr-2"></i> ${isFlow ? 'ส่งผลงานผังงานออนไลน์' : 'ส่งผลงานออนไลน์'}
             </button>
           </div>
         </div>
