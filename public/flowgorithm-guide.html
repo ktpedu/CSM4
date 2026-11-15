@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>คู่มือการดาวน์โหลด ติดตั้ง และการใช้งานโปรแกรม Flowgorithm เบื้องต้น | วิทยาการคำนวณ ม.4</title>
+  <link rel="icon" type="image/gif" href="img/LOGOprofile.gif" />
+  <link rel="apple-touch-icon" href="img/LOGOprofile.gif" />
+
+  <!-- Google Fonts: Sarabun, Kanit, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Kanit:wght@400;500;600;700&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #00b400;
+      --primary-dark: #008f00;
+      --primary-light: rgba(0, 180, 0, 0.12);
+      --accent-blue: #0284c7;
+      --accent-purple: #7c3aed;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      
+      --bg-body: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-alt: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-subtle: #94a3b8;
+      --border-color: #e2e8f0;
+      
+      --font-body: 'Sarabun', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Kanit', sans-serif;
+      --shadow-sm: 0 2px 6px rgba(0,0,0,0.06);
+      --shadow-md: 0 6px 18px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 30px rgba(0,0,0,0.12);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    [data-theme="dark"] {
+      --bg-body: #0b1120;
+      --bg-surface: #131d31;
+      --bg-surface-alt: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+      --border-color: #27354f;
+      --primary-light: rgba(0, 180, 0, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.8;
+      font-size: 16px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Reading Progress Bar */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      z-index: 1000;
+    }
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0284c7, #00b400, #f59e0b);
+      transition: width 0.1s ease-out;
+    }
+
+    /* Top Navbar */
+    .top-navbar {
+      position: sticky;
+      top: 0;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 999;
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-inner {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: white;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
+    }
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .brand-subtitle {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-btn {
+      padding: 7px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface-alt);
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      background: var(--border-color);
+      transform: translateY(-1px);
+    }
+    .nav-btn.primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .nav-btn.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Main Container Layout */
+    .guide-container {
+      max-width: 1220px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 36px;
+      align-items: flex-start;
+    }
+    @media (max-width: 900px) {
+      .guide-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .guide-sidebar {
+        display: none;
+      }
+    }
+
+    /* Sidebar TOC */
+    .guide-sidebar {
+      position: sticky;
+      top: 80px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .sidebar-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-blue);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+    .toc-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .toc-item a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.84rem;
+      padding: 7px 10px;
+      border-radius: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .toc-item a:hover, .toc-item a.active {
+      color: var(--accent-blue);
+      background: rgba(2, 132, 199, 0.1);
+      font-weight: 700;
+    }
+
+    /* Content Area */
+    .guide-content {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 36px;
+      box-shadow: var(--shadow-sm);
+    }
+    @media (max-width: 600px) {
+      .guide-content {
+        padding: 20px;
+      }
+    }
+
+    /* Headings */
+    h1.guide-title {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .guide-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .meta-tag {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      padding: 2px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin: 40px 0 16px 0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border-color);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--accent-blue);
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    p {
+      margin-bottom: 14px;
+      color: var(--text-main);
+    }
+
+    /* Diagram Wrap */
+    .diagram-card {
+      margin: 22px 0;
+      background: var(--bg-surface-alt);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .diagram-body {
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      background: #0b1120;
+    }
+    .diagram-caption {
+      padding: 12px 18px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .diagram-desc {
+      padding: 0 18px 14px 18px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+    }
+
+    /* Instruction Cards & Callouts */
+    .step-box {
+      background: var(--bg-surface-alt);
+      border-left: 4px solid var(--accent-blue);
+      padding: 18px 20px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 18px 0;
+    }
+    .step-box.green {
+      border-left-color: var(--primary);
+    }
+    .step-box.amber {
+      border-left-color: var(--accent-amber);
+    }
+    .step-header {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Shortcut & Key Badge */
+    .kbd-pill {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.82rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      font-weight: bold;
+    }
+
+    /* Tables */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 0.88rem;
+    }
+    .custom-table th, .custom-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+    .custom-table th {
+      background: var(--bg-surface-alt);
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    /* Print Styles */
+    @media print {
+      .top-navbar, .guide-sidebar, .nav-actions, #progress-container {
+        display: none !important;
+      }
+      .guide-container {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .guide-content {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Reading Progress Bar -->
+  <div id="progress-container"><div id="progress-bar"></div></div>
+
+  <!-- Top Navbar -->
+  <header class="top-navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon">
+          <i class="fa-solid fa-diagram-project"></i>
+        </div>
+        <div>
+          <div class="brand-title">Flowgorithm User Manual</div>
+          <div class="brand-subtitle">คู่มือการใช้งานสำหรับนักเรียนชั้น ม.4 • วิทยาการคำนวณ</div>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <a href="unit1.html#topic-flowgorithm" class="nav-btn">
+          <i class="fa-solid fa-arrow-left"></i> กลับสู่บทเรียนหน่วยที่ 1
+        </a>
+        <a href="http://flowgorithm.org/download/index.html" target="_blank" rel="noopener noreferrer" class="nav-btn primary">
+          <i class="fa-solid fa-download"></i> โหลดโปรแกรม (Official) ↗
+        </a>
+        <button onclick="window.print()" class="nav-btn" title="พิมพ์คู่มือฉบับนี้">
+          <i class="fa-solid fa-print"></i> พิมพ์เอกสาร
+        </button>
+        <button onclick="toggleTheme()" class="nav-btn" id="theme-toggle-btn">
+          <i class="fa-solid fa-sun" id="theme-btn-icon" style="color: #38bdf8;"></i> <span id="theme-text">โหมดสว่าง</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="guide-container">
+
+    <!-- Sticky Sidebar -->
+    <aside class="guide-sidebar">
+      <div class="sidebar-title">
+        <i class="fa-solid fa-list-check"></i> สารบัญคู่มือ
+      </div>
+      <ul class="toc-nav">
+        <li class="toc-item"><a href="#intro" class="active"><i class="fa-solid fa-circle-info"></i> ทำไมต้อง Flowgorithm?</a></li>
+        <li class="toc-item"><a href="#step-download"><i class="fa-solid fa-cloud-arrow-down"></i> 1. ขั้นตอนการดาวน์โหลด</a></li>
+        <li class="toc-item"><a href="#step-install"><i class="fa-solid fa-box-open"></i> 2. การติดตั้ง & เปลี่ยนภาษาไทย</a></li>
+        <li class="toc-item"><a href="#step-interface"><i class="fa-solid fa-desktop"></i> 3. หน้าต่างและสัญลักษณ์หลัก</a></li>
+        <li class="toc-item"><a href="#step-tutorial"><i class="fa-solid fa-play"></i> 4. ตัวอย่างการเขียน &amp; รันผังงาน</a></li>
+        <li class="toc-item"><a href="#step-code-export"><i class="fa-solid fa-code"></i> 5. แปลงเป็นโค้ด &amp; Export รูปภาพ</a></li>
+        <li class="toc-item"><a href="#step-faq"><i class="fa-solid fa-circle-question"></i> 6. ปัญหาที่พบบ่อย (FAQ)</a></li>
+      </ul>
+
+      <div style="margin-top: 24px; padding: 14px; background: var(--bg-surface-alt); border-radius: 8px; border: 1px solid var(--border-color); font-size: 0.78rem; color: var(--text-muted); line-height: 1.6;">
+        <strong style="color: var(--text-main); display: block; margin-bottom: 4px;"><i class="fa-solid fa-chalkboard-user mr-1 text-emerald-500"></i> ครูผู้สอน ม.4</strong>
+        ครูปณิฏฐา บุญยงค์<br>
+        กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี
+      </div>
+    </aside>
+
+    <!-- Content Area -->
+    <main class="guide-content">
+
+      <!-- Header Info -->
+      <section id="intro">
+        <h1 class="guide-title">
+          คู่มือการดาวน์โหลด ติดตั้ง และฝึกเขียนผังงานด้วย Flowgorithm
+        </h1>
+        <div class="guide-meta">
+          <span class="meta-tag"><i class="fa-solid fa-book-bookmark text-primary"></i> หน่วยการเรียนรู้ที่ 1: แนวคิดเชิงคำนวณ</span>
+          <span class="meta-tag"><i class="fa-solid fa-code-fork text-sky-500"></i> สัญลักษณ์ ANSI Flowchart</span>
+          <span class="meta-tag"><i class="fa-solid fa-graduation-cap text-purple-500"></i> มัธยมศึกษาปีที่ 4</span>
+        </div>
+
+        <p>
+          <strong>โปรแกรม Flowgorithm</strong> คือเครื่องมือเขียนและจำลองการทำงานของผังงาน (Interactive Flowchart Execution) ที่พัฒนาขึ้นสำหรับการเรียนการสอนด้านวิทยาการคำนวณโดยเฉพาะ จุดเด่นสำคัญคือนักเรียนสามารถ <strong>กดปุ่มรันเพื่อดูขั้นตอนการทำงานจริง</strong> ของผังงานได้ทันที ดูการไหลของข้อมูล การทำงานของตัวแปรในหน่วยความจำ และสามารถแปลงผังงานเป็นโค้ดภาษาคอมพิวเตอร์ยอดนิยม เช่น <strong>Python, C++, Java</strong> ได้ในคลิกเดียว
+        </p>
+
+        <div class="step-box green">
+          <div class="step-header" style="color: var(--primary);">
+            <i class="fa-solid fa-bullseye"></i> วัตถุประสงค์ในการใช้งานของรายวิชานี้
+          </div>
+          <ul style="margin-left: 20px; font-size: 0.92rem; line-height: 1.8;">
+            <li>เพื่อฝึกให้นักเรียนถ่ายทอดขั้นตอนวิธี (Algorithm) ออกมาเป็นผังงานมาตรฐาน ANSI ได้อย่างถูกต้อง</li>
+            <li>เพื่อให้นักเรียนสามารถตรวจสอบหาข้อผิดพลาด (Debugging) ของขั้นตอนวิธีก่อนลงมือเขียนโปรแกรมจริง</li>
+            <li>เพื่อบันทึกและ Export รูปภาพผังงานคุณภาพสูงนำไปประกอบในใบงานและเล่มรายงานโครงงาน 5 บท</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SECTION 1: DOWNLOAD -->
+      <section id="step-download">
+        <h2 class="section-title">
+          <span class="section-num">1</span> ขั้นตอนการดาวน์โหลดโปรแกรม (Download Guide)
+        </h2>
+
+        <p>
+          โปรแกรม Flowgorithm เป็นซอฟต์แวร์ฟรีสำหรับการศึกษา (Freeware) ให้นักเรียนเข้าไปที่เว็บไซต์ทางการ:
+          <br>
+          <a href="http://flowgorithm.org/download/index.html" target="_blank" rel="noopener noreferrer" style="color: var(--accent-blue); font-weight: 700; text-decoration: underline;">
+            <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> http://flowgorithm.org/download/index.html
+          </a>
+        </p>
+
+        <div class="diagram-card">
+          <div class="diagram-body">
+            <img src="img/flowgorithm_step1_download.svg" alt="ขั้นตอนการดาวน์โหลด Flowgorithm" style="max-width: 100%; height: auto;" />
+          </div>
+          <div class="diagram-caption">
+            <i class="fa-solid fa-image"></i> ภาพที่ 1: หน้าต่างเว็บไซต์ทางการและการเลือกรุ่นสำหรับดาวน์โหลด
+          </div>
+          <div class="diagram-desc">นักเรียนสามารถเลือกระหว่างรุ่น Installer (ติดตั้งลงเครื่อง) หรือรุ่น Portable (รุ่นพกพา แตกไฟล์แล้วเปิดได้ทันที)</div>
+        </div>
+
+        <h3 style="font-size: 1.1rem; margin: 20px 0 10px 0; font-family: var(--font-heading);">
+          💡 เลือกรุ่นไหนดีระหว่าง Installer กับ Portable?
+        </h3>
+
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th style="width: 25%;">รุ่นของโปรแกรม</th>
+              <th style="width: 35%;">คุณสมบัติเด่น</th>
+              <th>คำแนะนำการใช้งาน</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong style="color: var(--accent-blue);">1. Installer (.zip / .msi)</strong></td>
+              <td>ติดตั้งลงระบบ Windows แบบสมบูรณ์ สร้างไอคอนบน Desktop และผูกไฟล์นามสกุล .fprg อัตโนมัติ</td>
+              <td><strong>เหมาะสำหรับคอมพิวเตอร์ส่วนตัว / โน้ตบุ๊กของนักเรียนที่บ้าน</strong></td>
+            </tr>
+            <tr>
+              <td><strong style="color: #10b981;">2. Portable Zip</strong></td>
+              <td>ไม่ต้องกดติดตั้ง ไม่ต้องใช้สิทธิ์แอดมิน แตกไฟล์โฟลเดอร์ออกมาแล้วเปิดใช้งานได้ทันที</td>
+              <td><strong>เหมาะสำหรับเครื่องคอมพิวเตอร์ในห้องปฏิบัติการโรงเรียน หรือใส่ Flash Drive</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SECTION 2: INSTALLATION & LANGUAGE -->
+      <section id="step-install">
+        <h2 class="section-title">
+          <span class="section-num">2</span> การติดตั้งและตั้งค่าเมนูภาษาไทย (Installation & Setup)
+        </h2>
+
+        <div class="diagram-card">
+          <div class="diagram-body">
+            <img src="img/flowgorithm_step2_install.svg" alt="ขั้นตอนการติดตั้งและตั้งค่าภาษาไทย" style="max-width: 100%; height: auto;" />
+          </div>
+          <div class="diagram-caption">
+            <i class="fa-solid fa-image"></i> ภาพที่ 2: ขั้นตอนการติดตั้งบน Windows และการเปลี่ยนภาษาเป็นภาษาไทย
+          </div>
+          <div class="diagram-desc">โปรแกรมรองรับเมนูและคำอธิบายภาษาไทย ช่วยให้นักเรียนเริ่มต้นเรียนรู้ได้ง่าย ไม่ซับซ้อน</div>
+        </div>
+
+        <div class="step-box amber">
+          <div class="step-header" style="color: var(--accent-amber);">
+            <i class="fa-solid fa-triangle-exclamation"></i> ข้อควรระวัง: กรณีหน้าจอขึ้นข้อความสีฟ้า "Windows protected your PC"
+          </div>
+          <p style="margin: 0; font-size: 0.9rem;">
+            เนื่องจากเป็นโปรแกรมดาวน์โหลดจากอินเทอร์เน็ต ระบบความปลอดภัยของ Windows อาจแจ้งเตือน ให้แก้ไขง่ายๆ ดังนี้:
+            <br>
+            1. คลิกที่ข้อความ <span class="kbd-pill">More info</span> (ข้อมูลเพิ่มเติม)
+            <br>
+            2. จากนั้นจะมีปุ่ม <span class="kbd-pill" style="background: #2563eb; color: #fff;">Run anyway</span> ปรากฏขึ้นมา ให้กดคลิกเพื่อดำเนินการต่อได้ทันที
+          </p>
+        </div>
+
+        <h3 style="font-size: 1.1rem; margin: 20px 0 10px 0; font-family: var(--font-heading);">
+          🇹🇭 ขั้นตอนการเปลี่ยนเป็น "ภาษาไทย"
+        </h3>
+        <ol style="margin-left: 20px; line-height: 1.8;">
+          <li>เปิดโปรแกรม <strong>Flowgorithm</strong> ขึ้นมา</li>
+          <li>ที่แถบเมนูด้านบน เลือกเมนู <strong>Tools (เครื่องมือ)</strong></li>
+          <li>คลิกเลือกคำสั่ง <strong>Change Language... (เปลี่ยนภาษา)</strong></li>
+          <li>เลือก <strong>ภาษาไทย (Thai)</strong> จากนั้นกดปุ่ม <strong>OK (ตกลง)</strong></li>
+          <li>เมนูทั้งหมดจะเปลี่ยนเป็นภาษาไทยทันที ใช้งานง่ายและเป็นมิตรกับผู้เรียน</li>
+        </ol>
+      </section>
+
+      <!-- SECTION 3: INTERFACE OVERVIEW -->
+      <section id="step-interface">
+        <h2 class="section-title">
+          <span class="section-num">3</span> หน้าต่างการทำงานและเมนูคำสั่งหลัก (Interface Overview)
+        </h2>
+
+        <p>
+          เมื่อเปิดโปรแกรมขึ้นมา จะพบกับหน้าต่างการทำงานหลักที่มีผังงานเริ่มต้น <span class="kbd-pill">Main</span> และ <span class="kbd-pill">End</span> ให้นักเรียนดับเบิลคลิกที่เส้นลูกศรเชื่อมต่อ เพื่อเปิดเมนูเลือกคำสั่งผังงาน (Insert Shape Palette) ดังนี้:
+        </p>
+
+        <div class="diagram-card">
+          <div class="diagram-body">
+            <img src="img/flowgorithm_step3_interface.svg" alt="หน้าต่างและสัญลักษณ์คำสั่งหลักใน Flowgorithm" style="max-width: 100%; height: auto;" />
+          </div>
+          <div class="diagram-caption">
+            <i class="fa-solid fa-image"></i> ภาพที่ 3: พื้นที่ออกแบบผังงาน (Canvas) และแถบคำสั่ง Shape Palette
+          </div>
+          <div class="diagram-desc">ดับเบิลคลิกที่เส้นลูกศรเพื่อเลือกคำสั่งที่ต้องการได้อย่างรวดเร็ว</div>
+        </div>
+
+        <h3 style="font-size: 1.1rem; margin: 20px 0 10px 0; font-family: var(--font-heading);">
+          📌 สรุปสัญลักษณ์และคำสั่งสำคัญที่ใช้ใน ม.4
+        </h3>
+
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th style="width: 20%;">คำสั่งใน Flowgorithm</th>
+              <th style="width: 18%;">สัญลักษณ์ ANSI</th>
+              <th>หน้าที่และการนำไปใช้งาน</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong style="color: #fbbf24;">Declare (ประกาศตัวแปร)</strong></td>
+              <td>สี่เหลี่ยมผืนผ้า (สีส้ม)</td>
+              <td>ใช้จองพื้นที่หน่วยความจำและกำหนดชื่อตัวแปร เช่น <code>score</code>, <code>totalPrice</code> พร้อมระบุชนิดข้อมูล (Integer, Real, String, Boolean)</td>
+            </tr>
+            <tr>
+              <td><strong style="color: #60a5fa;">Input (รับข้อมูลเข้า)</strong></td>
+              <td>สี่เหลี่ยมด้านขนาน (สีฟ้า)</td>
+              <td>ใช้รับค่าจากผู้ใช้ผ่านแป้นพิมพ์ เพื่อนำไปเก็บไว้ในตัวแปรที่ประกาศไว้ เช่น รับค่าคะแนน <code>score</code></td>
+            </tr>
+            <tr>
+              <td><strong style="color: #34d399;">Output (แสดงผลลัพธ์)</strong></td>
+              <td>สี่เหลี่ยมด้านขนาน (สีเขียว)</td>
+              <td>ใช้พิมพ์ข้อความหรือค่าของตัวแปรออกทางหน้าจอ เช่น <code>"ยินดีด้วย คุณสอบผ่าน"</code></td>
+            </tr>
+            <tr>
+              <td><strong style="color: #f59e0b;">Assign (กำหนดค่า)</strong></td>
+              <td>สี่เหลี่ยมผืนผ้า (สีส้ม)</td>
+              <td>ใช้คำนวณทางคณิตศาสตร์หรือนำค่าไปใส่ในตัวแปร เช่น <code>sum = num1 + num2</code> หรือ <code>area = width * length</code></td>
+            </tr>
+            <tr>
+              <td><strong style="color: #f43f5e;">If (การตัดสินใจ/เงื่อนไข)</strong></td>
+              <td>สี่เหลี่ยมขนมเปียกปูน (สีแดง)</td>
+              <td>ตรวจสอบเงื่อนไขความจริง แยกการทำงานเป็น 2 ทาง คือ จริง (True) และ เท็จ (False) เช่น <code>score &gt;= 50</code></td>
+            </tr>
+            <tr>
+              <td><strong style="color: #a78bfa;">While / For (การวนซ้ำ)</strong></td>
+              <td>รูปหกเหลี่ยม (สีม่วง)</td>
+              <td>ใช้สร้างลูปเพื่อทำงานคำสั่งเดิมซ้ำๆ จนกว่าเงื่อนไขจะสิ้นสุดลง</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SECTION 4: STEP-BY-STEP TUTORIAL -->
+      <section id="step-tutorial">
+        <h2 class="section-title">
+          <span class="section-num">4</span> ตัวอย่างการเขียนผังงานและทดสอบรันผลจริง (Hands-on Tutorial)
+        </h2>
+
+        <p>
+          เพื่อให้นักเรียนเข้าใจเห็นภาพจริง มาดูตัวอย่าง <strong>"โปรแกรมตรวจสอบผลสอบ (Pass / Fail)"</strong> ซึ่งรับคะแนนจากผู้ใช้และตรวจสอบว่าผ่านเกณฑ์ 50 คะแนนหรือไม่:
+        </p>
+
+        <div class="diagram-card">
+          <div class="diagram-body">
+            <img src="img/flowgorithm_step4_flowchart.svg" alt="ตัวอย่างผังงานตรวจสอบผลสอบและการทดสอบรันผลจริง" style="max-width: 100%; height: auto;" />
+          </div>
+          <div class="diagram-caption">
+            <i class="fa-solid fa-image"></i> ภาพที่ 4: ผังงานสมบูรณ์พร้อมหน้าต่างจำลองการทำงานจริง (Console & Variable Watch)
+          </div>
+          <div class="diagram-desc">เห็นการทำงานของตัวแปร score และผลการตัดสินใจในหน้าต่าง Console ได้อย่างชัดเจน</div>
+        </div>
+
+        <h3 style="font-size: 1.1rem; margin: 20px 0 10px 0; font-family: var(--font-heading);">
+          📝 ลำดับขั้นตอนการสร้างผังงานตัวอย่าง:
+        </h3>
+        <ol style="margin-left: 20px; line-height: 1.85;">
+          <li>ดับเบิลคลิกเส้นลูกศรใต้ <strong>Main</strong> เลือกคำสั่ง <span class="kbd-pill" style="color: #d97706;">Declare</span> พิมพ์ชื่อตัวแปรว่า <code>score</code> และเลือก Type เป็น <strong>Integer (จำนวนเต็ม)</strong></li>
+          <li>เพิ่มคำสั่ง <span class="kbd-pill" style="color: #059669;">Output</span> พิมพ์ข้อความว่า <code>"กรุณากรอกคะแนน:"</code> <em>(หมายเหตุ: ข้อความต้องอยู่ในเครื่องหมายคำพูดเสมอ)</em></li>
+          <li>เพิ่มคำสั่ง <span class="kbd-pill" style="color: #0284c7;">Input</span> พิมพ์ชื่อตัวแปรที่รับค่าคือ <code>score</code></li>
+          <li>เพิ่มคำสั่ง <span class="kbd-pill" style="color: #dc2626;">If</span> พิมพ์เงื่อนไขว่า <code>score &gt;= 50</code></li>
+          <li>ในฝั่ง <strong>True (จริง)</strong>: เพิ่มคำสั่ง Output พิมพ์ข้อความว่า <code>"สอบผ่าน 🎉"</code></li>
+          <li>ในฝั่ง <strong>False (เท็จ)</strong>: เพิ่มคำสั่ง Output พิมพ์ข้อความว่า <code>"สอบไม่ผ่าน 💡"</code></li>
+          <li>คลิกปุ่มสีเขียว <span class="kbd-pill" style="background: #10b981; color: #fff;">▶ Run</span> หรือกดปุ่ม <span class="kbd-pill">F5</span> เพื่อเริ่มรันโปรแกรม</li>
+          <li>หน้าต่าง <strong>Console Window</strong> จะเปิดขึ้นมา ให้นักเรียนพิมพ์ตัวเลขคะแนน เช่น <code>75</code> แล้วกด Enter จะเห็นผลลัพธ์แสดง <code>"สอบผ่าน 🎉"</code> ทันที!</li>
+        </ol>
+      </section>
+
+      <!-- SECTION 5: SOURCE CODE & EXPORT -->
+      <section id="step-code-export">
+        <h2 class="section-title">
+          <span class="section-num">5</span> การแปลงผังงานเป็นโค้ดคอมพิวเตอร์และการ Export ส่งงาน
+        </h2>
+
+        <div class="diagram-card">
+          <div class="diagram-body">
+            <img src="img/flowgorithm_step5_codeview.svg" alt="การแปลงผังงานเป็นโค้ด Python และการบันทึกภาพผังงาน" style="max-width: 100%; height: auto;" />
+          </div>
+          <div class="diagram-caption">
+            <i class="fa-solid fa-image"></i> ภาพที่ 5: หน้าต่าง Source Code Viewer แปลงเป็น Python 3 และการ Export รูปภาพส่งงาน
+          </div>
+          <div class="diagram-desc">แปลงผังงานเป็นโค้ดภาษาจริงได้ทันที และ Export รูปภาพความละเอียดสูงเพื่อแนบลงในเล่มรายงานโครงงาน 5 บท</div>
+        </div>
+
+        <h3 style="font-size: 1.1rem; margin: 20px 0 10px 0; font-family: var(--font-heading);">
+          📸 วิธี Export ผังงานเป็นรูปภาพเพื่อนำไปใส่ใบงาน / เล่มโครงงาน:
+        </h3>
+        <ol style="margin-left: 20px; line-height: 1.85;">
+          <li>เมื่อเขียนผังงานเสร็จสมบูรณ์ ให้ไปที่เมนู <strong>Tools (เครื่องมือ)</strong></li>
+          <li>เลือกคำสั่ง <strong>Export to Image File... (ส่งออกเป็นไฟล์รูปภาพ)</strong> หรือ <strong>Export to Vector...</strong></li>
+          <li>เลือกฟอร์แมตเป็น <strong>PNG Image (.png)</strong> เพื่อให้ได้ภาพคมชัดสูงและพื้นหลังโปร่งใส</li>
+          <li>กดปุ่ม <strong>Save</strong> เลือกที่บันทึกในเครื่อง จะได้ไฟล์รูปภาพผังงานสวยงาม</li>
+          <li>นำภาพที่ได้ไปแทรกลงในไฟล์ <strong>Microsoft Word, Canva, หรือ Google Docs</strong> ของโครงงาน 5 บทได้ทันที</li>
+        </ol>
+
+        <h3 style="font-size: 1.1rem; margin: 20px 0 10px 0; font-family: var(--font-heading);">
+          💾 วิธีบันทึกไฟล์ผังงานต้นฉบับ (.fprg):
+        </h3>
+        <p>
+          ไปที่เมนู <span class="kbd-pill">File</span> -&gt; <span class="kbd-pill">Save As...</span> ตั้งชื่อไฟล์ เช่น <code>นายสมชาย_ใบงาน1.fprg</code> เพื่อเก็บไฟล์ต้นฉบับไว้เปิดแก้ไขในครั้งต่อไป หรือใช้แนบส่งงานผ่านระบบออนไลน์
+        </p>
+      </section>
+
+      <!-- SECTION 6: FAQ -->
+      <section id="step-faq">
+        <h2 class="section-title">
+          <span class="section-num">6</span> ข้อผิดพลาดที่พบบ่อยและวิธีแก้ไข (Troubleshooting & FAQ)
+        </h2>
+
+        <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 16px;">
+          <div style="background: var(--bg-surface-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 16px 20px;">
+            <strong style="color: var(--accent-rose); display: block; font-size: 0.95rem; margin-bottom: 4px;">
+              ❓ คำถาม: ทำไมใส่ข้อความใน Output แล้วโปรแกรมแจ้งเตือน Syntax Error สีแดง?
+            </strong>
+            <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">
+              <strong>วิธีแก้ไข:</strong> ในโปรแกรม Flowgorithm ข้อความตัวหนังสือ (Text String) จะต้องอยู่ภายในเครื่องหมายคำพูดคู่ <code>"..."</code> เสมอ เช่น <code>"สวัสดีครับ"</code> หรือ <code>"กรุณากรอกข้อมูล"</code> หากไม่ใส่เครื่องหมายคำพูด โปรแกรมจะเข้าใจผิดคิดว่าเป็นชื่อตัวแปร
+            </p>
+          </div>
+
+          <div style="background: var(--bg-surface-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 16px 20px;">
+            <strong style="color: var(--accent-blue); display: block; font-size: 0.95rem; margin-bottom: 4px;">
+              ❓ คำถาม: หากต้องการแสดงทั้งข้อความและค่าของตัวแปรพร้อมกันใน Output ต้องทำอย่างไร?
+            </strong>
+            <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">
+              <strong>วิธีแก้ไข:</strong> ให้ใช้เครื่องหมาย <code>&amp;</code> ในการเชื่อมข้อความกับตัวแปร เช่น <code>"คะแนนรวมของคุณคือ: " &amp; score &amp; " คะแนน"</code>
+            </p>
+          </div>
+
+          <div style="background: var(--bg-surface-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 16px 20px;">
+            <strong style="color: var(--accent-amber); display: block; font-size: 0.95rem; margin-bottom: 4px;">
+              ❓ คำถาม: กฎการตั้งชื่อตัวแปรใน Declare มีอะไรบ้าง?
+            </strong>
+            <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">
+              <strong>วิธีแก้ไข:</strong> ควรตั้งชื่อด้วยตัวอักษรภาษาอังกฤษ ไม่เว้นวรรค (ห้ามใช้ Spacebar) และไม่ขึ้นต้นด้วยตัวเลข เช่น <code>totalScore</code>, <code>userAge</code>, <code>num1</code>
+            </p>
+          </div>
+
+          <div style="background: var(--bg-surface-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 16px 20px;">
+            <strong style="color: var(--primary); display: block; font-size: 0.95rem; margin-bottom: 4px;">
+              ❓ คำถาม: ใช้งานบน macOS หรือ iPad ได้หรือไม่?
+            </strong>
+            <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">
+              <strong>วิธีแก้ไข:</strong> โปรแกรม Flowgorithm ออกแบบมาสำหรับระบบ Windows เป็นหลัก สำหรับนักเรียนที่ใช้ macOS สามารถรันผ่านโปรแกรมช่วย เช่น Wine หรือ CrossOver สำหรับ iPad แนะนำให้ใช้งานในห้องคอมพิวเตอร์โรงเรียน หรือเขียนผังงานผ่านเว็บเครื่องมือทดแทน เช่น Draw.io เมื่ออยู่นอกห้องเรียนครับ
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Action Banner -->
+      <div style="margin-top: 40px; background: linear-gradient(135deg, rgba(2, 132, 199, 0.1) 0%, rgba(0, 180, 0, 0.1) 100%); border: 1.5px solid rgba(2, 132, 199, 0.35); border-radius: var(--radius-md); padding: 26px; text-align: center;">
+        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 8px;">
+          พร้อมลงมือฝึกเขียนผังงานแล้วหรือยัง?
+        </h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 600px; margin: 0 auto 18px auto;">
+          ดาวน์โหลดโปรแกรมและเริ่มต้นฝึกออกแบบขั้นตอนวิธีเพื่อเตรียมความพร้อมสู่การพัฒนาโครงงานคอมพิวเตอร์ระดับมืออาชีพ
+        </p>
+        <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+          <a href="http://flowgorithm.org/download/index.html" target="_blank" rel="noopener noreferrer" class="nav-btn primary" style="padding: 10px 22px; font-size: 0.92rem;">
+            <i class="fa-solid fa-cloud-arrow-down"></i> ดาวน์โหลด Flowgorithm ↗
+          </a>
+          <a href="unit1.html#topic-1-algorithm" class="nav-btn" style="padding: 10px 20px; font-size: 0.92rem;">
+            <i class="fa-solid fa-book-open"></i> กลับไปอ่านเนื้อหาผังงาน หน่วยที่ 1
+          </a>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Page Footer -->
+  <footer style="margin-top: 60px; padding: 30px 20px; text-align: center; border-top: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-muted);">
+    <p>คู่มือประกอบการจัดการเรียนรู้วิทยาการคำนวณ ม.4 • โรงเรียนกุดชุมวิทยาคม</p>
+    <p style="margin-top: 4px; font-size: 0.78rem;">จัดทำเพื่อส่งเสริมการเรียนรู้การออกแบบอัลกอริทึมและผังงานมาตรฐานสากล (ANSI)</p>
+  </footer>
+
+  <script>
+    // Scroll progress bar
+    window.onscroll = function() {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById("progress-bar").style.width = scrolled + "%";
+      updateTocActive();
+    };
+
+    function updateTocActive() {
+      const sections = document.querySelectorAll('section[id]');
+      const scrollPos = window.scrollY + 120;
+      
+      sections.forEach(sec => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+        const link = document.querySelector(`.toc-nav a[href="#${id}"]`);
+        if (link) {
+          if (scrollPos >= top && scrollPos < top + height) {
+            document.querySelectorAll('.toc-nav a').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        }
+      });
+    }
+
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('csm4-theme', next);
+      updateThemeBtn(next);
+    }
+
+    function updateThemeBtn(theme) {
+      const icon = document.getElementById('theme-btn-icon');
+      const text = document.getElementById('theme-text');
+      if (theme === 'dark') {
+        icon.className = 'fa-solid fa-sun';
+        icon.style.color = '#38bdf8';
+        text.innerText = 'โหมดสว่าง';
+      } else {
+        icon.className = 'fa-solid fa-moon';
+        icon.style.color = 'inherit';
+        text.innerText = 'โหมดมืด';
+      }
+    }
+
+    const savedTheme = localStorage.getItem('csm4-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeBtn(savedTheme);
+  </script>
+
+</body>
+</html>

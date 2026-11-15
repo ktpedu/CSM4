@@ -1,0 +1,72 @@
+<svg viewBox="0 0 800 400" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Sarabun', 'Segoe UI', sans-serif;">
+  <defs>
+    <linearGradient id="bgGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="btnGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="accentGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="shadow1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Browser Frame -->
+  <rect x="20" y="20" width="760" height="360" rx="12" fill="url(#bgGrad1)" stroke="#334155" stroke-width="1.5" filter="url(#shadow1)"/>
+  
+  <!-- Browser Header -->
+  <rect x="20" y="20" width="760" height="42" rx="12" fill="#1e293b"/>
+  <rect x="20" y="50" width="760" height="12" fill="#1e293b"/>
+  <circle cx="45" cy="41" r="5" fill="#ef4444"/>
+  <circle cx="62" cy="41" r="5" fill="#f59e0b"/>
+  <circle cx="79" cy="41" r="5" fill="#10b981"/>
+  
+  <!-- Address Bar -->
+  <rect x="110" y="28" width="560" height="26" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="130" y="45" fill="#38bdf8" font-size="12" font-weight="600">http://flowgorithm.org/download/index.html</text>
+
+  <!-- Web Content -->
+  <!-- Header Title -->
+  <text x="400" y="95" fill="#f8fafc" font-size="18" font-weight="bold" text-anchor="middle">Flowgorithm - Official Download Page</text>
+  <text x="400" y="118" fill="#94a3b8" font-size="13" text-anchor="middle">เลือกรุ่นที่ต้องการใช้งานตามความเหมาะสมของเครื่องคอมพิวเตอร์</text>
+
+  <!-- Option 1: Standard Installer -->
+  <g transform="translate(60, 140)">
+    <rect x="0" y="0" width="315" height="210" rx="10" fill="#1e293b" stroke="#0284c7" stroke-width="2"/>
+    <rect x="15" y="15" width="40" height="40" rx="8" fill="#0284c7"/>
+    <text x="35" y="40" fill="#ffffff" font-size="20" text-anchor="middle">⬇</text>
+    <text x="68" y="32" fill="#38bdf8" font-size="15" font-weight="bold">รุ่นมาตรฐาน (Installer)</text>
+    <text x="68" y="50" fill="#94a3b8" font-size="11">แนะนำสำหรับการใช้งานในเครื่องส่วนตัว</text>
+    
+    <text x="20" y="85" fill="#cbd5e1" font-size="12">• ไฟล์ติดตั้ง Setup.zip (มีไฟล์ .msi ข้างใน)</text>
+    <text x="20" y="108" fill="#cbd5e1" font-size="12">• ติดตั้งลง Windows อัตโนมัติ</text>
+    <text x="20" y="131" fill="#cbd5e1" font-size="12">• สร้างไอคอนหน้าจอ Desktop พร้อมใช้งาน</text>
+
+    <!-- Download Button 1 -->
+    <rect x="20" y="152" width="275" height="38" rx="8" fill="url(#btnGrad1)"/>
+    <text x="157" y="176" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">คลิกดาวน์โหลด: Flowgorithm Installer (.zip)</text>
+  </g>
+
+  <!-- Option 2: Portable Version -->
+  <g transform="translate(425, 140)">
+    <rect x="0" y="0" width="315" height="210" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <rect x="15" y="15" width="40" height="40" rx="8" fill="#10b981"/>
+    <text x="35" y="40" fill="#ffffff" font-size="20" text-anchor="middle">📦</text>
+    <text x="68" y="32" fill="#34d399" font-size="15" font-weight="bold">รุ่นพกพา (Portable Zip)</text>
+    <text x="68" y="50" fill="#94a3b8" font-size="11">แนะนำสำหรับห้องคอมพิวเตอร์โรงเรียน</text>
+    
+    <text x="20" y="85" fill="#cbd5e1" font-size="12">• ไม่ต้องมีสิทธิ์ Admin ในการติดตั้ง</text>
+    <text x="20" y="108" fill="#cbd5e1" font-size="12">• แตกไฟล์ Zip แล้วดับเบิลคลิกเปิดได้ทันที</text>
+    <text x="20" y="131" fill="#cbd5e1" font-size="12">• พกพาใส่ Flash Drive ไปเปิดเครื่องไหนก็ได้</text>
+
+    <!-- Download Button 2 -->
+    <rect x="20" y="152" width="275" height="38" rx="8" fill="url(#accentGrad1)"/>
+    <text x="157" y="176" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">คลิกดาวน์โหลด: Portable Zip</text>
+  </g>
+</svg>

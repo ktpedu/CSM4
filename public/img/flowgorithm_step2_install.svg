@@ -1,0 +1,75 @@
+<svg viewBox="0 0 800 400" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Sarabun', 'Segoe UI', sans-serif;">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <filter id="shadow2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="400" rx="14" fill="url(#bgGrad2)"/>
+
+  <!-- Left: Installation Wizard Step -->
+  <g transform="translate(35, 30)">
+    <rect width="345" height="340" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow2)"/>
+    <rect width="345" height="36" rx="10" fill="#2563eb"/>
+    <rect y="26" width="345" height="10" fill="#2563eb"/>
+    <text x="20" y="24" fill="#ffffff" font-size="13" font-weight="bold">ขั้นตอนที่ 1: ติดตั้งโปรแกรมบน Windows</text>
+
+    <!-- Windows SmartScreen Alert Notice -->
+    <rect x="18" y="52" width="309" height="74" rx="8" fill="#451a03" stroke="#f59e0b" stroke-width="1.2"/>
+    <text x="32" y="74" fill="#fbbf24" font-size="12" font-weight="bold">⚠️ กรณีขึ้นหน้าต่างสีฟ้า Windows protected your PC</text>
+    <text x="32" y="94" fill="#fde68a" font-size="11.5">1. คลิกข้อความ: <tspan font-weight="bold" text-decoration="underline">More info</tspan> (ข้อมูลเพิ่มเติม)</text>
+    <text x="32" y="112" fill="#fde68a" font-size="11.5">2. คลิกปุ่ม: <tspan font-weight="bold" fill="#ffffff" text-decoration="underline">Run anyway</tspan> (ดำเนินการต่อไป)</text>
+
+    <!-- Wizard Steps -->
+    <rect x="18" y="140" width="309" height="175" rx="8" fill="#0f172a" stroke="#334155"/>
+    <text x="35" y="168" fill="#38bdf8" font-size="13" font-weight="bold">Flowgorithm Setup Wizard</text>
+    <text x="35" y="196" fill="#94a3b8" font-size="12">1. ดับเบิลคลิกไฟล์ <tspan fill="#e2e8f0" font-weight="bold">setup.exe</tspan> หรือ <tspan fill="#e2e8f0" font-weight="bold">.msi</tspan></text>
+    <text x="35" y="222" fill="#94a3b8" font-size="12">2. กดปุ่ม <tspan fill="#38bdf8" font-weight="bold">"Next"</tspan> เพื่อดำเนินการติดตั้ง</text>
+    <text x="35" y="248" fill="#94a3b8" font-size="12">3. เลือกโฟลเดอร์ปลายทาง แล้วกด <tspan fill="#38bdf8" font-weight="bold">"Next"</tspan></text>
+    <text x="35" y="274" fill="#94a3b8" font-size="12">4. กด <tspan fill="#10b981" font-weight="bold">"Close"</tspan> เมื่อติดตั้งเสร็จสิ้นสมบูรณ์</text>
+
+    <rect x="235" y="285" width="75" height="22" rx="4" fill="#10b981"/>
+    <text x="272" y="300" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">✓ ติดตั้งสำเร็จ</text>
+  </g>
+
+  <!-- Right: Change Language to Thai -->
+  <g transform="translate(420, 30)">
+    <rect width="345" height="340" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5" filter="url(#shadow2)"/>
+    <rect width="345" height="36" rx="10" fill="#059669"/>
+    <rect y="26" width="345" height="10" fill="#059669"/>
+    <text x="20" y="24" fill="#ffffff" font-size="13" font-weight="bold">ขั้นตอนที่ 2: เปลี่ยนเมนูเป็น "ภาษาไทย"</text>
+
+    <!-- Menu Simulation -->
+    <rect x="18" y="52" width="309" height="35" rx="6" fill="#0f172a" stroke="#334155"/>
+    <text x="32" y="74" fill="#94a3b8" font-size="12">File   Edit   View   Program   <tspan fill="#34d399" font-weight="bold">Tools</tspan>   Help</text>
+
+    <!-- Dropdown Menu -->
+    <g transform="translate(160, 92)">
+      <rect width="165" height="95" rx="6" fill="#1e293b" stroke="#334155" filter="url(#shadow2)"/>
+      <text x="12" y="22" fill="#cbd5e1" font-size="11.5">Color Schemes</text>
+      <text x="12" y="44" fill="#cbd5e1" font-size="11.5">Chart Style</text>
+      <rect y="52" width="165" height="24" fill="#0284c7"/>
+      <text x="12" y="68" fill="#ffffff" font-size="11.5" font-weight="bold">► Change Language...</text>
+      <text x="12" y="88" fill="#cbd5e1" font-size="11.5">Export...</text>
+    </g>
+
+    <!-- Language Selector Popup -->
+    <g transform="translate(18, 200)">
+      <rect width="309" height="115" rx="8" fill="#0f172a" stroke="#059669" stroke-width="1.5"/>
+      <text x="16" y="24" fill="#f8fafc" font-size="12" font-weight="bold">หน้าต่าง Change Language (เลือกภาษา)</text>
+      
+      <rect x="16" y="36" width="277" height="30" rx="6" fill="#065f46" stroke="#10b981" stroke-width="1.5"/>
+      <text x="30" y="56" fill="#ffffff" font-size="13" font-weight="bold">🇹🇭 ภาษาไทย (Thai)</text>
+      <text x="270" y="56" fill="#34d399" font-size="14" font-weight="bold">✓</text>
+
+      <rect x="220" y="76" width="73" height="26" rx="6" fill="#10b981"/>
+      <text x="256" y="93" fill="#ffffff" font-size="11.5" font-weight="bold" text-anchor="middle">ตกลง (OK)</text>
+    </g>
+
+    <text x="172" y="330" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">🎉 เมนูและคำสั่งทั้งหมดจะเปลี่ยนเป็นภาษาไทยทันที!</text>
+  </g>
+</svg>
