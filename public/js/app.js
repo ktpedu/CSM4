@@ -292,6 +292,16 @@ function updateAuthUI() {
       }
     }
 
+    // Toggle teacher / admin tabs in top navigation
+    const navTeacherLi = document.getElementById('nav-teacher-li');
+    if (navTeacherLi) {
+      navTeacherLi.style.display = (currentUser.role === 'teacher' || currentUser.role === 'admin') ? 'inline-block' : 'none';
+    }
+    const navAdminLi = document.getElementById('nav-admin-li');
+    if (navAdminLi) {
+      navAdminLi.style.display = (currentUser.role === 'admin') ? 'inline-block' : 'none';
+    }
+
     // Update Student Personalized Hub Banner (Logged In)
     const bannerIcon = document.getElementById('student-banner-icon');
     const bannerBadge = document.getElementById('student-banner-badge');
@@ -351,6 +361,11 @@ function updateAuthUI() {
       btnAnnounce.classList.add('hidden');
     }
 
+    const navTeacherLi = document.getElementById('nav-teacher-li');
+    if (navTeacherLi) navTeacherLi.style.display = 'none';
+    const navAdminLi = document.getElementById('nav-admin-li');
+    if (navAdminLi) navAdminLi.style.display = 'none';
+
     // Reset Student Personalized Hub Banner (Guest)
     const bannerIcon = document.getElementById('student-banner-icon');
     const bannerBadge = document.getElementById('student-banner-badge');
@@ -366,7 +381,7 @@ function updateAuthUI() {
       bannerBadge.style.color = '#6ee7b7';
     }
     if (bannerTitle) bannerTitle.innerText = 'ศูนย์การเรียนรู้วิทยาการคำนวณ ม.4 (CS-M4)';
-    if (bannerSub) bannerSub.innerText = 'เลือก 4 เมนูหลักด้านล่าง เพื่อเข้าสู่บทเรียน ทำใบงาน หรือทำแบบทดสอบได้ทันทีในคลิกเดียว';
+    if (bannerSub) bannerSub.innerText = 'เลือก 5 เมนูหลักด้านล่าง เพื่อเข้าสู่บทเรียน ทำใบงาน ส่งการบ้าน หรือทำแบบทดสอบได้ทันทีในคลิกเดียว';
     if (bannerActions) {
       bannerActions.innerHTML = `
         <button type="button" onclick="openLoginModal()" id="btn-banner-login" class="btn" style="background: #10b981; color: #ffffff; font-weight: 700; padding: 10px 20px; border-radius: 12px; font-size: 0.9rem; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35); display: inline-flex; align-items: center; gap: 8px;">
@@ -2683,7 +2698,7 @@ function renderAnnouncementsUI(announcements) {
       <div style="text-align: center; padding: 40px 20px; color: var(--text-muted); background: var(--surface-secondary); border-radius: 12px; border: 1px dashed var(--border-color);">
         <i class="fa-solid fa-bullhorn" style="font-size: 2rem; color: var(--thairath-green); margin-bottom: 10px; opacity: 0.6;"></i>
         <div style="font-weight: 700; font-size: 1rem; color: var(--text-main);">ยังไม่มีประกาศใหม่ในขณะนี้</div>
-        <div style="font-size: 0.82rem; margin-top: 4px;">ระบบเชื่อมต่อฐานข้อมูล Supabase Cloud เรียลไทม์ พร้อมแสดงผลทันทีเมื่อมีประกาศใหม่</div>
+        <div style="font-size: 0.82rem; margin-top: 4px;">ระบบพร้อมแสดงผลทันทีเมื่อคุณครูมีประกาศใหม่</div>
       </div>
     `;
     return;
@@ -2700,7 +2715,7 @@ function renderAnnouncementsUI(announcements) {
           </h4>
           <div style="display: flex; align-items: center; gap: 8px;">
             <span style="font-size: 0.72rem; padding: 3px 8px; border-radius: 999px; background: rgba(0, 180, 0, 0.12); color: var(--thairath-green); font-weight: 700;">
-              <i class="fa-solid fa-bolt mr-1"></i> Realtime Supabase
+              <i class="fa-solid fa-bolt mr-1"></i> อัปเดตล่าสุด
             </span>
             <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600;">
               <i class="fa-regular fa-calendar mr-1"></i> ${escapeHtml(formattedDate)}
@@ -4162,7 +4177,7 @@ function setWorksheetCategory(category) {
             <i class="fa-solid fa-layer-group text-slate-600"></i> คลังใบงานวิทยาการคำนวณ ม.4 ทั้งหมด (9 ฉบับ)
           </div>
           <div class="thairath-section-subtitle">
-            ใบงานภาคทฤษฎีและโครงงาน 6 ฉบับเดิม และใบงานแบบปฏิบัติการผังงาน Flowgorithm 3 ชุด รวม 30 ข้อ
+            ใบงานภาคทฤษฎีและโครงงาน 6 ฉบับมาตรฐาน และใบงานแบบปฏิบัติการผังงาน Flowgorithm 3 ชุด รวม 30 ข้อ
           </div>
         </div>
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -4181,7 +4196,7 @@ function setWorksheetCategory(category) {
             <i class="fa-solid fa-file-lines text-sky-600"></i> คลังใบงานทฤษฎี & โครงงาน (Theory & Project Worksheets)
           </div>
           <div class="thairath-section-subtitle">
-            ใบงานมาตรฐาน 6 ฉบับเดิม ครบทั้ง 2 หน่วยการเรียนรู้ (หน่วยละ 3 ใบงาน • คะแนนเต็ม 10 คะแนนทุกใบงาน) สำหรับฝึกกระบวนการคิดและพัฒนาโครงงาน
+            ใบงานมาตรฐาน 6 ฉบับมาตรฐาน ครบทั้ง 2 หน่วยการเรียนรู้ (หน่วยละ 3 ใบงาน • คะแนนเต็ม 10 คะแนนทุกใบงาน) สำหรับฝึกกระบวนการคิดและพัฒนาโครงงาน
           </div>
         </div>
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -6165,7 +6180,7 @@ async function doSubmitAssignment() {
         showToast(uploadErr.message || 'เกิดข้อผิดพลาดในการประมวลผลไฟล์', 'error');
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-1"></i> ยืนยันส่งงาน (Supabase Cloud)';
+          submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane mr-1"></i> ยืนยันการส่งงาน';
         }
         if (progressWrap) progressWrap.style.display = 'none';
         return;
@@ -6185,7 +6200,7 @@ async function doSubmitAssignment() {
   try {
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-1"></i> กำลังบันทึกลง Supabase...';
+      submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-1"></i> กำลังส่งงานเข้าระบบ...';
     }
 
     const studentUser = currentUser || {};
@@ -6288,7 +6303,7 @@ async function doSubmitAssignment() {
   } finally {
     if (submitBtn) {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-1"></i> ยืนยันส่งงาน (Supabase Cloud)';
+      submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane mr-1"></i> ยืนยันการส่งงาน';
     }
     if (progressWrap) progressWrap.style.display = 'none';
   }
@@ -8846,7 +8861,7 @@ async function submitQuizAnswers(isAutoSubmit = false, autoReason = '') {
     if (isAutoSubmit && autoReason) {
       showToast(autoReason, 'warning');
     } else {
-      showToast('ส่งคำตอบสำเร็จและบันทึกคะแนนลงฐานข้อมูล Supabase เรียบร้อยแล้ว!', 'success');
+      showToast('ส่งคำตอบสำเร็จและบันทึกคะแนนเข้าระบบเรียบร้อยแล้ว!', 'success');
     }
 
     if (res.percentage >= 80 && typeof confetti === 'function') {
@@ -9175,7 +9190,7 @@ async function replyQuestionPrompt(questionId) {
       })
     });
     if (!res.ok) throw new Error('เกิดข้อผิดพลาดในการบันทึกคำตอบ');
-    showToast('บันทึกคำตอบลงฐานข้อมูล Supabase สำเร็จ!', 'success');
+    showToast('บันทึกคำตอบเข้าระบบสำเร็จ!', 'success');
     loadTeacherData();
   } catch (err) {
     console.error('Reply question error:', err);
@@ -9471,7 +9486,7 @@ async function submitStudentQuestion() {
 
     document.getElementById('contact-subject-input').value = '';
     document.getElementById('contact-question-input').value = '';
-    showToast('ส่งคำถามถึงครูเรียบร้อยแล้ว! บันทึกลง Supabase สำเร็จ', 'success');
+    showToast('ส่งคำถามถึงคุณครูเรียบร้อยแล้ว!', 'success');
     loadContactData();
   } catch (err) {
     console.error('Submit question error:', err);

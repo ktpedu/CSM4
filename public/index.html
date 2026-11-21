@@ -79,28 +79,7 @@
   </head>
   <body>
 
-    <!-- THAIRATH ONLINE TOP UTILITY BAR -->
-    <div class="thairath-top-bar">
-      <div class="container thairath-top-container">
-        <div class="thairath-date-badge">
-          <span id="thairath-date-display"><i class="fa-regular fa-calendar-days mr-1 text-emerald-600"></i> วันศุกร์ที่ 18 กันยายน 2569</span>
-          <span class="hidden-mobile" style="color: var(--border-color);">|</span>
-          <span class="hidden-mobile">
-            <span class="thairath-live-dot mr-1"></span>
-            <strong style="color: var(--breaking-red);">LIVE</strong> สตรีมมิ่งบทเรียนวิทยาการคำนวณ ม.4
-          </span>
-        </div>
-
-        <div id="admin-sheet-indicator" style="display: none; align-items: center; gap: 16px;">
-          <a href="https://docs.google.com/spreadsheets/d/13n23D7lMUIwjwArmoOyOyY5eNSLz_a2Fw7Jkb2QqrWA/edit" target="_blank" style="color: var(--thairath-green); font-weight: 700; text-decoration: none; font-size: 0.76rem; display: inline-flex; align-items: center; gap: 5px;" title="เปิด Supabase Dashboard (เฉพาะ Admin)">
-            <i class="fa-solid fa-circle pulse-glow" style="font-size: 0.55rem; color: var(--thairath-green);"></i>
-            <span>Supabase Cloud (Admin)</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- THAIRATH ONLINE MAIN BRAND HEADER -->
+    <!-- MAIN BRAND HEADER -->
     <header class="thairath-main-header">
       <div class="container thairath-header-container">
         
@@ -108,12 +87,12 @@
         <a href="javascript:void(0)" onclick="switchTab('home')" class="thairath-brand-logo">
           <img src="img/LOGOprofile.gif" alt="Computing science Logo" class="brand-logo-img" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--thairath-green); flex-shrink: 0;" />
           <div class="thairath-brand-text">
-            <span class="thairath-brand-title">Computing science • CS-M4</span>
-            <span class="thairath-brand-sub">แหล่งเรียนรู้วิทยาการคำนวณ ม.4</span>
+            <span class="thairath-brand-title">วิทยาการคำนวณ ม.4</span>
+            <span class="thairath-brand-sub">โรงเรียนวังน้ำเย็นวิทยาคม • ว 4.2 ม.4/1 • ครูปณิฏฐา</span>
           </div>
         </a>
 
-        <!-- Thairath Quick Search Bar -->
+        <!-- Quick Search Bar -->
         <div class="thairath-search-wrap hidden-mobile">
           <input type="text" id="thairath-quick-search" placeholder="ค้นหาบทเรียน, ใบงาน, ข้อสอบ..." class="thairath-search-input" onkeyup="if(event.key==='Enter')executeThairathSearch()" />
           <button class="thairath-search-btn" onclick="executeThairathSearch()" title="ค้นหา">
@@ -124,6 +103,9 @@
         <!-- Right Side: Auth State (Login Button / User Profile Dropdown) & Theme Toggle -->
         <div style="display: flex; align-items: center; gap: 10px;">
           
+          <!-- Hidden indicator placeholder for JS compatibility -->
+          <div id="admin-sheet-indicator" style="display: none;"></div>
+
           <!-- Guest State: Login Button -->
           <button id="btn-header-login" onclick="openLoginModal()" class="btn-thairath-login" style="display: inline-flex;">
             <i class="fa-solid fa-arrow-right-to-bracket mr-1"></i>
@@ -162,23 +144,23 @@
 
               <a href="javascript:void(0)" onclick="switchTab('assignments'); closeUserDropdown();" class="user-dropdown-item">
                 <i class="fa-solid fa-cloud-arrow-up text-emerald-600"></i>
-                <span>ประวัติการส่งผลงาน</span>
+                <span>ประวัติการส่งผลงาน &amp; คะแนน</span>
               </a>
               <div id="dropdown-teacher-links" style="display: none;">
                 <div class="user-dropdown-divider"></div>
                 <a href="javascript:void(0)" onclick="switchTab('teacher'); closeUserDropdown();" class="user-dropdown-item">
                   <i class="fa-solid fa-chalkboard-user text-amber-600"></i>
-                  <span>ระบบงานครูผู้สอน (ประเมินผลงาน/บันทึกคะแนน)</span>
+                  <span>แดชบอร์ดครูผู้สอน (ตรวจงาน/บันทึกคะแนน)</span>
                 </a>
               </div>
               <div id="dropdown-admin-links" style="display: none;">
                 <a href="javascript:void(0)" onclick="switchTab('admin'); closeUserDropdown();" class="user-dropdown-item">
                   <i class="fa-solid fa-user-shield text-rose-600"></i>
-                  <span>ระบบผู้ดูแลระบบ (จัดการระบบ)</span>
+                  <span>ระบบผู้ดูแลระบบ (Admin Console)</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/13n23D7lMUIwjwArmoOyOyY5eNSLz_a2Fw7Jkb2QqrWA/edit" target="_blank" class="user-dropdown-item">
                   <i class="fa-solid fa-table text-emerald-600"></i>
-                  <span>เปิด Supabase Dashboard (เฉพาะ Admin)</span>
+                  <span>เปิด Google Spreadsheet / Database</span>
                 </a>
               </div>
               <div class="user-dropdown-divider"></div>
@@ -207,190 +189,79 @@
       </div>
     </header>
 
-    <!-- THAIRATH ONLINE STICKY CATEGORY NAVIGATION BAR -->
+    <!-- DIRECT, STUDENT-FIRST NAVIGATION BAR -->
     <nav class="thairath-cat-nav">
       <div class="container">
         <ul class="thairath-cat-list" id="nav-links">
           
-          <!-- 1. หน้าแรก (Home) -->
+          <!-- 1. หน้าแรก -->
           <li>
             <a href="javascript:void(0)" onclick="switchTab('home')" class="thairath-cat-item active" id="nav-home">
               <i class="fa-solid fa-house"></i> หน้าแรก
             </a>
           </li>
 
-          <!-- 2. สาระการเรียนรู้ (Curriculum Dropdown) -->
-          <li class="thairath-cat-dropdown">
-            <button class="thairath-cat-dropbtn" id="nav-group-learning" type="button" onclick="toggleNavDropdown(this, event)">
-              <i class="fa-solid fa-book-open"></i>
-              <span>สาระการเรียนรู้</span>
-              <i class="fa-solid fa-chevron-down drop-arrow"></i>
-            </button>
-            <div class="thairath-dropdown-panel">
-              <!-- 1. หน่วยการเรียนรู้ (มีเมนูย่อย Submenu: บทเรียนดิจิทัล หน่วยที่ 1 & หน่วยที่ 2) -->
-              <div class="thairath-has-submenu" id="nav-item-has-submenu">
-                <div class="thairath-drop-link thairath-submenu-trigger" onclick="toggleNavSubmenu(this, event)">
-                  <div class="drop-icon bg-emerald-light"><i class="fa-solid fa-book-open"></i></div>
-                  <div class="drop-text" style="flex: 1;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-                      <span class="drop-title">หน่วยการเรียนรู้</span>
-                      <span class="thairath-submenu-badge">2 หน่วย</span>
-                    </div>
-                    <span class="drop-desc">บทเรียนดิจิทัล &amp; หลักสูตร ม.4</span>
-                  </div>
-                  <i class="fa-solid fa-chevron-right thairath-submenu-arrow"></i>
-                </div>
-
-                <!-- SUBMENU PANEL (Flyout to the right) -->
-                <div class="thairath-submenu-panel">
-                  <div class="thairath-submenu-header">
-                    <i class="fa-solid fa-graduation-cap text-emerald-600 mr-1"></i> บทเรียนดิจิทัล ม.4 (ฉบับสมบูรณ์)
-                  </div>
-
-                  <!-- เมนูย่อย 1: บทเรียนดิจิทัล หน่วยที่ 1 -->
-                  <a href="unit1.html" target="_blank" class="thairath-drop-link thairath-submenu-link">
-                    <div class="drop-icon bg-blue-light"><i class="fa-solid fa-graduation-cap"></i></div>
-                    <div class="drop-text">
-                      <span class="drop-title">บทเรียนดิจิทัล หน่วยที่ 1</span>
-                      <span class="drop-desc">แนวคิดเชิงคำนวณและ SDLC พร้อมแผนภาพเวกเตอร์</span>
-                    </div>
-                    <i class="fa-solid fa-arrow-up-right-from-square thairath-ext-icon" title="เปิดในแท็บใหม่"></i>
-                  </a>
-
-                  <!-- เมนูย่อย 2: บทเรียนดิจิทัล หน่วยที่ 2 -->
-                  <a href="unit2.html" target="_blank" class="thairath-drop-link thairath-submenu-link">
-                    <div class="drop-icon bg-emerald-light" style="background: rgba(2, 132, 199, 0.12); color: #0284c7;"><i class="fa-solid fa-laptop-code"></i></div>
-                    <div class="drop-text">
-                      <span class="drop-title">บทเรียนดิจิทัล หน่วยที่ 2</span>
-                      <span class="drop-desc">2 กรณีศึกษา (เว็บห้องสมุด &amp; แอปเตือนกินยา) ฉบับสมบูรณ์</span>
-                    </div>
-                    <i class="fa-solid fa-arrow-up-right-from-square thairath-ext-icon" title="เปิดในแท็บใหม่"></i>
-                  </a>
-
-                  <div class="thairath-submenu-divider"></div>
-
-                  <!-- เมนูย่อย 3: ภาพรวมสาระการเรียนรู้ในระบบ -->
-                  <a href="javascript:void(0)" onclick="switchTab('lessons')" class="thairath-drop-link thairath-submenu-link" id="nav-lessons" style="padding: 7px 12px;">
-                    <div class="drop-icon bg-teal-light" style="width: 30px; height: 30px; font-size: 0.85rem;"><i class="fa-solid fa-table-cells-large"></i></div>
-                    <div class="drop-text">
-                      <span class="drop-title" style="font-size: 0.82rem; color: #00b400;">ดูภาพรวมทั้ง 2 หน่วยการเรียนรู้</span>
-                      <span class="drop-desc" style="font-size: 0.72rem;">เปิดหน้าสาระการเรียนรู้และแผนการจัดการเรียนรู้</span>
-                    </div>
-                    <i class="fa-solid fa-arrow-right text-emerald-500" style="font-size: 0.72rem; margin-left: auto;"></i>
-                  </a>
-                </div>
-              </div>
-              <a href="javascript:void(0)" onclick="switchTab('ebook')" class="thairath-drop-link" id="nav-ebook">
-                <div class="drop-icon bg-teal-light"><i class="fa-solid fa-book-bookmark"></i></div>
-                <div class="drop-text">
-                  <span class="drop-title">E-Book หนังสือเรียน</span>
-                  <span class="drop-desc">หนังสือเรียนฉบับจริง เปิดอ่านออนไลน์และข้ามหน้า</span>
-                </div>
-              </a>
-              <a href="javascript:void(0)" onclick="switchTab('media')" class="thairath-drop-link" id="nav-media">
-                <div class="drop-icon bg-rose-light"><i class="fa-solid fa-circle-play"></i></div>
-                <div class="drop-text">
-                  <span class="drop-title">สื่อวิดีทัศน์ & สไลด์ประกอบการสอน</span>
-                  <span class="drop-desc">วิดีทัศน์การสอน และสื่อนำเสนอสรุปเนื้อหาบทเรียน</span>
-                </div>
-              </a>
-              <a href="javascript:void(0)" onclick="switchTab('ct-tools')" class="thairath-drop-link" id="nav-ct-tools">
-                <div class="drop-icon bg-purple-light"><i class="fa-solid fa-flask"></i></div>
-                <div class="drop-text">
-                  <span class="drop-title">CS Lab ปฏิบัติการคำนวณ</span>
-                  <span class="drop-desc">เครื่องมือ Decomposition Solver 4 มิติ และวงจร SDLC</span>
-                </div>
-              </a>
-            </div>
-          </li>
-
-          <!-- 3. ภาระงาน & โครงงาน (Tasks Dropdown) -->
-          <li class="thairath-cat-dropdown">
-            <button class="thairath-cat-dropbtn" id="nav-group-tasks" type="button" onclick="toggleNavDropdown(this, event)">
-              <i class="fa-solid fa-list-check"></i>
-              <span>ภาระงาน & โครงงาน</span>
-              <i class="fa-solid fa-chevron-down drop-arrow"></i>
-            </button>
-            <div class="thairath-dropdown-panel">
-              <a href="javascript:void(0)" onclick="switchTab('worksheets'); if (typeof setWorksheetCategory === 'function') setWorksheetCategory('theory');" class="thairath-drop-link" id="nav-worksheets">
-                <div class="drop-icon bg-blue-light"><i class="fa-solid fa-file-lines text-sky-600"></i></div>
-                <div class="drop-text">
-                  <span class="drop-title">คลังใบงานทฤษฎี & โครงงาน (6 ฉบับเดิม)</span>
-                  <span class="drop-desc">ใบงานมาตรฐาน 6 ฉบับ ครบ 2 หน่วยการเรียนรู้ (เต็ม 10 คะแนนทุกใบงาน)</span>
-                </div>
-              </a>
-              <a href="javascript:void(0)" onclick="switchTab('worksheets'); if (typeof setWorksheetCategory === 'function') setWorksheetCategory('practical');" class="thairath-drop-link" id="nav-worksheets-practical">
-                <div class="drop-icon bg-emerald-light"><i class="fa-solid fa-laptop-code text-emerald-600"></i></div>
-                <div class="drop-text">
-                  <span class="drop-title">ใบงานแบบปฏิบัติ (Flowchart Lab 3 ชุด)</span>
-                  <span class="drop-desc">ฝึกเขียนผังงานด้วย Flowgorithm 30 โจทย์ปัญหา พร้อมส่งไฟล์ .fprg หรือรูป</span>
-                </div>
-              </a>
-              <a href="javascript:void(0)" onclick="switchTab('assignments')" class="thairath-drop-link" id="nav-assignments">
-                <div class="drop-icon bg-purple-light" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                <div class="drop-text">
-                  <span class="drop-title">ระบบส่งภาระงานและโครงงาน</span>
-                  <span class="drop-desc">ส่งไฟล์ผลงาน (ขนาดสูงสุด 25MB) หรือแนบลิงก์ผลงาน</span>
-                </div>
-              </a>
-            </div>
-          </li>
-
-          <!-- 4. วัดผล & สถิติ (Assessments Dropdown) -->
-          <li class="thairath-cat-dropdown">
-            <button class="thairath-cat-dropbtn" id="nav-group-eval" type="button" onclick="toggleNavDropdown(this, event)">
-              <i class="fa-solid fa-chart-column"></i>
-              <span>วัดผล & สถิติ</span>
-              <i class="fa-solid fa-chevron-down drop-arrow"></i>
-            </button>
-            <div class="thairath-dropdown-panel">
-              <a href="javascript:void(0)" onclick="switchTab('quizzes')" class="thairath-drop-link" id="nav-quizzes">
-                <div class="drop-icon bg-amber-light"><i class="fa-solid fa-clipboard-check"></i></div>
-                <div class="drop-text">
-                  <span class="drop-title">คลังแบบทดสอบออนไลน์</span>
-                  <span class="drop-desc">แบบทดสอบย่อย, ข้อสอบกลางภาค และปลายภาค ตรวจอัตโนมัติ</span>
-                </div>
-              </a>
-              <a href="javascript:void(0)" onclick="switchTab('analytics')" class="thairath-drop-link" id="nav-analytics">
-                <div class="drop-icon bg-indigo-light"><i class="fa-solid fa-chart-line"></i></div>
-                <div class="drop-text">
-                  <span class="drop-title">สถิติ & อันดับคะแนน</span>
-                  <span class="drop-desc">แผนภูมิวิเคราะห์ผลการเรียน และทำเนียบผลการเรียนรู้ (Leaderboard)</span>
-                </div>
-              </a>
-            </div>
-          </li>
-
-          <!-- 5. ปรึกษาครู (Direct Link) -->
+          <!-- 2. บทเรียน & สไลด์ -->
           <li>
-            <a href="javascript:void(0)" onclick="switchTab('contact')" class="thairath-cat-item" id="nav-contact">
-              <i class="fa-solid fa-comments"></i> ปรึกษาครู
+            <a href="javascript:void(0)" onclick="switchTab('lessons')" class="thairath-cat-item" id="nav-lessons">
+              <i class="fa-solid fa-book-open"></i> บทเรียน &amp; สไลด์
             </a>
           </li>
 
-          <!-- 6. ระบบจัดการ (Dropdown - Teacher & Admin) -->
-          <li class="thairath-cat-dropdown drop-right" id="nav-group-management-li">
-            <button class="thairath-cat-dropbtn" id="nav-group-management" type="button" onclick="toggleNavDropdown(this, event)">
-              <i class="fa-solid fa-sliders"></i>
-              <span>ระบบจัดการ</span>
-              <i class="fa-solid fa-chevron-down drop-arrow"></i>
-            </button>
-            <div class="thairath-dropdown-panel">
-              <a href="javascript:void(0)" onclick="switchTab('teacher')" class="thairath-drop-link" id="nav-teacher">
-                <div class="drop-icon bg-amber-light"><i class="fa-solid fa-chalkboard-user"></i></div>
-                <div class="drop-text">
-                  <span class="drop-title">ระบบจัดการการเรียนรู้สำหรับครูผู้สอน</span>
-                  <span class="drop-desc">ประเมินภาระงานตามเกณฑ์รูบริก บันทึกข้อเสนอแนะ และสร้างประกาศ</span>
-                </div>
-              </a>
-              <a href="javascript:void(0)" onclick="switchTab('admin')" class="thairath-drop-link" id="nav-admin">
-                <div class="drop-icon bg-rose-light"><i class="fa-solid fa-user-shield"></i></div>
-                <div class="drop-text">
-                  <span class="drop-title">ระบบบริหารจัดการสำหรับผู้ดูแลระบบ (Admin Center)</span>
-                  <span class="drop-desc">จัดการสิทธิ์ผู้ใช้งาน และระบบฐานข้อมูล Supabase Cloud</span>
-                </div>
-              </a>
-            </div>
+          <!-- 3. คลังใบงาน & Lab -->
+          <li>
+            <a href="javascript:void(0)" onclick="switchTab('worksheets')" class="thairath-cat-item" id="nav-worksheets">
+              <i class="fa-solid fa-file-pen"></i> ใบงาน &amp; Lab
+            </a>
+          </li>
+
+          <!-- 4. ส่งการบ้าน -->
+          <li>
+            <a href="javascript:void(0)" onclick="switchTab('assignments')" class="thairath-cat-item" id="nav-assignments">
+              <i class="fa-solid fa-cloud-arrow-up"></i> ส่งการบ้าน
+            </a>
+          </li>
+
+          <!-- 5. ทำแบบทดสอบ -->
+          <li>
+            <a href="javascript:void(0)" onclick="switchTab('quizzes')" class="thairath-cat-item" id="nav-quizzes">
+              <i class="fa-solid fa-clipboard-check"></i> ทำแบบทดสอบ
+            </a>
+          </li>
+
+          <!-- 6. คะแนน & อันดับ -->
+          <li>
+            <a href="javascript:void(0)" onclick="switchTab('analytics')" class="thairath-cat-item" id="nav-analytics">
+              <i class="fa-solid fa-chart-line"></i> คะแนน &amp; อันดับ
+            </a>
+          </li>
+
+          <!-- 7. ปรึกษาครู -->
+          <li>
+            <a href="javascript:void(0)" onclick="switchTab('contact')" class="thairath-cat-item" id="nav-contact">
+              <i class="fa-solid fa-comments"></i> ถามครู
+            </a>
+          </li>
+
+          <!-- 8. CS Lab (ห้องปฏิบัติการจำลอง) -->
+          <li>
+            <a href="javascript:void(0)" onclick="switchTab('ct-tools')" class="thairath-cat-item" id="nav-ct-tools">
+              <i class="fa-solid fa-flask"></i> CS Lab
+            </a>
+          </li>
+
+          <!-- 9. แดชบอร์ดครูผู้สอน (แสดงเฉพาะครู/admin) -->
+          <li id="nav-teacher-li" style="display: none;">
+            <a href="javascript:void(0)" onclick="switchTab('teacher')" class="thairath-cat-item" id="nav-teacher" style="color: #f59e0b; font-weight: 700;">
+              <i class="fa-solid fa-chalkboard-user"></i> แดชบอร์ดครู
+            </a>
+          </li>
+
+          <!-- 10. จัดการระบบสำหรับ Admin (แสดงเฉพาะ admin) -->
+          <li id="nav-admin-li" style="display: none;">
+            <a href="javascript:void(0)" onclick="switchTab('admin')" class="thairath-cat-item" id="nav-admin" style="color: #ef4444; font-weight: 700;">
+              <i class="fa-solid fa-user-shield"></i> จัดการระบบ
+            </a>
           </li>
 
         </ul>
@@ -403,778 +274,355 @@
       <!-- ====================================================================
            TAB 1: HOME (HERO & OVERVIEW)
            ==================================================================== -->
+      <!-- ====================================================================
+           TAB 1: HOME (STUDENT-CENTRIC PORTAL DASHBOARD)
+           ==================================================================== -->
+      <!-- ====================================================================
+           TAB 1: HOME (STUDENT-CENTRIC PORTAL DASHBOARD)
+           ==================================================================== -->
       <section id="tab-home" class="tab-content">
         
-        <!-- STUDENT QUICK ACCESS HUB (ศูนย์กลางการเรียนรู้ด่วน - เข้าถึงง่ายที่สุดสำหรับนักเรียน) -->
-        <section class="student-quick-hub-section" style="padding: 16px 0 10px 0; background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, transparent 100%);">
-          <div class="container">
+        <div class="container" style="padding-top: 14px;">
+          
+          <!-- 1. FULL-WIDTH TOP BILLBOARD SLIDER (หัวเว็บสไลเดอร์ใหญ่ด้านบนสุด ตามรูปที่ผู้ใช้เลือก) -->
+          <div class="thairath-billboard-wrap" id="billboard-slider-container" onmouseenter="pauseBillboardSlider()" onmouseleave="resumeBillboardSlider()" style="margin-bottom: 22px;">
             
-            <!-- Student Personalized / Welcome Banner -->
-            <div id="student-welcome-banner" style="background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%); color: #ffffff; border-radius: 20px; padding: 22px 26px; margin-bottom: 20px; border: 1.5px solid rgba(16, 185, 129, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.14); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
-              <div style="display: flex; align-items: center; gap: 16px;">
-                <div style="width: 54px; height: 54px; border-radius: 16px; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0;">
-                  <span id="student-banner-icon">🎓</span>
-                </div>
-                <div>
-                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
-                    <span id="student-banner-badge" style="background: rgba(16, 185, 129, 0.25); color: #6ee7b7; font-size: 0.72rem; font-weight: 800; padding: 3px 10px; border-radius: 999px; letter-spacing: 0.5px;">
-                      ระบบการเรียนรู้ออนไลน์ ม.4
-                    </span>
-                    <span style="font-size: 0.74rem; color: #94a3b8;">ว 4.2 ม.4/1 • ครูปณิฏฐา บุญยงค์</span>
-                  </div>
-                  <h2 id="student-banner-title" style="font-family: 'Kanit', sans-serif; font-size: 1.35rem; font-weight: 800; margin: 0; color: #ffffff; line-height: 1.3;">
-                    ศูนย์การเรียนรู้วิทยาการคำนวณ ม.4 (CS-M4)
-                  </h2>
-                  <p id="student-banner-sub" style="font-size: 0.86rem; color: #cbd5e1; margin: 4px 0 0 0;">
-                    เลือก 4 เมนูหลักด้านล่าง เพื่อเข้าสู่บทเรียน ทำใบงาน หรือทำแบบทดสอบได้ทันทีในคลิกเดียว
-                  </p>
-                </div>
-              </div>
-
-              <!-- Quick login / student status -->
-              <div id="student-banner-actions" style="display: flex; align-items: center; gap: 10px;">
-                <button type="button" onclick="openLoginModal()" id="btn-banner-login" class="btn" style="background: #10b981; color: #ffffff; font-weight: 700; padding: 10px 20px; border-radius: 12px; font-size: 0.9rem; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35); display: inline-flex; align-items: center; gap: 8px;">
-                  <i class="fa-solid fa-arrow-right-to-bracket"></i> เข้าสู่ระบบนักเรียน (เลข 5 หลัก)
-                </button>
-              </div>
-            </div>
-
-            <!-- 4 ESSENTIAL ACTION TILES (4 ประตูหลักที่นักเรียนใช้งานบ่อยที่สุด) -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 24px;">
+            <!-- Billboard Slider Track -->
+            <div class="thairath-billboard-track" id="billboard-track">
               
-              <!-- Tile 1: บทเรียนดิจิทัล & สไลด์ -->
-              <div class="glass-card-hover" style="background: var(--surface-color); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 6px 20px rgba(0,0,0,0.04);">
-                <div>
-                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                    <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.12); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-                      <i class="fa-solid fa-book-open"></i>
+              <!-- BILLBOARD SLIDE 1: แนวคิดเชิงคำนวณ & SDLC 5 ขั้นตอน -->
+              <div class="billboard-slide active" style="background: linear-gradient(135deg, #091224 0%, #112240 50%, #0a3d24 100%);">
+                <div class="billboard-slide-grid">
+                  <div class="billboard-visual-col">
+                    <div class="billboard-badge-glow">
+                      <img src="img/LOGOprofile.gif" alt="CS-M4 Logo" class="billboard-logo-img" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid #00b400; flex-shrink: 0;" />
+                      <div class="billboard-platform-disc">
+                        <i class="fa-solid fa-microchip disc-icon"></i>
+                        <i class="fa-solid fa-code disc-icon"></i>
+                        <i class="fa-solid fa-network-wired disc-icon"></i>
+                      </div>
                     </div>
-                    <span style="font-size: 0.72rem; font-weight: 800; background: rgba(16, 185, 129, 0.1); color: #059669; padding: 3px 10px; border-radius: 999px;">
-                      2 หน่วยการเรียนรู้
-                    </span>
                   </div>
-                  <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
-                    1. บทเรียนดิจิทัล &amp; สไลด์
-                  </h3>
-                  <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
-                    ศึกษาเนื้อหาบทเรียนหน่วยที่ 1-2 พร้อมภาพเวกเตอร์ และสไลด์บรรยายสรุปสาระสำคัญ
-                  </p>
+                  <div class="billboard-content-col">
+                    <div class="billboard-top-tag">
+                      <span class="billboard-tag-live"><i class="fa-solid fa-circle-dot mr-1 text-emerald-400"></i> ประเด็นสำคัญการเรียนรู้ ม.4</span>
+                      <span class="billboard-tag-term">ว 4.2 ม.4/1 • หลักสูตรแกนกลาง</span>
+                    </div>
+                    <h2 class="billboard-title">
+                      จากรากฐานแนวคิดเชิงคำนวณ สู่การพัฒนาโครงงานอย่างยั่งยืน
+                    </h2>
+                    <p class="billboard-subtitle">
+                      เจาะลึก 4 องค์ประกอบ Computational Thinking บูรณาการวงจร SDLC 5 ขั้นตอน พร้อมจัดทำรายงานโครงงาน 5 บทมาตรฐานวิชาการ
+                    </p>
+                    <div class="billboard-meta-row">
+                      <span><i class="fa-solid fa-user-pen mr-1 text-emerald-400"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
+                      <span><i class="fa-solid fa-book-bookmark mr-1 text-amber-400"></i> หนังสือเรียนอิเล็กทรอนิกส์</span>
+                      <button onclick="switchTab('lessons')" class="billboard-btn-action">
+                        เข้าสู่บทเรียน <i class="fa-solid fa-arrow-right ml-1"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                  <a href="unit1.html" target="_blank" style="display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: rgba(16, 185, 129, 0.1); color: #047857; border-radius: 10px; font-weight: 700; font-size: 0.82rem; text-decoration: none;">
-                    <span><i class="fa-solid fa-graduation-cap mr-1.5"></i> เข้าเรียน หน่วยที่ 1 (แนวคิดเชิงคำนวณ)</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
-                  </a>
-                  <a href="unit2.html" target="_blank" style="display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: rgba(2, 132, 199, 0.1); color: #0284c7; border-radius: 10px; font-weight: 700; font-size: 0.82rem; text-decoration: none;">
-                    <span><i class="fa-solid fa-laptop-code mr-1.5"></i> เข้าเรียน หน่วยที่ 2 (พัฒนาโครงงาน)</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
-                  </a>
-                  <button type="button" onclick="openSlideDeck(1)" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 14px; background: #f59e0b; color: white; border-radius: 10px; font-weight: 700; font-size: 0.82rem; border: none; cursor: pointer; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);">
-                    <i class="fa-solid fa-file-powerpoint"></i> สไลด์ประกอบการสอน (Google Slides ↗)
-                  </button>
-                </div>
+                <div class="billboard-ambient-mesh"></div>
               </div>
 
-              <!-- Tile 2: คลังใบงาน & ดาวน์โหลด PDF -->
-              <div class="glass-card-hover" style="background: var(--surface-color); border: 2px solid rgba(2, 132, 199, 0.3); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 6px 20px rgba(0,0,0,0.04);">
-                <div>
-                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                    <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(2, 132, 199, 0.12); color: #0284c7; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-                      <i class="fa-solid fa-file-pen"></i>
+              <!-- BILLBOARD SLIDE 2: โครงงานคอมพิวเตอร์ 5 บท -->
+              <div class="billboard-slide" style="background: linear-gradient(135deg, #1a1205 0%, #3d2305 50%, #0d2818 100%);">
+                <div class="billboard-slide-grid">
+                  <div class="billboard-visual-col">
+                    <div class="billboard-badge-glow glow-amber">
+                      <i class="fa-solid fa-diagram-project billboard-main-icon" style="color: var(--accent-amber);"></i>
+                      <div class="billboard-platform-disc" style="border-color: rgba(217, 119, 6, 0.4);">
+                        <i class="fa-solid fa-file-lines disc-icon" style="color: #fbbf24;"></i>
+                        <i class="fa-solid fa-chart-gantt disc-icon" style="color: #fbbf24;"></i>
+                        <i class="fa-solid fa-cloud-arrow-up disc-icon" style="color: #fbbf24;"></i>
+                      </div>
                     </div>
-                    <span style="font-size: 0.72rem; font-weight: 800; background: rgba(2, 132, 199, 0.1); color: #0284c7; padding: 3px 10px; border-radius: 999px;">
-                      6 ใบงาน (A4 / PDF)
-                    </span>
                   </div>
-                  <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
-                    2. ใบงาน &amp; ส่งการบ้าน
-                  </h3>
-                  <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
-                    ดาวน์โหลดใบงาน PDF ขนาด A4 รองรับการเขียนบน iPad / GoodNotes พร้อมระบบส่งผลงาน
-                  </p>
+                  <div class="billboard-content-col">
+                    <div class="billboard-top-tag">
+                      <span class="billboard-tag-live tag-amber"><i class="fa-solid fa-star mr-1"></i> โครงงานวิทยาการคำนวณ</span>
+                      <span class="billboard-tag-term">ระบบส่งงานออนไลน์</span>
+                    </div>
+                    <h2 class="billboard-title">
+                      คู่มือจัดทำเค้าโครงโครงงาน 5 บท &amp; ระบบส่งงานออนไลน์
+                    </h2>
+                    <p class="billboard-subtitle">
+                      ดาวน์โหลดแบบฟอร์มเอกสารโครงงาน 5 บท เทมเพลตสไลด์นำเสนอ และส่งไฟล์ผ่านระบบออนไลน์ ตรวจสอบสถานะการตรวจได้ทันที
+                    </p>
+                    <div class="billboard-meta-row">
+                      <span><i class="fa-solid fa-file-pdf mr-1 text-amber-400"></i> ดาวน์โหลดแบบฟอร์ม</span>
+                      <span><i class="fa-solid fa-cloud-arrow-up mr-1 text-emerald-400"></i> แนบไฟล์ / Canva</span>
+                      <button onclick="switchTab('assignments')" class="billboard-btn-action" style="background-color: var(--accent-amber);">
+                        ไปยังหน้าส่งงาน <i class="fa-solid fa-arrow-right ml-1"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                  <a href="worksheets/all_worksheets_m4.pdf" target="_blank" download="รวมใบงาน_วิทยาการคำนวณ_ม4.pdf" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 14px; background: #0284c7; color: white; border-radius: 10px; font-weight: 700; font-size: 0.82rem; text-decoration: none; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.25);">
-                    <i class="fa-solid fa-file-arrow-down"></i> โหลด PDF รวม 6 ฉบับ (สำหรับ iPad)
-                  </a>
-                  <button type="button" onclick="switchTab('worksheets')" style="display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: var(--surface-secondary); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 10px; font-weight: 700; font-size: 0.82rem; cursor: pointer;">
-                    <span><i class="fa-solid fa-layer-group mr-1.5 text-sky-600"></i> ดูคลังใบงานแยกฉบับ (1.1 - 2.3)</span>
-                    <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
-                  </button>
-                  <button type="button" onclick="switchTab('assignments')" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 14px; background: rgba(16, 185, 129, 0.12); color: #059669; border-radius: 10px; font-weight: 700; font-size: 0.82rem; border: 1px solid #10b981; cursor: pointer;">
-                    <i class="fa-solid fa-cloud-arrow-up"></i> ส่งผลงานออนไลน์ (แนบไฟล์/ลิงก์)
-                  </button>
-                </div>
+                <div class="billboard-ambient-mesh"></div>
               </div>
 
-              <!-- Tile 3: แบบทดสอบ & สอบเก็บคะแนน -->
-              <div class="glass-card-hover" style="background: var(--surface-color); border: 2px solid rgba(245, 158, 11, 0.3); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 6px 20px rgba(0,0,0,0.04);">
-                <div>
-                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                    <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(245, 158, 11, 0.12); color: #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-                      <i class="fa-solid fa-clipboard-check"></i>
+              <!-- BILLBOARD SLIDE 3: Interactive CS Lab 4 มิติ -->
+              <div class="billboard-slide" style="background: linear-gradient(135deg, #051a24 0%, #0d3244 50%, #0a3d24 100%);">
+                <div class="billboard-slide-grid">
+                  <div class="billboard-visual-col">
+                    <div class="billboard-badge-glow glow-cyan">
+                      <i class="fa-solid fa-flask-vial billboard-main-icon" style="color: #38bdf8;"></i>
+                      <div class="billboard-platform-disc" style="border-color: rgba(56, 189, 248, 0.4);">
+                        <i class="fa-solid fa-calculator disc-icon" style="color: #7dd3fc;"></i>
+                        <i class="fa-solid fa-network-wired disc-icon" style="color: #7dd3fc;"></i>
+                        <i class="fa-solid fa-microchip disc-icon" style="color: #7dd3fc;"></i>
+                      </div>
                     </div>
-                    <span style="font-size: 0.72rem; font-weight: 800; background: rgba(245, 158, 11, 0.1); color: #d97706; padding: 3px 10px; border-radius: 999px;">
-                      ตรวจผลอัตโนมัติ
-                    </span>
                   </div>
-                  <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
-                    3. ห้องสอบออนไลน์
-                  </h3>
-                  <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
-                    แบบทดสอบก่อนเรียน ท้ายหน่วย กลางภาค และปลายภาค บันทึกคะแนนลง Supabase เรียลไทม์
-                  </p>
+                  <div class="billboard-content-col">
+                    <div class="billboard-top-tag">
+                      <span class="billboard-tag-live tag-cyan"><i class="fa-solid fa-flask mr-1"></i> ห้องปฏิบัติการเสมือน</span>
+                      <span class="billboard-tag-term">Interactive CS Lab</span>
+                    </div>
+                    <h2 class="billboard-title">
+                      ทดลองแก้ปัญหา 4 มิติ และโปรแกรมจำลองวงจร SDLC
+                    </h2>
+                    <p class="billboard-subtitle">
+                      ฝึกทักษะการคิดเชิงคำนวณผ่านเครื่องมือจำลองปัญหา การวางแผน Gantt Chart และโปรแกรมจำลองผังงาน Flowgorithm ออนไลน์
+                    </p>
+                    <div class="billboard-meta-row">
+                      <span><i class="fa-solid fa-microchip mr-1 text-cyan-400"></i> Simulation Tool</span>
+                      <span><i class="fa-solid fa-puzzle-piece mr-1 text-emerald-400"></i> 4 กิจกรรมปฏิบัติการ</span>
+                      <button onclick="switchTab('ct-tools')" class="billboard-btn-action btn-cyan">
+                        เปิด CS Lab <i class="fa-solid fa-arrow-right ml-1"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                  <button type="button" onclick="switchTab('quizzes')" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 14px; background: #f59e0b; color: white; border-radius: 10px; font-weight: 700; font-size: 0.85rem; border: none; cursor: pointer; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);">
-                    <i class="fa-solid fa-pen-to-square"></i> เข้าสู่ห้องสอบออนไลน์ (เลือกชุดข้อสอบ)
-                  </button>
-                  <button type="button" onclick="startDirectQuiz('quiz-pre-unit1')" style="display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: rgba(245, 158, 11, 0.1); color: #b45309; border-radius: 10px; font-weight: 700; font-size: 0.82rem; border: none; cursor: pointer;">
-                    <span><i class="fa-solid fa-play mr-1.5"></i> ทำแบบทดสอบก่อนเรียน หน่วยที่ 1</span>
-                    <i class="fa-solid fa-chevron-right" style="font-size: 0.75rem;"></i>
-                  </button>
-                </div>
+                <div class="billboard-ambient-mesh"></div>
               </div>
 
-              <!-- Tile 4: ตรวจสอบคะแนน & สถิติ -->
-              <div class="glass-card-hover" style="background: var(--surface-color); border: 2px solid rgba(99, 102, 241, 0.3); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 6px 20px rgba(0,0,0,0.04);">
-                <div>
-                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                    <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(99, 102, 241, 0.12); color: #6366f1; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-                      <i class="fa-solid fa-chart-line"></i>
+              <!-- BILLBOARD SLIDE 4: คลังข้อสอบกลางภาค & ปลายภาค (ตรงตามรูปที่ผู้ใช้ต้องการ) -->
+              <div class="billboard-slide" style="background: linear-gradient(135deg, #2b0810 0%, #4c0d1b 50%, #0e2b1b 100%);">
+                <div class="billboard-slide-grid">
+                  <div class="billboard-visual-col">
+                    <div class="billboard-badge-glow glow-rose">
+                      <i class="fa-solid fa-trophy billboard-main-icon" style="color: #fbbf24;"></i>
+                      <div class="billboard-platform-disc" style="border-color: rgba(208, 0, 0, 0.4);">
+                        <i class="fa-solid fa-list-check disc-icon" style="color: #f87171;"></i>
+                        <i class="fa-solid fa-award disc-icon" style="color: #f87171;"></i>
+                        <i class="fa-solid fa-chart-line disc-icon" style="color: #f87171;"></i>
+                      </div>
                     </div>
-                    <span style="font-size: 0.72rem; font-weight: 800; background: rgba(99, 102, 241, 0.1); color: #4f46e5; padding: 3px 10px; border-radius: 999px;">
-                      สถิติ &amp; ลำดับคะแนน
-                    </span>
                   </div>
-                  <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
-                    4. คะแนนของฉัน &amp; สถิติ
-                  </h3>
-                  <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
-                    ดูคะแนนสอบของตนเอง ตรวจสอบอันดับบน Leaderboard และสถิติภาพรวมการเรียน
-                  </p>
+                  <div class="billboard-content-col">
+                    <div class="billboard-top-tag">
+                      <span class="billboard-tag-live tag-rose"><i class="fa-solid fa-square-check mr-1"></i> การวัดและประเมินผลการเรียนรู้ ม.4</span>
+                      <span class="billboard-tag-term">ระบบตรวจข้อสอบอัตโนมัติ 100%</span>
+                    </div>
+                    <h2 class="billboard-title">
+                      คลังข้อสอบกลางภาค &amp; ปลายภาค 20 ข้อ พร้อมเฉลยละเอียดทันที
+                    </h2>
+                    <p class="billboard-subtitle">
+                      ทดสอบความรู้ครบถ้วน 2 หน่วยการเรียนรู้ ทราบผลคะแนนเรียลไทม์ บันทึกข้อมูลเข้าระบบอัตโนมัติ และอัปเดตตารางคะแนนทันที
+                    </p>
+                    <div class="billboard-meta-row">
+                      <span><i class="fa-solid fa-user-pen mr-1 text-emerald-400"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
+                      <span><i class="fa-solid fa-stopwatch mr-1 text-amber-400"></i> จับเวลาและเฉลยรายข้อ</span>
+                      <button onclick="switchTab('quizzes')" class="billboard-btn-action btn-rose">
+                        เริ่มทำแบบทดสอบ <i class="fa-solid fa-arrow-right ml-1"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                  <button type="button" onclick="switchTab('analytics')" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 14px; background: #6366f1; color: white; border-radius: 10px; font-weight: 700; font-size: 0.82rem; border: none; cursor: pointer; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);">
-                    <i class="fa-solid fa-trophy"></i> ดูอันดับและคะแนน (Leaderboard)
-                  </button>
-                  <button type="button" onclick="switchTab('contact')" style="display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: var(--surface-secondary); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 10px; font-weight: 700; font-size: 0.82rem; cursor: pointer;">
-                    <span><i class="fa-solid fa-comments mr-1.5 text-indigo-600"></i> สอบถาม / ปรึกษาครูปณิฏฐา</span>
-                    <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
-                  </button>
-                </div>
+                <div class="billboard-ambient-mesh"></div>
               </div>
 
             </div>
+
+            <!-- Billboard Chevron Arrows (< and >) -->
+            <button class="billboard-arrow billboard-arrow-left" onclick="prevBillboardSlide()" aria-label="สไลด์ก่อนหน้า" title="สไลด์ก่อนหน้า">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="billboard-arrow billboard-arrow-right" onclick="nextBillboardSlide()" aria-label="สไลด์ถัดไป" title="สไลด์ถัดไป">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+            <!-- Billboard Centered Dots Indicator -->
+            <div class="billboard-dots-wrap" id="billboard-dots">
+              <button class="billboard-dot active" onclick="goToBillboardSlide(0)" aria-label="สไลด์ที่ 1"></button>
+              <button class="billboard-dot" onclick="goToBillboardSlide(1)" aria-label="สไลด์ที่ 2"></button>
+              <button class="billboard-dot" onclick="goToBillboardSlide(2)" aria-label="สไลด์ที่ 3"></button>
+              <button class="billboard-dot" onclick="goToBillboardSlide(3)" aria-label="สไลด์ที่ 4"></button>
+            </div>
+
+            <!-- Floating Pill on Bottom-Right (สรุปบทเรียนเด่น) -->
+            <button class="billboard-ai-pill" onclick="openEbookModal()" title="เปิดดูสรุปเนื้อหาสำคัญและ E-Book">
+              <i class="fa-solid fa-wand-magic-sparkles text-emerald-400 mr-1"></i>
+              <span>✦ สรุปบทเรียนเด่น CS-M4</span>
+              <i class="fa-solid fa-chevron-right ml-1 text-xs opacity-75"></i>
+            </button>
 
           </div>
-        </section>
-        
-        <!-- THAIRATH STYLE FRONTPAGE SPOTLIGHT & TRENDING GRID -->
-        <section style="padding: 24px 0 20px 0;">
-          <div class="container">
-            <!-- FULL-WIDTH TOP BILLBOARD SLIDER (แบนเนอร์สไลเดอร์ใหญ่ด้านบนสุด) -->
-            <div class="thairath-billboard-wrap" id="billboard-slider-container" onmouseenter="pauseBillboardSlider()" onmouseleave="resumeBillboardSlider()">
-              
-              <!-- Billboard Slider Track -->
-              <div class="thairath-billboard-track" id="billboard-track">
-                
-                <!-- BILLBOARD SLIDE 1: แนวคิดเชิงคำนวณ & SDLC 5 ขั้นตอน -->
-                <div class="billboard-slide active" style="background: linear-gradient(135deg, #091224 0%, #112240 50%, #0a3d24 100%);">
-                  <div class="billboard-slide-grid">
-                    <div class="billboard-visual-col">
-                      <div class="billboard-badge-glow">
-                        <img src="img/LOGOprofile.gif" alt="CS-M4 Logo" class="billboard-logo-img" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid #00b400; flex-shrink: 0;" />
-                        <div class="billboard-platform-disc">
-                          <i class="fa-solid fa-microchip disc-icon"></i>
-                          <i class="fa-solid fa-code disc-icon"></i>
-                          <i class="fa-solid fa-network-wired disc-icon"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="billboard-content-col">
-                      <div class="billboard-top-tag">
-                        <span class="billboard-tag-live"><i class="fa-solid fa-circle-dot mr-1 text-emerald-400"></i> ประเด็นสำคัญการเรียนรู้ ม.4</span>
-                      </div>
-                      <h2 class="billboard-title">
-                        จากรากฐานแนวคิดเชิงคำนวณ สู่การพัฒนาโครงงานอย่างยั่งยืน
-                      </h2>
-                      <p class="billboard-subtitle">
-                        เจาะลึก 4 องค์ประกอบ Computational Thinking บูรณาการวงจร SDLC 5 ขั้นตอน พร้อมจัดทำรายงานโครงงาน 5 บทมาตรฐานวิชาการ
-                      </p>
-                      <div class="billboard-meta-row">
-                        <span><i class="fa-solid fa-user-pen mr-1 text-emerald-400"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
-                        <span><i class="fa-solid fa-book-bookmark mr-1 text-amber-400"></i> หนังสือเรียนอิเล็กทรอนิกส์</span>
-                        <span><i class="fa-solid fa-bolt mr-1 text-emerald-400"></i> บันทึกลง Supabase เรียลไทม์</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="billboard-ambient-mesh"></div>
-                </div>
 
-                <!-- BILLBOARD SLIDE 2: โครงงานคอมพิวเตอร์ 5 บท -->
-                <div class="billboard-slide" style="background: linear-gradient(135deg, #1a1205 0%, #3d2305 50%, #0d2818 100%);">
-                  <div class="billboard-slide-grid">
-                    <div class="billboard-visual-col">
-                      <div class="billboard-badge-glow glow-amber">
-                        <i class="fa-solid fa-diagram-project billboard-main-icon" style="color: var(--accent-amber);"></i>
-                        <div class="billboard-platform-disc" style="border-color: rgba(217, 119, 6, 0.4);">
-                          <i class="fa-solid fa-file-lines disc-icon" style="color: #fbbf24;"></i>
-                          <i class="fa-solid fa-chart-gantt disc-icon" style="color: #fbbf24;"></i>
-                          <i class="fa-solid fa-cloud-arrow-up disc-icon" style="color: #fbbf24;"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="billboard-content-col">
-                      <div class="billboard-top-tag">
-                        <span class="billboard-tag-live tag-amber"><i class="fa-solid fa-star mr-1"></i> โครงงานวิทยาการคำนวณ</span>
-                        <span class="billboard-tag-term">กำหนดส่งเค้าโครง 25 ก.ย. 2569</span>
-                      </div>
-                      <h2 class="billboard-title">
-                        คู่มือจัดทำเค้าโครงโครงงาน 5 บท & ระบบส่งงานออนไลน์
-                      </h2>
-                      <p class="billboard-subtitle">
-                        ดาวน์โหลดแบบฟอร์มเค้าโครงโครงงาน 5 บทมาตรฐาน สพฐ. ศึกษาเกณฑ์ประเมิน Rubric และอัปโหลดผลงานตรวจได้ทันที
-                      </p>
-                      <div class="billboard-meta-row">
-                        <span><i class="fa-solid fa-user-pen mr-1 text-emerald-400"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
-                        <span><i class="fa-solid fa-file-lines mr-1 text-amber-400"></i> ใบงาน 6 ฉบับ (หน่วยละ 3 ใบงาน • เต็ม 10 คะแนน)</span>
-                        <button onclick="switchTab('worksheets')" class="billboard-btn-action">
-                          เปิดดูเอกสารโครงงาน <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="billboard-ambient-mesh"></div>
-                </div>
-
-                <!-- BILLBOARD SLIDE 3: Interactive CS Lab 4 มิติ -->
-                <div class="billboard-slide" style="background: linear-gradient(135deg, #022030 0%, #063852 50%, #044b36 100%);">
-                  <div class="billboard-slide-grid">
-                    <div class="billboard-visual-col">
-                      <div class="billboard-badge-glow glow-cyan">
-                        <i class="fa-solid fa-flask-vial billboard-main-icon" style="color: #38bdf8;"></i>
-                        <div class="billboard-platform-disc" style="border-color: rgba(2, 132, 199, 0.4);">
-                          <i class="fa-solid fa-brain disc-icon" style="color: #38bdf8;"></i>
-                          <i class="fa-solid fa-sliders disc-icon" style="color: #38bdf8;"></i>
-                          <i class="fa-solid fa-clock-rotate-left disc-icon" style="color: #38bdf8;"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="billboard-content-col">
-                      <div class="billboard-top-tag">
-                        <span class="billboard-tag-live tag-cyan"><i class="fa-solid fa-flask mr-1"></i> Interactive CS Lab</span>
-                        <span class="billboard-tag-term">โปรแกรมจำลองสถานการณ์เสมือนจริง</span>
-                      </div>
-                      <h2 class="billboard-title">
-                        ทดลองแก้ปัญหา 4 มิติ และโปรแกรมจำลองวงจร SDLC
-                      </h2>
-                      <p class="billboard-subtitle">
-                        ฝึกทักษะ Decomposition วิเคราะห์แยกส่วนปัญหาสู่แผนภาพ พร้อมคำนวณระยะเวลาพัฒนาโครงการตามวงจร SDLC อัตโนมัติ
-                      </p>
-                      <div class="billboard-meta-row">
-                        <span><i class="fa-solid fa-microchip mr-1 text-cyan-400"></i> โปรแกรมจำลอง 2 รูปแบบ</span>
-                        <span><i class="fa-solid fa-mobile-screen mr-1 text-emerald-400"></i> รองรับทุกหน้าจอ</span>
-                        <button onclick="switchTab('ct-tools')" class="billboard-btn-action btn-cyan">
-                          เข้าสู่ห้องปฏิบัติการ CS Lab <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="billboard-ambient-mesh"></div>
-                </div>
-
-                <!-- BILLBOARD SLIDE 4: คลังข้อสอบกลางภาค & ปลายภาค -->
-                <div class="billboard-slide" style="background: linear-gradient(135deg, #2b0810 0%, #4c0d1b 50%, #0e2b1b 100%);">
-                  <div class="billboard-slide-grid">
-                    <div class="billboard-visual-col">
-                      <div class="billboard-badge-glow glow-rose">
-                        <i class="fa-solid fa-trophy billboard-main-icon" style="color: #fbbf24;"></i>
-                        <div class="billboard-platform-disc" style="border-color: rgba(208, 0, 0, 0.4);">
-                          <i class="fa-solid fa-list-check disc-icon" style="color: #f87171;"></i>
-                          <i class="fa-solid fa-award disc-icon" style="color: #f87171;"></i>
-                          <i class="fa-solid fa-chart-line disc-icon" style="color: #f87171;"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="billboard-content-col">
-                      <div class="billboard-top-tag">
-                        <span class="billboard-tag-live tag-rose"><i class="fa-solid fa-square-check mr-1"></i> การวัดและประเมินผลการเรียนรู้ ม.4</span>
-                        <span class="billboard-tag-term">ระบบตรวจข้อสอบอัตโนมัติ 100%</span>
-                      </div>
-                      <h2 class="billboard-title">
-                        คลังข้อสอบกลางภาค & ปลายภาค 20 ข้อ พร้อมเฉลยละเอียดทันที
-                      </h2>
-                      <p class="billboard-subtitle">
-                        ทดสอบความรู้ครบถ้วน 2 หน่วยการเรียนรู้ ทราบผลคะแนนเรียลไทม์ บันทึกข้อมูลเข้า Supabase และอัปเดตตาราง Leaderboard
-                      </p>
-                      <div class="billboard-meta-row">
-                        <span><i class="fa-solid fa-user-pen mr-1 text-emerald-400"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
-                        <span><i class="fa-solid fa-stopwatch mr-1 text-amber-400"></i> จับเวลาและเฉลยรายข้อ</span>
-                        <button onclick="switchTab('quizzes')" class="billboard-btn-action btn-rose">
-                          เริ่มทำแบบทดสอบ <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="billboard-ambient-mesh"></div>
-                </div>
-
+          <!-- 2. STUDENT WELCOME & IDENTITY BANNER -->
+          <div id="student-welcome-banner" class="home-welcome-card">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div style="width: 50px; height: 50px; border-radius: 14px; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.65rem; flex-shrink: 0;">
+                <span id="student-banner-icon">🎓</span>
               </div>
-
-              <!-- Thairath Style Controls: Left & Right Chevrons -->
-              <button class="billboard-arrow billboard-arrow-left" onclick="prevBillboardSlide()" aria-label="สไลด์ก่อนหน้า" title="สไลด์ก่อนหน้า">
-                <i class="fa-solid fa-chevron-left"></i>
-              </button>
-              <button class="billboard-arrow billboard-arrow-right" onclick="nextBillboardSlide()" aria-label="สไลด์ถัดไป" title="สไลด์ถัดไป">
-                <i class="fa-solid fa-chevron-right"></i>
-              </button>
-
-              <!-- Thairath Style Centered Dots Indicator -->
-              <div class="billboard-dots-wrap" id="billboard-dots">
-                <button class="billboard-dot active" onclick="goToBillboardSlide(0)" aria-label="สไลด์ที่ 1"></button>
-                <button class="billboard-dot" onclick="goToBillboardSlide(1)" aria-label="สไลด์ที่ 2"></button>
-                <button class="billboard-dot" onclick="goToBillboardSlide(2)" aria-label="สไลด์ที่ 3"></button>
-                <button class="billboard-dot" onclick="goToBillboardSlide(3)" aria-label="สไลด์ที่ 4"></button>
-              </div>
-
-              <!-- Thairath Style Floating Pill on Bottom-Right (AI สรุปบทเรียนเด่น) -->
-              <button class="billboard-ai-pill" onclick="openEbookModal()" title="เปิดดูสรุปเนื้อหาสำคัญและ E-Book">
-                <i class="fa-solid fa-wand-magic-sparkles text-emerald-400 mr-1"></i>
-                <span>✦ สรุปบทเรียนเด่น CS-M4</span>
-                <i class="fa-solid fa-chevron-right ml-1 text-xs opacity-75"></i>
-              </button>
-
-            </div>
-
-            <div class="thairath-hero-grid">
-              
-              <!-- Left: Big Spotlight Headline Slider (Thairath Style Slider) -->
-              <div class="thairath-spotlight-card thairath-slider-container" id="hero-slider" onmouseenter="pauseHeroSlider()" onmouseleave="resumeHeroSlider()">
-                
-                <!-- Slides Wrapper -->
-                <div class="thairath-slider-track" id="slider-track">
-                  
-                  <!-- SLIDE 1: บทเรียนเด่น CT & SDLC -->
-                  <div class="thairath-slide active">
-                    <div class="thairath-spotlight-thumb">
-                      <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1200&auto=format&fit=crop" alt="4 องค์ประกอบแนวคิดเชิงคำนวณ & SDLC" class="slide-bg-img" />
-                      <div class="slide-thumb-overlay"></div>
-                      <span class="thairath-spotlight-tag">
-                        <i class="fa-solid fa-star mr-1"></i> ประเด็นสำคัญประจำสัปดาห์
-                      </span>
-                      <span class="slide-counter-badge"><i class="fa-solid fa-images mr-1"></i> 1 / 4</span>
-                      <div class="slide-thumb-caption">
-                        <img src="img/LOGOprofile.gif" alt="Computing science Logo" class="slide-brand-logo" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid var(--thairath-green); flex-shrink: 0;" />
-                        <div class="slide-brand-text">Computing science • เทคโนโลยี (วิทยาการคำนวณ) ม.4</div>
-                        <div class="slide-brand-sub">หลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน • ว 4.2 ม.4/1</div>
-                      </div>
-                    </div>
-                    <div class="thairath-spotlight-body">
-                      <div class="slide-body-badges">
-                        <span class="tag-pill tag-pill-green">บทเรียนสำคัญประจำหน่วย</span>
-                        <span class="slide-meta-sync"><i class="fa-solid fa-bolt mr-1"></i> Supabase Cloud เรียลไทม์</span>
-                      </div>
-                      <h1 class="thairath-spotlight-title">
-                        เจาะลึก 4 องค์ประกอบแนวคิดเชิงคำนวณ & วงจรพัฒนาระบบ SDLC 5 ขั้นตอน สู่โครงงานบูรณาการ
-                      </h1>
-                      <p class="thairath-spotlight-desc">
-                        เรียนรู้วิทยาการคำนวณ ม.4 อย่างเป็นระบบ ฝึกทักษะการคิดเชิงคำนวณ (Decomposition, Pattern Recognition, Abstraction, Algorithm Design) วางแผนการพัฒนาระบบตามวงจร SDLC 5 ขั้นตอน พร้อมเขียนรายงานโครงงาน 5 บทมาตรฐานวิชาการ และทดลองเครื่องมือ CS Lab อัตโนมัติ
-                      </p>
-                      <div class="thairath-meta" style="margin-bottom: 22px;">
-                        <span><i class="fa-solid fa-user-pen mr-1 text-emerald-600"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
-                        <span><i class="fa-solid fa-book-bookmark mr-1 text-amber-600"></i> หนังสือเรียนอิเล็กทรอนิกส์</span>
-                        <span><i class="fa-solid fa-clipboard-check mr-1 text-blue-600"></i> มีแบบทดสอบท้ายหน่วย</span>
-                      </div>
-                      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button onclick="switchTab('lessons')" class="btn btn-primary">
-                          <i class="fa-solid fa-book-open"></i> เข้าสู่บทเรียนหลัก
-                        </button>
-                        <button onclick="openEbookModal()" class="btn btn-emerald">
-                          <i class="fa-solid fa-book-bookmark"></i> เปิดอ่าน E-Book
-                        </button>
-                        <button onclick="switchTab('quizzes')" class="btn btn-outline">
-                          <i class="fa-solid fa-pen-to-square"></i> แบบทดสอบวัดผลสัมฤทธิ์
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- SLIDE 2: โครงงานคอมพิวเตอร์ 5 บท -->
-                  <div class="thairath-slide">
-                    <div class="thairath-spotlight-thumb">
-                      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop" alt="โครงงานคอมพิวเตอร์ 5 บท" class="slide-bg-img" />
-                      <div class="slide-thumb-overlay"></div>
-                      <span class="thairath-spotlight-tag" style="background-color: var(--accent-amber);">
-                        <i class="fa-solid fa-diagram-project mr-1"></i> โครงงานวิทยาการคำนวณ ม.4
-                      </span>
-                      <span class="slide-counter-badge"><i class="fa-solid fa-images mr-1"></i> 2 / 4</span>
-                      <div class="slide-thumb-caption">
-                        <img src="img/LOGOprofile.gif" alt="Computing science Logo" class="slide-brand-logo" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid var(--thairath-green); flex-shrink: 0;" />
-                        <div class="slide-brand-text">โครงงานบูรณาการแก้ปัญหาในชีวิตจริง</div>
-                        <div class="slide-brand-sub">แนวทางการจัดทำเอกสาร 5 บทมาตรฐานวิชาการ พร้อมเกณฑ์ประเมิน Rubric</div>
-                      </div>
-                    </div>
-                    <div class="thairath-spotlight-body">
-                      <div class="slide-body-badges">
-                        <span class="tag-pill tag-pill-amber">เอกสารโครงงานมาตรฐาน</span>
-                        <span class="slide-meta-time"><i class="fa-regular fa-clock mr-1"></i> กำหนดส่งเค้าโครง 25 ก.ย. นี้</span>
-                        <span class="slide-meta-sync" style="color: var(--accent-amber);"><i class="fa-solid fa-file-arrow-up mr-1"></i> ส่งผ่านระบบออนไลน์</span>
-                      </div>
-                      <h1 class="thairath-spotlight-title">
-                        แนวทางจัดทำโครงงานคอมพิวเตอร์ 5 บทมาตรฐาน & ดาวน์โหลดแบบฟอร์มเค้าโครง
-                      </h1>
-                      <p class="thairath-spotlight-desc">
-                        คู่มือฉบับสมบูรณ์สำหรับการพัฒนาโครงงานวิทยาการคำนวณ ม.4 ตั้งแต่บทที่ 1 บทนำ, บทที่ 2 เอกสารที่เกี่ยวข้อง, บทที่ 3 วิธีดำเนินการ, บทที่ 4 ผลการดำเนินงาน จนถึงบทที่ 5 สรุปผล พร้อมตัวอย่างเค้าโครงและแบบฟอร์มส่งงานที่ตรงตามเกณฑ์
-                      </p>
-                      <div class="thairath-meta" style="margin-bottom: 22px;">
-                        <span><i class="fa-solid fa-user-pen mr-1 text-emerald-600"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
-                        <span><i class="fa-solid fa-file-lines mr-1 text-amber-600"></i> ใบงาน 6 ฉบับ (หน่วยละ 3 ใบงาน • เต็ม 10 คะแนน)</span>
-                        <span><i class="fa-solid fa-cloud-arrow-up mr-1 text-blue-600"></i> บันทึกลง Supabase</span>
-                      </div>
-                      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button onclick="switchTab('worksheets')" class="btn btn-primary" style="background-color: var(--accent-amber); border-color: var(--accent-amber);">
-                          <i class="fa-solid fa-file-lines"></i> ดูคลังใบงาน 6 ฉบับ
-                        </button>
-                        <button onclick="switchTab('assignments')" class="btn btn-emerald">
-                          <i class="fa-solid fa-cloud-arrow-up"></i> ระบบส่งภาระงาน & โครงงาน
-                        </button>
-
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- SLIDE 3: Interactive CS Lab & SDLC Simulator -->
-                  <div class="thairath-slide">
-                    <div class="thairath-spotlight-thumb">
-                      <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop" alt="Interactive CS Lab" class="slide-bg-img" />
-                      <div class="slide-thumb-overlay"></div>
-                      <span class="thairath-spotlight-tag" style="background-color: #0284c7;">
-                        <i class="fa-solid fa-flask mr-1"></i> Interactive CS Lab
-                      </span>
-                      <span class="slide-counter-badge"><i class="fa-solid fa-images mr-1"></i> 3 / 4</span>
-                      <div class="slide-thumb-caption">
-                        <img src="img/LOGOprofile.gif" alt="Computing science Logo" class="slide-brand-logo" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid var(--thairath-green); flex-shrink: 0;" />
-                        <div class="slide-brand-text">ห้องทดลองและจำลองแก้ปัญหาเชิงคำนวณ</div>
-                        <div class="slide-brand-sub">เครื่องมือคำนวณระยะเวลา SDLC & จำลองแยกส่วนประกอบ Decomposition</div>
-                      </div>
-                    </div>
-                    <div class="thairath-spotlight-body">
-                      <div class="slide-body-badges">
-                        <span class="tag-pill tag-pill-cyan">เครื่องมือแล็บจำลอง</span>
-                        <span class="slide-meta-time"><i class="fa-regular fa-clock mr-1"></i> ใช้งานได้ฟรี ทุกอุปกรณ์</span>
-                        <span class="slide-meta-sync" style="color: #0284c7;"><i class="fa-solid fa-chart-pie mr-1"></i> วิเคราะห์แบบเรียลไทม์</span>
-                      </div>
-                      <h1 class="thairath-spotlight-title">
-                        ทดลองเครื่องมือจำลอง Computational Thinking Lab & วางแผนตารางเวลา SDLC
-                      </h1>
-                      <p class="thairath-spotlight-desc">
-                        สัมผัสประสบการณ์เรียนรู้แบบลงมือปฏิบัติจริง ฝึกวิเคราะห์ปัญหาผ่านเครื่องมือจำลอง 4 องค์ประกอบ และใช้โปรแกรมคำนวณระยะเวลาโครงการซอฟต์แวร์ตามวงจร SDLC 5 ขั้นตอน พร้อมคำนวณสัดส่วนเวลาและแสดงผลกราฟิกทันทีในเบราว์เซอร์
-                      </p>
-                      <div class="thairath-meta" style="margin-bottom: 22px;">
-                        <span><i class="fa-solid fa-user-pen mr-1 text-emerald-600"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
-                        <span><i class="fa-solid fa-microchip mr-1 text-cyan-600"></i> โปรแกรมจำลอง 2 รูปแบบ</span>
-                        <span><i class="fa-solid fa-circle-play mr-1 text-emerald-600"></i> ทดลองได้ทันที</span>
-                      </div>
-                      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button onclick="switchTab('ct-tools')" class="btn btn-primary" style="background-color: #0284c7; border-color: #0284c7;">
-                          <i class="fa-solid fa-flask"></i> เข้าสู่ CS Lab
-                        </button>
-                        <button onclick="switchTab('lessons')" class="btn btn-emerald">
-                          <i class="fa-solid fa-diagram-project"></i> ศึกษาวงจร SDLC 5 ขั้นตอน
-                        </button>
-                        <button onclick="switchTab('quizzes')" class="btn btn-outline">
-                          <i class="fa-solid fa-pen-to-square"></i> ทำแบบฝึกหัดท้ายบท
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- SLIDE 4: คลังข้อสอบวัดระดับ & Supabase Cloud -->
-                  <div class="thairath-slide">
-                    <div class="thairath-spotlight-thumb">
-                      <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1200&auto=format&fit=crop" alt="แบบทดสอบวัดผลสัมฤทธิ์" class="slide-bg-img" />
-                      <div class="slide-thumb-overlay"></div>
-                      <span class="thairath-spotlight-tag" style="background-color: var(--breaking-red);">
-                        <i class="fa-solid fa-list-check mr-1"></i> ระบบสอบมาตรฐาน ม.4
-                      </span>
-                      <span class="slide-counter-badge"><i class="fa-solid fa-images mr-1"></i> 4 / 4</span>
-                      <div class="slide-thumb-caption">
-                        <img src="img/LOGOprofile.gif" alt="Computing science Logo" class="slide-brand-logo" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid var(--thairath-green); flex-shrink: 0;" />
-                        <div class="slide-brand-text">คลังข้อสอบกลางภาค & ปลายภาค ม.4</div>
-                        <div class="slide-brand-sub">ตรวจผลทันที • เฉลยละเอียด • บันทึกลง Supabase Cloud และ Leaderboard</div>
-                      </div>
-                    </div>
-                    <div class="thairath-spotlight-body">
-                      <div class="slide-body-badges">
-                        <span class="tag-pill tag-pill-rose">ระบบตรวจอัตโนมัติ 100%</span>
-                        <span class="slide-meta-time"><i class="fa-regular fa-clock mr-1"></i> ข้อสอบ 20 ข้อมาตรฐาน</span>
-                        <span class="slide-meta-sync" style="color: var(--accent-amber);"><i class="fa-solid fa-trophy mr-1"></i> มีทำเนียบคะแนนผลการเรียนรู้</span>
-                      </div>
-                      <h1 class="thairath-spotlight-title">
-                        แบบทดสอบวัดผลสัมฤทธิ์กลางภาคและปลายภาค 20 ข้อ พร้อมระบบตรวจอัตโนมัติและเฉลยละเอียด
-                      </h1>
-                      <p class="thairath-spotlight-desc">
-                        ประเมินความพร้อมก่อนสอบจริงด้วยระบบข้อสอบออนไลน์ครอบคลุมทั้ง 2 หน่วยการเรียนรู้ ระบบทำการตรวจคำตอบทันที แสดงคะแนน คำอธิบายคำตอบที่ถูกต้องทุกข้อ และบันทึกผลการประเมินลงฐานข้อมูล Supabase Cloud เรียลไทม์
-                      </p>
-                      <div class="thairath-meta" style="margin-bottom: 22px;">
-                        <span><i class="fa-solid fa-user-pen mr-1 text-emerald-600"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
-                        <span><i class="fa-solid fa-bolt mr-1 text-amber-600"></i> ทราบผลคะแนนทันที</span>
-                        <span><i class="fa-solid fa-bolt mr-1 text-emerald-600"></i> Supabase Cloud</span>
-                      </div>
-                      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button onclick="switchTab('quizzes')" class="btn btn-primary" style="background-color: var(--breaking-red); border-color: var(--breaking-red); box-shadow: 0 4px 12px rgba(208, 0, 0, 0.3);">
-                          <i class="fa-solid fa-pen-to-square"></i> เริ่มทำข้อสอบทันที
-                        </button>
-                        <button onclick="switchTab('assignments')" class="btn btn-emerald">
-                          <i class="fa-solid fa-cloud-arrow-up"></i> ประวัติการส่งงานและคะแนน
-                        </button>
-                        <button onclick="switchTab('analytics')" class="btn btn-outline">
-                          <i class="fa-solid fa-chart-line"></i> สถิติและทำเนียบผลการเรียนรู้
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-                <!-- Slider Navigation Controls (Thairath Style Floating Arrows & Indicators) -->
-                <div class="thairath-slider-controls">
-                  <button class="slider-btn slider-btn-prev" onclick="prevHeroSlide()" aria-label="สไลด์ก่อนหน้า" title="สไลด์ก่อนหน้า">
-                    <i class="fa-solid fa-chevron-left"></i>
-                  </button>
-                  <div class="slider-indicators" id="slider-indicators">
-                    <button class="slider-dot active" onclick="goToHeroSlide(0)" aria-label="สไลด์ที่ 1"></button>
-                    <button class="slider-dot" onclick="goToHeroSlide(1)" aria-label="สไลด์ที่ 2"></button>
-                    <button class="slider-dot" onclick="goToHeroSlide(2)" aria-label="สไลด์ที่ 3"></button>
-                    <button class="slider-dot" onclick="goToHeroSlide(3)" aria-label="สไลด์ที่ 4"></button>
-                  </div>
-                  <button class="slider-btn slider-btn-next" onclick="nextHeroSlide()" aria-label="สไลด์ถัดไป" title="สไลด์ถัดไป">
-                    <i class="fa-solid fa-chevron-right"></i>
-                  </button>
-                </div>
-
-              </div>
-
-              <!-- Right: 5 Trending Lessons Sidebar (Thairath Top 5 News Style) -->
-              <div class="thairath-ranking-card">
-                <div class="thairath-ranking-header">
-                  <i class="fa-solid fa-fire text-rose-600"></i>
-                  <span>หัวข้อการเรียนรู้สำคัญประจำภาคเรียน</span>
-                </div>
-                
-                <a href="unit1.html#topic-1-decomposition" target="_blank" class="thairath-rank-item" style="text-decoration: none; color: inherit;" title="คลิกเพื่อเปิดบทเรียน เรื่อง การแยกส่วนประกอบและการย่อยปัญหา">
-                  <div class="thairath-rank-num">1</div>
-                  <div>
-                    <h4 class="thairath-rank-title">การแยกส่วนประกอบและการย่อยปัญหา (Decomposition)</h4>
-                    <div class="thairath-rank-meta"><i class="fa-solid fa-layer-group mr-1 text-emerald-600"></i> หน่วยที่ 1 • เรื่องที่ 1 • สรุป 15 นาที</div>
-                  </div>
-                </a>
-
-                <a href="unit1.html#topic-2-stages" target="_blank" class="thairath-rank-item" style="text-decoration: none; color: inherit;" title="คลิกเพื่อเปิดบทเรียน เรื่อง วงจร SDLC 5 ขั้นตอน">
-                  <div class="thairath-rank-num">2</div>
-                  <div>
-                    <h4 class="thairath-rank-title">วงจรการพัฒนาระบบ SDLC 5 ขั้นตอนสำหรับโครงงาน</h4>
-                    <div class="thairath-rank-meta"><i class="fa-solid fa-rotate mr-1 text-blue-600"></i> หน่วยที่ 1 • เรื่องที่ 2 • แผนภาพวงจร</div>
-                  </div>
-                </a>
-
-                <a href="unit1.html#topic-3-report-model" target="_blank" class="thairath-rank-item" style="text-decoration: none; color: inherit;" title="คลิกเพื่อเปิดบทเรียน เรื่อง โครงสร้างรายงาน 5 บท และแบบฟอร์มเค้าโครง">
-                  <div class="thairath-rank-num">3</div>
-                  <div>
-                    <h4 class="thairath-rank-title">การจัดทำเค้าโครงรายงานโครงงาน 5 บท มาตรฐานวิชาการ</h4>
-                    <div class="thairath-rank-meta"><i class="fa-solid fa-file-lines mr-1 text-amber-600"></i> หน่วยที่ 1 • เรื่องที่ 3 • ผังรายงาน 5 บท &amp; เค้าโครง</div>
-                  </div>
-                </a>
-
-                <div class="thairath-rank-item" onclick="switchTab('quizzes')" role="button" tabindex="0" title="คลิกเพื่อเปิดระบบคลังข้อสอบออนไลน์">
-                  <div class="thairath-rank-num">4</div>
-                  <div>
-                    <h4 class="thairath-rank-title">คลังข้อสอบกลางภาค &amp; ปลายภาค 20 ข้อ ระบบตรวจทันที</h4>
-                    <div class="thairath-rank-meta"><i class="fa-solid fa-list-check mr-1 text-purple-600"></i> สอบออนไลน์ • มีเฉลยและ Rubric</div>
-                  </div>
-                </div>
-
-                <div class="thairath-rank-item" onclick="switchTab('ct-tools')" role="button" tabindex="0" title="คลิกเพื่อเปิดห้องทดลองปฏิบัติการ CS Lab">
-                  <div class="thairath-rank-num">5</div>
-                  <div>
-                    <h4 class="thairath-rank-title">CS Lab: เครื่องมือจำลองแก้ปัญหา &amp; คำนวณตารางเวลา SDLC</h4>
-                    <div class="thairath-rank-meta"><i class="fa-solid fa-flask mr-1 text-rose-600"></i> Interactive Lab • วิเคราะห์ 4 มิติ</div>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        <!-- Features Section (Thairath Style) -->
-        <section class="features">
-          <div class="container">
-            <div class="thairath-section-header">
               <div>
-                <div class="thairath-section-title">
-                  <i class="fa-solid fa-shapes text-emerald-600"></i> เป้าหมายและสื่อการเรียนรู้วิทยาการคำนวณ ม.4
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 3px;">
+                  <span id="student-banner-badge" style="background: rgba(16, 185, 129, 0.25); color: #6ee7b7; font-size: 0.72rem; font-weight: 800; padding: 2px 10px; border-radius: 999px; letter-spacing: 0.5px;">
+                    ระบบการเรียนรู้ออนไลน์ ม.4
+                  </span>
+                  <span style="font-size: 0.76rem; color: #94a3b8;">ว 4.2 ม.4/1 • โรงเรียนวังน้ำเย็นวิทยาคม • ครูปณิฏฐา บุญยงค์</span>
                 </div>
-                <div class="thairath-section-subtitle">
-                  6 องค์ประกอบการเรียนรู้แบบลงมือปฏิบัติจริง มีสื่อมัลติมีเดียและเชื่อมต่อ Supabase Cloud เรียลไทม์
-                </div>
+                <h2 id="student-banner-title" style="font-family: 'Kanit', sans-serif; font-size: 1.28rem; font-weight: 800; margin: 0; color: #ffffff; line-height: 1.3;">
+                  ศูนย์การเรียนรู้วิทยาการคำนวณ ม.4 (CS-M4)
+                </h2>
+                <p id="student-banner-sub" style="font-size: 0.82rem; color: #cbd5e1; margin: 3px 0 0 0;">
+                  ยินดีต้อนรับนักเรียนทุกคน สามารถเข้าเรียน ส่งงาน และทำแบบทดสอบได้ทันที
+                </p>
               </div>
-              <span class="thairath-view-all" onclick="switchTab('lessons')">ดูหลักสูตรทั้งหมด ></span>
             </div>
-            <div class="features-grid">
-              
-              <div class="feature-card card-hover" onclick="switchTab('lessons')" style="cursor: pointer;">
-                <div class="feature-icon"><i class="fa-solid fa-book-open"></i></div>
-                <h3>เนื้อหาครบถ้วนตามหลักสูตร</h3>
-                <p>ครอบคลุม 2 หน่วยการเรียนรู้หลัก (แนวคิดเชิงคำนวณ, SDLC, รายงาน 5 บท และ 2 กรณีศึกษาโครงงาน)</p>
-              </div>
 
-              <div class="feature-card card-hover" onclick="switchTab('ct-tools')" style="cursor: pointer;">
-                <div class="feature-icon" style="background-color: rgba(124, 58, 237, 0.12); color: #7c3aed;"><i class="fa-solid fa-flask"></i></div>
-                <h3>ห้องปฏิบัติการวิทยาการคำนวณ <span style="white-space: nowrap;">(CS Lab)</span></h3>
-                <p>พื้นที่ทดลองจำลองย่อยปัญหา (Decomposition), วางแผน SDLC Gantt Chart, และออกแบบผังงาน</p>
-              </div>
-
-              <div class="feature-card card-hover" onclick="switchTab('media')" style="cursor: pointer;">
-                <div class="feature-icon" style="background-color: rgba(239, 68, 68, 0.12); color: #ef4444;"><i class="fa-solid fa-video"></i></div>
-                <h3>คลังสื่อวิดีทัศน์ & สไลด์</h3>
-                <p>เรียนรู้ผ่านสื่อวิดีทัศน์การสอน และสไลด์สรุปสาระสำคัญประจำหน่วยอย่างเป็นระบบ</p>
-              </div>
-
-              <div class="feature-card card-hover" onclick="openEbookModal()" style="cursor: pointer;">
-                <div class="feature-icon" style="background-color: rgba(0, 180, 0, 0.12); color: var(--thairath-green);"><i class="fa-solid fa-book-bookmark"></i></div>
-                <h3>E-Book หนังสือเรียน</h3>
-                <p>อ่านหนังสือเรียนฉบับจริงผ่านระบบ Interactive Flipbook/PDF พร้อมสารบัญข้ามหน้าทันที</p>
-              </div>
-
-              <div class="feature-card card-hover" onclick="switchTab('quizzes')" style="cursor: pointer;">
-                <div class="feature-icon" style="background-color: rgba(245, 158, 11, 0.12); color: #f59e0b;"><i class="fa-solid fa-chart-line"></i></div>
-                <h3>ประเมินผล & ข้อสอบออนไลน์</h3>
-                <p>แบบทดสอบย่อยท้ายหน่วย ข้อสอบกลางภาค และปลายภาค ตรวจผลอัตโนมัติพร้อมเฉลยละเอียด</p>
-              </div>
-
-              <div class="feature-card card-hover" onclick="switchTab('assignments')" style="cursor: pointer;">
-                <div class="feature-icon" style="background-color: rgba(6, 182, 212, 0.12); color: #06b6d4;"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                <h3>ฐานข้อมูล Supabase Cloud</h3>
-                <p>บันทึกการส่งงาน คะแนนสอบ 20 ข้อ และข้อมูลนักเรียนลง Supabase PostgreSQL Cloud อัตโนมัติ ปลอดภัยและรวดเร็ว</p>
-              </div>
-
+            <!-- Quick login / student status -->
+            <div id="student-banner-actions" style="display: flex; align-items: center; gap: 10px;">
+              <button type="button" onclick="openLoginModal()" id="btn-banner-login" class="btn" style="background: #10b981; color: #ffffff; font-weight: 700; padding: 9px 18px; border-radius: 12px; font-size: 0.86rem; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35); display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i> เข้าสู่ระบบนักเรียน (เลข 5 หลัก)
+              </button>
             </div>
           </div>
-        </section>
 
-        <!-- Course Units Section -->
-        <section style="padding: 40px 0;">
-          <div class="container">
-            <div class="thairath-section-header">
-              <div>
-                <div class="thairath-section-title">
-                  <i class="fa-solid fa-layer-group text-emerald-600"></i> หน่วยการเรียนรู้หลัก ม.4 (หลักสูตรแกนกลาง)
-                </div>
-                <div class="thairath-section-subtitle">
-                  เลือกศึกษาหน่วยการเรียนรู้ 40 ชั่วโมง พร้อมใบงาน วิดีโอ และข้อสอบย่อย
-                </div>
+          <!-- 3. FIVE QUICK ACTION APPS (5 ทางลัดเมนูหลักแบบโมเดิร์น แตะง่าย สบายตา) -->
+          <div class="home-quick-apps">
+            
+            <!-- App 1: บทเรียนดิจิทัล -->
+            <div class="home-app-card" onclick="switchTab('lessons')" role="button" tabindex="0">
+              <div class="home-app-icon" style="background: rgba(16, 185, 129, 0.12); color: #10b981;">
+                <i class="fa-solid fa-book-open"></i>
               </div>
-              <span class="thairath-view-all" onclick="switchTab('lessons')">เข้าเรียนทุกหน่วย ></span>
+              <div class="home-app-title">1. บทเรียน &amp; สไลด์</div>
+              <div class="home-app-desc">สไลด์ ม.4 และวิดีโอสอน</div>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
-              
-              <!-- Unit 1 Card -->
-              <div class="card card-hover" style="border-top: 5px solid var(--primary-color);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                  <span class="badge-tag" style="margin-bottom: 0;">หน่วยการเรียนรู้ที่ 1</span>
-                  <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);"><i class="fa-regular fa-clock"></i> 20 ชั่วโมง</span>
-                </div>
-                <h3 style="font-size: 1.3rem; margin-bottom: 12px;">แนวคิดเชิงคำนวณในการพัฒนาโครงงาน</h3>
-                <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px; line-height: 1.6;">
-                  ศึกษาองค์ประกอบ 4 ส่วนของ Computational Thinking (Decomposition, Pattern, Abstraction, Algorithm), วงจร SDLC 5 ขั้นตอน และโครงสร้างเค้าโครงรายงานโครงงาน 5 บท
-                </p>
-                <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-                  <span style="font-size: 0.78rem; background: var(--surface-secondary); padding: 4px 10px; border-radius: var(--radius-sm);"><i class="fa-solid fa-video text-rose"></i> 3 วิดีโอ</span>
-                  <span style="font-size: 0.78rem; background: var(--surface-secondary); padding: 4px 10px; border-radius: var(--radius-sm);"><i class="fa-solid fa-file-powerpoint text-amber"></i> สไลด์บรรยาย</span>
-                  <a href="http://flowgorithm.org/download/index.html" target="_blank" rel="noopener noreferrer" style="font-size: 0.78rem; background: rgba(2, 132, 199, 0.12); color: #0284c7; padding: 4px 10px; border-radius: var(--radius-sm); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;" title="โปรแกรมเขียนผังงาน Flowgorithm"><i class="fa-solid fa-diagram-project"></i> โหลด Flowgorithm ↗</a>
-                  <a href="flowgorithm-guide.html" target="_blank" style="font-size: 0.78rem; background: rgba(16, 185, 129, 0.12); color: #10b981; padding: 4px 10px; border-radius: var(--radius-sm); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;" title="คู่มือใช้งาน Flowgorithm"><i class="fa-solid fa-book-open"></i> คู่มือ Flowgorithm ↗</a>
-                  <span style="font-size: 0.78rem; background: var(--surface-secondary); padding: 4px 10px; border-radius: var(--radius-sm);"><i class="fa-solid fa-file-lines text-primary"></i> 3 ใบงาน</span>
-                  <span style="font-size: 0.78rem; background: rgba(16, 185, 129, 0.1); color: #059669; padding: 4px 10px; border-radius: var(--radius-sm); font-weight: 700;"><i class="fa-solid fa-clipboard-question mr-1"></i> ข้อสอบ 20 ข้อ</span>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                  <button onclick="switchTab('lessons')" class="btn btn-primary" style="flex: 1; padding: 10px;">เข้าสู่บทเรียน</button>
-                  <button onclick="openQuizModal('quiz-unit1')" class="btn btn-amber" style="padding: 10px 18px;">ทำแบบทดสอบ (20 ข้อ)</button>
-                </div>
+            <!-- App 2: ใบงาน & Lab -->
+            <div class="home-app-card" onclick="switchTab('worksheets')" role="button" tabindex="0">
+              <div class="home-app-icon" style="background: rgba(59, 130, 246, 0.12); color: #3b82f6;">
+                <i class="fa-solid fa-file-pen"></i>
               </div>
-
-              <!-- Unit 2 Card -->
-              <div class="card card-hover" style="border-top: 5px solid var(--accent-color);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                  <span class="badge-tag" style="background-color: rgba(124, 58, 237, 0.12); color: var(--accent-color); border-color: rgba(124, 58, 237, 0.2); margin-bottom: 0;">หน่วยการเรียนรู้ที่ 2</span>
-                  <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);"><i class="fa-regular fa-clock"></i> 20 ชั่วโมง</span>
-                </div>
-                <h3 style="font-size: 1.3rem; margin-bottom: 12px;">การประยุกต์ใช้แนวคิดเชิงคำนวณเพื่อพัฒนาโครงงาน</h3>
-                <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px; line-height: 1.6;">
-                  การศึกษาความเป็นไปได้ การออกแบบผังงานระบบ (Flowchart), แบบจำลองข้อมูล UI/UX, การลงมือพัฒนาโปรแกรม ทดสอบประสิทธิภาพ และการนำเสนอโครงงาน
-                </p>
-                <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-                  <span style="font-size: 0.78rem; background: var(--surface-secondary); padding: 4px 10px; border-radius: var(--radius-sm);"><i class="fa-solid fa-video text-rose"></i> 4 วิดีโอ</span>
-                  <span style="font-size: 0.78rem; background: var(--surface-secondary); padding: 4px 10px; border-radius: var(--radius-sm);"><i class="fa-solid fa-puzzle-piece text-purple"></i> Flowchart Tool</span>
-                  <span style="font-size: 0.78rem; background: var(--surface-secondary); padding: 4px 10px; border-radius: var(--radius-sm);"><i class="fa-solid fa-file-lines text-primary"></i> 3 ใบงาน</span>
-                  <span style="font-size: 0.78rem; background: rgba(16, 185, 129, 0.1); color: #059669; padding: 4px 10px; border-radius: var(--radius-sm); font-weight: 700;"><i class="fa-solid fa-clipboard-question mr-1"></i> ข้อสอบ 20 ข้อ</span>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                  <button onclick="switchTab('lessons')" class="btn btn-primary" style="flex: 1; padding: 10px;">เข้าสู่บทเรียน</button>
-                  <button onclick="openQuizModal('quiz-unit2')" class="btn btn-amber" style="padding: 10px 18px;">ทำแบบทดสอบ (20 ข้อ)</button>
-                </div>
-              </div>
-
+              <div class="home-app-title">2. ใบงาน &amp; Lab</div>
+              <div class="home-app-desc">ดาวน์โหลดใบงาน 1-6</div>
             </div>
+
+            <!-- App 3: ส่งการบ้าน -->
+            <div class="home-app-card" onclick="switchTab('assignments')" role="button" tabindex="0">
+              <div class="home-app-icon" style="background: rgba(139, 92, 246, 0.12); color: #8b5cf6;">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+              </div>
+              <div class="home-app-title">3. ส่งการบ้าน</div>
+              <div class="home-app-desc">อัปโหลดไฟล์ / ลิงก์ Canva</div>
+            </div>
+
+            <!-- App 4: ห้องสอบออนไลน์ -->
+            <div class="home-app-card" onclick="switchTab('quizzes')" role="button" tabindex="0">
+              <div class="home-app-icon" style="background: rgba(245, 158, 11, 0.12); color: #f59e0b;">
+                <i class="fa-solid fa-clipboard-check"></i>
+              </div>
+              <div class="home-app-title">4. ห้องสอบออนไลน์</div>
+              <div class="home-app-desc">แบบทดสอบท้ายบท 20 ข้อ</div>
+            </div>
+
+            <!-- App 5: คะแนน & อันดับ -->
+            <div class="home-app-card" onclick="switchTab('analytics')" role="button" tabindex="0">
+              <div class="home-app-icon" style="background: rgba(244, 63, 94, 0.12); color: #f43f5e;">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <div class="home-app-title">5. คะแนน &amp; อันดับ</div>
+              <div class="home-app-desc">เช็คคะแนนและสถิติการเรียน</div>
+            </div>
+
           </div>
-        </section>
 
-        <!-- Announcements Feed -->
-        <section style="padding: 10px 0 50px 0;">
-          <div class="container">
-            <div class="card">
-              <div class="thairath-section-header" style="margin-bottom: 16px;">
+          <!-- 4. DASHBOARD: ประกาศสำคัญของครู & เครื่องมือช่วยเรียน (ตัดหน่วยการเรียนรู้ที่ซ้ำซ้อนออกแล้ว) -->
+          <div class="home-dashboard-layout" style="grid-template-columns: 1.45fr 1fr; margin-bottom: 30px;">
+            
+            <!-- LEFT: Announcements & Updates (ประกาศสำคัญจากครูปณิฏฐา) -->
+            <div class="card" style="margin-bottom: 0;">
+              <div class="thairath-section-header" style="margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
                 <div>
-                  <div class="thairath-section-title" style="font-size: 1.25rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <div class="thairath-section-title" style="font-size: 1.15rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                     <i class="fa-solid fa-bullhorn text-amber-500"></i> ประกาศสำคัญและอัปเดตการเรียนรู้
-                    <span id="announcement-realtime-pill" style="font-size: 0.72rem; padding: 3px 10px; border-radius: 999px; background: rgba(0, 180, 0, 0.12); color: #00b400; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(0, 180, 0, 0.25);">
-                      <i class="fa-solid fa-circle" style="font-size: 0.5rem; color: #00b400;"></i>
-                      <span>Supabase Realtime</span>
+                    <span id="announcement-realtime-pill" style="font-size: 0.72rem; padding: 2px 10px; border-radius: 999px; background: rgba(0, 180, 0, 0.12); color: #00b400; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(0, 180, 0, 0.25);">
+                      <i class="fa-solid fa-circle" style="font-size: 0.45rem; color: #00b400;"></i>
+                      <span>อัปเดตล่าสุด</span>
                     </span>
                   </div>
-                  <div class="thairath-section-subtitle">
-                    อัปเดตงาน มอบหมายกิจกรรม และแจ้งเตือนกำหนดส่งจากครูผู้สอน (เชื่อมต่อฐานข้อมูล Supabase Cloud เรียลไทม์)
+                  <div class="thairath-section-subtitle" style="font-size: 0.82rem; margin-top: 3px;">
+                    อัปเดตงาน มอบหมายกิจกรรม และแจ้งเตือนกำหนดส่งจากครูปณิฏฐา บุญยงค์
                   </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px;">
-                  <button onclick="loadAnnouncementsRealtime(true)" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px;" title="รีเฟรชข้อมูลประกาศจาก Supabase Cloud">
+                  <button onclick="loadAnnouncementsRealtime(true)" class="btn btn-outline" style="padding: 6px 12px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 5px;" title="รีเฟรชข้อมูลประกาศ">
                     <i class="fa-solid fa-rotate" id="btn-refresh-anc-icon"></i>
                     <span>รีเฟรช</span>
                   </button>
-                  <button onclick="openAnnouncementModal()" id="btn-add-announcement" class="btn btn-amber" style="padding: 6px 16px; font-size: 0.84rem; display: none;">
+                  <button onclick="openAnnouncementModal()" id="btn-add-announcement" class="btn btn-amber" style="padding: 6px 14px; font-size: 0.82rem; display: none;">
                     + สร้างประกาศ
                   </button>
                 </div>
               </div>
-              <div id="announcements-list" style="display: flex; flex-direction: column; gap: 14px;">
-                <!-- Rendered dynamically -->
+              
+              <div id="announcements-list" style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Rendered dynamically via renderAnnouncementsUI -->
               </div>
             </div>
+
+            <!-- RIGHT: Student Toolkit & Quick Contact -->
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              
+              <!-- Card: เครื่องมือช่วยเรียน (Student Toolkit) -->
+              <div class="card" style="margin-bottom: 0; padding: 20px;">
+                <div style="font-family: 'Kanit', sans-serif; font-size: 1rem; font-weight: 800; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                  <i class="fa-solid fa-toolbox text-amber-500"></i> เครื่องมือช่วยทำกิจกรรม &amp; ปรึกษาครู
+                </div>
+                <div class="home-tool-grid">
+                  <div class="home-tool-item" onclick="switchTab('ct-tools')" role="button" tabindex="0">
+                    <i class="fa-solid fa-diagram-project text-purple-600" style="font-size: 1.15rem;"></i>
+                    <span>Flowchart Tool</span>
+                  </div>
+                  <a href="https://www.canva.com" target="_blank" rel="noopener noreferrer" class="home-tool-item">
+                    <i class="fa-solid fa-palette text-cyan-600" style="font-size: 1.15rem;"></i>
+                    <span>Canva ออกแบบ</span>
+                  </a>
+                  <div class="home-tool-item" onclick="switchTab('worksheets')" role="button" tabindex="0">
+                    <i class="fa-solid fa-file-arrow-down text-emerald-600" style="font-size: 1.15rem;"></i>
+                    <span>ดาวน์โหลดใบงาน</span>
+                  </div>
+                  <div class="home-tool-item" onclick="switchTab('contact')" role="button" tabindex="0">
+                    <i class="fa-solid fa-comment-dots text-rose-500" style="font-size: 1.15rem;"></i>
+                    <span>ถามครูปณิฏฐา</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Info Card for Students -->
+              <div class="card" style="margin-bottom: 0; padding: 18px; background: rgba(16, 185, 129, 0.05); border: 1.5px dashed rgba(16, 185, 129, 0.3);">
+                <div style="display: flex; align-items: flex-start; gap: 12px;">
+                  <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;">
+                    <i class="fa-solid fa-lightbulb"></i>
+                  </div>
+                  <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
+                    <strong style="color: var(--text-main); display: block; margin-bottom: 2px;">คำแนะนำสำหรับนักเรียน:</strong>
+                    เข้าสู่ระบบด้วยรหัสนักเรียน 5 หลักเพื่อส่งการบ้าน ทำแบบทดสอบท้ายบท 20 ข้อ และตรวจเช็คคะแนนของตนเองได้ตลอด 24 ชั่วโมง
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
           </div>
-        </section>
+
+        </div>
 
       </section>
-
-
-      <!-- ====================================================================
-           TAB 2: LESSONS (FULL CURRICULUM)
-           ==================================================================== -->
-      <!-- ====================================================================
-           TAB 2: LESSONS (FULL CURRICULUM)
-           ==================================================================== -->
       <section id="tab-lessons" class="tab-content" style="display: none; padding: 24px 0 30px 0;">
         <div class="container">
           <div style="background: rgba(16, 185, 129, 0.08); border-left: 4px solid #10b981; border-radius: 12px; padding: 12px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
@@ -1588,7 +1036,7 @@
             <button id="ws-cat-btn-theory" onclick="setWorksheetCategory('theory')" class="ws-cat-pill active theory">
               <i class="fa-solid fa-file-lines text-sky-600"></i>
               <span>1. ใบงานทฤษฎี & โครงงาน</span>
-              <span style="font-size: 0.75rem; padding: 2px 9px; border-radius: 999px; background: rgba(2, 132, 199, 0.18); color: #0284c7; font-weight: 800;">6 ฉบับเดิม</span>
+              <span style="font-size: 0.75rem; padding: 2px 9px; border-radius: 999px; background: rgba(2, 132, 199, 0.18); color: #0284c7; font-weight: 800;">6 ฉบับมาตรฐาน</span>
             </button>
             <button id="ws-cat-btn-practical" onclick="setWorksheetCategory('practical')" class="ws-cat-pill">
               <i class="fa-solid fa-laptop-code text-emerald-600"></i>
@@ -1635,7 +1083,7 @@
                 <i class="fa-solid fa-cloud-arrow-up text-emerald-600"></i> ส่งผลงานโครงงานและภาระงานออนไลน์
               </div>
               <div class="thairath-section-subtitle">
-                แนบลิงก์ผลงาน (Google Drive / GitHub / Canva) บันทึกลง Supabase แบบเรียลไทม์
+                ส่งไฟล์ผลงาน (PDF, Word, รูปภาพ, .fprg) หรือแนบลิงก์ พร้อมตรวจเช็คผลการให้คะแนนจากครู
               </div>
             </div>
 
@@ -1693,7 +1141,7 @@
           <div style="background: rgba(245, 158, 11, 0.08); border-left: 4px solid #f59e0b; border-radius: 12px; padding: 12px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
             <div style="font-size: 0.84rem; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
               <i class="fa-solid fa-shield-halved text-amber-500" style="font-size: 1.1rem;"></i>
-              <span><strong>กติกาการสอบ:</strong> นักเรียนเข้าสอบได้คนละ <strong>1 ครั้งต่อชุด</strong> ระบบตรวจและบันทึกคะแนนลง Supabase Cloud เรียลไทม์ทันทีที่กดส่ง</span>
+              <span><strong>กติกาการสอบ:</strong> นักเรียนเข้าสอบได้คนละ <strong>1 ครั้งต่อชุด</strong> ระบบตรวจคำตอบและบันทึกคะแนนอัตโนมัติทันทีที่กดส่ง</span>
             </div>
             <button type="button" onclick="switchTab('analytics')" class="btn btn-outline" style="padding: 5px 12px; font-size: 0.76rem; font-weight: 700; border-color: #f59e0b; color: #b45309;">
               <i class="fa-solid fa-trophy mr-1"></i> เช็คอันดับคะแนน
@@ -1702,10 +1150,10 @@
           <div class="thairath-section-header">
             <div>
               <div class="thairath-section-title">
-                <i class="fa-solid fa-clipboard-check text-amber-500"></i> การวัดและประเมินผลการเรียนรู้ (Quizzes, Midterm & Final Exams)
+                <i class="fa-solid fa-clipboard-check text-amber-500"></i> คลังแบบทดสอบและห้องสอบออนไลน์
               </div>
               <div class="thairath-section-subtitle">
-                ทดสอบวัดความรู้ ตรวจคำตอบอัตโนมัติพร้อมเฉลยละเอียด และบันทึกคะแนนลง Supabase เรียลไทม์
+                ทำแบบทดสอบวัดความรู้ ตรวจคำตอบอัตโนมัติพร้อมเฉลยละเอียด และทราบคะแนนทันที
               </div>
             </div>
             <span class="thairath-view-all" onclick="filterQuizCategory('all')">แบบทดสอบทั้งหมด ></span>
@@ -2210,7 +1658,7 @@
                 <i class="fa-solid fa-comment-dots text-emerald-600"></i> ติดต่อครูผู้สอน & ขอคำปรึกษาโครงงาน
               </div>
               <div class="thairath-section-subtitle">
-                ช่องทางติดต่อครูปณิฏฐา บุญยงค์ และส่งข้อคำถามออนไลน์บันทึกลงระบบ Supabase
+                ช่องทางติดต่อครูปณิฏฐา บุญยงค์ และส่งข้อความสอบถามออนไลน์
               </div>
             </div>
           </div>
@@ -2417,7 +1865,7 @@
             <span id="submit-user-info-text" style="font-weight: 700; color: var(--text-main);">ผู้ส่งงาน: นักเรียน ม.4</span>
           </div>
           <span style="font-size: 0.72rem; color: #10b981; font-weight: 700; background: rgba(16, 185, 129, 0.15); padding: 3px 10px; border-radius: 9999px;">
-            <i class="fa-solid fa-cloud"></i> บันทึกตรงสู่ Supabase Cloud
+            <i class="fa-solid fa-circle-check"></i> บันทึกผลงานออนไลน์อัตโนมัติ
           </span>
         </div>
 
@@ -2509,7 +1957,7 @@
         <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; border-top: 1px solid var(--border-color); padding-top: 16px;">
           <button type="button" onclick="closeModal('modal-submit-assignment')" class="btn btn-outline">ยกเลิก</button>
           <button type="button" id="btn-submit-work" onclick="doSubmitAssignment()" class="btn btn-emerald">
-            <i class="fa-solid fa-cloud-arrow-up mr-1"></i> ยืนยันส่งงาน (Supabase Cloud)
+            <i class="fa-solid fa-paper-plane mr-1"></i> ยืนยันการส่งงาน
           </button>
         </div>
       </div>
@@ -2884,7 +2332,7 @@
           <div class="quiz-result-meta-row">
             <span id="quiz-percent-text" class="quiz-result-percentage">คิดเป็น 90% (ดีเยี่ยม)</span>
             <span id="quiz-time-spent-badge" class="quiz-meta-pill"><i class="fa-solid fa-clock"></i> ใช้เวลา: 12:45 นาที</span>
-            <span id="quiz-sheet-sync-badge" class="quiz-meta-pill sheet-synced"><i class="fa-solid fa-bolt text-emerald-600"></i> บันทึกคะแนนลง Supabase เรียบร้อย</span>
+            <span id="quiz-sheet-sync-badge" class="quiz-meta-pill sheet-synced"><i class="fa-solid fa-circle-check text-emerald-600"></i> บันทึกคะแนนเข้าระบบเรียบร้อย</span>
           </div>
         </div>
 
@@ -3165,6 +2613,10 @@
       <button type="button" onclick="switchTab('worksheets')" class="mobile-bottom-btn" id="m-nav-worksheets">
         <i class="fa-solid fa-file-pen"></i>
         <span>ใบงาน</span>
+      </button>
+      <button type="button" onclick="switchTab('assignments')" class="mobile-bottom-btn" id="m-nav-assignments">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        <span>ส่งงาน</span>
       </button>
       <button type="button" onclick="switchTab('quizzes')" class="mobile-bottom-btn" id="m-nav-quizzes">
         <i class="fa-solid fa-clipboard-check"></i>
