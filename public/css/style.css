@@ -2424,23 +2424,24 @@ footer {
 
 [data-theme="dark"] .badge-admin {
   background: #10b981 !important;
-  color: #041f11 !important;
+  color: #ffffff !important;
   border: 1px solid #34d399 !important;
   font-weight: 800 !important;
 }
 
-/* Buttons in Dark Mode: Black & Vibrant Green */
+/* Buttons in Dark Mode: High-Contrast Pure White Text */
 [data-theme="dark"] .btn-primary {
   background-color: #10b981 !important;
-  color: #022c18 !important;
+  color: #ffffff !important;
   border-color: #10b981 !important;
   box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35) !important;
   font-weight: 700 !important;
 }
 
 [data-theme="dark"] .btn-primary:hover {
-  background-color: #34d399 !important;
-  color: #021a0d !important;
+  background-color: #059669 !important;
+  color: #ffffff !important;
+  border-color: #059669 !important;
   box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45) !important;
 }
 
@@ -2452,7 +2453,8 @@ footer {
 
 [data-theme="dark"] .btn-outline:hover {
   background-color: #10b981 !important;
-  color: #022c18 !important;
+  color: #ffffff !important;
+  border-color: #10b981 !important;
 }
 
 [data-theme="dark"] .btn-emerald {
@@ -2463,19 +2465,19 @@ footer {
 }
 
 [data-theme="dark"] .btn-emerald:hover {
-  background-color: #10b981 !important;
-  color: #022c18 !important;
+  background-color: #047857 !important;
+  color: #ffffff !important;
 }
 
 [data-theme="dark"] .btn-amber {
-  background-color: #12281c !important;
-  color: #34d399 !important;
-  border: 1px solid #10b981 !important;
+  background-color: #d97706 !important;
+  color: #ffffff !important;
+  border: 1px solid #f59e0b !important;
 }
 
 [data-theme="dark"] .btn-amber:hover {
-  background-color: #10b981 !important;
-  color: #022c18 !important;
+  background-color: #b45309 !important;
+  color: #ffffff !important;
 }
 
 /* Navbar & Header in Dark Mode */
@@ -2571,7 +2573,7 @@ footer {
 
 [data-theme="dark"] .feature-card:hover .feature-icon {
   background-color: #10b981 !important;
-  color: #022c18 !important;
+  color: #ffffff !important;
 }
 
 /* Cards and Modals */
@@ -2628,26 +2630,35 @@ footer {
 
 /* Map utility buttons & tags in Dark Mode to Black-Green */
 [data-theme="dark"] .bg-blue-600,
-[data-theme="dark"] .bg-blue-700,
+[data-theme="dark"] .bg-blue-700 {
+  background-color: #0284c7 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
 [data-theme="dark"] .bg-emerald-600,
 [data-theme="dark"] .bg-emerald-700 {
-  background-color: #10b981 !important;
-  color: #022c18 !important;
+  background-color: #059669 !important;
+  color: #ffffff !important;
   font-weight: 700 !important;
 }
 
 [data-theme="dark"] .bg-blue-600:hover,
-[data-theme="dark"] .bg-blue-700:hover,
+[data-theme="dark"] .bg-blue-700:hover {
+  background-color: #0369a1 !important;
+  color: #ffffff !important;
+}
+
 [data-theme="dark"] .bg-emerald-600:hover,
 [data-theme="dark"] .bg-emerald-700:hover {
-  background-color: #34d399 !important;
-  color: #021a0d !important;
+  background-color: #047857 !important;
+  color: #ffffff !important;
 }
 
 [data-theme="dark"] .bg-amber-500,
 [data-theme="dark"] .bg-amber-600 {
-  background-color: #10b981 !important;
-  color: #022c18 !important;
+  background-color: #d97706 !important;
+  color: #ffffff !important;
   font-weight: 700 !important;
 }
 
@@ -5838,4 +5849,19 @@ body {
   color: #10b981;
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
+}
+
+
+/* UNIVERSAL HIGH-CONTRAST BUTTONS & PILLS (PREVENTS UNREADABLE TEXT) */
+.btn-primary, .btn-emerald, .btn-amber, .btn-rose,
+a.btn-primary, a.btn-emerald, a.btn-amber, a.btn-rose,
+button.btn-primary, button.btn-emerald, button.btn-amber, button.btn-rose {
+  color: #ffffff !important;
+}
+
+/* Ensure bright contrast for pills and tags in dark mode */
+[data-theme="dark"] .badge-student,
+[data-theme="dark"] .badge-tag {
+  color: #6ee7b7 !important;
+  background-color: rgba(16, 185, 129, 0.2) !important;
 }

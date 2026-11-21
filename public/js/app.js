@@ -2889,29 +2889,29 @@ function getUnitsShowcaseHtml() {
 
                   <div style="padding: 24px;">
                     <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
-                      <span style="background: rgba(0, 180, 0, 0.12); color: #008f00; font-weight: 800; font-size: 0.76rem; padding: 4px 12px; border-radius: 999px; letter-spacing: 0.5px;">
+                      <span style="background: rgba(0, 180, 0, 0.12); color: #10b981; font-weight: 800; font-size: 0.76rem; padding: 4px 12px; border-radius: 999px; letter-spacing: 0.5px;">
                         <i class="fa-solid fa-graduation-cap mr-1"></i> หน่วยการเรียนรู้ที่ 1 • 20 ชั่วโมง
                       </span>
-                      <span style="font-size: 0.74rem; color: #64748b; font-weight: 600;">ตัวชี้วัด ว 4.2 ม.4/1</span>
+                      <span style="font-size: 0.74rem; color: var(--text-muted); font-weight: 600;">ตัวชี้วัด ว 4.2 ม.4/1</span>
                     </div>
 
-                    <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.35rem; font-weight: 700; color: #0f172a; margin-bottom: 6px; line-height: 1.3;">
+                    <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; line-height: 1.3;">
                       แนวคิดเชิงคำนวณในการพัฒนาโครงงาน
                     </h3>
-                    <div style="font-size: 0.8rem; font-weight: 600; color: #008f00; margin-bottom: 12px;">
+                    <div style="font-size: 0.8rem; font-weight: 600; color: #10b981; margin-bottom: 12px;">
                       Computational Thinking in Project Development
                     </div>
 
-                    <p style="font-size: 0.88rem; color: #475569; line-height: 1.6; margin-bottom: 18px;">
+                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
                       ศึกษา 4 องค์ประกอบของแนวคิดเชิงคำนวณ การแก้ปัญหาด้วยวงจรการพัฒนาระบบ SDLC 5 ขั้นตอน และโครงสร้างการเขียนรายงานโครงงานคอมพิวเตอร์ 5 บท
                     </p>
 
                     <!-- Subtopics List -->
-                    <div style="background: var(--bg-surface-alt, #f8fafc); border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; margin-bottom: 20px;">
-                      <div style="font-size: 0.82rem; font-weight: 700; color: #1e293b; margin-bottom: 8px;">
+                    <div style="background: var(--surface-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; margin-bottom: 20px;">
+                      <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">
                         <i class="fa-solid fa-list-check text-emerald-600 mr-1"></i> เนื้อหาสำคัญ 3 หัวข้อการเรียนรู้:
                       </div>
-                      <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.82rem; color: #475569; line-height: 1.8;">
+                      <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.8;">
                         <li style="display: flex; align-items: flex-start; gap: 8px;">
                           <i class="fa-solid fa-check-circle text-emerald-600" style="margin-top: 4px;"></i>
                           <span><strong>1.1 แนวคิดเชิงคำนวณ:</strong> 4 องค์ประกอบ (Decomposition, Pattern, Abstraction, Algorithm) &amp; กรณีศึกษารถของตะวัน</span>
@@ -3042,26 +3042,26 @@ function getUnitsShowcaseHtml() {
                       <span style="background: rgba(2, 132, 199, 0.12); color: #0284c7; font-weight: 800; font-size: 0.76rem; padding: 4px 12px; border-radius: 999px; letter-spacing: 0.5px;">
                         <i class="fa-solid fa-laptop-code mr-1"></i> หน่วยการเรียนรู้ที่ 2 • 20 ชั่วโมง
                       </span>
-                      <span style="font-size: 0.74rem; color: #64748b; font-weight: 600;">Project-Based Learning</span>
+                      <span style="font-size: 0.74rem; color: var(--text-muted); font-weight: 600;">Project-Based Learning</span>
                     </div>
 
-                    <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.35rem; font-weight: 700; color: #0f172a; margin-bottom: 6px; line-height: 1.3;">
+                    <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; line-height: 1.3;">
                       การประยุกต์ใช้แนวคิดเชิงคำนวณเพื่อพัฒนาโครงงาน
                     </h3>
                     <div style="font-size: 0.8rem; font-weight: 600; color: #0284c7; margin-bottom: 12px;">
                       Applied Computational Thinking for Projects
                     </div>
 
-                    <p style="font-size: 0.88rem; color: #475569; line-height: 1.6; margin-bottom: 18px;">
+                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
                       ฝึกปฏิบัติการทำโครงงานจริงผ่าน 2 กรณีศึกษา: เว็บไซต์แนะนำการใช้งานห้องสมุด (Web App) และโปรแกรมแจ้งเตือนการกินยาผ่านสมาร์ตโฟน (Health Tech) ตามวงจร SDLC 5 ขั้นตอน
                     </p>
 
                     <!-- Subtopics List -->
-                    <div style="background: var(--bg-surface-alt, #f8fafc); border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; margin-bottom: 20px;">
-                      <div style="font-size: 0.82rem; font-weight: 700; color: #1e293b; margin-bottom: 8px;">
+                    <div style="background: var(--surface-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; margin-bottom: 20px;">
+                      <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">
                         <i class="fa-solid fa-folder-open text-sky-600 mr-1"></i> กรณีศึกษาและกิจกรรม 3 ส่วน:
                       </div>
-                      <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.82rem; color: #475569; line-height: 1.8;">
+                      <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.8;">
                         <li style="display: flex; align-items: flex-start; gap: 8px;">
                           <i class="fa-solid fa-check-circle text-sky-600" style="margin-top: 4px;"></i>
                           <span><strong>กรณีศึกษาที่ 1 (ห้องสมุด):</strong> เว็บสารสนเทศ, แยกย่อย 4 โมดูล, DFD Level 1, หมวดหมู่ดิวอี้ &amp; UI Responsive</span>
@@ -3084,7 +3084,7 @@ function getUnitsShowcaseHtml() {
                   <a href="unit2.html" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 20px; background: #0284c7; color: #ffffff; font-weight: 700; font-size: 0.95rem; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 12px rgba(2,132,199,0.25); transition: all 0.2s;">
                     <i class="fa-solid fa-laptop-code"></i> เข้าสู่บทเรียน หน่วยที่ 2 (ฉบับสมบูรณ์)
                   </a>
-                  <button onclick="showToast('สไลด์ประกอบการสอน หน่วยที่ 2 อยู่ระหว่างจัดทำโดยครูผู้สอน จะเปิดให้อ่านเร็วๆ นี้ครับ', 'info')" style="display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px 12px; background: #f1f5f9; color: #64748b; border: 1.5px dashed #cbd5e1; font-weight: 600; font-size: 0.82rem; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
+                  <button onclick="showToast('สไลด์ประกอบการสอน หน่วยที่ 2 อยู่ระหว่างจัดทำโดยครูผู้สอน จะเปิดให้อ่านเร็วๆ นี้ครับ', 'info')" style="display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px 12px; background: #f1f5f9; color: var(--text-muted); border: 1.5px dashed #cbd5e1; font-weight: 600; font-size: 0.82rem; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
                     <i class="fa-solid fa-hourglass-half text-slate-400"></i> สไลด์ประกอบการสอน (อยู่ระหว่างจัดทำ)
                   </button>
                 </div>
@@ -5662,7 +5662,7 @@ async function previewSubmissionWork(subId, studentName, asgId) {
           </div>
           ${previewCode ? `
             <div style="text-align: left; background: #090d16; border: 1px solid #1e293b; border-radius: 12px; padding: 14px; margin-top: 14px;">
-              <div style="font-size: 0.72rem; color: #64748b; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+              <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
                 <span><i class="fa-solid fa-code text-sky-400 mr-1"></i> โครงสร้าง Flowgorithm XML Code:</span>
                 <span>(ตัวอย่างเนื้อหาไฟล์ผังงาน)</span>
               </div>
