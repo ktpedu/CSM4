@@ -1,0 +1,71 @@
+{
+  "id": "csm4-wny-pwa",
+  "name": "วิทยาการคำนวณ ม.4 (CS-M4) - โรงเรียนวังน้ำเย็นวิทยาคม",
+  "short_name": "CS-M4 วังน้ำเย็น",
+  "description": "ระบบการเรียนรู้ดิจิทัล วิทยาการคำนวณ ม.4 โรงเรียนวังน้ำเย็นวิทยาคม บทเรียน สื่อ วิดีโอ ใบงาน และแบบทดสอบออนไลน์",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#00b400",
+  "orientation": "any",
+  "lang": "th",
+  "dir": "ltr",
+  "categories": ["education", "books", "utilities"],
+  "icons": [
+    {
+      "src": "img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "img/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "บทเรียน & สไลด์",
+      "short_name": "บทเรียน",
+      "description": "เปิดดูบทเรียนวิทยาการคำนวณ ม.4 ทั้ง 2 หน่วย",
+      "url": "./index.html?tab=lessons",
+      "icons": [{ "src": "img/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "ทำแบบทดสอบ",
+      "short_name": "แบบทดสอบ",
+      "description": "ทำข้อสอบก่อนเรียน หลังเรียน กลางภาค ปลายภาค",
+      "url": "./index.html?tab=quizzes",
+      "icons": [{ "src": "img/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "ใบงาน & CS Lab",
+      "short_name": "ใบงาน",
+      "description": "ดาวน์โหลดและทำใบงานจำลอง Flowchart",
+      "url": "./index.html?tab=worksheets",
+      "icons": [{ "src": "img/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "ส่งการบ้าน",
+      "short_name": "ส่งงาน",
+      "description": "ส่งไฟล์โครงงาน 5 บทและใบงาน",
+      "url": "./index.html?tab=assignments",
+      "icons": [{ "src": "img/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
