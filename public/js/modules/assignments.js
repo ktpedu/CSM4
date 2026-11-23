@@ -86,9 +86,35 @@ const OFFLINE_ASSIGNMENTS = [
     total_points: 10
   }];
 
+// Current category filter for Assignments tab: 'theory' | 'practical' | 'all'
+let currentAssignmentCategory = 'theory';
+
+function filterAssignmentsCategory(category) {
+  currentAssignmentCategory = category || 'theory';
+  if (typeof window !== 'undefined') {
+    window.currentAssignmentCategory = currentAssignmentCategory;
+  }
+  ['theory', 'practical', 'all'].forEach(cat => {
+    const btn = document.getElementById(`asg-filter-btn-${cat}`);
+    if (btn) {
+      if (cat === currentAssignmentCategory) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    }
+  });
+  loadAssignmentsData();
+}
+
+function loadSubmissionsData() {
+  return loadAssignmentsData();
+}
+
 // Helper to check if a submission belongs strictly to the currently logged in student
 function isMySubmission(sub, user) {
   if (!user || user.role !== 'student') return false;
+  if (!sub) return false;
   
   const userIds = [user.id, user.username, user.student_id]
     .filter(Boolean)
@@ -98,23 +124,27 @@ function isMySubmission(sub, user) {
   const subId = String(sub.id || '').toLowerCase().trim();
 
   // 1. Direct ID match
-  if (userIds.includes(subStudentId)) return true;
+  if (subStudentId && userIds.includes(subStudentId)) return true;
 
   // 2. subId contains user ID
-  if (userIds.some(uid => subId.includes(`-${uid}-`) || subId.startsWith(`sub-${uid}`) || subId === uid)) {
+  if (userIds.some(uid => uid && (subId.includes(`-${uid}-`) || subId.startsWith(`sub-${uid}`) || subId.endsWith(`-${uid}`) || subId === uid))) {
     return true;
   }
 
-  // 3. Name match
-  const subName = String(sub.student_name || '').toLowerCase().trim();
-  if (user.real_name && subName.includes(user.real_name.toLowerCase().trim())) return true;
-  if (user.full_name && subName.includes(user.full_name.toLowerCase().trim())) return true;
+  // 3. Name match with cleaning (strip title prefix and room tags)
+  const cleanName = (name) => String(name || '')
+    .replace(/^(นาย|นางสาว|นาง|ด\.ช\.|ด\.ญ\.)\s*/, '')
+    .replace(/\s*\([^)]*\)/g, '')
+    .trim()
+    .toLowerCase();
 
-  // Clean title prefix like นาย, นางสาว, ด.ช., ด.ญ.
-  const cleanName = (name) => name.replace(/^(นาย|นางสาว|นาง|ด\.ช\.|ด\.ญ\.)\s*/, '').trim();
-  const userClean = cleanName(user.real_name || user.full_name || '');
-  if (userClean && userClean.length >= 4 && subName.includes(userClean.toLowerCase())) {
-    return true;
+  const userClean = cleanName(user.real_name || user.full_name || user.username || '');
+  const subClean = cleanName(sub.student_name || '');
+
+  if (userClean && subClean && userClean.length >= 3 && subClean.length >= 3) {
+    if (userClean === subClean || userClean.includes(subClean) || subClean.includes(userClean)) {
+      return true;
+    }
   }
 
   return false;
@@ -149,17 +179,32 @@ function renderSubmissionCardHtml(sub, assignments) {
 
   const isTeacher = currentUser && (currentUser.role === 'teacher' || currentUser.role === 'admin');
 
+  let cleanStudentName = sub.student_name || 'นักเรียน';
+  if (sub.class_room && cleanStudentName.includes(`(${sub.class_room})`)) {
+    cleanStudentName = cleanStudentName.replace(`(${sub.class_room})`, '').trim();
+  }
+
+  let formattedDate = '';
+  if (sub.submitted_at) {
+    try {
+      formattedDate = new Date(sub.submitted_at).toLocaleString('th-TH', { dateStyle: 'short', timeStyle: 'short' });
+    } catch (e) {}
+  }
+
   return `
-    <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 mb-3 shadow-sm hover:shadow-md transition">
+    <div class="p-4 rounded-2xl border space-y-2 mb-3 shadow-sm hover:shadow-md transition" style="background: var(--surface-color); border: 1px solid var(--border-color); color: var(--text-main);">
       <div class="flex items-center justify-between flex-wrap gap-2">
-        <span class="font-bold text-xs text-slate-800">${escapeHtml(sub.student_name)} ${sub.class_room ? `<span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-full ml-1">${escapeHtml(sub.class_room)}</span>` : ''}</span>
+        <span class="font-bold text-xs" style="color: var(--text-main); font-size: 0.92rem;">
+          ${escapeHtml(cleanStudentName)} ${sub.class_room ? `<span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full ml-1">${escapeHtml(sub.class_room)}</span>` : ''}
+        </span>
         <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${sub.status === 'graded' ? 'bg-blue-100 text-blue-700' : (sub.status === 'returned' || sub.status === 'revision_requested') ? 'bg-rose-100 text-rose-800 border border-rose-300' : 'bg-amber-100 text-amber-700'}">
           ${sub.status === 'graded' ? `ตรวจแล้ว: ${sub.score}/${maxPts} คะแนน` : (sub.status === 'returned' || sub.status === 'revision_requested') ? '⚠️ ส่งกลับให้แก้ไข (ขอให้ส่งใหม่)' : 'รอครูตรวจคะแนน'}
         </span>
       </div>
-      <p class="text-xs font-semibold text-emerald-700"><i class="fa-solid fa-file-lines mr-1.5"></i>${escapeHtml(asgTitle)}</p>
-      <p class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 whitespace-pre-line">${escapeHtml(sub.content || '')}</p>
+      <p class="text-xs font-semibold" style="color: var(--thairath-green); font-size: 0.88rem;"><i class="fa-solid fa-file-lines mr-1.5"></i>${escapeHtml(asgTitle)}</p>
+      <p class="text-xs p-2.5 rounded-xl border whitespace-pre-line" style="background: var(--surface-secondary); border-color: var(--border-color); color: var(--text-main); font-size: 0.84rem; line-height: 1.5;">${escapeHtml(sub.content || '')}</p>
       ${fileLinkHtml}
+      ${formattedDate ? `<div style="font-size: 0.72rem; color: var(--text-subtle);"><i class="fa-regular fa-clock mr-1"></i>ส่งเมื่อ: ${formattedDate}</div>` : ''}
       ${sub.feedback ? `
         <div class="text-xs ${(sub.status === 'returned' || sub.status === 'revision_requested') ? 'bg-rose-50 text-rose-950 border-rose-300' : 'bg-amber-50 text-amber-900 border-amber-200'} p-3 rounded-xl border">
           <span class="font-bold block ${(sub.status === 'returned' || sub.status === 'revision_requested') ? 'text-rose-800' : 'text-amber-800'} mb-1">
@@ -274,11 +319,14 @@ async function fetchAllSubmissions(forceFresh = false) {
             list[existIdx].file_url = ls.file_url;
           }
         } else {
-          list.push(ls);
+          list.unshift(ls);
         }
       });
     }
   } catch (e) {}
+
+  // Sort newest submissions first
+  list.sort((a, b) => new Date(b.submitted_at || 0) - new Date(a.submitted_at || 0));
 
   allSubmissionsGlobalCache = list;
   return list;
@@ -1040,7 +1088,9 @@ async function loadAssignmentsData() {
               btnBg = 'bg-blue-600 hover:bg-blue-700';
               btnIcon = 'fa-check';
             } else {
-              btnText = 'แก้ไขส่งงาน';
+              btnText = 'ส่งแล้ว (รอครูตรวจคะแนน)';
+              btnBg = 'bg-emerald-600 hover:bg-emerald-700';
+              btnIcon = 'fa-clock';
             }
           }
 
@@ -1388,7 +1438,10 @@ function openSubmitModal(asgId, title) {
   
   const userInfoText = document.getElementById('submit-user-info-text');
   if (userInfoText && currentUser) {
-    userInfoText.innerText = `ผู้ส่งงาน: ${currentUser.full_name || currentUser.username} (${currentUser.class_room || 'ม.4'})`;
+    const rawName = currentUser.full_name || currentUser.username || 'นักเรียน';
+    const roomStr = currentUser.class_room ? `(${currentUser.class_room})` : '';
+    const cleanDisplay = (roomStr && rawName.includes(roomStr)) ? rawName : `${rawName} ${roomStr}`.trim();
+    userInfoText.innerText = `ผู้ส่งงาน: ${cleanDisplay}`;
   }
 
   // Reset form states
@@ -1507,8 +1560,11 @@ async function doSubmitAssignment() {
 
     const studentUser = currentUser || {};
     const studentId = studentUser.id || studentUser.student_id || studentUser.username || '10001';
-    const studentName = studentUser.full_name || studentUser.real_name || 'นายกิตติศักดิ์ มีสุข';
+    let studentName = studentUser.full_name || studentUser.real_name || 'นักเรียน';
     const classRoom = studentUser.class_room || 'ม.4/1';
+    if (classRoom && studentName.includes(`(${classRoom})`)) {
+      studentName = studentName.replace(`(${classRoom})`, '').trim();
+    }
     const subId = `sub-${studentId}-${assignment_id}`;
 
     const submissionRecord = {
@@ -1868,6 +1924,20 @@ async function doDeleteSubmissionPrompt() {
     console.error('Delete submission error:', err);
     showToast('เกิดข้อผิดพลาดในการลบข้อมูล: ' + err.message, 'error');
   }
+}
+
+// Global Browser Window Exports
+if (typeof window !== 'undefined') {
+  window.currentAssignmentCategory = currentAssignmentCategory;
+  window.filterAssignmentsCategory = filterAssignmentsCategory;
+  window.loadAssignmentsData = loadAssignmentsData;
+  window.loadSubmissionsData = loadSubmissionsData;
+  window.openSubmitModal = openSubmitModal;
+  window.previewSubmissionWork = previewSubmissionWork;
+  window.downloadSubmissionFileById = downloadSubmissionFileById;
+  window.openOrDownloadSubmissionFile = openOrDownloadSubmissionFile;
+  window.doSubmitAssignment = doSubmitAssignment;
+  window.isMySubmission = isMySubmission;
 }
 
 

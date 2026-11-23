@@ -1,6 +1,7 @@
 // --- 10. TEACHER DASHBOARD DATA ---
 let currentTeacherSubmissionsFilter = 'all';
 let currentTeacherSubmissionsStatus = 'submitted'; // 'submitted' (รอตรวจ) | 'graded' (ตรวจแล้ว)
+let currentTeacherSubmissionsCategory = 'all';
 
 function filterTeacherSubmissions(room) {
   currentTeacherSubmissionsFilter = room;
@@ -13,11 +14,37 @@ function setTeacherSubmissionsStatus(status) {
   renderTeacherPendingSubmissions();
 }
 
+function filterTeacherSubmissionsCategory(category) {
+  currentTeacherSubmissionsCategory = category || 'all';
+  if (typeof window !== 'undefined') {
+    window.currentTeacherSubmissionsCategory = currentTeacherSubmissionsCategory;
+  }
+  ['all', 'theory', 'practical'].forEach(cat => {
+    const btn = document.getElementById(`btn-t-subs-cat-${cat}`);
+    if (btn) {
+      if (cat === currentTeacherSubmissionsCategory) {
+        btn.style.background = 'var(--thairath-green)';
+        btn.style.color = '#fff';
+      } else {
+        btn.style.background = 'transparent';
+        btn.style.color = 'var(--text-muted)';
+      }
+    }
+  });
+  renderTeacherPendingSubmissions();
+}
+
 function renderTeacherPendingSubmissions() {
   const container = document.getElementById('teacher-pending-submissions');
   if (!container) return;
 
-  const allItems = allSubmissionsGlobalCache || [];
+  let allItems = allSubmissionsGlobalCache || [];
+  if (currentTeacherSubmissionsCategory === 'theory') {
+    allItems = allItems.filter(s => !s.assignment_id || (!s.assignment_id.startsWith('asg-flow-') && !s.assignment_id.startsWith('ws-flow-')));
+  } else if (currentTeacherSubmissionsCategory === 'practical') {
+    allItems = allItems.filter(s => s.assignment_id && (s.assignment_id.startsWith('asg-flow-') || s.assignment_id.startsWith('ws-flow-')));
+  }
+
   const submittedItems = allItems.filter(s => s.status === 'submitted');
   const returnedItems = allItems.filter(s => s.status === 'returned' || s.status === 'revision_requested');
   const gradedItems = allItems.filter(s => s.status === 'graded');
@@ -905,4 +932,11 @@ async function doViewerReturnRevision() {
     console.error('Viewer return revision error:', err);
     showToast('เกิดข้อผิดพลาดในการส่งกลับแก้ไข', 'error');
   }
+}
+
+if (typeof window !== 'undefined') {
+  window.filterTeacherSubmissions = filterTeacherSubmissions;
+  window.setTeacherSubmissionsStatus = setTeacherSubmissionsStatus;
+  window.filterTeacherSubmissionsCategory = filterTeacherSubmissionsCategory;
+  window.renderTeacherPendingSubmissions = renderTeacherPendingSubmissions;
 }
