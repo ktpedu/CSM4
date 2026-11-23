@@ -2824,7 +2824,7 @@ function getUnitsShowcaseHtml() {
               <!-- ==========================================
                    CARD 1: UNIT 1 (LEFT ORANGE BOX)
                    ========================================== -->
-              <div class="glass-card" style="border-radius: 20px; overflow: hidden; border: 2px solid rgba(0, 180, 0, 0.3); background: var(--bg-surface, #ffffff); box-shadow: 0 10px 25px rgba(0,0,0,0.06); display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="glass-card" style="border-radius: 20px; overflow: hidden; border: 2px solid rgba(0, 180, 0, 0.3); box-shadow: 0 10px 25px rgba(0,0,0,0.06); display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                   
 <div style="width: 100%; border-radius: 16px 16px 0 0; overflow: hidden; background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);">
@@ -2907,20 +2907,20 @@ function getUnitsShowcaseHtml() {
                     </p>
 
                     <!-- Subtopics List -->
-                    <div style="background: var(--surface-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; margin-bottom: 20px;">
-                      <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">
-                        <i class="fa-solid fa-list-check text-emerald-600 mr-1"></i> เนื้อหาสำคัญ 3 หัวข้อการเรียนรู้:
+                    <div class="unit-subtopics-box">
+                      <div class="unit-subtopics-title">
+                        <i class="fa-solid fa-list-check text-emerald-600"></i> เนื้อหาสำคัญ 3 หัวข้อการเรียนรู้:
                       </div>
-                      <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.8;">
-                        <li style="display: flex; align-items: flex-start; gap: 8px;">
+                      <ul class="unit-subtopics-list">
+                        <li>
                           <i class="fa-solid fa-check-circle text-emerald-600" style="margin-top: 4px;"></i>
                           <span><strong>1.1 แนวคิดเชิงคำนวณ:</strong> 4 องค์ประกอบ (Decomposition, Pattern, Abstraction, Algorithm) &amp; กรณีศึกษารถของตะวัน</span>
                         </li>
-                        <li style="display: flex; align-items: flex-start; gap: 8px;">
+                        <li>
                           <i class="fa-solid fa-check-circle text-emerald-600" style="margin-top: 4px;"></i>
                           <span><strong>1.2 วงจรการพัฒนาระบบ (SDLC):</strong> 5 ขั้นตอน, ผัง Gantt Chart 20 สัปดาห์, แผนภาพ DFD, พีระมิดทดสอบ 4 ระดับ</span>
                         </li>
-                        <li style="display: flex; align-items: flex-start; gap: 8px;">
+                        <li>
                           <i class="fa-solid fa-check-circle text-emerald-600" style="margin-top: 4px;"></i>
                           <span><strong>1.3 การเขียนรายงานโครงงาน:</strong> 3 ส่วนหลัก 5 บท, ผังเค้าโครงโครงงาน (Proposal) &amp; บรรณานุกรม APA</span>
                         </li>
@@ -2931,11 +2931,11 @@ function getUnitsShowcaseHtml() {
 
                 <!-- CTA Action Buttons -->
                 <div style="padding: 0 24px 24px 24px; display: flex; flex-direction: column; gap: 10px;">
-                  <a href="unit1.html" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 20px; background: #00b400; color: #ffffff; font-weight: 700; font-size: 0.95rem; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 12px rgba(0,180,0,0.25); transition: all 0.2s;">
+                  <a href="unit1.html" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 20px; background: #047857; color: #ffffff; font-weight: 700; font-size: 0.95rem; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 12px rgba(0,180,0,0.25); transition: all 0.2s;">
                     <i class="fa-solid fa-book-open"></i> เข้าสู่บทเรียน หน่วยที่ 1 (ฉบับสมบูรณ์)
                   </a>
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                    <button onclick="openSlideModal('sld-1')" style="display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px 12px; background: #fef3c7; color: #b45309; border: 1.5px solid #f59e0b; font-weight: 700; font-size: 0.82rem; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
+                    <button onclick="openSlideModal('sld-1')" class="btn-web-slides">
                       <i class="fa-solid fa-file-powerpoint text-amber-600"></i> สไลด์ในเว็บ
                     </button>
                     <a href="https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px 12px; background: #f59e0b; color: #ffffff; font-weight: 700; font-size: 0.82rem; border-radius: 10px; text-decoration: none; transition: all 0.2s; box-shadow: 0 2px 8px rgba(245,158,11,0.25);">
@@ -2948,7 +2948,7 @@ function getUnitsShowcaseHtml() {
               <!-- ==========================================
                    CARD 2: UNIT 2 (RIGHT ORANGE BOX)
                    ========================================== -->
-              <div class="glass-card" style="border-radius: 20px; overflow: hidden; border: 2px solid rgba(2, 132, 199, 0.3); background: var(--bg-surface, #ffffff); box-shadow: 0 10px 25px rgba(0,0,0,0.06); display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="glass-card" style="border-radius: 20px; overflow: hidden; border: 2px solid rgba(2, 132, 199, 0.3); box-shadow: 0 10px 25px rgba(0,0,0,0.06); display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                   
 <div style="width: 100%; border-radius: 16px 16px 0 0; overflow: hidden; background: linear-gradient(135deg, #0c4a6e 0%, #1e1b4b 100%);">
@@ -3057,20 +3057,20 @@ function getUnitsShowcaseHtml() {
                     </p>
 
                     <!-- Subtopics List -->
-                    <div style="background: var(--surface-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; margin-bottom: 20px;">
-                      <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">
-                        <i class="fa-solid fa-folder-open text-sky-600 mr-1"></i> กรณีศึกษาและกิจกรรม 3 ส่วน:
+                    <div class="unit-subtopics-box unit2-box">
+                      <div class="unit-subtopics-title">
+                        <i class="fa-solid fa-folder-open text-sky-600"></i> กรณีศึกษาและกิจกรรม 3 ส่วน:
                       </div>
-                      <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.8;">
-                        <li style="display: flex; align-items: flex-start; gap: 8px;">
+                      <ul class="unit-subtopics-list">
+                        <li>
                           <i class="fa-solid fa-check-circle text-sky-600" style="margin-top: 4px;"></i>
                           <span><strong>กรณีศึกษาที่ 1 (ห้องสมุด):</strong> เว็บสารสนเทศ, แยกย่อย 4 โมดูล, DFD Level 1, หมวดหมู่ดิวอี้ &amp; UI Responsive</span>
                         </li>
-                        <li style="display: flex; align-items: flex-start; gap: 8px;">
+                        <li>
                           <i class="fa-solid fa-check-circle text-sky-600" style="margin-top: 4px;"></i>
                           <span><strong>กรณีศึกษาที่ 2 (เตือนกินยา):</strong> Mobile App สุขภาพ, 10 กลุ่มงาน, ผังงาน Snooze Logic &amp; UI เพื่อผู้สูงอายุ</span>
                         </li>
-                        <li style="display: flex; align-items: flex-start; gap: 8px;">
+                        <li>
                           <i class="fa-solid fa-check-circle text-sky-600" style="margin-top: 4px;"></i>
                           <span><strong>ท้ายหน่วยการเรียนรู้:</strong> สรุปเปรียบเทียบ Web vs Mobile, กิจกรรม Project Pitch &amp; แบบทดสอบทบทวน</span>
                         </li>
@@ -3081,10 +3081,10 @@ function getUnitsShowcaseHtml() {
 
                 <!-- CTA Action Buttons -->
                 <div style="padding: 0 24px 24px 24px; display: flex; flex-direction: column; gap: 10px;">
-                  <a href="unit2.html" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 20px; background: #0284c7; color: #ffffff; font-weight: 700; font-size: 0.95rem; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 12px rgba(2,132,199,0.25); transition: all 0.2s;">
+                  <a href="unit2.html" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 20px; background: #0369a1; color: #ffffff; font-weight: 700; font-size: 0.95rem; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 12px rgba(3,105,161,0.25); transition: all 0.2s;">
                     <i class="fa-solid fa-laptop-code"></i> เข้าสู่บทเรียน หน่วยที่ 2 (ฉบับสมบูรณ์)
                   </a>
-                  <button onclick="showToast('สไลด์ประกอบการสอน หน่วยที่ 2 อยู่ระหว่างจัดทำโดยครูผู้สอน จะเปิดให้อ่านเร็วๆ นี้ครับ', 'info')" style="display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px 12px; background: #f1f5f9; color: var(--text-muted); border: 1.5px dashed #cbd5e1; font-weight: 600; font-size: 0.82rem; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
+                  <button onclick="showToast('สไลด์ประกอบการสอน หน่วยที่ 2 อยู่ระหว่างจัดทำโดยครูผู้สอน จะเปิดให้อ่านเร็วๆ นี้ครับ', 'info')" class="btn-prep-slides">
                     <i class="fa-solid fa-hourglass-half text-slate-400"></i> สไลด์ประกอบการสอน (อยู่ระหว่างจัดทำ)
                   </button>
                 </div>
@@ -4519,7 +4519,7 @@ function openWorksheetDetail(wsId) {
                 <div class="ws-answer-key-box" style="display: none; margin-top: 12px; background: rgba(245, 158, 11, 0.08); border: 1.5px dashed #d97706; border-radius: 10px; padding: 14px;" data-task-idx="${idx}">
                   <div style="font-size: 0.78rem; font-weight: 800; color: #b45309; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
                     <span><i class="fa-solid fa-circle-check"></i> แนวคำตอบสำหรับครูผู้สอน (Teacher Answer Key):</span>
-                    <span style="font-size: 0.7rem; background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 9999px; font-weight: 700; border: 1px solid #fde68a;">
+                    <span class="badge-teacher-only">
                       <i class="fa-solid fa-shield-halved"></i> สิทธิ์เฉพาะครูและผู้ดูแลระบบ
                     </span>
                   </div>

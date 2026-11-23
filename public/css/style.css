@@ -24,6 +24,9 @@
   --accent-rose: #d00000;
 
   --bg-color: #f5f6f8;
+  --bg-body: #f5f6f8;
+  --bg-surface: #ffffff;
+  --bg-surface-alt: #f0f2f5;
   --surface-primary: #ffffff;
   --surface-color: #ffffff;
   --surface-secondary: #f0f2f5;
@@ -57,6 +60,9 @@
 /* DARK THEME: โหมดมืด (Deep AMOLED Charcoal & Neon Green) */
 [data-theme="dark"] {
   --bg-color: #121212;
+  --bg-body: #0d1e16;
+  --bg-surface: #0a130e;
+  --bg-surface-alt: #13271e;
   --surface-primary: #1a1a1a;
   --surface-color: #1a1a1a;
   --surface-secondary: #242424;
@@ -2431,7 +2437,7 @@ footer {
 
 /* Buttons in Dark Mode: High-Contrast Pure White Text */
 [data-theme="dark"] .btn-primary {
-  background-color: #10b981 !important;
+  background-color: #047857 !important;
   color: #ffffff !important;
   border-color: #10b981 !important;
   box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35) !important;
@@ -2439,9 +2445,9 @@ footer {
 }
 
 [data-theme="dark"] .btn-primary:hover {
-  background-color: #059669 !important;
+  background-color: #065f46 !important;
   color: #ffffff !important;
-  border-color: #059669 !important;
+  border-color: #34d399 !important;
   box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45) !important;
 }
 
@@ -5864,4 +5870,182 @@ button.btn-primary, button.btn-emerald, button.btn-amber, button.btn-rose {
 [data-theme="dark"] .badge-tag {
   color: #6ee7b7 !important;
   background-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+
+/* ==========================================================
+   UNIT CARDS SUBTOPICS BOX (GUARANTEED ULTRA HIGH CONTRAST)
+   ========================================================== */
+.unit-subtopics-box {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+
+.unit-subtopics-box.unit2-box {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+}
+
+.unit-subtopics-title {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.unit-subtopics-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.82rem;
+  color: #334155;
+  line-height: 1.8;
+}
+
+.unit-subtopics-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 4px;
+  color: #334155;
+}
+
+.unit-subtopics-list li strong {
+  color: #047857;
+  font-weight: 700;
+}
+
+.unit-subtopics-box.unit2-box .unit-subtopics-list li strong {
+  color: #0369a1;
+}
+
+/* Dark Theme Overrides for Subtopics Box - NEVER A WHITE BOX */
+[data-theme="dark"] .unit-subtopics-box {
+  background: rgba(16, 185, 129, 0.08) !important;
+  border: 1px solid rgba(16, 185, 129, 0.28) !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .unit-subtopics-box.unit2-box {
+  background: rgba(2, 132, 199, 0.08) !important;
+  border: 1px solid rgba(2, 132, 199, 0.28) !important;
+}
+
+[data-theme="dark"] .unit-subtopics-title {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .unit-subtopics-list,
+[data-theme="dark"] .unit-subtopics-list li,
+[data-theme="dark"] .unit-subtopics-list li span {
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .unit-subtopics-list li strong {
+  color: #6ee7b7 !important;
+}
+
+[data-theme="dark"] .unit-subtopics-box.unit2-box .unit-subtopics-list li strong {
+  color: #7dd3fc !important;
+}
+
+[data-theme="dark"] .unit-subtopics-box i.fa-check-circle {
+  color: #34d399 !important;
+}
+
+[data-theme="dark"] .unit-subtopics-box.unit2-box i.fa-check-circle {
+  color: #38bdf8 !important;
+}
+
+/* Slide action buttons */
+.btn-web-slides {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px 12px;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1.5px solid #f59e0b;
+  font-weight: 700;
+  font-size: 0.82rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+[data-theme="dark"] .btn-web-slides {
+  background: rgba(245, 158, 11, 0.15) !important;
+  color: #fbbf24 !important;
+  border-color: #f59e0b !important;
+}
+
+.btn-prep-slides {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px 12px;
+  background: #f1f5f9;
+  color: #475569;
+  border: 1.5px dashed #cbd5e1;
+  font-weight: 600;
+  font-size: 0.82rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+[data-theme="dark"] .btn-prep-slides {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #cbd5e1 !important;
+  border-color: #475569 !important;
+}
+
+/* Automatic Dark Mode Fallback for any legacy light inline backgrounds */
+[data-theme="dark"] [style*="background: #f1f5f9"],
+[data-theme="dark"] [style*="background: #f8fafc"],
+[data-theme="dark"] [style*="background: #f0f2f5"],
+[data-theme="dark"] [style*="background-color: #f1f5f9"],
+[data-theme="dark"] [style*="background-color: #f8fafc"],
+[data-theme="dark"] [style*="background-color: #f0f2f5"] {
+  background: #13271e !important;
+  color: #f8fafc !important;
+  border-color: #244434 !important;
+}
+
+[data-theme="dark"] [style*="background: #fef3c7"],
+[data-theme="dark"] [style*="background-color: #fef3c7"] {
+  background: rgba(245, 158, 11, 0.18) !important;
+  color: #fbbf24 !important;
+  border-color: rgba(245, 158, 11, 0.4) !important;
+}
+
+/* Badge teacher only */
+.badge-teacher-only {
+  font-size: 0.7rem;
+  background: #fef3c7;
+  color: #92400e;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-weight: 700;
+  border: 1px solid #fde68a;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+[data-theme="dark"] .badge-teacher-only {
+  background: rgba(245, 158, 11, 0.2) !important;
+  color: #fbbf24 !important;
+  border-color: rgba(245, 158, 11, 0.4) !important;
 }
