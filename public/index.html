@@ -2265,6 +2265,10 @@
               <span class="proctor-pill" id="proctor-pill-fullscreen" style="border-color: #0284c7; background: rgba(2, 132, 199, 0.16); color: #38bdf8;"><i class="fa-solid fa-expand"></i> บังคับเต็มหน้าจอ</span>
               <span class="proctor-pill" id="proctor-pill-learning" style="display: none; border-color: #10b981; background: rgba(16, 185, 129, 0.16); color: #34d399;"><i class="fa-solid fa-book-open"></i> แบบทดสอบเพื่อการเรียนรู้</span>
               <span class="proctor-student-pill" id="quiz-student-identity"><i class="fa-solid fa-user-shield"></i> ผู้สอบ: กำลังโหลด...</span>
+              <span class="quiz-autosave-pill" id="quiz-autosave-pill" title="ระบบบันทึกคำตอบอัตโนมัติลงในเครื่อง (ป้องกันข้อมูลสูญหายเมื่อเน็ตหลุด)">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span id="quiz-autosave-text">Auto-save เปิดทำงาน</span>
+              </span>
             </div>
             <h3 id="quiz-modal-title" class="quiz-modal-title">แบบทดสอบ</h3>
             <p class="quiz-modal-subtitle"><i class="fa-solid fa-circle-info"></i> แบบทดสอบ</p>
@@ -2322,10 +2326,18 @@
             <span class="quiz-violations-status" id="quiz-violations-badge">
               <i class="fa-solid fa-eye text-emerald-500"></i> สลับหน้าจอ: 0/3 ครั้ง
             </span>
+            <span id="quiz-autosave-time" style="font-size: 0.76rem; color: #94a3b8; display: inline-flex; align-items: center; gap: 5px;">
+              <i class="fa-solid fa-floppy-disk text-emerald-400"></i> บันทึกอัตโนมัติแล้ว
+            </span>
           </div>
-          <button onclick="confirmSubmitQuiz()" class="quiz-submit-btn" id="btn-submit-quiz">
-            <i class="fa-solid fa-paper-plane mr-2"></i> ส่งคำตอบ & บันทึกคะแนน
-          </button>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <button type="button" onclick="clearQuizDraftPrompt()" class="quiz-btn-clear-draft" title="ล้างคำตอบที่ตอบไว้ทั้งหมดเพื่อเริ่มต้นทำใหม่">
+              <i class="fa-solid fa-rotate-left"></i> ล้างคำตอบ
+            </button>
+            <button onclick="confirmSubmitQuiz()" class="quiz-submit-btn" id="btn-submit-quiz">
+              <i class="fa-solid fa-paper-plane mr-2"></i> ส่งคำตอบ & บันทึกคะแนน
+            </button>
+          </div>
         </div>
       </div>
     </div>

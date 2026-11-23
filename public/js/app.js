@@ -8161,6 +8161,11 @@ function startQuizTimer() {
     quizTimeRemaining--;
     updateTimerDisplay();
 
+    // Real-time periodic auto-save every 10 seconds
+    if (quizTimeRemaining % 10 === 0) {
+      saveQuizAnswersDraft();
+    }
+
     if (quizTimeRemaining <= 0) {
       clearInterval(quizTimerInterval);
       quizTimerInterval = null;
@@ -8199,6 +8204,184 @@ function stopQuizTimer() {
   }
 }
 
+// =========================================================================
+// REAL-TIME QUIZ AUTO-SAVE & DRAFT RECOVERY SYSTEM (RESILIENCE AGAINST OFFLINE/CRASH)
+// =========================================================================
+
+function getQuizDraftStorageKey(quizId) {
+  const userKey = (currentUser && (currentUser.student_id || currentUser.username || currentUser.id)) || 'guest';
+  const qId = quizId || (currentQuiz && currentQuiz.id) || 'unknown';
+  return `csm4_quiz_draft_${userKey}_${qId}`;
+}
+
+function saveQuizAnswersDraft() {
+  if (!quizIsActive || !currentQuiz || !quizActiveQuestions) return;
+
+  const key = getQuizDraftStorageKey(currentQuiz.id);
+  const answers = {};
+  quizActiveQuestions.forEach(q => {
+    const selected = document.querySelector(`input[name="q_${q.id}"]:checked`);
+    if (selected) {
+      answers[q.id] = parseInt(selected.value);
+    }
+  });
+
+  const answeredCount = Object.keys(answers).length;
+  const draftData = {
+    quizId: currentQuiz.id,
+    quizTitle: currentQuiz.title,
+    studentId: currentUser ? (currentUser.student_id || currentUser.username) : 'guest',
+    studentName: currentUser ? (currentUser.full_name || currentUser.username) : '',
+    answers: answers,
+    answeredCount: answeredCount,
+    totalQuestions: quizActiveQuestions.length,
+    savedAt: new Date().toISOString(),
+    savedTimeFormatted: new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+    timeRemaining: quizTimeRemaining
+  };
+
+  try {
+    localStorage.setItem(key, JSON.stringify(draftData));
+
+    // Update Auto-save UI indicator in header
+    const pill = document.getElementById('quiz-autosave-pill');
+    const pillText = document.getElementById('quiz-autosave-text');
+    if (pill && pillText) {
+      pill.classList.remove('is-saving');
+      pillText.innerText = `Auto-saved (${answeredCount}/${draftData.totalQuestions} ข้อ)`;
+    }
+
+    // Update Auto-save status in footer
+    const footerTime = document.getElementById('quiz-autosave-time');
+    if (footerTime) {
+      footerTime.innerHTML = `<i class="fa-solid fa-floppy-disk text-emerald-400"></i> บันทึกล่าสุด ${draftData.savedTimeFormatted}`;
+    }
+  } catch (err) {
+    console.warn('[Quiz AutoSave Storage Warning]:', err);
+  }
+}
+
+function restoreQuizAnswersDraft(quizId) {
+  if (!currentQuiz || !quizActiveQuestions) return false;
+  const key = getQuizDraftStorageKey(quizId || currentQuiz.id);
+  let draftJson = null;
+  try {
+    draftJson = localStorage.getItem(key);
+  } catch (e) {
+    return false;
+  }
+  if (!draftJson) return false;
+
+  let draft = null;
+  try {
+    draft = JSON.parse(draftJson);
+  } catch (e) {
+    return false;
+  }
+
+  if (!draft || !draft.answers || typeof draft.answers !== 'object') return false;
+
+  const answerKeys = Object.keys(draft.answers);
+  if (answerKeys.length === 0) return false;
+
+  let restoredCount = 0;
+  answerKeys.forEach(qId => {
+    const val = draft.answers[qId];
+    const radio = document.querySelector(`input[name="q_${qId}"][value="${val}"]`);
+    if (radio) {
+      radio.checked = true;
+      const parentCard = radio.closest('.quiz-option-card');
+      if (parentCard) parentCard.classList.add('is-selected');
+      restoredCount++;
+    }
+  });
+
+  if (restoredCount > 0) {
+    updateQuizAnswerCount();
+
+    // Restore timer if student has remaining time
+    if (typeof draft.timeRemaining === 'number' && draft.timeRemaining > 30 && draft.timeRemaining < 1800) {
+      quizTimeRemaining = draft.timeRemaining;
+      updateTimerDisplay();
+    }
+
+    // Render prominent recovery banner in questions body
+    const noticeContainer = document.getElementById('quiz-draft-notice-container');
+    if (noticeContainer) {
+      noticeContainer.innerHTML = `
+        <div class="quiz-restored-banner" id="quiz-restored-banner-el">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-cloud-arrow-down" style="font-size: 1.25rem; color: #10b981;"></i>
+            <div>
+              <strong>กู้คืนคำตอบอัตโนมัติแล้ว (${restoredCount} จาก ${quizActiveQuestions.length} ข้อ):</strong>
+              <div style="font-size: 0.8rem; opacity: 0.9;">ระบบโหลดคำตอบที่บันทึกไว้ล่าสุด (${draft.savedTimeFormatted || 'ก่อนหน้า'}) ให้เรียบร้อยแล้ว สามารถทำต่อได้ทันที</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button type="button" onclick="clearQuizDraftPrompt()" class="quiz-btn-clear-draft">
+              <i class="fa-solid fa-rotate-left"></i> ล้างคำตอบเริ่มใหม่
+            </button>
+            <button type="button" onclick="document.getElementById('quiz-restored-banner-el').style.display='none'" style="background: none; border: none; color: inherit; cursor: pointer; padding: 4px;" title="ปิดการแจ้งเตือน">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    const pillText = document.getElementById('quiz-autosave-text');
+    if (pillText) {
+      pillText.innerText = `กู้คืนคำตอบแล้ว (${restoredCount}/${quizActiveQuestions.length} ข้อ)`;
+    }
+    const footerTime = document.getElementById('quiz-autosave-time');
+    if (footerTime) {
+      footerTime.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> กู้คืนอัตโนมัติ (${draft.savedTimeFormatted || 'ก่อนหน้า'})`;
+    }
+
+    showToast(`กู้คืนคำตอบที่บันทึกไว้อัตโนมัติ (${restoredCount} ข้อ) เรียบร้อยแล้ว`, 'success');
+    return true;
+  }
+
+  return false;
+}
+
+function clearQuizDraft(quizId) {
+  const key = getQuizDraftStorageKey(quizId || (currentQuiz && currentQuiz.id));
+  try {
+    localStorage.removeItem(key);
+  } catch (e) {}
+}
+
+function clearQuizDraftPrompt() {
+  if (!confirm('คุณต้องการล้างคำตอบที่ตอบไว้ทั้งหมดเพื่อเริ่มต้นทำใหม่ใช่หรือไม่?')) return;
+  if (!currentQuiz || !quizActiveQuestions) return;
+
+  clearQuizDraft(currentQuiz.id);
+
+  // Uncheck all radios & remove .is-selected class
+  quizActiveQuestions.forEach(q => {
+    const radios = document.querySelectorAll(`input[name="q_${q.id}"]`);
+    radios.forEach(r => {
+      r.checked = false;
+      const parent = r.closest('.quiz-option-card');
+      if (parent) parent.classList.remove('is-selected');
+    });
+  });
+
+  updateQuizAnswerCount();
+
+  // Hide recovery banner if present
+  const noticeContainer = document.getElementById('quiz-draft-notice-container');
+  if (noticeContainer) noticeContainer.innerHTML = '';
+
+  const pillText = document.getElementById('quiz-autosave-text');
+  if (pillText) pillText.innerText = `ล้างคำตอบแล้ว (เริ่มทำใหม่)`;
+  const footerTime = document.getElementById('quiz-autosave-time');
+  if (footerTime) footerTime.innerHTML = `<i class="fa-solid fa-rotate-left text-amber-400"></i> ล้างข้อมูลดราฟต์แล้ว`;
+
+  showToast('ล้างคำตอบที่บันทึกไว้เรียบร้อยแล้ว สามารถเริ่มทำใหม่ได้ทันที', 'info');
+}
+
 // Option selection & answer counters
 function updateQuizOptionSelection(labelEl, radioName) {
   const radio = labelEl.querySelector(`input[name="${radioName}"]`);
@@ -8217,6 +8400,7 @@ function updateQuizOptionSelection(labelEl, radioName) {
     }
   });
   updateQuizAnswerCount();
+  saveQuizAnswersDraft();
 }
 
 function updateQuizAnswerCount() {
@@ -8239,7 +8423,8 @@ function confirmCloseQuiz() {
     closeModal('modal-take-quiz');
     return;
   }
-  if (confirm('คำเตือน: หากคุณออกจากแบบทดสอบตอนนี้ ระบบจะไม่บันทึกคะแนนการทำแบบทดสอบ คุณต้องการออกจากการทดสอบหรือไม่?')) {
+  if (confirm('คุณต้องการออกจากการทำแบบทดสอบชั่วคราวหรือไม่?\n(ระบบได้บันทึกคำตอบที่คุณเลือกไว้แล้ว สามารถกลับมาทำต่อได้ตลอดเวลา)')) {
+    saveQuizAnswersDraft(); // Ensure latest draft is stored
     quizIsActive = false;
     stopQuizTimer();
     document.body.style.overflow = '';
@@ -8254,7 +8439,7 @@ function confirmCloseQuiz() {
     const watermarkLayer = document.getElementById('quiz-watermark-layer');
     if (watermarkLayer) watermarkLayer.innerHTML = '';
     closeModal('modal-take-quiz');
-    showToast('ออกจากการทำแบบทดสอบแล้ว', 'info');
+    showToast('ออกจากการทำแบบทดสอบชั่วคราวแล้ว (ระบบบันทึกคำตอบไว้ให้เรียบร้อยแล้ว)', 'info');
   }
 }
 
@@ -8548,24 +8733,30 @@ async function startProctoredQuiz(rawQuiz) {
   }
 
   const body = document.getElementById('quiz-questions-body');
-  body.innerHTML = quizActiveQuestions.map((q, idx) => `
-    <div class="quiz-question-box" data-question-id="${q.id}">
-      <div class="quiz-question-header">
-        <span class="quiz-q-number-badge"><i class="fa-solid fa-circle-question"></i> ข้อที่ ${idx + 1} จาก ${totalQ}</span>
-        <h4 class="quiz-question-text">${idx + 1}. ${escapeHtml(q.question)}</h4>
+  body.innerHTML = `
+    <div id="quiz-draft-notice-container"></div>
+    ${quizActiveQuestions.map((q, idx) => `
+      <div class="quiz-question-box" data-question-id="${q.id}">
+        <div class="quiz-question-header">
+          <span class="quiz-q-number-badge"><i class="fa-solid fa-circle-question"></i> ข้อที่ ${idx + 1} จาก ${totalQ}</span>
+          <h4 class="quiz-question-text">${idx + 1}. ${escapeHtml(q.question)}</h4>
+        </div>
+        <div class="quiz-options-group">
+          ${q.shuffledOptions.map((opt, displayIdx) => `
+            <label class="quiz-option-card" onclick="updateQuizOptionSelection(this, 'q_${q.id}')">
+              <input type="radio" name="q_${q.id}" value="${opt.origIdx}" class="quiz-option-radio" onchange="updateQuizAnswerCount(); saveQuizAnswersDraft();">
+              <span class="quiz-option-letter">${thaiChoiceLetters[displayIdx] || (displayIdx + 1)}</span>
+              <span class="quiz-option-label-text">${escapeHtml(opt.text)}</span>
+              <span class="quiz-option-indicator"><i class="fa-solid fa-check"></i></span>
+            </label>
+          `).join('')}
+        </div>
       </div>
-      <div class="quiz-options-group">
-        ${q.shuffledOptions.map((opt, displayIdx) => `
-          <label class="quiz-option-card" onclick="updateQuizOptionSelection(this, 'q_${q.id}')">
-            <input type="radio" name="q_${q.id}" value="${opt.origIdx}" class="quiz-option-radio" onchange="updateQuizAnswerCount()">
-            <span class="quiz-option-letter">${thaiChoiceLetters[displayIdx] || (displayIdx + 1)}</span>
-            <span class="quiz-option-label-text">${escapeHtml(opt.text)}</span>
-            <span class="quiz-option-indicator"><i class="fa-solid fa-check"></i></span>
-          </label>
-        `).join('')}
-      </div>
-    </div>
-  `).join('');
+    `).join('')}
+  `;
+
+  // Automatic Draft Restoration (if previously saved in LocalStorage)
+  restoreQuizAnswersDraft(currentQuiz.id);
 
   // Generate watermarks
   updateQuizWatermark();
@@ -8796,6 +8987,9 @@ async function submitQuizAnswers(isAutoSubmit = false, autoReason = '') {
     } catch (e) {}
 
     closeModal('modal-take-quiz');
+
+    // Clear auto-saved draft after successful submission
+    clearQuizDraft(currentQuiz.id);
 
     // Populate Result Modal
     document.getElementById('quiz-score-badge').innerText = `${res.score} / ${res.maxScore} คะแนน`;
