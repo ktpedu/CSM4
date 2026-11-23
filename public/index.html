@@ -1892,46 +1892,46 @@
     </div>
 
     <!-- Submit Assignment Modal (Pro Multi-Mode Uploader) -->
-    <div id="modal-submit-assignment" style="position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px;">
-      <div class="card" style="max-width: 560px; width: 100%; padding: 28px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 14px; margin-bottom: 18px;">
+    <div id="modal-submit-assignment" class="modal-overlay" style="position: fixed; inset: 0; background: rgba(0,0,0,0.72); backdrop-filter: blur(8px); z-index: 2500; display: none; align-items: center; justify-content: center; padding: 12px; overflow-y: auto;">
+      <div class="card" style="max-width: 500px; width: 100%; max-height: calc(100vh - 28px); max-height: calc(100dvh - 28px); overflow-y: auto; padding: 16px 18px; border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.5); background: var(--surface-primary); margin: auto; box-sizing: border-box;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 10px;">
           <div>
-            <h3 id="modal-asg-title" style="font-size: 1.22rem; font-weight: 700; color: var(--text-main);">ส่งผลงาน</h3>
-            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">เลือกส่งไฟล์ผลงานจากเครื่อง หรือแนบลิงก์ผลงานโครงงาน</p>
+            <h3 id="modal-asg-title" style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin: 0;">ส่งผลงาน</h3>
+            <p style="font-size: 0.74rem; color: var(--text-muted); margin: 2px 0 0 0;">เลือกส่งไฟล์ผลงานจากเครื่อง หรือแนบลิงก์ผลงานโครงงาน</p>
           </div>
-          <button onclick="closeModal('modal-submit-assignment')" style="background: none; border: none; font-size: 1.4rem; color: var(--text-muted); cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+          <button onclick="closeModal('modal-submit-assignment')" style="background: none; border: none; font-size: 1.25rem; color: var(--text-muted); cursor: pointer; padding: 4px;" title="ปิดหน้าต่าง"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <input type="hidden" id="submit-asg-id">
 
         <!-- Student Identity Bar -->
-        <div id="submit-student-info-bar" style="background: rgba(0, 180, 0, 0.08); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 9px 14px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; flex-wrap: wrap; gap: 8px;">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <i class="fa-solid fa-circle-user text-emerald-600" style="font-size: 1.15rem;"></i>
+        <div id="submit-student-info-bar" style="background: rgba(0, 180, 0, 0.08); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 6px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 0.76rem; flex-wrap: wrap; gap: 6px;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-circle-user text-emerald-600" style="font-size: 1rem;"></i>
             <span id="submit-user-info-text" style="font-weight: 700; color: var(--text-main);">ผู้ส่งงาน: นักเรียน ม.4</span>
           </div>
-          <span style="font-size: 0.72rem; color: #10b981; font-weight: 700; background: rgba(16, 185, 129, 0.15); padding: 3px 10px; border-radius: 9999px;">
+          <span style="font-size: 0.7rem; color: #10b981; font-weight: 700; background: rgba(16, 185, 129, 0.15); padding: 2px 8px; border-radius: 9999px;">
             <i class="fa-solid fa-circle-check"></i> บันทึกผลงานออนไลน์อัตโนมัติ
           </span>
         </div>
 
         <!-- Mode Switcher Tabs -->
-        <div style="display: flex; gap: 8px; background: var(--surface-secondary); padding: 4px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 16px;">
-          <button type="button" id="tab-mode-upload" onclick="switchSubmitMode('upload')" class="sub-mode-btn active" style="flex: 1; padding: 8px 12px; border-radius: var(--radius-sm); font-size: 0.82rem; font-weight: 700; border: none; cursor: pointer;">
+        <div style="display: flex; gap: 6px; background: var(--surface-secondary); padding: 3px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 10px;">
+          <button type="button" id="tab-mode-upload" onclick="switchSubmitMode('upload')" class="sub-mode-btn active" style="flex: 1; padding: 6px 10px; border-radius: var(--radius-sm); font-size: 0.78rem; font-weight: 700; border: none; cursor: pointer;">
             <i class="fa-solid fa-cloud-arrow-up mr-1 text-emerald-600"></i> 1. อัปโหลดไฟล์จากเครื่อง
           </button>
-          <button type="button" id="tab-mode-link" onclick="switchSubmitMode('link')" class="sub-mode-btn" style="flex: 1; padding: 8px 12px; border-radius: var(--radius-sm); font-size: 0.82rem; font-weight: 700; border: none; cursor: pointer;">
+          <button type="button" id="tab-mode-link" onclick="switchSubmitMode('link')" class="sub-mode-btn" style="flex: 1; padding: 6px 10px; border-radius: var(--radius-sm); font-size: 0.78rem; font-weight: 700; border: none; cursor: pointer;">
             <i class="fa-solid fa-link mr-1 text-blue-600"></i> 2. แนบลิงก์ (Drive/Canva/GitHub)
           </button>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 14px; font-size: 0.9rem;">
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
           
           <!-- Mode 1: Native Multi-File Upload Dropzone -->
           <div id="section-submit-upload">
-            <div id="dropzone" class="upload-dropzone" onclick="document.getElementById('submit-file-input').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)" style="cursor: pointer; border: 2px dashed var(--thairath-green); border-radius: var(--radius-md); padding: 22px 16px; text-align: center; transition: all 0.2s; background: rgba(0, 180, 0, 0.03);">
-              <i class="fa-solid fa-cloud-arrow-up" style="font-size: 2.3rem; color: var(--thairath-green); margin-bottom: 8px; display: block;"></i>
-              <div style="font-weight: 800; font-size: 0.95rem; color: var(--text-main);">คลิกเพื่อเลือกไฟล์ (ส่งได้หลายไฟล์พร้อมกัน) หรือลากไฟล์มาวางที่นี่</div>
-              <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px; line-height: 1.5;">
+            <div id="dropzone" class="upload-dropzone" onclick="document.getElementById('submit-file-input').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)" style="cursor: pointer; border: 2px dashed var(--thairath-green); border-radius: var(--radius-md); padding: 14px 12px; text-align: center; transition: all 0.2s; background: rgba(0, 180, 0, 0.03);">
+              <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.6rem; color: var(--thairath-green); margin-bottom: 4px; display: block;"></i>
+              <div style="font-weight: 800; font-size: 0.88rem; color: var(--text-main);">คลิกเพื่อเลือกไฟล์ (ส่งได้หลายไฟล์พร้อมกัน) หรือลากไฟล์มาวางที่นี่</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 3px; line-height: 1.4;">
                 รองรับไฟล์ผังงาน Flowgorithm (.fprg), รูปภาพ (.png, .jpg), .pdf, .docx, .zip<br>
                 <span style="color: #38bdf8; font-weight: 700;"><i class="fa-solid fa-layer-group mr-1"></i> สามารถเลือกหลายไฟล์พร้อมกัน หรือกดปุ่ม "เพิ่มไฟล์อีก" ได้</span>
               </div>
@@ -1939,40 +1939,40 @@
             </div>
 
             <!-- Multi-File Selected Container -->
-            <div id="selected-files-container" style="display: none; margin-top: 12px;">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
-                <span id="selected-files-count-badge" style="font-size: 0.8rem; font-weight: 800; color: #10b981; background: rgba(16, 185, 129, 0.15); padding: 3px 10px; border-radius: 999px;">
+            <div id="selected-files-container" style="display: none; margin-top: 10px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; flex-wrap: wrap; gap: 6px;">
+                <span id="selected-files-count-badge" style="font-size: 0.76rem; font-weight: 800; color: #10b981; background: rgba(16, 185, 129, 0.15); padding: 2px 8px; border-radius: 999px;">
                   <i class="fa-solid fa-paperclip mr-1"></i> ไฟล์แนบ (0 ไฟล์)
                 </span>
-                <div style="display: flex; gap: 8px;">
-                  <button type="button" onclick="document.getElementById('submit-file-input').click()" style="background: rgba(56, 189, 248, 0.15); border: 1px solid #0284c7; color: #0284c7; font-size: 0.76rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                <div style="display: flex; gap: 6px;">
+                  <button type="button" onclick="document.getElementById('submit-file-input').click()" style="background: rgba(56, 189, 248, 0.15); border: 1px solid #0284c7; color: #0284c7; font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
                     <i class="fa-solid fa-plus"></i> เพิ่มไฟล์อีก
                   </button>
-                  <button type="button" onclick="clearSelectedFiles()" style="background: rgba(244, 63, 94, 0.1); border: 1px solid #f43f5e; color: #f43f5e; font-size: 0.76rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                  <button type="button" onclick="clearSelectedFiles()" style="background: rgba(244, 63, 94, 0.1); border: 1px solid #f43f5e; color: #f43f5e; font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
                     <i class="fa-solid fa-trash-can"></i> ล้างทั้งหมด
                   </button>
                 </div>
               </div>
 
               <!-- List of attached files -->
-              <div id="selected-files-list" style="display: flex; flex-direction: column; gap: 6px; max-height: 200px; overflow-y: auto; padding-right: 4px;">
+              <div id="selected-files-list" style="display: flex; flex-direction: column; gap: 4px; max-height: 110px; overflow-y: auto; padding-right: 4px;">
               </div>
             </div>
           </div>
 
           <!-- Mode 2: URL Link with Drive Permission Guard -->
           <div id="section-submit-link" style="display: none;">
-            <label style="font-weight: 700; display: block; margin-bottom: 6px; font-size: 0.82rem;">แนบลิงก์ผลงาน (GitHub / Google Drive / Canva):</label>
+            <label style="font-weight: 700; display: block; margin-bottom: 4px; font-size: 0.78rem;">แนบลิงก์ผลงาน (GitHub / Google Drive / Canva):</label>
             <div style="position: relative;">
-              <input type="url" id="submit-file-url" oninput="checkDriveUrl(this.value)" placeholder="https://drive.google.com/... หรือ https://github.com/..." style="width: 100%; padding: 10px 12px 10px 36px; border-radius: var(--radius-md); border: 1.5px solid var(--border-color); font-family: inherit; background: var(--surface-secondary); color: var(--text-main); font-size: 0.88rem;">
-              <i class="fa-solid fa-link" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-subtle);"></i>
+              <input type="url" id="submit-file-url" oninput="checkDriveUrl(this.value)" placeholder="https://drive.google.com/... หรือ https://github.com/..." style="width: 100%; padding: 8px 10px 8px 32px; border-radius: var(--radius-sm); border: 1.5px solid var(--border-color); font-family: inherit; background: var(--surface-secondary); color: var(--text-main); font-size: 0.82rem; box-sizing: border-box;">
+              <i class="fa-solid fa-link" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-subtle); font-size: 0.85rem;"></i>
             </div>
 
             <!-- Smart Google Drive Sharing Alert -->
-            <div id="drive-perm-alert" class="drive-alert-box" style="display: none; margin-top: 10px; background: rgba(245, 158, 11, 0.12); border: 1.5px solid #f59e0b; border-radius: var(--radius-md); padding: 10px 14px;">
-              <div style="display: flex; gap: 10px; align-items: flex-start;">
-                <i class="fa-solid fa-triangle-exclamation text-amber-500" style="font-size: 1.2rem; margin-top: 2px;"></i>
-                <div style="font-size: 0.78rem; line-height: 1.5; color: var(--text-main);">
+            <div id="drive-perm-alert" class="drive-alert-box" style="display: none; margin-top: 8px; background: rgba(245, 158, 11, 0.12); border: 1.5px solid #f59e0b; border-radius: var(--radius-sm); padding: 8px 10px;">
+              <div style="display: flex; gap: 8px; align-items: flex-start;">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500" style="font-size: 1rem; margin-top: 2px;"></i>
+                <div style="font-size: 0.74rem; line-height: 1.4; color: var(--text-main);">
                   <strong style="color: #d97706; display: block; margin-bottom: 2px;">⚠️ ตรวจพบลิงก์ Google Drive:</strong>
                   กรุณาตรวจสอบว่าได้ตั้งค่าการแชร์เป็น <strong>"ทุกคนที่มีลิงก์ (Anyone with the link)"</strong> แล้ว เพื่อให้ครูผู้สอนสามารถเปิดตรวจและให้คะแนนผลงานของคุณได้
                 </div>
@@ -1982,26 +1982,26 @@
 
           <!-- Description Field -->
           <div>
-            <label style="font-weight: 700; display: block; margin-bottom: 6px; font-size: 0.82rem;">รายละเอียดงาน / คำอธิบายโครงงาน:</label>
-            <textarea id="submit-content" rows="3" placeholder="กรอกรายละเอียดโครงงาน ปัญหาที่เลือก หรือคำอธิบายใบงานที่ส่ง..." style="width: 100%; padding: 10px 12px; border-radius: var(--radius-md); border: 1.5px solid var(--border-color); font-family: inherit; background: var(--surface-secondary); color: var(--text-main); font-size: 0.88rem;"></textarea>
+            <label style="font-weight: 700; display: block; margin-bottom: 4px; font-size: 0.78rem;">รายละเอียดงาน / คำอธิบายโครงงาน:</label>
+            <textarea id="submit-content" rows="2" placeholder="กรอกรายละเอียดโครงงาน ปัญหาที่เลือก หรือคำอธิบายใบงานที่ส่ง..." style="width: 100%; padding: 6px 10px; border-radius: var(--radius-sm); border: 1.5px solid var(--border-color); font-family: inherit; background: var(--surface-secondary); color: var(--text-main); font-size: 0.82rem; resize: vertical; box-sizing: border-box;"></textarea>
           </div>
 
         </div>
 
         <!-- Progress Indicator -->
-        <div id="upload-progress-wrap" style="display: none; margin-top: 14px;">
-          <div style="display: flex; justify-content: space-between; font-size: 0.74rem; font-weight: 700; color: var(--thairath-green); margin-bottom: 4px;">
+        <div id="upload-progress-wrap" style="display: none; margin-top: 10px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 700; color: var(--thairath-green); margin-bottom: 3px;">
             <span id="upload-progress-text">กำลังอัปโหลดไฟล์...</span>
             <span id="upload-progress-pct">0%</span>
           </div>
-          <div style="height: 6px; background: var(--surface-secondary); border-radius: 3px; overflow: hidden;">
+          <div style="height: 5px; background: var(--surface-secondary); border-radius: 3px; overflow: hidden;">
             <div id="upload-progress-bar" style="height: 100%; width: 0%; background: var(--thairath-green); transition: width 0.2s;"></div>
           </div>
         </div>
 
-        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; border-top: 1px solid var(--border-color); padding-top: 16px;">
-          <button type="button" onclick="closeModal('modal-submit-assignment')" class="btn btn-outline">ยกเลิก</button>
-          <button type="button" id="btn-submit-work" onclick="doSubmitAssignment()" class="btn btn-emerald">
+        <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; border-top: 1px solid var(--border-color); padding-top: 10px;">
+          <button type="button" onclick="closeModal('modal-submit-assignment')" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.82rem;">ยกเลิก</button>
+          <button type="button" id="btn-submit-work" onclick="doSubmitAssignment()" class="btn btn-emerald" style="padding: 6px 18px; font-size: 0.82rem; font-weight: 700;">
             <i class="fa-solid fa-paper-plane mr-1"></i> ยืนยันการส่งงาน
           </button>
         </div>

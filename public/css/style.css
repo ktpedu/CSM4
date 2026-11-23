@@ -1116,41 +1116,63 @@ a {
 /* Thairath Billboard Centered Dots */
 .billboard-dots-wrap {
   position: absolute;
-  bottom: 12px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  z-index: 10;
-  padding: 4px 12px;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(6px);
+  z-index: 15;
+  height: 22px;
+  padding: 0 12px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: var(--radius-full);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-sizing: border-box;
 }
 
 .billboard-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
-  border: none;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  flex: 0 0 7px;
+  width: 7px !important;
+  height: 7px !important;
+  min-width: 7px !important;
+  min-height: 7px !important;
+  max-width: 7px !important;
+  max-height: 7px !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.45);
+  border: none !important;
+  outline: none !important;
   cursor: pointer;
-  padding: 0;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
   transition: all 0.25s ease;
+  display: block;
 }
 
 .billboard-dot:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .billboard-dot.active {
-  width: 8px;
-  height: 8px;
-  background: #00b400; /* Thairath Signature Green */
-  box-shadow: 0 0 10px rgba(0, 180, 0, 0.85);
-  transform: scale(1.2);
+  flex: 0 0 20px;
+  width: 20px !important;
+  height: 7px !important;
+  min-width: 20px !important;
+  min-height: 7px !important;
+  max-width: 20px !important;
+  border-radius: 999px !important;
+  background: #00b400 !important; /* Thairath Signature Green */
+  box-shadow: 0 0 8px rgba(0, 180, 0, 0.85);
+  transform: none !important;
 }
 
 /* Floating Pill Button Bottom-Right (AI สรุปบทเรียนเด่น style) */
@@ -1188,10 +1210,10 @@ a {
 @media (max-width: 900px) {
   .thairath-billboard-wrap {
     height: auto;
-    min-height: 220px;
+    min-height: 230px;
   }
   .billboard-slide {
-    padding: 18px 24px 38px 24px;
+    padding: 16px 20px 48px 20px;
     position: relative;
     display: none;
   }
@@ -1201,7 +1223,7 @@ a {
   .billboard-slide-grid {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 12px;
+    gap: 10px;
   }
   .billboard-visual-col {
     display: none;
@@ -1210,13 +1232,24 @@ a {
     justify-content: center;
   }
   .billboard-title {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+    line-height: 1.35;
+  }
+  .billboard-subtitle {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    margin-bottom: 4px;
   }
   .billboard-meta-row {
     justify-content: center;
+    gap: 10px;
+    margin-bottom: 6px;
   }
   .billboard-ai-pill {
     display: none;
+  }
+  .billboard-dots-wrap {
+    bottom: 8px;
   }
 }
 
@@ -6146,4 +6179,38 @@ button.btn-primary, button.btn-emerald, button.btn-amber, button.btn-rose {
 [data-theme="dark"] .quiz-btn-clear-draft:hover {
   background: rgba(239, 68, 68, 0.2) !important;
   color: #ffffff !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE MODAL OVERFLOW & FIT CONTROLS (PREVENTS SCREEN BLEEDING)
+   ========================================================================== */
+.modal-overlay,
+#modal-submit-assignment {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal-overlay .card,
+#modal-submit-assignment .card {
+  max-height: calc(100vh - 24px) !important;
+  max-height: calc(100dvh - 24px) !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box !important;
+}
+
+@media (max-height: 750px) {
+  #modal-submit-assignment .card {
+    padding: 14px 16px !important;
+  }
+  #modal-submit-assignment .upload-dropzone {
+    padding: 10px 12px !important;
+  }
+  #modal-submit-assignment .upload-dropzone i {
+    font-size: 1.4rem !important;
+    margin-bottom: 2px !important;
+  }
+  #modal-submit-assignment #selected-files-list {
+    max-height: 85px !important;
+  }
 }
