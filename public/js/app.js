@@ -2283,6 +2283,22 @@ function updateStudentSyncUI() {
   }
 }
 
+// ==========================================
+// SECURE AUTHENTICATION (SALTED SHA-256 HASH)
+// ==========================================
+const AUTH_SALT = 'csm4_wny_salt_2026_teacher_auth';
+const TEACHER_AUTH_HASH = 'e3e18a24113d8c724734a52c7d05303faf4c929795297a6c756c16119c1a1242';
+const ADMIN_AUTH_HASH = '36d34632f21cbe0b789a54bd3847d44a87137b14d36259e34686dbfc0a963017';
+
+async function computeSha256(text) {
+  if (typeof crypto !== 'undefined' && crypto.subtle && typeof TextEncoder !== 'undefined') {
+    const data = new TextEncoder().encode(text);
+    const hashBuf = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+  return '';
+}
+
 // Perform Login via /api/auth/login
 async function handleLogin(username, password) {
   const errMsg = document.getElementById('login-error-msg');
@@ -2304,7 +2320,18 @@ async function handleLogin(username, password) {
       };
 
       if (staffAccounts[username]) {
-        if (password === 'teacher123' || password === 'admin123' || password === username + '123' || password === 'pass1234') {
+        const inputHash = await computeSha256(AUTH_SALT + (password || '').trim());
+        const customTeacherHash = localStorage.getItem('csm4_teacher_custom_hash');
+        const customAdminHash = localStorage.getItem('csm4_admin_custom_hash');
+
+        let isValid = false;
+        if (username === 'teacher') {
+          isValid = inputHash === (customTeacherHash || TEACHER_AUTH_HASH);
+        } else if (username === 'admin') {
+          isValid = inputHash === (customAdminHash || ADMIN_AUTH_HASH);
+        }
+
+        if (isValid) {
           res = staffAccounts[username];
         } else {
           throw new Error('รหัสผ่านไม่ถูกต้อง');
@@ -2429,16 +2456,20 @@ function handleLogout() {
   }
 }
 
-// Quick Switch Role (kept for backwards compatibility)
+// Quick Switch Role (safe compatibility helper)
 async function quickSwitchRole(role) {
-  const credentials = {
-    student1: { u: 'student1', p: 'student123' },
-    student2: { u: 'student2', p: 'student123' },
-    teacher: { u: 'teacher', p: 'teacher123' },
-    admin: { u: 'admin', p: 'admin123' }
-  };
-  const cred = credentials[role] || credentials.student1;
-  await handleLogin(cred.u, cred.p);
+  if (role === 'teacher' || role === 'admin') {
+    openLoginModal();
+    const uInput = document.getElementById('login-username');
+    if (uInput) {
+      uInput.value = role;
+      const pInput = document.getElementById('login-password');
+      if (pInput) pInput.focus();
+    }
+    return;
+  }
+  const defaultStudent = typeof STUDENT_ACCOUNTS !== 'undefined' ? Object.keys(STUDENT_ACCOUNTS)[0] || '10101' : '10101';
+  await handleLogin(defaultStudent, defaultStudent);
 }
 
 // Tab Switcher Router
@@ -8606,7 +8637,7 @@ function handleQuizPasscodeSubmit(e) {
     isPass = true;
   } else if (pendingQuizData.id === 'quiz-final' && (normEntered === 'final' || normEntered === quizPasscode)) {
     isPass = true;
-  } else if (normEntered === quizPasscode || ['csm4', '1234', 'teacher123', 'admin123', 'csm401', 'csm402', 'midterm4', 'final4', 'preunit1', 'preunit2', 'pre1', 'pre2'].includes(normEntered)) {
+  } else if (normEntered === quizPasscode || ['csm4', '1234', 'csm401', 'csm402', 'midterm4', 'final4', 'preunit1', 'preunit2', 'pre1', 'pre2'].includes(normEntered)) {
     isPass = true;
   }
   
@@ -9688,6 +9719,112 @@ async function submitStudentQuestion() {
   }
 }
 
+// ==========================================
+// TEACHER / ADMIN PASSWORD MANAGEMENT
+// ==========================================
+function openChangePasswordModal() {
+  if (!currentUser || (currentUser.role !== 'teacher' && currentUser.role !== 'admin')) {
+    showToast('กรุณาเข้าสู่ระบบด้วยบัญชีครูหรือแอดมินก่อนดำเนินการ', 'error');
+    return;
+  }
+  const form = document.getElementById('form-change-password');
+  if (form) form.reset();
+  const errMsg = document.getElementById('change-pwd-error-msg');
+  if (errMsg) errMsg.style.display = 'none';
+  openModal('modal-change-password');
+  setTimeout(() => {
+    const currInput = document.getElementById('input-curr-pwd');
+    if (currInput) currInput.focus();
+  }, 100);
+}
+
+async function handleChangePasswordSubmit(event) {
+  if (event && event.preventDefault) event.preventDefault();
+  if (!currentUser || (currentUser.role !== 'teacher' && currentUser.role !== 'admin')) {
+    showToast('ไม่มีสิทธิ์เข้าถึงฟังก์ชันนี้', 'error');
+    return;
+  }
+
+  const currInput = document.getElementById('input-curr-pwd');
+  const newInput = document.getElementById('input-new-pwd');
+  const confirmInput = document.getElementById('input-confirm-pwd');
+  const errMsg = document.getElementById('change-pwd-error-msg');
+  const errText = document.getElementById('change-pwd-error-text');
+  const submitBtn = document.getElementById('btn-submit-change-pwd');
+
+  const currPwd = (currInput ? currInput.value : '').trim();
+  const newPwd = (newInput ? newInput.value : '').trim();
+  const confirmPwd = (confirmInput ? confirmInput.value : '').trim();
+
+  const showError = (msg) => {
+    if (errText) errText.textContent = msg;
+    if (errMsg) errMsg.style.display = 'flex';
+  };
+
+  if (errMsg) errMsg.style.display = 'none';
+
+  if (!currPwd) {
+    showError('กรุณากรอกรหัสผ่านปัจจุบัน');
+    if (currInput) currInput.focus();
+    return;
+  }
+  if (!newPwd || newPwd.length < 6) {
+    showError('รหัสผ่านใหม่ต้องมีความยาวอย่างน้อย 6 ตัวอักษร');
+    if (newInput) newInput.focus();
+    return;
+  }
+  if (newPwd !== confirmPwd) {
+    showError('รหัสผ่านใหม่และการยืนยันรหัสผ่านไม่ตรงกัน');
+    if (confirmInput) confirmInput.focus();
+    return;
+  }
+
+  try {
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-1"></i> กำลังบันทึก...';
+    }
+
+    const currentHash = await computeSha256(AUTH_SALT + currPwd);
+    const storageKey = currentUser.role === 'admin' ? 'csm4_admin_custom_hash' : 'csm4_teacher_custom_hash';
+    const defaultHash = currentUser.role === 'admin' ? ADMIN_AUTH_HASH : TEACHER_AUTH_HASH;
+    const expectedHash = localStorage.getItem(storageKey) || defaultHash;
+
+    if (currentHash !== expectedHash) {
+      showError('รหัสผ่านปัจจุบันไม่ถูกต้อง');
+      if (currInput) {
+        currInput.value = '';
+        currInput.focus();
+      }
+      return;
+    }
+
+    const newHash = await computeSha256(AUTH_SALT + newPwd);
+    localStorage.setItem(storageKey, newHash);
+
+    closeModal('modal-change-password');
+    showToast('เปลี่ยนรหัสผ่านสำเร็จเรียบร้อยแล้ว', 'success');
+  } catch (err) {
+    showError('เกิดข้อผิดพลาดในการเปลี่ยนรหัสผ่าน: ' + (err.message || ''));
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk mr-1"></i> บันทึกรหัสผ่าน';
+    }
+  }
+}
+
+function handleResetDefaultPassword() {
+  if (!currentUser || (currentUser.role !== 'teacher' && currentUser.role !== 'admin')) return;
+  const targetName = currentUser.role === 'admin' ? 'ผู้ดูแลระบบ (Admin)' : 'ครูผู้สอน';
+  const confirmed = confirm(`ต้องการรีเซ็ตรหัสผ่านของ${targetName}กลับเป็นรหัสเริ่มต้นใช่หรือไม่?`);
+  if (!confirmed) return;
+
+  const storageKey = currentUser.role === 'admin' ? 'csm4_admin_custom_hash' : 'csm4_teacher_custom_hash';
+  localStorage.removeItem(storageKey);
+  closeModal('modal-change-password');
+  showToast(`รีเซ็ตรหัสผ่านของ${targetName}กลับเป็นค่าเริ่มต้นเรียบร้อยแล้ว`, 'info');
+}
 
 // --- ANNOUNCEMENT MODAL ---
 function openAnnouncementModal() {

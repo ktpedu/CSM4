@@ -1289,9 +1289,14 @@
                 ตรวจงาน ให้คะแนนโครงงาน 5 บท ตอบคำถามนักเรียน และสร้างประกาศ
               </div>
             </div>
-            <button onclick="openAnnouncementModal()" class="btn btn-amber" style="padding: 6px 16px; font-size: 0.84rem;">
-              <i class="fa-solid fa-bullhorn"></i> สร้างประกาศใหม่
-            </button>
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+              <button onclick="openChangePasswordModal()" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.84rem; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-key"></i> เปลี่ยนรหัสผ่านครู
+              </button>
+              <button onclick="openAnnouncementModal()" class="btn btn-amber" style="padding: 6px 16px; font-size: 0.84rem;">
+                <i class="fa-solid fa-bullhorn"></i> สร้างประกาศใหม่
+              </button>
+            </div>
           </div>
 
           <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px;">
@@ -2613,6 +2618,68 @@
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <!-- Modal เปลี่ยนรหัสผ่านสำหรับครูและผู้ดูแลระบบ -->
+    <div id="modal-change-password" class="modal-overlay" style="position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 2600; display: none; align-items: center; justify-content: center; padding: 20px;">
+      <div class="card" style="max-width: 440px; width: 100%; padding: 28px 24px; position: relative; border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid var(--border-color); background: var(--surface-primary);">
+        <button onclick="closeModal('modal-change-password')" style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 1.3rem; color: var(--text-muted); cursor: pointer;" title="ปิดหน้าต่าง">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(245, 158, 11, 0.15); color: #d97706; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 1.4rem;">
+            <i class="fa-solid fa-key"></i>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px;">เปลี่ยนรหัสผ่านครูผู้สอน</h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted);">กำหนดรหัสผ่านใหม่เพื่อความปลอดภัยในการเข้าถึงคอนโซลครู</p>
+        </div>
+
+        <form id="form-change-password" onsubmit="handleChangePasswordSubmit(event)">
+          <div id="change-pwd-error-msg" style="display: none; padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; font-size: 0.82rem; margin-bottom: 14px; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span id="change-pwd-error-text">รหัสผ่านไม่ถูกต้อง</span>
+          </div>
+
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px; color: var(--text-main);">
+              รหัสผ่านปัจจุบัน <span style="color: #ef4444;">*</span>
+            </label>
+            <div style="position: relative;">
+              <input type="password" id="input-curr-pwd" required placeholder="ป้อนรหัสผ่านปัจจุบัน" class="form-input" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--surface-secondary); color: var(--text-main);" />
+            </div>
+          </div>
+
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px; color: var(--text-main);">
+              รหัสผ่านใหม่ <span style="color: #ef4444;">*</span>
+            </label>
+            <div style="position: relative;">
+              <input type="password" id="input-new-pwd" required minlength="6" placeholder="อย่างน้อย 6 ตัวอักษร" class="form-input" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--surface-secondary); color: var(--text-main);" />
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px; color: var(--text-main);">
+              ยืนยันรหัสผ่านใหม่ <span style="color: #ef4444;">*</span>
+            </label>
+            <div style="position: relative;">
+              <input type="password" id="input-confirm-pwd" required minlength="6" placeholder="ป้อนรหัสผ่านใหม่อีกครั้ง" class="form-input" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--surface-secondary); color: var(--text-main);" />
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; border-top: 1px solid var(--border-color); padding-top: 16px;">
+            <button type="button" onclick="handleResetDefaultPassword()" style="background: none; border: none; font-size: 0.78rem; color: var(--text-muted); cursor: pointer; text-decoration: underline;" title="รีเซ็ตกลับไปใช้รหัสเริ่มต้น">
+              รีเซ็ตรหัสเริ่มต้น
+            </button>
+            <div style="display: flex; gap: 8px;">
+              <button type="button" onclick="closeModal('modal-change-password')" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">ยกเลิก</button>
+              <button type="submit" id="btn-submit-change-pwd" class="btn btn-emerald" style="padding: 8px 20px; font-size: 0.85rem; font-weight: 700;">
+                <i class="fa-solid fa-floppy-disk mr-1"></i> บันทึกรหัสผ่าน
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
 
