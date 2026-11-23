@@ -4,14 +4,22 @@
 // School: Wangnamyenwittayakom School
 // ====================================================================
 
-const CACHE_NAME = 'csm4-pwa-v5.6';
-const RUNTIME_CACHE = 'csm4-runtime-v5.6';
+const CACHE_NAME = 'csm4-pwa-v5.7';
+const RUNTIME_CACHE = 'csm4-runtime-v5.7';
 
-// Core App Shell Assets for Offline Access
+// Core App Shell Assets for Offline Access (Modular Architecture)
 const CORE_ASSETS = [
   './',
   './index.html',
   './css/style.css',
+  './js/config.js',
+  './js/modules/auth.js',
+  './js/modules/lessons.js',
+  './js/modules/worksheets.js',
+  './js/modules/assignments.js',
+  './js/modules/quizzes.js',
+  './js/modules/teacher.js',
+  './js/modules/pwa.js',
   './js/app.js',
   './manifest.json',
   './img/LOGOprofile.gif',
