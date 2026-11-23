@@ -1074,7 +1074,7 @@ async function loadAssignmentsData() {
             </button>
           `;
         } else if (currentUser.role === 'student') {
-          let btnText = 'ส่งงาน (Supabase Cloud)';
+          let btnText = 'ส่งงาน';
           let btnBg = 'bg-emerald-600 hover:bg-emerald-700';
           let btnIcon = 'fa-upload';
 
