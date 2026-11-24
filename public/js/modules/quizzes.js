@@ -1399,7 +1399,7 @@ let quizTimeRemaining = 1800; // 30 minutes in seconds
 let quizStartTime = null;
 let quizViolationsCount = 0;
 let quizIsActive = false;
-let quizEyeTheme = 'dark'; // Primary default standby: Dark Mode
+let quizEyeTheme = 'light'; // Clean Minimal White-Green Light Mode
 let pendingQuizData = null; // Stored quiz object before passcode validation
 let quizActiveQuestions = []; // stores current randomized questions
 const GOOGLE_SCRIPT_QUIZ_URL = 'https://script.google.com/macros/s/AKfycbyaRWXgcCKdlgCylkC-5bjyb_FT80LPMdDg42GzpoMrSoF6cYyv21958w5QRLwFmrM/exec';
@@ -1439,14 +1439,13 @@ function updateQuizWatermark() {
   layer.innerHTML = html;
 }
 
-// Eye Comfort Theme Toggle (Standby default: Dark)
+// Eye Comfort Theme Toggle (Enforce Clean Minimal White-Green Light Mode)
 function toggleQuizEyeTheme() {
-  quizEyeTheme = quizEyeTheme === 'dark' ? 'light' : 'dark';
+  quizEyeTheme = 'light';
   const mainCard = document.getElementById('quiz-main-card');
   const resultCard = document.getElementById('quiz-result-card');
-  if (mainCard) mainCard.setAttribute('data-quiz-theme', quizEyeTheme);
-  if (resultCard) resultCard.setAttribute('data-quiz-theme', quizEyeTheme);
-  showToast(`สลับเป็นโหมด${quizEyeTheme === 'dark' ? 'มืดถนอมสายตา' : 'สว่างนวลตา'} เรียบร้อย`, 'info');
+  if (mainCard) mainCard.setAttribute('data-quiz-theme', 'light');
+  if (resultCard) resultCard.setAttribute('data-quiz-theme', 'light');
 }
 
 // Forced Fullscreen Controller & Handlers
@@ -2081,16 +2080,16 @@ async function startProctoredQuiz(rawQuiz) {
 
   currentQuiz = rawQuiz;
 
-  // Set quiz eye theme to DARK by default (Standby primary mode)
-  quizEyeTheme = 'dark';
+  // Set quiz eye theme to LIGHT by default (Clean Minimal White-Green Mode)
+  quizEyeTheme = 'light';
   const mainCard = document.getElementById('quiz-main-card');
   const resultCard = document.getElementById('quiz-result-card');
   if (mainCard) {
-    mainCard.setAttribute('data-quiz-theme', 'dark');
+    mainCard.setAttribute('data-quiz-theme', 'light');
     mainCard.classList.add('is-fullscreen');
   }
   if (resultCard) {
-    resultCard.setAttribute('data-quiz-theme', 'dark');
+    resultCard.setAttribute('data-quiz-theme', 'light');
   }
 
   const hasAntiCheat = isAntiCheatQuiz(currentQuiz);

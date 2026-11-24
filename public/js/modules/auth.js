@@ -93,30 +93,33 @@ function updateAuthUI() {
       bannerBadge.innerText = currentUser.role === 'student' 
         ? `นักเรียนห้อง ${currentUser.class_room || 'ม.4'} • เลขประจำตัว ${currentUser.username}`
         : `บัญชี${currentUser.role === 'teacher' ? 'ครูผู้สอน' : 'ผู้ดูแลระบบ'}`;
-      bannerBadge.style.background = currentUser.role === 'student' ? 'rgba(16, 185, 129, 0.25)' : 'rgba(59, 130, 246, 0.25)';
-      bannerBadge.style.color = currentUser.role === 'student' ? '#6ee7b7' : '#93c5fd';
+      bannerBadge.style.background = currentUser.role === 'student' ? '#dcfce7' : '#eff6ff';
+      bannerBadge.style.color = currentUser.role === 'student' ? '#15803d' : '#1d4ed8';
+      bannerBadge.style.border = currentUser.role === 'student' ? '1px solid #bbf7d0' : '1px solid #bfdbfe';
     }
     if (bannerTitle) {
       bannerTitle.innerText = `ยินดีต้อนรับ, ${currentUser.full_name}`;
+      bannerTitle.style.color = '#0f172a';
     }
     if (bannerSub) {
       bannerSub.innerText = currentUser.role === 'student'
         ? `พร้อมเริ่มบทเรียน ทำใบงาน หรือเข้าสอบออนไลน์ได้ทันที ตรวจสอบผลคะแนนได้ตลอดเวลา`
         : `คุณกำลังเข้าสู่ระบบในฐานะ${currentUser.role === 'teacher' ? 'ครูผู้สอน' : 'ผู้ดูแลระบบ'} สามารถจัดการคะแนนและตรวจงานได้ที่เมนูระบบจัดการ`;
+      bannerSub.style.color = '#334155';
     }
     if (bannerActions) {
       if (currentUser.role === 'student') {
         bannerActions.innerHTML = `
-          <button type="button" onclick="switchTab('analytics')" class="btn" style="background: rgba(255,255,255,0.15); color: #ffffff; font-weight: 700; padding: 10px 18px; border-radius: 12px; font-size: 0.88rem; border: 1px solid rgba(255,255,255,0.25); cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
-            <i class="fa-solid fa-chart-line text-emerald-400"></i> ดูคะแนนของฉัน
+          <button type="button" onclick="switchTab('analytics')" class="btn" style="background: #ffffff; color: var(--primary-color); font-weight: 700; padding: 10px 18px; border-radius: 12px; font-size: 0.88rem; border: 1.5px solid var(--primary-color); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <i class="fa-solid fa-chart-line text-emerald-700"></i> ดูคะแนนของฉัน
           </button>
-          <button type="button" onclick="logout()" class="btn" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; font-weight: 700; padding: 10px 14px; border-radius: 12px; font-size: 0.88rem; border: 1px solid rgba(239, 68, 68, 0.4); cursor: pointer; display: inline-flex; align-items: center; gap: 6px;" title="ออกจากระบบ">
+          <button type="button" onclick="logout()" class="btn" style="background: #fef2f2; color: #dc2626; font-weight: 700; padding: 10px 14px; border-radius: 12px; font-size: 0.88rem; border: 1px solid #fecaca; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;" title="ออกจากระบบ">
             <i class="fa-solid fa-arrow-right-from-bracket"></i> ออกจากระบบ
           </button>
         `;
       } else {
         bannerActions.innerHTML = `
-          <button type="button" onclick="switchTab('teacher')" class="btn" style="background: #10b981; color: #ffffff; font-weight: 700; padding: 10px 18px; border-radius: 12px; font-size: 0.88rem; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);">
+          <button type="button" onclick="switchTab('teacher')" class="btn btn-primary" style="padding: 10px 18px; border-radius: 12px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
             <i class="fa-solid fa-chalkboard-user"></i> แดชบอร์ดครูผู้สอน
           </button>
         `;
@@ -155,14 +158,25 @@ function updateAuthUI() {
     if (bannerIcon) bannerIcon.innerText = '🎓';
     if (bannerBadge) {
       bannerBadge.innerText = 'ระบบการเรียนรู้ออนไลน์ ม.4';
-      bannerBadge.style.background = 'rgba(16, 185, 129, 0.25)';
-      bannerBadge.style.color = '#6ee7b7';
+      bannerBadge.style.background = '#dcfce7';
+      bannerBadge.style.color = '#15803d';
+      bannerBadge.style.border = '1px solid #bbf7d0';
     }
-    if (bannerTitle) bannerTitle.innerText = 'ศูนย์การเรียนรู้วิทยาการคำนวณ ม.4 (CS-M4)';
-    if (bannerSub) bannerSub.innerText = 'เลือก 5 เมนูหลักด้านล่าง เพื่อเข้าสู่บทเรียน ทำใบงาน ส่งการบ้าน หรือทำแบบทดสอบได้ทันทีในคลิกเดียว';
+    if (bannerTitle) {
+      bannerTitle.innerText = 'ศูนย์การเรียนรู้วิทยาการคำนวณ ม.4 (CS-M4)';
+      bannerTitle.style.color = '#0f172a';
+    }
+    if (bannerSub) {
+      bannerSub.innerText = 'เลือก 5 เมนูหลักด้านล่าง เพื่อเข้าสู่บทเรียน ทำใบงาน ส่งการบ้าน หรือทำแบบทดสอบได้ทันทีในคลิกเดียว';
+      bannerSub.style.color = '#334155';
+    }
     if (bannerActions) {
       bannerActions.innerHTML = `
-        <button type="button" onclick="openLoginModal()" id="btn-banner-login" class="btn" style="background: #10b981; color: #ffffff; font-weight: 700; padding: 10px 20px; border-radius: 12px; font-size: 0.9rem; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35); display: inline-flex; align-items: center; gap: 8px;">
+        <button type="button" onclick="openLoginModal()" id="btn-banner-login" class="btn btn-primary" style="padding: 10px 20px; border-radius: 12px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> เข้าสู่ระบบนักเรียน (เลข 5 หลัก)
+        </button>
+      `;
+    }
           <i class="fa-solid fa-arrow-right-to-bracket"></i> เข้าสู่ระบบนักเรียน (เลข 5 หลัก)
         </button>
       `;

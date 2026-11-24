@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th" data-theme="dark">
+<html lang="th" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
@@ -8,10 +8,10 @@
 
     <!-- Progressive Web App (PWA) Meta & Manifest -->
     <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#00b400" />
+    <meta name="theme-color" content="#107548" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="CS-M4" />
     <meta name="application-name" content="CS-M4 วังน้ำเย็น" />
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
@@ -45,13 +45,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
-        corePlugins: { preflight: false },
-        darkMode: ['selector', '[data-theme="dark"]']
+        corePlugins: { preflight: false }
       }
     </script>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v=5.0" />
+    <link rel="stylesheet" href="css/style.css?v=6.0" />
       <style>
       /* Ensure Font Awesome icons ALWAYS render correctly and never get overridden */
       .fa-solid, .fas, i.fa-solid, i.fas {
@@ -204,10 +203,8 @@
             </div>
           </div>
 
-          <!-- Theme Toggle Button -->
-          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle Theme" onclick="toggleTheme()" title="เปลี่ยนโหมดสี">
-            <i class="fa-solid fa-sun" id="theme-icon" style="color: #00b400;"></i>
-          </button>
+          <!-- Theme Toggle Retired (โหมดมืดถูกตัดทิ้ง คงเหลือเฉพาะโหมดสว่าง ขาว-เขียว สบายตา) -->
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-hidden="true" style="display: none !important;"></button>
 
           <!-- Mobile Toggle -->
           <button class="mobile-toggle" id="mobile-toggle" onclick="toggleMobileMenu()">
@@ -320,11 +317,11 @@
             <div class="thairath-billboard-track" id="billboard-track">
               
               <!-- BILLBOARD SLIDE 1: แนวคิดเชิงคำนวณ & SDLC 5 ขั้นตอน -->
-              <div class="billboard-slide active" style="background: linear-gradient(135deg, #091224 0%, #112240 50%, #0a3d24 100%);">
+              <div class="billboard-slide active" style="background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 60%, #e6f7ee 100%);">
                 <div class="billboard-slide-grid">
                   <div class="billboard-visual-col">
                     <div class="billboard-badge-glow">
-                      <img src="img/LOGOprofile.gif" alt="CS-M4 Logo" class="billboard-logo-img" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid #00b400; flex-shrink: 0;" />
+                      <img src="img/LOGOprofile.gif" alt="CS-M4 Logo" class="billboard-logo-img" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-color); flex-shrink: 0;" />
                       <div class="billboard-platform-disc">
                         <i class="fa-solid fa-microchip disc-icon"></i>
                         <i class="fa-solid fa-code disc-icon"></i>
@@ -334,7 +331,7 @@
                   </div>
                   <div class="billboard-content-col">
                     <div class="billboard-top-tag">
-                      <span class="billboard-tag-live"><i class="fa-solid fa-circle-dot mr-1 text-emerald-400"></i> ประเด็นสำคัญการเรียนรู้ ม.4</span>
+                      <span class="billboard-tag-live"><i class="fa-solid fa-circle-dot mr-1 text-emerald-700"></i> ประเด็นสำคัญการเรียนรู้ ม.4</span>
                       <span class="billboard-tag-term">ว 4.2 ม.4/1 • หลักสูตรแกนกลาง</span>
                     </div>
                     <h2 class="billboard-title">
@@ -344,8 +341,8 @@
                       เจาะลึก 4 องค์ประกอบ Computational Thinking บูรณาการวงจร SDLC 5 ขั้นตอน พร้อมจัดทำรายงานโครงงาน 5 บทมาตรฐานวิชาการ
                     </p>
                     <div class="billboard-meta-row">
-                      <span><i class="fa-solid fa-user-pen mr-1 text-emerald-400"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
-                      <span><i class="fa-solid fa-book-bookmark mr-1 text-amber-400"></i> หนังสือเรียนอิเล็กทรอนิกส์</span>
+                      <span><i class="fa-solid fa-user-pen mr-1 text-emerald-700"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
+                      <span><i class="fa-solid fa-book-bookmark mr-1 text-amber-600"></i> หนังสือเรียนอิเล็กทรอนิกส์</span>
                       <button onclick="switchTab('lessons')" class="billboard-btn-action">
                         เข้าสู่บทเรียน <i class="fa-solid fa-arrow-right ml-1"></i>
                       </button>
@@ -356,15 +353,15 @@
               </div>
 
               <!-- BILLBOARD SLIDE 2: โครงงานคอมพิวเตอร์ 5 บท -->
-              <div class="billboard-slide" style="background: linear-gradient(135deg, #1a1205 0%, #3d2305 50%, #0d2818 100%);">
+              <div class="billboard-slide" style="background: linear-gradient(135deg, #ffffff 0%, #fffbeb 60%, #fef3c7 100%);">
                 <div class="billboard-slide-grid">
                   <div class="billboard-visual-col">
                     <div class="billboard-badge-glow glow-amber">
                       <i class="fa-solid fa-diagram-project billboard-main-icon" style="color: var(--accent-amber);"></i>
-                      <div class="billboard-platform-disc" style="border-color: rgba(217, 119, 6, 0.4);">
-                        <i class="fa-solid fa-file-lines disc-icon" style="color: #fbbf24;"></i>
-                        <i class="fa-solid fa-chart-gantt disc-icon" style="color: #fbbf24;"></i>
-                        <i class="fa-solid fa-cloud-arrow-up disc-icon" style="color: #fbbf24;"></i>
+                      <div class="billboard-platform-disc" style="border-color: rgba(217, 119, 6, 0.3);">
+                        <i class="fa-solid fa-file-lines disc-icon" style="color: #d97706;"></i>
+                        <i class="fa-solid fa-chart-gantt disc-icon" style="color: #d97706;"></i>
+                        <i class="fa-solid fa-cloud-arrow-up disc-icon" style="color: #d97706;"></i>
                       </div>
                     </div>
                   </div>
@@ -380,9 +377,9 @@
                       ดาวน์โหลดแบบฟอร์มเอกสารโครงงาน 5 บท เทมเพลตสไลด์นำเสนอ และส่งไฟล์ผ่านระบบออนไลน์ ตรวจสอบสถานะการตรวจได้ทันที
                     </p>
                     <div class="billboard-meta-row">
-                      <span><i class="fa-solid fa-file-pdf mr-1 text-amber-400"></i> ดาวน์โหลดแบบฟอร์ม</span>
-                      <span><i class="fa-solid fa-cloud-arrow-up mr-1 text-emerald-400"></i> แนบไฟล์ / Canva</span>
-                      <button onclick="switchTab('assignments')" class="billboard-btn-action" style="background-color: var(--accent-amber);">
+                      <span><i class="fa-solid fa-file-pdf mr-1 text-amber-600"></i> ดาวน์โหลดแบบฟอร์ม</span>
+                      <span><i class="fa-solid fa-cloud-arrow-up mr-1 text-emerald-700"></i> แนบไฟล์ / Canva</span>
+                      <button onclick="switchTab('assignments')" class="billboard-btn-action" style="background-color: var(--accent-amber); border-color: var(--accent-amber);">
                         ไปยังหน้าส่งงาน <i class="fa-solid fa-arrow-right ml-1"></i>
                       </button>
                     </div>
@@ -392,15 +389,15 @@
               </div>
 
               <!-- BILLBOARD SLIDE 3: Interactive CS Lab 4 มิติ -->
-              <div class="billboard-slide" style="background: linear-gradient(135deg, #051a24 0%, #0d3244 50%, #0a3d24 100%);">
+              <div class="billboard-slide" style="background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 60%, #e0f2fe 100%);">
                 <div class="billboard-slide-grid">
                   <div class="billboard-visual-col">
                     <div class="billboard-badge-glow glow-cyan">
-                      <i class="fa-solid fa-flask-vial billboard-main-icon" style="color: #38bdf8;"></i>
-                      <div class="billboard-platform-disc" style="border-color: rgba(56, 189, 248, 0.4);">
-                        <i class="fa-solid fa-calculator disc-icon" style="color: #7dd3fc;"></i>
-                        <i class="fa-solid fa-network-wired disc-icon" style="color: #7dd3fc;"></i>
-                        <i class="fa-solid fa-microchip disc-icon" style="color: #7dd3fc;"></i>
+                      <i class="fa-solid fa-flask-vial billboard-main-icon" style="color: #0284c7;"></i>
+                      <div class="billboard-platform-disc" style="border-color: rgba(2, 132, 199, 0.3);">
+                        <i class="fa-solid fa-calculator disc-icon" style="color: #0284c7;"></i>
+                        <i class="fa-solid fa-network-wired disc-icon" style="color: #0284c7;"></i>
+                        <i class="fa-solid fa-microchip disc-icon" style="color: #0284c7;"></i>
                       </div>
                     </div>
                   </div>
@@ -416,9 +413,9 @@
                       ฝึกทักษะการคิดเชิงคำนวณผ่านเครื่องมือจำลองปัญหา การวางแผน Gantt Chart และโปรแกรมจำลองผังงาน Flowgorithm ออนไลน์
                     </p>
                     <div class="billboard-meta-row">
-                      <span><i class="fa-solid fa-microchip mr-1 text-cyan-400"></i> Simulation Tool</span>
-                      <span><i class="fa-solid fa-puzzle-piece mr-1 text-emerald-400"></i> 4 กิจกรรมปฏิบัติการ</span>
-                      <button onclick="switchTab('ct-tools')" class="billboard-btn-action btn-cyan">
+                      <span><i class="fa-solid fa-microchip mr-1 text-cyan-600"></i> Simulation Tool</span>
+                      <span><i class="fa-solid fa-puzzle-piece mr-1 text-emerald-700"></i> 4 กิจกรรมปฏิบัติการ</span>
+                      <button onclick="switchTab('ct-tools')" class="billboard-btn-action" style="background-color: #0284c7; border-color: #0284c7;">
                         เปิด CS Lab <i class="fa-solid fa-arrow-right ml-1"></i>
                       </button>
                     </div>
@@ -428,15 +425,15 @@
               </div>
 
               <!-- BILLBOARD SLIDE 4: คลังข้อสอบกลางภาค & ปลายภาค (ตรงตามรูปที่ผู้ใช้ต้องการ) -->
-              <div class="billboard-slide" style="background: linear-gradient(135deg, #2b0810 0%, #4c0d1b 50%, #0e2b1b 100%);">
+              <div class="billboard-slide" style="background: linear-gradient(135deg, #ffffff 0%, #fef2f2 60%, #fee2e2 100%);">
                 <div class="billboard-slide-grid">
                   <div class="billboard-visual-col">
                     <div class="billboard-badge-glow glow-rose">
-                      <i class="fa-solid fa-trophy billboard-main-icon" style="color: #fbbf24;"></i>
-                      <div class="billboard-platform-disc" style="border-color: rgba(208, 0, 0, 0.4);">
-                        <i class="fa-solid fa-list-check disc-icon" style="color: #f87171;"></i>
-                        <i class="fa-solid fa-award disc-icon" style="color: #f87171;"></i>
-                        <i class="fa-solid fa-chart-line disc-icon" style="color: #f87171;"></i>
+                      <i class="fa-solid fa-trophy billboard-main-icon" style="color: #d97706;"></i>
+                      <div class="billboard-platform-disc" style="border-color: rgba(220, 38, 38, 0.3);">
+                        <i class="fa-solid fa-list-check disc-icon" style="color: #dc2626;"></i>
+                        <i class="fa-solid fa-award disc-icon" style="color: #dc2626;"></i>
+                        <i class="fa-solid fa-chart-line disc-icon" style="color: #dc2626;"></i>
                       </div>
                     </div>
                   </div>
@@ -452,9 +449,9 @@
                       ทดสอบความรู้ครบถ้วน 2 หน่วยการเรียนรู้ ทราบผลคะแนนเรียลไทม์ บันทึกข้อมูลเข้าระบบอัตโนมัติ และอัปเดตตารางคะแนนทันที
                     </p>
                     <div class="billboard-meta-row">
-                      <span><i class="fa-solid fa-user-pen mr-1 text-emerald-400"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
-                      <span><i class="fa-solid fa-stopwatch mr-1 text-amber-400"></i> จับเวลาและเฉลยรายข้อ</span>
-                      <button onclick="switchTab('quizzes')" class="billboard-btn-action btn-rose">
+                      <span><i class="fa-solid fa-user-pen mr-1 text-emerald-700"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
+                      <span><i class="fa-solid fa-stopwatch mr-1 text-amber-600"></i> จับเวลาและเฉลยรายข้อ</span>
+                      <button onclick="switchTab('quizzes')" class="billboard-btn-action" style="background-color: #dc2626; border-color: #dc2626;">
                         เริ่มทำแบบทดสอบ <i class="fa-solid fa-arrow-right ml-1"></i>
                       </button>
                     </div>
@@ -493,20 +490,20 @@
           <!-- 2. STUDENT WELCOME & IDENTITY BANNER -->
           <div id="student-welcome-banner" class="home-welcome-card">
             <div style="display: flex; align-items: center; gap: 16px;">
-              <div style="width: 50px; height: 50px; border-radius: 14px; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.65rem; flex-shrink: 0;">
+              <div style="width: 50px; height: 50px; border-radius: 14px; background: #ecfdf5; border: 2px solid #bbf7d0; display: flex; align-items: center; justify-content: center; font-size: 1.65rem; flex-shrink: 0;">
                 <span id="student-banner-icon">🎓</span>
               </div>
               <div>
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 3px;">
-                  <span id="student-banner-badge" style="background: rgba(16, 185, 129, 0.25); color: #6ee7b7; font-size: 0.72rem; font-weight: 800; padding: 2px 10px; border-radius: 999px; letter-spacing: 0.5px;">
+                  <span id="student-banner-badge" style="background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; font-size: 0.72rem; font-weight: 800; padding: 2px 10px; border-radius: 999px; letter-spacing: 0.5px;">
                     ระบบการเรียนรู้ออนไลน์ ม.4
                   </span>
-                  <span style="font-size: 0.76rem; color: #94a3b8;">ว 4.2 ม.4/1 • โรงเรียนวังน้ำเย็นวิทยาคม • ครูปณิฏฐา บุญยงค์</span>
+                  <span style="font-size: 0.76rem; color: #475569; font-weight: 600;">ว 4.2 ม.4/1 • โรงเรียนวังน้ำเย็นวิทยาคม • ครูปณิฏฐา บุญยงค์</span>
                 </div>
-                <h2 id="student-banner-title" style="font-family: 'Kanit', sans-serif; font-size: 1.28rem; font-weight: 800; margin: 0; color: #ffffff; line-height: 1.3;">
+                <h2 id="student-banner-title" style="font-family: 'Kanit', sans-serif; font-size: 1.28rem; font-weight: 800; margin: 0; color: #0f172a; line-height: 1.3;">
                   ศูนย์การเรียนรู้วิทยาการคำนวณ ม.4 (CS-M4)
                 </h2>
-                <p id="student-banner-sub" style="font-size: 0.82rem; color: #cbd5e1; margin: 3px 0 0 0;">
+                <p id="student-banner-sub" style="font-size: 0.82rem; color: #334155; margin: 3px 0 0 0;">
                   ยินดีต้อนรับนักเรียนทุกคน สามารถเข้าเรียน ส่งงาน และทำแบบทดสอบได้ทันที
                 </p>
               </div>
@@ -514,7 +511,7 @@
 
             <!-- Quick login / student status -->
             <div id="student-banner-actions" style="display: flex; align-items: center; gap: 10px;">
-              <button type="button" onclick="openLoginModal()" id="btn-banner-login" class="btn" style="background: #10b981; color: #ffffff; font-weight: 700; padding: 9px 18px; border-radius: 12px; font-size: 0.86rem; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35); display: inline-flex; align-items: center; gap: 8px;">
+              <button type="button" onclick="openLoginModal()" id="btn-banner-login" class="btn btn-primary" style="padding: 9px 18px; border-radius: 12px; font-size: 0.86rem; display: inline-flex; align-items: center; gap: 8px;">
                 <i class="fa-solid fa-arrow-right-to-bracket"></i> เข้าสู่ระบบนักเรียน (เลข 5 หลัก)
               </button>
             </div>
@@ -1047,12 +1044,12 @@
               </div>
             </div>
 
-            <div class="card" style="padding: 10px; background: #0f172a; min-height: 720px; display: flex; flex-direction: column;">
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; color: #94a3b8; font-size: 0.85rem; border-bottom: 1px solid #1e293b;">
-                <span style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-file-pdf" style="color: #ef4444;"></i> textbook_m4.pdf (คู่มือนักเรียนฉบับสมบูรณ์ 16 หน้า • สรุปเนื้อหา กิจกรรม และผังงาน ไม่มีเฉลย)</span>
+            <div class="card" style="padding: 10px; background: #ffffff; min-height: 720px; display: flex; flex-direction: column; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; color: var(--text-muted); font-size: 0.85rem; border-bottom: 1px solid var(--border-color);">
+                <span style="display: flex; align-items: center; gap: 8px; font-weight: 600;"><i class="fa-solid fa-file-pdf" style="color: #ef4444;"></i> textbook_m4.pdf (คู่มือนักเรียนฉบับสมบูรณ์ 16 หน้า • สรุปเนื้อหา กิจกรรม และผังงาน ไม่มีเฉลย)</span>
                 <div style="display: flex; gap: 12px; align-items: center;">
-                  <a href="textbook_m4.pdf" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดแท็บใหม่</a>
-                  <a href="/api/ebooks/pdf" download="student_handbook_m4.pdf" style="color: #10b981; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;"><i class="fa-solid fa-download"></i> ดาวน์โหลด</a>
+                  <a href="textbook_m4.pdf" target="_blank" style="color: #0284c7; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดแท็บใหม่</a>
+                  <a href="/api/ebooks/pdf" download="student_handbook_m4.pdf" style="color: var(--primary-color); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;"><i class="fa-solid fa-download"></i> ดาวน์โหลด</a>
                 </div>
               </div>
               <iframe id="ebook-tab-iframe" src="textbook_m4.pdf#page=1" style="width: 100%; height: 700px; border: none; border-radius: var(--radius-md); flex: 1;"></iframe>
@@ -1812,18 +1809,18 @@
     </div>
 
     <!-- Slide Presentation Viewer Modal -->
-    <div id="modal-slide-viewer" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px;">
-      <div style="background: #0f172a; color: white; border-radius: var(--radius-lg); max-width: 1040px; width: 100%; padding: 24px; border: 1px solid #334155; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; max-height: 92vh;">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 14px; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+    <div id="modal-slide-viewer" style="position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px;">
+      <div style="background: var(--surface-primary); color: var(--text-main); border-radius: var(--radius-lg); max-width: 1040px; width: 100%; padding: 24px; border: 1px solid var(--border-color); box-shadow: var(--shadow-lg); display: flex; flex-direction: column; max-height: 92vh;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 14px; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
           <div>
-            <h3 id="slide-modal-title" style="font-size: 1.25rem; color: white; font-weight: 700;">สไลด์ประกอบการสอน: แนวคิดเชิงคำนวณในการพัฒนาโครงงาน</h3>
-            <p id="slide-modal-unit" style="font-size: 0.85rem; color: #94a3b8;">หน่วยการเรียนรู้ที่ 1</p>
+            <h3 id="slide-modal-title" style="font-size: 1.25rem; color: var(--text-main); font-weight: 700;">สไลด์ประกอบการสอน: แนวคิดเชิงคำนวณในการพัฒนาโครงงาน</h3>
+            <p id="slide-modal-unit" style="font-size: 0.85rem; color: var(--text-muted);">หน่วยการเรียนรู้ที่ 1</p>
           </div>
           <div style="display: flex; align-items: center; gap: 10px;">
-            <a id="slide-modal-external-link" href="https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn" style="background: rgba(245, 158, 11, 0.2); border: 1.5px solid #f59e0b; color: #fbbf24; font-size: 0.84rem; padding: 7px 16px; border-radius: 10px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
+            <a id="slide-modal-external-link" href="https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn" style="background: #fffbeb; border: 1.5px solid #f59e0b; color: #b45309; font-size: 0.84rem; padding: 7px 16px; border-radius: 10px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
               <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดใน Google Slides
             </a>
-            <button onclick="closeModal('modal-slide-viewer')" style="background: none; border: none; font-size: 1.5rem; color: #94a3b8; cursor: pointer; padding: 4px 8px;"><i class="fa-solid fa-xmark"></i></button>
+            <button onclick="closeModal('modal-slide-viewer')" style="background: none; border: none; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; padding: 4px 8px;"><i class="fa-solid fa-xmark"></i></button>
           </div>
         </div>
 
@@ -1834,16 +1831,16 @@
 
         <!-- Fallback Card Viewer (used only if text-based slide) -->
         <div class="slide-box" id="slide-card-container" style="display: none;">
-          <span id="slide-page-counter" style="font-size: 0.8rem; font-weight: 700; color: #60a5fa; letter-spacing: 2px; margin-bottom: 15px;">SLIDE 1 OF 5</span>
-          <h2 id="slide-card-title" style="font-size: 1.8rem; font-weight: 700; margin-bottom: 15px; color: white;">บทนำสู่แนวคิดเชิงคำนวณ</h2>
-          <p id="slide-card-note" style="font-size: 1rem; color: #cbd5e1; max-width: 600px; line-height: 1.7;">ความหมายและนิยามตามหลักสูตรแกนกลาง ตัวชี้วัด ว 4.2 ม.4/1</p>
+          <span id="slide-page-counter" style="font-size: 0.8rem; font-weight: 700; color: #0284c7; letter-spacing: 2px; margin-bottom: 15px;">SLIDE 1 OF 5</span>
+          <h2 id="slide-card-title" style="font-size: 1.8rem; font-weight: 700; margin-bottom: 15px; color: var(--text-main);">บทนำสู่แนวคิดเชิงคำนวณ</h2>
+          <p id="slide-card-note" style="font-size: 1rem; color: var(--text-muted); max-width: 600px; line-height: 1.7;">ความหมายและนิยามตามหลักสูตรแกนกลาง ตัวชี้วัด ว 4.2 ม.4/1</p>
         </div>
 
         <div id="slide-card-nav" style="display: none; justify-content: space-between; align-items: center; margin-top: 25px;">
-          <button onclick="prevSlide()" class="btn" style="background: #1e293b; color: white; border: 1px solid #334155;">
+          <button onclick="prevSlide()" class="btn" style="background: var(--surface-secondary); color: var(--text-main); border: 1px solid var(--border-color);">
             <i class="fa-solid fa-chevron-left"></i> ก่อนหน้า
           </button>
-          <span id="slide-indicator" style="font-weight: 700; font-size: 0.9rem; color: #94a3b8;">1 / 5</span>
+          <span id="slide-indicator" style="font-weight: 700; font-size: 0.9rem; color: var(--text-muted);">1 / 5</span>
           <button onclick="nextSlide()" class="btn btn-primary">
             ถัดไป <i class="fa-solid fa-chevron-right"></i>
           </button>
@@ -1852,24 +1849,24 @@
     </div>
 
     <!-- E-Book Viewer Modal -->
-    <div id="modal-ebook-reader" style="position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(10px); z-index: 2000; display: none; flex-direction: column; padding: 20px;">
-      <div style="background: #0f172a; color: white; border-radius: var(--radius-lg); flex: 1; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #334155;">
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 25px; border-bottom: 1px solid #1e293b;">
+    <div id="modal-ebook-reader" style="position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(8px); z-index: 2000; display: none; flex-direction: column; padding: 20px;">
+      <div style="background: var(--surface-primary); color: var(--text-main); border-radius: var(--radius-lg); flex: 1; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-lg);">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 25px; border-bottom: 1px solid var(--border-color);">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <i class="fa-solid fa-book-open-reader" style="color: #10b981; font-size: 1.3rem;"></i>
+            <i class="fa-solid fa-book-open-reader" style="color: var(--primary-color); font-size: 1.3rem;"></i>
             <div>
-              <h3 style="font-size: 1.1rem; color: white; font-weight: 700;">คู่มือนักเรียน การพัฒนาโครงงานเทคโนโลยี (วิทยาการคำนวณ) ม.4 (16 หน้า)</h3>
-              <p style="font-size: 0.8rem; color: #94a3b8;">หลักสูตรแกนกลางฯ สาระเทคโนโลยี (ว 4.2 ม.4/1) • แผนผัง SDLC ตารางเค้าโครง และเกณฑ์การประเมิน (ฉบับนักเรียน ไม่มีเฉลย)</p>
+              <h3 style="font-size: 1.1rem; color: var(--text-main); font-weight: 700;">คู่มือนักเรียน การพัฒนาโครงงานเทคโนโลยี (วิทยาการคำนวณ) ม.4 (16 หน้า)</h3>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">หลักสูตรแกนกลางฯ สาระเทคโนโลยี (ว 4.2 ม.4/1) • แผนผัง SDLC ตารางเค้าโครง และเกณฑ์การประเมิน (ฉบับนักเรียน ไม่มีเฉลย)</p>
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 15px;">
-            <a href="/api/ebooks/pdf" download="student_handbook_m4.pdf" style="color: #10b981; font-size: 0.85rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            <a href="/api/ebooks/pdf" download="student_handbook_m4.pdf" style="color: var(--primary-color); font-size: 0.85rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
               <i class="fa-solid fa-download"></i> ดาวน์โหลด PDF (16 หน้า)
             </a>
-            <a href="textbook_m4.pdf" target="_blank" style="color: #38bdf8; font-size: 0.85rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            <a href="textbook_m4.pdf" target="_blank" style="color: #0284c7; font-size: 0.85rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
               <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดแท็บใหม่
             </a>
-            <button onclick="closeModal('modal-ebook-reader')" style="background: none; border: none; font-size: 1.5rem; color: #94a3b8; cursor: pointer; line-height: 1;"><i class="fa-solid fa-xmark"></i></button>
+            <button onclick="closeModal('modal-ebook-reader')" style="background: none; border: none; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; line-height: 1;"><i class="fa-solid fa-xmark"></i></button>
           </div>
         </div>
         <div style="flex: 1; padding: 6px;">
@@ -1879,11 +1876,11 @@
     </div>
 
     <!-- Video Player Modal -->
-    <div id="modal-video-player" style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px;">
-      <div style="background: #0f172a; color: white; border-radius: var(--radius-lg); max-width: 860px; width: 100%; padding: 25px; border: 1px solid #334155;">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 15px; margin-bottom: 20px;">
-          <h3 id="video-modal-title" style="font-size: 1.25rem; color: white;">วิดีโอการเรียนรู้</h3>
-          <button onclick="closeModal('modal-video-player')" style="background: none; border: none; font-size: 1.5rem; color: #94a3b8; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+    <div id="modal-video-player" style="position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px;">
+      <div style="background: var(--surface-primary); color: var(--text-main); border-radius: var(--radius-lg); max-width: 860px; width: 100%; padding: 25px; border: 1px solid var(--border-color); box-shadow: var(--shadow-lg);">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px;">
+          <h3 id="video-modal-title" style="font-size: 1.25rem; color: var(--text-main); font-weight: 700;">วิดีโอการเรียนรู้</h3>
+          <button onclick="closeModal('modal-video-player')" style="background: none; border: none; font-size: 1.5rem; color: var(--text-muted); cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="aspect-video-box" style="border-radius: var(--radius-md); overflow: hidden; background: black;">
           <iframe id="video-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -2040,7 +2037,7 @@
         </div>
 
         <!-- Body / Content Area -->
-        <div id="viewer-content-area" style="flex: 1; overflow: auto; display: flex; align-items: center; justify-content: center; background: #0f172a; border-radius: 12px; min-height: 440px; padding: 12px; text-align: center;">
+        <div id="viewer-content-area" style="flex: 1; overflow: auto; display: flex; align-items: center; justify-content: center; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px; min-height: 440px; padding: 12px; text-align: center;">
           <!-- Dynamically filled with image, PDF object, or link -->
         </div>
 
@@ -2048,43 +2045,43 @@
         <div id="viewer-student-note" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; padding: 8px 12px; background: var(--surface-secondary); border-radius: 8px; border: 1px solid var(--border-color); text-align: left; display: none;"></div>
 
         <!-- Integrated Teacher Quick-Grading Toolbar -->
-        <div id="viewer-teacher-grading-bar" style="display: none; background: #0b1322; border: 1.5px solid #1e293b; border-radius: 12px; padding: 12px 16px; margin-top: 10px;">
+        <div id="viewer-teacher-grading-bar" style="display: none; background: #ffffff; border: 1.5px solid var(--border-color); box-shadow: var(--shadow-sm); border-radius: 12px; padding: 12px 16px; margin-top: 10px;">
           <input type="hidden" id="viewer-sub-id" />
           <div style="display: flex; flex-direction: column; gap: 10px;">
             <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
               
               <!-- Quick Score Chips & Input -->
               <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                <span style="font-size: 0.82rem; font-weight: 800; color: #94a3b8;"><i class="fa-solid fa-star text-amber-400 mr-1"></i> ให้คะแนน:</span>
-                <button type="button" onclick="setViewerQuickScore(10)" class="quick-score-btn" data-score="10" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 800; border-radius: 6px; border: 1px solid rgba(16,185,129,0.4); background: rgba(16,185,129,0.15); color: #34d399; cursor: pointer;">10 เต็ม</button>
-                <button type="button" onclick="setViewerQuickScore(9)" class="quick-score-btn" data-score="9" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 800; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #cbd5e1; cursor: pointer;">9</button>
-                <button type="button" onclick="setViewerQuickScore(8)" class="quick-score-btn" data-score="8" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 800; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #cbd5e1; cursor: pointer;">8</button>
-                <button type="button" onclick="setViewerQuickScore(7)" class="quick-score-btn" data-score="7" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 800; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #cbd5e1; cursor: pointer;">7</button>
+                <span style="font-size: 0.82rem; font-weight: 800; color: #475569;"><i class="fa-solid fa-star text-amber-500 mr-1"></i> ให้คะแนน:</span>
+                <button type="button" onclick="setViewerQuickScore(10)" class="quick-score-btn" data-score="10" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 800; border-radius: 6px; border: 1px solid #bbf7d0; background: #dcfce7; color: #15803d; cursor: pointer;">10 เต็ม</button>
+                <button type="button" onclick="setViewerQuickScore(9)" class="quick-score-btn" data-score="9" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 800; border-radius: 6px; border: 1px solid var(--border-color); background: #f8fafc; color: var(--text-main); cursor: pointer;">9</button>
+                <button type="button" onclick="setViewerQuickScore(8)" class="quick-score-btn" data-score="8" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 800; border-radius: 6px; border: 1px solid var(--border-color); background: #f8fafc; color: var(--text-main); cursor: pointer;">8</button>
+                <button type="button" onclick="setViewerQuickScore(7)" class="quick-score-btn" data-score="7" style="padding: 4px 10px; font-size: 0.8rem; font-weight: 800; border-radius: 6px; border: 1px solid var(--border-color); background: #f8fafc; color: var(--text-main); cursor: pointer;">7</button>
                 <div style="display: inline-flex; align-items: center; gap: 4px; margin-left: 4px;">
-                  <input type="number" id="viewer-inline-score-input" min="0" max="20" value="10" style="width: 58px; padding: 4px 8px; border-radius: 6px; border: 1.5px solid #10b981; font-weight: 800; font-size: 0.95rem; text-align: center; color: #ffffff; background: #0f172a;">
-                  <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 700;">/ 10</span>
+                  <input type="number" id="viewer-inline-score-input" min="0" max="20" value="10" style="width: 58px; padding: 4px 8px; border-radius: 6px; border: 1.5px solid var(--primary-color); font-weight: 800; font-size: 0.95rem; text-align: center; color: var(--text-main); background: #ffffff;">
+                  <span style="font-size: 0.8rem; color: #475569; font-weight: 700;">/ 10</span>
                 </div>
               </div>
 
               <!-- Quick Feedback Presets -->
               <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                <button type="button" onclick="setViewerQuickFeedback('ยอดเยี่ยม ผังงานถูกต้องและสัญลักษณ์ ANSI ครบถ้วน')" style="font-size: 0.74rem; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #cbd5e1; cursor: pointer;">👍 ถูกต้องสมบูรณ์</button>
-                <button type="button" onclick="setViewerQuickFeedback('ผังงานดีมาก มีการคำนวณและแสดงผลครบถ้วน')" style="font-size: 0.74rem; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #cbd5e1; cursor: pointer;">💡 ครบถ้วน</button>
-                <button type="button" onclick="setViewerQuickFeedback('กรุณาตรวจสอบทิศทางลูกศร Flowline ให้ชี้ถูกทิศทาง')" style="font-size: 0.74rem; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #cbd5e1; cursor: pointer;">⚠️ ทิศทางลูกศร</button>
+                <button type="button" onclick="setViewerQuickFeedback('ยอดเยี่ยม ผังงานถูกต้องและสัญลักษณ์ ANSI ครบถ้วน')" style="font-size: 0.74rem; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: #f1f5f9; border: 1px solid var(--border-color); color: var(--text-muted); cursor: pointer;">👍 ถูกต้องสมบูรณ์</button>
+                <button type="button" onclick="setViewerQuickFeedback('ผังงานดีมาก มีการคำนวณและแสดงผลครบถ้วน')" style="font-size: 0.74rem; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: #f1f5f9; border: 1px solid var(--border-color); color: var(--text-muted); cursor: pointer;">💡 ครบถ้วน</button>
+                <button type="button" onclick="setViewerQuickFeedback('กรุณาตรวจสอบทิศทางลูกศร Flowline ให้ชี้ถูกทิศทาง')" style="font-size: 0.74rem; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: #f1f5f9; border: 1px solid var(--border-color); color: var(--text-muted); cursor: pointer;">⚠️ ทิศทางลูกศร</button>
               </div>
             </div>
 
             <!-- Feedback Input & Action Buttons -->
             <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-              <input type="text" id="viewer-inline-feedback-input" placeholder="พิมพ์ข้อเสนอแนะ หรือคลิกเลือกข้อความสำเร็จรูปข้างบน..." style="flex: 1; min-width: 220px; padding: 8px 12px; border-radius: 8px; border: 1px solid #334155; font-size: 0.84rem; color: #ffffff; background: #0f172a;" />
+              <input type="text" id="viewer-inline-feedback-input" placeholder="พิมพ์ข้อเสนอแนะ หรือคลิกเลือกข้อความสำเร็จรูปข้างบน..." style="flex: 1; min-width: 220px; padding: 8px 12px; border-radius: 8px; border: 1.5px solid var(--border-color); font-size: 0.84rem; color: var(--text-main); background: #ffffff;" />
               
-              <button type="button" onclick="doViewerSaveGrade(false)" class="btn" style="background: #059669; color: white; font-size: 0.82rem; font-weight: 700; padding: 8px 14px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer;">
+              <button type="button" onclick="doViewerSaveGrade(false)" class="btn btn-primary" style="font-size: 0.82rem; font-weight: 700; padding: 8px 14px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px;">
                 <i class="fa-solid fa-floppy-disk"></i> บันทึก
               </button>
-              <button type="button" onclick="doViewerSaveGrade(true)" class="btn" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: white; font-size: 0.82rem; font-weight: 700; padding: 8px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer; box-shadow: 0 2px 10px rgba(2, 132, 199, 0.35);">
+              <button type="button" onclick="doViewerSaveGrade(true)" class="btn" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: white; font-size: 0.82rem; font-weight: 700; padding: 8px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer; box-shadow: 0 2px 10px rgba(2, 132, 199, 0.25);">
                 บันทึก & คนถัดไป <i class="fa-solid fa-arrow-right"></i>
               </button>
-              <button type="button" onclick="doViewerReturnRevision()" class="btn" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); font-size: 0.8rem; font-weight: 700; padding: 8px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;" title="ส่งกลับให้นักเรียนแก้ไข">
+              <button type="button" onclick="doViewerReturnRevision()" class="btn" style="background: #fffbeb; color: #b45309; border: 1px solid #fde68a; font-size: 0.8rem; font-weight: 700; padding: 8px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;" title="ส่งกลับให้นักเรียนแก้ไข">
                 <i class="fa-solid fa-rotate-left"></i> ส่งกลับแก้ไข
               </button>
             </div>
@@ -2268,7 +2265,7 @@
 
     <!-- Take Quiz Modal (Proctored Eye-Friendly Exam - Forced Fullscreen) -->
     <div id="modal-take-quiz" class="quiz-modal-overlay is-fullscreen-active" oncontextmenu="return false;">
-      <div class="quiz-modal-card is-fullscreen" id="quiz-main-card" data-quiz-theme="dark">
+      <div class="quiz-modal-card is-fullscreen" id="quiz-main-card" data-quiz-theme="light">
         <!-- Floating Security Watermark Layer -->
         <div id="quiz-watermark-layer" class="quiz-watermark-layer" aria-hidden="true"></div>
 
@@ -2296,8 +2293,8 @@
           <div class="quiz-modal-header-info">
             <div class="quiz-header-top-row">
               <span class="proctor-pill" id="proctor-pill-security"><i class="fa-solid fa-shield-halved"></i> ระบบป้องกันการทุจริต</span>
-              <span class="proctor-pill" id="proctor-pill-fullscreen" style="border-color: #0284c7; background: rgba(2, 132, 199, 0.16); color: #38bdf8;"><i class="fa-solid fa-expand"></i> บังคับเต็มหน้าจอ</span>
-              <span class="proctor-pill" id="proctor-pill-learning" style="display: none; border-color: #10b981; background: rgba(16, 185, 129, 0.16); color: #34d399;"><i class="fa-solid fa-book-open"></i> แบบทดสอบเพื่อการเรียนรู้</span>
+              <span class="proctor-pill" id="proctor-pill-fullscreen" style="border-color: #0284c7; background: #e0f2fe; color: #0369a1;"><i class="fa-solid fa-expand"></i> บังคับเต็มหน้าจอ</span>
+              <span class="proctor-pill" id="proctor-pill-learning" style="display: none; border-color: #107548; background: #ecfdf5; color: #107548;"><i class="fa-solid fa-book-open"></i> แบบทดสอบเพื่อการเรียนรู้</span>
               <span class="proctor-student-pill" id="quiz-student-identity"><i class="fa-solid fa-user-shield"></i> ผู้สอบ: กำลังโหลด...</span>
               <span class="quiz-autosave-pill" id="quiz-autosave-pill" title="ระบบบันทึกคำตอบอัตโนมัติลงในเครื่อง (ป้องกันข้อมูลสูญหายเมื่อเน็ตหลุด)">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
@@ -2316,10 +2313,8 @@
               <span id="quiz-timer-text" class="quiz-timer-digit">30:00</span>
             </div>
 
-            <!-- Eye Comfort Theme Toggle -->
-            <button type="button" onclick="toggleQuizEyeTheme()" class="quiz-tool-btn" id="btn-quiz-theme" title="สลับโหมดถนอมสายตา (มืดสบายตา / สว่างนวล)">
-              <i class="fa-solid fa-circle-half-stroke"></i>
-            </button>
+            <!-- Eye Comfort Theme Toggle Retired -->
+            <button type="button" class="quiz-tool-btn" id="btn-quiz-theme" style="display: none !important;" aria-hidden="true"></button>
 
             <!-- Fullscreen Button -->
             <button type="button" onclick="toggleQuizFullscreen()" class="quiz-tool-btn" id="btn-quiz-fullscreen" title="บังคับโหมดเต็มหน้าจอ (คลิกเพื่อขยายซ้ำหากหลุดจากโหมด)">
@@ -2378,7 +2373,7 @@
 
     <!-- Quiz Result Modal (Eye-Friendly Review) -->
     <div id="modal-quiz-result" class="quiz-modal-overlay">
-      <div class="quiz-modal-card quiz-result-card" id="quiz-result-card" data-quiz-theme="dark">
+      <div class="quiz-modal-card quiz-result-card" id="quiz-result-card" data-quiz-theme="light">
         <div class="quiz-result-header">
           <div class="quiz-result-icon">
             <i class="fa-solid fa-award"></i>

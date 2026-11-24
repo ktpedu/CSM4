@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="th" data-theme="dark">
+<html lang="th" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,9 +18,9 @@
 
   <style>
     :root {
-      --primary: #00b400;
-      --primary-dark: #008f00;
-      --primary-light: #e8f9e8;
+      --primary: #107548;
+      --primary-dark: #0a5231;
+      --primary-light: #ecfdf5;
       --accent-blue: #0284c7;
       --accent-purple: #7c3aed;
       --accent-amber: #d97706;
@@ -44,7 +44,7 @@
       --radius-lg: 20px;
     }
 
-    [data-theme="dark"] {
+    [data-theme="light"] {
       --bg-body: #0b1120;
       --bg-surface: #131d31;
       --bg-surface-alt: #1e293b;
@@ -52,7 +52,7 @@
       --text-muted: #94a3b8;
       --text-subtle: #64748b;
       --border-color: #27354f;
-      --primary-light: rgba(0, 180, 0, 0.15);
+      --primary-light: #ecfdf5;
     }
 
     * {
@@ -576,10 +576,7 @@
       </a>
 
       <div class="nav-actions">
-        <button class="nav-btn" onclick="toggleTheme()" title="สลับโหมดมืด/สว่าง">
-          <i class="fa-solid fa-moon" id="theme-btn-icon"></i>
-          <span id="theme-text">โหมดมืด</span>
-        </button>
+        <!-- Theme Toggle Retired -->
         <button class="nav-btn" onclick="window.print()" title="พิมพ์หรือบันทึกเป็น PDF">
           <i class="fa-solid fa-print"></i> พิมพ์เอกสาร
         </button>
@@ -1835,7 +1832,7 @@
     }
 
     // Restore saved theme (Default: dark mode standby)
-    const savedTheme = localStorage.getItem('csm4-unit1-theme') || localStorage.getItem('csm4-theme') || 'dark';
+    const savedTheme = 'light'; document.documentElement.setAttribute('data-theme', 'light');
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeBtn(savedTheme);
   </script>

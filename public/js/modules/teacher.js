@@ -324,8 +324,6 @@ async function loadAnalyticsData() {
     const ctx = document.getElementById('analyticsChart').getContext('2d');
     if (chartInstance) chartInstance.destroy();
 
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-
     chartInstance = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -333,7 +331,7 @@ async function loadAnalyticsData() {
         datasets: [{
           label: 'คะแนนสะสมรวม',
           data: data.leaderboard.map(i => i.totalScore),
-          backgroundColor: isDark ? '#00b400' : '#00903b',
+          backgroundColor: '#107548',
           borderRadius: 8
         }]
       },
@@ -342,8 +340,8 @@ async function loadAnalyticsData() {
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          x: { ticks: { color: isDark ? '#4ade80' : '#374151' }, grid: { color: isDark ? '#2e2e2e' : '#e5e7eb' } },
-          y: { beginAtZero: true, ticks: { color: isDark ? '#4ade80' : '#374151' }, grid: { color: isDark ? '#2e2e2e' : '#e5e7eb' } }
+          x: { ticks: { color: '#334155' }, grid: { color: '#e2e8f0' } },
+          y: { beginAtZero: true, ticks: { color: '#334155' }, grid: { color: '#e2e8f0' } }
         }
       }
     });

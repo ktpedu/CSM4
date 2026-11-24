@@ -86,17 +86,17 @@ function showToast(message, type = 'info') {
   const container = document.getElementById('toast-container');
   const toast = document.createElement('div');
   
-  let bg = 'bg-slate-800 text-white';
-  let icon = 'fa-info-circle text-blue-400';
+  let bg = 'bg-white text-slate-900 border border-slate-200 shadow-md';
+  let icon = 'fa-info-circle text-emerald-700';
   if (type === 'success') {
-    bg = 'bg-emerald-900 text-emerald-100 border border-emerald-500';
-    icon = 'fa-circle-check text-emerald-400';
+    bg = 'bg-emerald-50 text-emerald-950 border border-emerald-300 shadow-md';
+    icon = 'fa-circle-check text-emerald-700';
   } else if (type === 'error') {
-    bg = 'bg-rose-900 text-rose-100 border border-rose-500';
-    icon = 'fa-triangle-exclamation text-rose-400';
+    bg = 'bg-rose-50 text-rose-950 border border-rose-300 shadow-md';
+    icon = 'fa-triangle-exclamation text-rose-600';
   }
 
-  toast.className = `${bg} px-4 py-3 rounded-2xl shadow-xl flex items-center space-x-3 text-xs pointer-events-auto transition-all transform duration-300 translate-y-2 opacity-0 max-w-md`;
+  toast.className = `${bg} px-4 py-3 rounded-2xl shadow-xl flex items-center space-x-3 text-xs font-medium pointer-events-auto transition-all transform duration-300 translate-y-2 opacity-0 max-w-md`;
   toast.innerHTML = `<i class="fa-solid ${icon} text-base"></i><span>${message}</span>`;
   
   container.appendChild(toast);
@@ -111,37 +111,29 @@ function showToast(message, type = 'info') {
   }, 4000);
 }
 
-// Theme Management (Default Standard: Dark Mode as primary standby)
+// Theme Management: Enforce Clean Minimal Light Mode (ขาว - เขียว สบายตา คมชัด)
 function initTheme() {
-  if (!localStorage.getItem('csm4-theme-standby-v3')) {
-    localStorage.setItem('csm4-theme', 'dark');
-    localStorage.setItem('csm4-theme-standby-v3', 'true');
-  }
-  const saved = localStorage.getItem('csm4-theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', saved);
-  updateThemeIcon(saved);
+  localStorage.setItem('csm4-theme', 'light');
+  localStorage.setItem('csm4-unit1-theme', 'light');
+  localStorage.setItem('csm4-unit2-theme', 'light');
+  localStorage.setItem('csm4-ebook-theme', 'light');
+  document.documentElement.setAttribute('data-theme', 'light');
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (toggleBtn) toggleBtn.style.display = 'none';
+  const quizThemeBtn = document.getElementById('btn-quiz-theme');
+  if (quizThemeBtn) quizThemeBtn.style.display = 'none';
 }
 
 function toggleTheme() {
-  const current = document.documentElement.getAttribute('data-theme') || 'dark';
-  const next = current === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('csm4-theme', next);
-  updateThemeIcon(next);
-  if (activeTab === 'analytics') loadAnalyticsData();
-  showToast(`เปลี่ยนเป็นโหมด ${next === 'dark' ? 'มืด (ดำ - เขียว)' : 'สว่าง (ขาว - เขียว)'} เรียบร้อย`, 'info');
+  // Dark mode has been retired; keep only clean minimal white-green light mode
+  document.documentElement.setAttribute('data-theme', 'light');
+  localStorage.setItem('csm4-theme', 'light');
 }
 
 function updateThemeIcon(theme) {
   const icon = document.getElementById('theme-icon');
   if (icon) {
-    if (theme === 'dark') {
-      icon.className = 'fa-solid fa-sun';
-      icon.style.color = '#00b400';
-    } else {
-      icon.className = 'fa-solid fa-moon';
-      icon.style.color = '#00903b';
-    }
+    icon.style.display = 'none';
   }
 }
 
