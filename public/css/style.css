@@ -7133,3 +7133,159 @@ textarea::placeholder {
     padding: 0 8px !important;
   }
 }
+
+
+/* ==========================================================================
+   ULTRA-HIGH CONTRAST & LEGIBILITY OVERRIDE (ตัวหนังสือคมชัด มองเห็นชัดเจน 100%)
+   ========================================================================== */
+
+/* 1. Dark Gradient Overlay with High Opacity Behind All Text */
+.billboard-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  background: linear-gradient(90deg, 
+    rgba(2, 14, 9, 0.98) 0%, 
+    rgba(2, 14, 9, 0.95) 45%, 
+    rgba(3, 20, 13, 0.90) 62%, 
+    rgba(4, 25, 16, 0.55) 78%, 
+    rgba(4, 25, 16, 0.15) 100%
+  ) !important;
+  pointer-events: none !important;
+}
+
+/* 2. Top Badge Pill on Slides - High Contrast Solid / Glass */
+.hero-slide-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(3, 20, 13, 0.92) !important;
+  border: 1.5px solid #22c55e !important;
+  color: #ffffff !important;
+  padding: 6px 18px !important;
+  border-radius: 999px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 16px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), inset 0 0 12px rgba(34, 197, 94, 0.25) !important;
+  letter-spacing: 0.3px !important;
+}
+
+.hero-slide-badge i {
+  color: #4ade80 !important;
+  filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.8)) !important;
+  font-size: 0.95rem !important;
+}
+
+.hero-slide-badge.badge-amber {
+  border-color: #facc15 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), inset 0 0 12px rgba(250, 204, 21, 0.25) !important;
+}
+.hero-slide-badge.badge-amber i {
+  color: #facc15 !important;
+  filter: drop-shadow(0 0 6px rgba(250, 204, 21, 0.8)) !important;
+}
+
+.hero-slide-badge.badge-cyan {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), inset 0 0 12px rgba(56, 189, 248, 0.25) !important;
+}
+.hero-slide-badge.badge-cyan i {
+  color: #38bdf8 !important;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.8)) !important;
+}
+
+.hero-slide-badge.badge-rose {
+  border-color: #22c55e !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), inset 0 0 12px rgba(34, 197, 94, 0.25) !important;
+}
+.hero-slide-badge.badge-rose i {
+  color: #4ade80 !important;
+  filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.8)) !important;
+}
+
+/* 3. Hero Slide Title (Ultra-Bold Pure White with High-Contrast Shadow) */
+.billboard-hero-title {
+  font-family: 'Kanit', sans-serif !important;
+  font-size: 2.25rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  line-height: 1.25 !important;
+  margin: 0 0 14px 0 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95), 0 4px 20px rgba(0, 0, 0, 0.9) !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* 4. Hero Subtitle (Bright Sunshine Gold/Yellow - Exactly as in EmbeddedAI) */
+.hero-subheading {
+  display: block !important;
+  font-size: 0.86em !important;
+  font-weight: 700 !important;
+  color: #facc15 !important; /* Bright Gold */
+  margin-top: 8px !important;
+  line-height: 1.35 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.9) !important;
+  letter-spacing: -0.01em !important;
+  opacity: 1 !important;
+}
+
+/* 5. Hero Description (Pure White with Crisp Drop Shadow) */
+.billboard-hero-desc {
+  font-size: 0.98rem !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  line-height: 1.65 !important;
+  margin: 0 0 24px 0 !important;
+  max-width: 620px !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 1) !important;
+  opacity: 1 !important;
+}
+
+/* 6. Quick Service Cards Text Sharpening */
+.service-title {
+  font-family: 'Kanit', sans-serif !important;
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+  color: #0f172a !important; /* Solid Black Slate */
+  margin: 0 0 3px 0 !important;
+}
+
+.service-desc {
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  color: #1e293b !important; /* High-contrast Dark Slate */
+  margin: 0 !important;
+}
+
+/* 7. Active Navigation Tab Highlighter */
+.thairath-cat-item {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
+}
+
+.thairath-cat-item.active {
+  color: #facc15 !important; /* Bright Gold active tab */
+  border-bottom: 3px solid #facc15 !important;
+  background-color: rgba(16, 117, 72, 0.5) !important;
+}
+
+/* 8. Mobile Responsiveness */
+@media (max-width: 640px) {
+  .billboard-overlay {
+    background: linear-gradient(180deg, 
+      rgba(2, 14, 9, 0.97) 0%, 
+      rgba(2, 14, 9, 0.94) 60%, 
+      rgba(3, 20, 13, 0.98) 100%
+    ) !important;
+  }
+  .billboard-hero-title {
+    font-size: 1.45rem !important;
+  }
+  .hero-subheading {
+    font-size: 0.82em !important;
+  }
+  .billboard-hero-desc {
+    font-size: 0.86rem !important;
+  }
+}
