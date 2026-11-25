@@ -50,7 +50,7 @@
     </script>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v=7.1" />
+    <link rel="stylesheet" href="css/style.css?v=7.2" />
       <style>
       /* Ensure Font Awesome icons ALWAYS render correctly and never get overridden */
       .fa-solid, .fas, i.fa-solid, i.fas {
@@ -889,46 +889,47 @@
       <!-- ====================================================================
            TAB 5: WORKSHEETS & LEARNING ACTIVITIES
            ==================================================================== -->
-      <section id="tab-worksheets" class="tab-content" style="display: none; padding: 24px 0 30px 0;">
+      <section id="tab-worksheets" class="tab-content" style="display: none; padding: 18px 0 35px 0;">
         <div class="container">
           
-          <!-- Category Switcher (Edge AI Style) -->
-          <div style="background: var(--surface-secondary); border: 1.5px solid var(--border-color); border-radius: 16px; padding: 6px; margin-bottom: 22px; display: inline-flex; gap: 8px; flex-wrap: wrap; box-shadow: var(--shadow-sm);">
-            <button id="ws-cat-btn-theory" onclick="setWorksheetCategory('theory')" class="ws-cat-pill active theory">
-              <i class="fa-solid fa-file-lines text-sky-600"></i>
-              <span>1. ใบงานทฤษฎี & โครงงาน</span>
-              <span style="font-size: 0.75rem; padding: 2px 9px; border-radius: 999px; background: rgba(2, 132, 199, 0.18); color: #0284c7; font-weight: 800;">6 ฉบับมาตรฐาน</span>
-            </button>
-            <button id="ws-cat-btn-practical" onclick="setWorksheetCategory('practical')" class="ws-cat-pill">
-              <i class="fa-solid fa-laptop-code text-emerald-600"></i>
-              <span>2. ใบงานแบบปฏิบัติ (Flowchart Lab)</span>
-              <span style="font-size: 0.75rem; padding: 2px 9px; border-radius: 999px; background: rgba(16, 185, 129, 0.18); color: #059669; font-weight: 800;">3 ชุด / 30 ข้อ</span>
-            </button>
-            <button id="ws-cat-btn-all" onclick="setWorksheetCategory('all')" class="ws-cat-pill">
-              <i class="fa-solid fa-layer-group text-slate-500"></i>
-              <span>ดูทั้งหมด (9 ฉบับ)</span>
-            </button>
+          <!-- Unified Modern Header: Title + Category Segmented Switcher in ONE row -->
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; padding-bottom: 16px; border-bottom: 2px solid #e2e8f0; flex-wrap: wrap;">
+            <div>
+              <h2 style="font-size: 1.45rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 10px; margin: 0; font-family: 'Kanit', sans-serif;">
+                <div style="width: 42px; height: 42px; border-radius: 12px; background: #ecfdf5; color: #107548; border: 1.5px solid #a7f3d0; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; box-shadow: 0 2px 8px rgba(16, 117, 72, 0.1);">
+                  <i class="fa-solid fa-file-pen"></i>
+                </div>
+                <span>คลังใบงาน &amp; กิจกรรมปฏิบัติการ (Worksheets &amp; Lab)</span>
+              </h2>
+              <p style="font-size: 0.85rem; color: #475569; margin: 5px 0 0 0; font-weight: 500;">
+                วิทยาการคำนวณ ม.4 • ทำออนไลน์ หรือดาวน์โหลด PDF ไปทำใน GoodNotes / iPad / สั่งพิมพ์ได้ทันที
+              </p>
+            </div>
+
+            <!-- Two Clear Category Tabs (ทฤษฎี vs ปฏิบัติการ) -->
+            <div style="background: #f1f5f9; border: 1.5px solid #cbd5e1; border-radius: 14px; padding: 5px; display: inline-flex; gap: 6px;">
+              <button id="ws-cat-btn-theory" onclick="setWorksheetCategory('theory')" class="ws-cat-pill active theory">
+                <i class="fa-solid fa-file-lines text-sky-600"></i>
+                <span>1. ใบงานทฤษฎี &amp; โครงงาน</span>
+                <span class="ws-pill-counter">6 ฉบับ</span>
+              </button>
+              <button id="ws-cat-btn-practical" onclick="setWorksheetCategory('practical')" class="ws-cat-pill">
+                <i class="fa-solid fa-laptop-code text-emerald-600"></i>
+                <span>2. ปฏิบัติการ Flowchart Lab</span>
+                <span class="ws-pill-counter">30 ข้อ</span>
+              </button>
+            </div>
           </div>
 
-          <!-- Dynamic Banner Area (iPad / Flowgorithm Lab) -->
-          <div id="ws-category-banner">
-            <!-- Rendered via JS -->
-          </div>
+          <!-- Dynamic Tool Strip (Flowgorithm Download & Guide in practical mode only) -->
+          <div id="ws-category-banner"></div>
 
-          <!-- Section Header Area (Dynamic) -->
-          <div id="ws-header-area" class="thairath-section-header">
-            <!-- Rendered via JS -->
-          </div>
+          <!-- Sub-Filter Tabs (One Clean Row: Unit 1 / Unit 2 or Lab 1 / 2 / 3) -->
+          <div id="ws-subfilter-container" style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;"></div>
 
-          <!-- Sub-Filter Tabs (Dynamic: Unit 1/2 vs Lab 1/2/3) -->
-          <div id="ws-subfilter-container" style="display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;">
-            <!-- Rendered via JS -->
-          </div>
+          <!-- Worksheets Grid (Spacious 3-Column Layout, Never 4-column squished) -->
+          <div id="worksheets-grid" class="worksheets-responsive-grid"></div>
 
-          <!-- Worksheets Grid -->
-          <div id="worksheets-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 22px;">
-            <!-- Rendered via JS -->
-          </div>
         </div>
       </section>
 
@@ -2593,12 +2594,12 @@
     <script src="js/config.js?v=5.8"></script>
     <script src="js/modules/auth.js?v=5.8"></script>
     <script src="js/modules/lessons.js?v=7.1"></script>
-    <script src="js/modules/worksheets.js?v=7.1"></script>
+    <script src="js/modules/worksheets.js?v=7.2"></script>
     <script src="js/modules/assignments.js?v=5.8"></script>
     <script src="js/modules/quizzes.js?v=5.8"></script>
     <script src="js/modules/teacher.js?v=5.8"></script>
     <script src="js/modules/pwa.js?v=5.8"></script>
-    <script src="js/app.js?v=7.1"></script>
+    <script src="js/app.js?v=7.2"></script>
 
     <!-- MOBILE & TABLET STICKY BOTTOM NAVIGATION BAR -->
     <nav id="mobile-bottom-nav" class="mobile-bottom-nav">

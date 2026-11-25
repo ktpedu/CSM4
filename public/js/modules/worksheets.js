@@ -537,7 +537,6 @@ function setWorksheetCategory(category) {
   // 1. Update Category Buttons UI
   const btnTheory = document.getElementById('ws-cat-btn-theory');
   const btnPractical = document.getElementById('ws-cat-btn-practical');
-  const btnAll = document.getElementById('ws-cat-btn-all');
 
   if (btnTheory) {
     btnTheory.className = 'ws-cat-pill' + (category === 'theory' ? ' active theory' : '');
@@ -545,116 +544,46 @@ function setWorksheetCategory(category) {
   if (btnPractical) {
     btnPractical.className = 'ws-cat-pill' + (category === 'practical' ? ' active practical' : '');
   }
-  if (btnAll) {
-    btnAll.className = 'ws-cat-pill' + (category === 'all' ? ' active' : '');
-  }
 
-  // 2. Render Dynamic Banner
+  // 2. Render Dynamic Tool Strip (only for practical mode)
   const bannerContainer = document.getElementById('ws-category-banner');
   if (bannerContainer) {
     if (category === 'practical') {
       bannerContainer.innerHTML = `
-        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.12) 100%); border: 1.5px solid rgba(16, 185, 129, 0.3); border-radius: 16px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.05);">
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 12px;">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <div style="width: 44px; height: 44px; border-radius: 12px; background: #059669; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-                <i class="fa-solid fa-diagram-project"></i>
-              </div>
-              <div>
-                <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin: 0 0 2px 0;">
-                  ห้องปฏิบัติการออกแบบผังงาน (Flowchart & Flowgorithm Lab)
-                </h4>
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">
-                  ฝึกทักษะการแก้ปัญหา 30 ข้อโจทย์จริง • รองรับการส่งไฟล์โปรแกรม Flowgorithm (.fprg) และภาพถ่ายผังงาน
-                </p>
-              </div>
-            </div>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              <a href="http://flowgorithm.org/download/index.html" target="_blank" rel="noopener noreferrer" style="background: #059669; color: white; padding: 7px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-                <i class="fa-solid fa-download"></i> ดาวน์โหลด Flowgorithm ↗
-              </a>
-              <a href="flowgorithm-guide.html" target="_blank" style="background: rgba(5, 150, 105, 0.12); color: #059669; border: 1px solid rgba(5, 150, 105, 0.3); padding: 7px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-                <i class="fa-solid fa-book-open"></i> คู่มือการใช้งาน
-              </a>
-              <a href="worksheets/all_flowchart_worksheets_m4.pdf" target="_blank" download="รวมใบงานปฏิบัติการผังงาน_ม4.pdf" style="background: #0284c7; color: white; padding: 7px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-                <i class="fa-solid fa-file-pdf"></i> รวมใบงานปฏิบัติการ PDF (30 ข้อ)
-              </a>
-            </div>
+        <div style="background: #ecfdf5; border: 1.5px solid #a7f3d0; border-left: 5px solid #059669; border-radius: 12px; padding: 12px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-laptop-code text-emerald-600" style="font-size: 1.3rem;"></i>
+            <span style="font-size: 0.88rem; color: #065f46; font-weight: 600;">
+              <strong>ห้องปฏิบัติการผังงาน Flowgorithm 3 ชุด (30 ข้อ):</strong> รองรับไฟล์โปรแกรม (.fprg) และภาพถ่ายผังงาน
+            </span>
           </div>
-          <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.84rem; color: var(--text-main); background: var(--surface-secondary); border: 1px solid var(--border-color); padding: 10px 16px; border-radius: 10px; font-weight: 600;">
-            <span><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> สัญลักษณ์ ANSI Flowchart มาตรฐาน</span>
-            <span><i class="fa-solid fa-file-code text-blue-600 mr-1"></i> รองรับไฟล์ .fprg โดยตรง มีระบบตรวจโครงสร้าง XML อัตโนมัติ</span>
-            <span><i class="fa-solid fa-file-image text-amber-600 mr-1"></i> รองรับภาพถ่าย/ภาพวาดผังงาน</span>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <a href="http://flowgorithm.org/download/index.html" target="_blank" rel="noopener noreferrer" style="background: #059669; color: white; padding: 6px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-download"></i> ดาวน์โหลด Flowgorithm ↗
+            </a>
+            <a href="flowgorithm-guide.html" target="_blank" style="background: #ffffff; color: #059669; border: 1.5px solid #a7f3d0; padding: 6px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-book-open"></i> คู่มือการใช้งาน
+            </a>
           </div>
         </div>
       `;
     } else {
-            // Default: Theory mode
+      // Clean iPad hint bar for theory mode
       bannerContainer.innerHTML = `
-        <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; border-left: 5px solid #0284c7; border-radius: 12px; padding: 13px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.06);">
-          <div style="font-size: 0.88rem; color: #0c4a6e; display: flex; align-items: center; gap: 10px; font-weight: 600;">
-            <i class="fa-solid fa-circle-info text-sky-600" style="font-size: 1.2rem; flex-shrink: 0;"></i>
-            <span><strong>สำหรับ iPad &amp; การพิมพ์:</strong> สามารถกดปุ่ม <strong>"โหลด PDF (iPad)"</strong> ในการ์ดแต่ละใบงาน เพื่อบันทึกไฟล์เข้า GoodNotes/Files หรือสั่งพิมพ์ แล้วส่งผ่านระบบออนไลน์ได้ทันที</span>
+        <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; border-left: 5px solid #0284c7; border-radius: 12px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+          <div style="font-size: 0.86rem; color: #0369a1; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-circle-info text-sky-600" style="font-size: 1.15rem;"></i>
+            <span><strong>สำหรับ iPad:</strong> กดปุ่ม <strong>"PDF/iPad"</strong> ในการ์ดใบงานเพื่อโหลดเข้า GoodNotes หรือแอป Files แล้วเขียนส่งได้ทันที</span>
           </div>
+          <span style="font-size: 0.78rem; font-weight: 700; background: #e0f2fe; color: #0284c7; padding: 3px 10px; border-radius: 999px;">
+            6 ใบงานมาตรฐาน
+          </span>
         </div>
       `;
     }
   }
 
-  // 3. Render Header Area
-  const headerContainer = document.getElementById('ws-header-area');
-  if (headerContainer) {
-    if (category === 'practical') {
-      headerContainer.innerHTML = `
-        <div style="margin-bottom: 6px;">
-          <div class="thairath-section-title" style="font-size: 1.35rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 10px; font-family: 'Kanit', sans-serif;">
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: #ecfdf5; color: #059669; border: 1.5px solid #a7f3d0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">
-              <i class="fa-solid fa-laptop-code"></i>
-            </div>
-            <span>ห้องปฏิบัติการ &amp; ใบงานแบบปฏิบัติ (Flowchart Lab)</span>
-          </div>
-          <div class="thairath-section-subtitle" style="font-size: 0.88rem; color: #334155; margin-top: 4px; font-weight: 500;">
-            ใบงานฝึกทักษะการออกแบบผังงาน 3 ชุด รวม 30 โจทย์ปัญหา (แบบลำดับ • แบบเงื่อนไข • แบบหลายทางเลือก) พร้อมเกณฑ์รูบริกส์ข้อละ 1 คะแนน
-          </div>
-        </div>
-      `;
-    } else if (category === 'all') {
-      headerContainer.innerHTML = `
-        <div>
-          <div class="thairath-section-title">
-            <i class="fa-solid fa-layer-group text-slate-600"></i> คลังใบงานวิทยาการคำนวณ ม.4 ทั้งหมด (9 ฉบับ)
-          </div>
-          <div class="thairath-section-subtitle">
-            ใบงานภาคทฤษฎีและโครงงาน 6 ฉบับมาตรฐาน และใบงานแบบปฏิบัติการผังงาน Flowgorithm 3 ชุด รวม 30 ข้อ
-          </div>
-        </div>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <a href="worksheets/all_worksheets_m4.pdf" target="_blank" download="รวมใบงานทฤษฎี_วิทยาการคำนวณ_ม4.pdf" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.84rem; font-weight: 700;">
-            <i class="fa-solid fa-file-pdf text-sky-600 mr-1"></i> โหลดทฤษฎี (6 ฉบับ)
-          </a>
-          <a href="worksheets/all_flowchart_worksheets_m4.pdf" target="_blank" download="รวมใบงานปฏิบัติการผังงาน_ม4.pdf" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.84rem; font-weight: 700; border-color: #059669; color: #059669;">
-            <i class="fa-solid fa-file-pdf mr-1"></i> โหลดปฏิบัติการ (30 ข้อ)
-          </a>
-        </div>
-      `;
-    } else {
-      headerContainer.innerHTML = `
-        <div style="margin-bottom: 6px;">
-          <div class="thairath-section-title" style="font-size: 1.35rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 10px; font-family: 'Kanit', sans-serif;">
-            <div style="width: 40px; height: 40px; border-radius: 10px; background: #e0f2fe; color: #0284c7; border: 1.5px solid #bae6fd; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">
-              <i class="fa-solid fa-file-lines"></i>
-            </div>
-            <span>คลังใบงานทฤษฎี &amp; โครงงาน (Theory &amp; Project Worksheets)</span>
-          </div>
-          <div class="thairath-section-subtitle" style="font-size: 0.88rem; color: #334155; margin-top: 4px; font-weight: 500;">
-            ใบงานมาตรฐาน 6 ฉบับ ครบทั้ง 2 หน่วยการเรียนรู้ (หน่วยละ 3 ใบงาน • คะแนนเต็ม 10 คะแนนทุกใบงาน) สำหรับฝึกกระบวนการคิดและพัฒนาโครงงาน
-          </div>
-        </div>
-      `;
-    }
-  }
-
-  // 4. Render Dynamic Sub-filters
+  // 3. Render Sub-filters
   const subfilterContainer = document.getElementById('ws-subfilter-container');
   if (subfilterContainer) {
     if (category === 'practical') {
@@ -663,43 +592,31 @@ function setWorksheetCategory(category) {
           <i class="fa-solid fa-layer-group mr-1.5"></i> ทุกชุดปฏิบัติการ (3 ชุด / 30 ข้อ)
         </button>
         <button onclick="filterWorksheets('ws-flow-1')" class="btn-ws-filter" id="btn-ws-filter-ws-flow-1">
-          <i class="fa-solid fa-arrow-down-long mr-1.5" style="color: #10b981;"></i> Lab 1: ผังงานแบบลำดับ (10 ข้อ)
+          <i class="fa-solid fa-arrow-down-long mr-1.5" style="color: #10b981;"></i> Lab 1: ผังงานลำดับ (10 ข้อ)
         </button>
         <button onclick="filterWorksheets('ws-flow-2')" class="btn-ws-filter" id="btn-ws-filter-ws-flow-2">
-          <i class="fa-solid fa-code-branch mr-1.5" style="color: #059669;"></i> Lab 2: ผังงานแบบเงื่อนไข (10 ข้อ)
+          <i class="fa-solid fa-code-branch mr-1.5" style="color: #059669;"></i> Lab 2: ผังงานเงื่อนไข (10 ข้อ)
         </button>
         <button onclick="filterWorksheets('ws-flow-3')" class="btn-ws-filter" id="btn-ws-filter-ws-flow-3">
           <i class="fa-solid fa-network-wired mr-1.5" style="color: #047857;"></i> Lab 3: ผังงานหลายทางเลือก (10 ข้อ)
         </button>
       `;
-    } else if (category === 'all') {
-      subfilterContainer.innerHTML = `
-        <button onclick="filterWorksheets('all')" class="btn-ws-filter active" id="btn-ws-filter-all">
-          <i class="fa-solid fa-layer-group mr-1.5"></i> ทั้งหมด (9 ฉบับ)
-        </button>
-        <button onclick="filterWorksheets('cat-theory')" class="btn-ws-filter" id="btn-ws-filter-cat-theory">
-          <i class="fa-solid fa-file-lines mr-1.5 text-sky-600"></i> ใบงานทฤษฎี & โครงงาน (6 ฉบับ)
-        </button>
-        <button onclick="filterWorksheets('cat-practical')" class="btn-ws-filter" id="btn-ws-filter-cat-practical">
-          <i class="fa-solid fa-laptop-code mr-1.5 text-emerald-600"></i> ใบงานแบบปฏิบัติ Flowchart (3 ชุด)
-        </button>
-      `;
     } else {
       subfilterContainer.innerHTML = `
         <button onclick="filterWorksheets('all')" class="btn-ws-filter active" id="btn-ws-filter-all">
-          <i class="fa-solid fa-layer-group mr-1.5"></i> ทุกหน่วยการเรียนรู้ (6 ใบงานเดิม)
+          <i class="fa-solid fa-layer-group mr-1.5"></i> ทั้งหมด (6 ใบงาน)
         </button>
         <button onclick="filterWorksheets('mod-1')" class="btn-ws-filter" id="btn-ws-filter-mod-1">
-          <i class="fa-solid fa-lightbulb mr-1.5" style="color: #10b981;"></i> หน่วยที่ 1: แนวคิดเชิงคำนวณ (3 ใบงาน)
+          <i class="fa-solid fa-lightbulb mr-1.5" style="color: #10b981;"></i> หน่วยที่ 1: แนวคิดเชิงคำนวณ (ใบงาน 1.1 - 1.3)
         </button>
         <button onclick="filterWorksheets('mod-2')" class="btn-ws-filter" id="btn-ws-filter-mod-2">
-          <i class="fa-solid fa-laptop-code mr-1.5" style="color: #0284c7;"></i> หน่วยที่ 2: การพัฒนาโครงงาน (3 ใบงาน)
+          <i class="fa-solid fa-diagram-project mr-1.5" style="color: #0284c7;"></i> หน่วยที่ 2: การพัฒนาโครงงาน (ใบงาน 2.1 - 2.3)
         </button>
       `;
     }
   }
 
-  // 5. Load Worksheets Data
+  // 4. Load Data
   loadWorksheetsData('all');
 }
 
@@ -780,69 +697,49 @@ async function loadWorksheetsData(filterUnit = currentWorksheetSubFilter) {
 
       return `
         <div class="ws-card ${isFlow ? 'practical' : (isUnit2 ? 'unit-2' : '')}">
-          <div style="display: flex; flex-direction: column; gap: 12px;">
-            
-            <!-- Ultra High-Contrast Header Row -->
-            <div class="ws-card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px;">
-              <span class="ws-card-badge-pill ${badgeClass}" style="display: inline-flex; align-items: center; font-size: 0.84rem; font-weight: 800; padding: 6px 14px; border-radius: 8px; background: ${isFlow ? '#065f46' : (isUnit2 ? '#0369a1' : '#065f46')} !important; color: #ffffff !important; border: 2px solid ${isFlow ? '#34d399' : (isUnit2 ? '#38bdf8' : '#4ade80')} !important; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
-                ${isFlow ? '<i class="fa-solid fa-laptop-code mr-1.5" style="color: #6ee7b7;"></i>' : '<i class="fa-solid fa-book-bookmark mr-1.5" style="color: #93c5fd;"></i>'} ${escapeHtml(ws.unit)} • ${escapeHtml(ws.code)}
-              </span>
-              <span class="ws-card-points-badge" style="display: inline-flex; align-items: center; font-size: 0.84rem; font-weight: 800; padding: 6px 14px; border-radius: 8px; background: #0f172a !important; color: #fde047 !important; border: 2px solid #eab308 !important; box-shadow: 0 2px 8px rgba(234, 179, 8, 0.35); flex-shrink: 0;">
-                <i class="fa-solid fa-star mr-1" style="color: #facc15;"></i> เต็ม ${ws.points} คะแนน
-              </span>
-            </div>
-
+          <div style="display: flex; flex-direction: column; height: 100%; justify-content: space-between; gap: 12px;">
             <div>
-              <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px; line-height: 1.4;">
-                ${escapeHtml(stripDifficultyTags(ws.title))}
-              </h4>
-              <p class="ws-card-subtitle">
-                ${escapeHtml(stripDifficultyTags(ws.subtitle || ws.plan))}
-              </p>
-              <p class="ws-card-desc">
-                ${escapeHtml(ws.scenario || ws.instructions)}
-              </p>
-
-              ${isFlow ? `
-              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px;">
-                <span style="font-size: 0.76rem; font-weight: 700; background: rgba(15, 23, 42, 0.6); color: #cbd5e1; padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); display: inline-flex; align-items: center; gap: 5px;">
-                  <i class="fa-solid fa-list-check" style="color: #34d399;"></i> 10 ข้อปฏิบัติการ
+              <!-- Header Badges -->
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span class="ws-badge ${isFlow ? 'practical' : (isUnit2 ? 'unit-2' : '')}">
+                  ${isFlow ? '<i class="fa-solid fa-laptop-code mr-1"></i>' : '<i class="fa-solid fa-bookmark mr-1"></i>'} ${escapeHtml(ws.unit)} • ${escapeHtml(ws.code)}
                 </span>
-                <span style="font-size: 0.76rem; font-weight: 700; background: rgba(15, 23, 42, 0.6); color: #cbd5e1; padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); display: inline-flex; align-items: center; gap: 5px;">
-                  <i class="fa-solid fa-file-code" style="color: #38bdf8;"></i> Flowgorithm (.fprg)
-                </span>
-                <span style="font-size: 0.76rem; font-weight: 700; background: rgba(15, 23, 42, 0.6); color: #cbd5e1; padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); display: inline-flex; align-items: center; gap: 5px;">
-                  <i class="fa-solid fa-image" style="color: #fbbf24;"></i> รูปภาพผังงาน
+                <span class="ws-score">
+                  <i class="fa-solid fa-star text-amber-500 mr-1"></i> เต็ม ${ws.points} คะแนน
                 </span>
               </div>
-              ` : ''}
-            </div>
-          </div>
 
-          <div class="ws-card-footer">
-            <div class="ws-card-meta-row">
-              <span><i class="fa-regular fa-calendar-days mr-1.5 text-sky-400"></i> กำหนดส่ง: ${escapeHtml(ws.due)}</span>
-              <span style="font-weight: 700; color: #fbbf24;"><i class="fa-solid fa-bookmark mr-1"></i> ${escapeHtml(ws.standard || 'ว 4.2 ม.4/1')}</span>
+              <!-- Title -->
+              <h4 style="font-size: 1.12rem; font-weight: 800; color: #0f172a; margin: 0 0 6px 0; line-height: 1.35; font-family: 'Kanit', sans-serif;">
+                ${escapeHtml(stripDifficultyTags(ws.title))}
+              </h4>
+              <p style="font-size: 0.82rem; color: ${isFlow ? '#059669' : '#0284c7'}; font-weight: 700; margin: 0 0 8px 0;">
+                ${escapeHtml(stripDifficultyTags(ws.subtitle || ws.plan))}
+              </p>
+              <p style="font-size: 0.88rem; color: #334155; line-height: 1.55; margin: 0; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                ${escapeHtml(ws.scenario || ws.instructions)}
+              </p>
             </div>
 
-            ${isFlow ? `
-            <button onclick="openWorksheetDetail('${escapeHtml(ws.id)}')" class="ws-card-btn-open">
-              <i class="fa-solid fa-book-open mr-2"></i> เปิดดูฉบับเต็ม (โจทย์ 10 ข้อ)
-            </button>
-            ` : `
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-              <button onclick="openWorksheetDetail('${escapeHtml(ws.id)}')" class="btn btn-outline" style="padding: 9px 12px; font-size: 0.82rem; font-weight: 800; justify-content: center;">
-                <i class="fa-solid fa-book-open mr-1"></i> เปิดดูฉบับเต็ม
-              </button>
-              <a href="worksheets/${escapeHtml(ws.id)}.pdf" target="_blank" download="${escapeHtml(ws.code)}_ม4.pdf" class="btn btn-outline" style="padding: 9px 12px; font-size: 0.82rem; font-weight: 800; justify-content: center; border-color: #0284c7; color: #0284c7; text-decoration: none; display: inline-flex; align-items: center;">
-                <i class="fa-solid fa-file-arrow-down mr-1"></i> โหลด PDF (iPad)
-              </a>
-            </div>
-            `}
+            <!-- Footer: Meta & Action Buttons on 1 Clean Row -->
+            <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: #64748b; margin-bottom: 10px;">
+                <span><i class="fa-regular fa-calendar-days mr-1 text-slate-400"></i> กำหนดส่ง: ${escapeHtml(ws.due)}</span>
+                <span style="font-weight: 700; color: #0f172a;">${escapeHtml(ws.standard || 'ว 4.2 ม.4/1')}</span>
+              </div>
 
-            <button onclick="openSubmitModal('${asgId}', '${escapeHtml(stripDifficultyTags(ws.title))}')" class="ws-card-btn-submit">
-              <i class="fa-solid fa-cloud-arrow-up mr-2"></i> ${isFlow ? 'ส่งผลงานผังงานออนไลน์' : 'ส่งผลงานออนไลน์'}
-            </button>
+              <div style="display: grid; grid-template-columns: 1.25fr 1fr auto; gap: 6px;">
+                <button onclick="openWorksheetDetail('${escapeHtml(ws.id)}')" class="btn btn-primary" style="padding: 8px 10px; font-size: 0.82rem; font-weight: 700; border-radius: 8px; justify-content: center; white-space: nowrap;">
+                  <i class="fa-solid fa-book-open mr-1"></i> ${isFlow ? 'โจทย์ 10 ข้อ' : 'ทำออนไลน์'}
+                </button>
+                <a href="worksheets/${isFlow ? 'all_flowchart_worksheets_m4.pdf' : `${escapeHtml(ws.id)}.pdf`}" target="_blank" download="${escapeHtml(ws.code)}_ม4.pdf" class="btn btn-outline" style="padding: 8px 8px; font-size: 0.8rem; font-weight: 700; border-radius: 8px; justify-content: center; text-decoration: none; display: inline-flex; align-items: center; border-color: #cbd5e1; color: #1e293b; white-space: nowrap;">
+                  <i class="fa-solid fa-file-arrow-down mr-1 text-sky-600"></i> PDF/iPad
+                </a>
+                <button onclick="openSubmitModal('${asgId}', '${escapeHtml(stripDifficultyTags(ws.title))}')" class="btn btn-amber" style="padding: 8px 12px; font-size: 0.82rem; font-weight: 700; border-radius: 8px; justify-content: center;" title="ส่งงาน">
+                  <i class="fa-solid fa-cloud-arrow-up"></i>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       `;
