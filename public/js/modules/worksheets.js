@@ -589,16 +589,13 @@ function setWorksheetCategory(category) {
         </div>
       `;
     } else {
-      // Default: Theory mode
+            // Default: Theory mode
       bannerContainer.innerHTML = `
-        <div style="background: rgba(2, 132, 199, 0.08); border-left: 4px solid #0284c7; border-radius: 12px; padding: 12px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
-          <div style="font-size: 0.84rem; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
-            <i class="fa-solid fa-circle-info text-sky-600" style="font-size: 1.1rem;"></i>
-            <span><strong>สำหรับ iPad:</strong> กดปุ่ม <strong>"โหลด PDF (iPad)"</strong> เพื่อเปิดและบันทึกไฟล์เข้า GoodNotes หรือแอป Files แล้วเขียนส่งได้ทันที</span>
+        <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; border-left: 5px solid #0284c7; border-radius: 12px; padding: 13px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.06);">
+          <div style="font-size: 0.88rem; color: #0c4a6e; display: flex; align-items: center; gap: 10px; font-weight: 600;">
+            <i class="fa-solid fa-circle-info text-sky-600" style="font-size: 1.2rem; flex-shrink: 0;"></i>
+            <span><strong>สำหรับ iPad &amp; การพิมพ์:</strong> สามารถกดปุ่ม <strong>"โหลด PDF (iPad)"</strong> ในการ์ดแต่ละใบงาน เพื่อบันทึกไฟล์เข้า GoodNotes/Files หรือสั่งพิมพ์ แล้วส่งผ่านระบบออนไลน์ได้ทันที</span>
           </div>
-          <a href="worksheets/all_worksheets_m4.pdf" target="_blank" download="รวมใบงานทฤษฎี_วิทยาการคำนวณ_ม4.pdf" style="background: #0284c7; color: white; padding: 6px 14px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <i class="fa-solid fa-file-pdf"></i> รวมใบงานทฤษฎี PDF 6 ฉบับ
-          </a>
         </div>
       `;
     }
@@ -609,21 +606,16 @@ function setWorksheetCategory(category) {
   if (headerContainer) {
     if (category === 'practical') {
       headerContainer.innerHTML = `
-        <div>
-          <div class="thairath-section-title">
-            <i class="fa-solid fa-laptop-code text-emerald-600"></i> ห้องปฏิบัติการ & ใบงานแบบปฏิบัติ (Flowchart Lab)
+        <div style="margin-bottom: 6px;">
+          <div class="thairath-section-title" style="font-size: 1.35rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 10px; font-family: 'Kanit', sans-serif;">
+            <div style="width: 40px; height: 40px; border-radius: 10px; background: #ecfdf5; color: #059669; border: 1.5px solid #a7f3d0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">
+              <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <span>ห้องปฏิบัติการ &amp; ใบงานแบบปฏิบัติ (Flowchart Lab)</span>
           </div>
-          <div class="thairath-section-subtitle">
+          <div class="thairath-section-subtitle" style="font-size: 0.88rem; color: #334155; margin-top: 4px; font-weight: 500;">
             ใบงานฝึกทักษะการออกแบบผังงาน 3 ชุด รวม 30 โจทย์ปัญหา (แบบลำดับ • แบบเงื่อนไข • แบบหลายทางเลือก) พร้อมเกณฑ์รูบริกส์ข้อละ 1 คะแนน
           </div>
-        </div>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <a href="worksheets/all_flowchart_worksheets_m4.pdf" target="_blank" download="รวมใบงานปฏิบัติการผังงาน_ม4.pdf" class="btn" style="padding: 6px 14px; font-size: 0.84rem; background: #059669; color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; border-radius: 8px;">
-            <i class="fa-solid fa-file-pdf"></i> รวมใบงานปฏิบัติการ PDF (30 ข้อ)
-          </a>
-          <button onclick="switchTab('assignments'); filterAssignmentsCategory('practical');" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.84rem; background: #059669; border-color: #059669;">
-            <i class="fa-solid fa-cloud-arrow-up"></i> ไปหน้าส่งงานปฏิบัติ
-          </button>
         </div>
       `;
     } else if (category === 'all') {
@@ -647,21 +639,16 @@ function setWorksheetCategory(category) {
       `;
     } else {
       headerContainer.innerHTML = `
-        <div>
-          <div class="thairath-section-title">
-            <i class="fa-solid fa-file-lines text-sky-600"></i> คลังใบงานทฤษฎี & โครงงาน (Theory & Project Worksheets)
+        <div style="margin-bottom: 6px;">
+          <div class="thairath-section-title" style="font-size: 1.35rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 10px; font-family: 'Kanit', sans-serif;">
+            <div style="width: 40px; height: 40px; border-radius: 10px; background: #e0f2fe; color: #0284c7; border: 1.5px solid #bae6fd; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">
+              <i class="fa-solid fa-file-lines"></i>
+            </div>
+            <span>คลังใบงานทฤษฎี &amp; โครงงาน (Theory &amp; Project Worksheets)</span>
           </div>
-          <div class="thairath-section-subtitle">
-            ใบงานมาตรฐาน 6 ฉบับมาตรฐาน ครบทั้ง 2 หน่วยการเรียนรู้ (หน่วยละ 3 ใบงาน • คะแนนเต็ม 10 คะแนนทุกใบงาน) สำหรับฝึกกระบวนการคิดและพัฒนาโครงงาน
+          <div class="thairath-section-subtitle" style="font-size: 0.88rem; color: #334155; margin-top: 4px; font-weight: 500;">
+            ใบงานมาตรฐาน 6 ฉบับ ครบทั้ง 2 หน่วยการเรียนรู้ (หน่วยละ 3 ใบงาน • คะแนนเต็ม 10 คะแนนทุกใบงาน) สำหรับฝึกกระบวนการคิดและพัฒนาโครงงาน
           </div>
-        </div>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <a href="worksheets/all_worksheets_m4.pdf" target="_blank" download="รวมใบงานทฤษฎี_วิทยาการคำนวณ_ม4.pdf" class="btn" style="padding: 6px 14px; font-size: 0.84rem; background: #0284c7; color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; border-radius: 8px;">
-            <i class="fa-solid fa-file-pdf"></i> รวมใบงานทฤษฎี PDF 6 ฉบับ
-          </a>
-          <button onclick="switchTab('assignments'); filterAssignmentsCategory('theory');" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.84rem;">
-            <i class="fa-solid fa-cloud-arrow-up"></i> ไปหน้าส่งงาน
-          </button>
         </div>
       `;
     }

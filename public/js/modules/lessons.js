@@ -14,7 +14,7 @@ function getUnitsShowcaseHtml() {
   <div class="lessons-embedded-wrapper" style="padding-top: 6px;">
 
     <!-- 1. SECTION HEADER (depa-style / EmbeddedAI-style) -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 pb-4 border-b border-slate-200 gap-4">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #e2e8f0; flex-wrap: wrap;">
       <div>
         <h2 class="text-2xl font-black text-[#0f172a] flex items-center gap-2.5 font-heading tracking-tight">
           <div class="w-10 h-10 rounded-xl bg-emerald-50 text-[#107548] border border-emerald-200 flex items-center justify-center text-xl shadow-sm shrink-0">
@@ -26,11 +26,11 @@ function getUnitsShowcaseHtml() {
           วิทยาการคำนวณ ม.4 • ครอบคลุม 4 เสาหลักแนวคิดเชิงคำนวณ (Computational Thinking), วงจรการพัฒนาระบบ (SDLC 5 ขั้นตอน), การเขียนรายงานโครงงาน 5 บท และกรณีศึกษาเชิงประยุกต์
         </p>
       </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <button onclick="openEbookModal()" class="btn-lesson-outline">
+      <div style="display: flex; flex-direction: row; align-items: center; gap: 10px; flex-shrink: 0; white-space: nowrap;">
+        <button onclick="openEbookModal()" class="btn-lesson-outline" style="white-space: nowrap; padding: 9px 16px; font-weight: 700; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px;">
           <i class="fa-solid fa-book-bookmark text-[#107548]"></i> เปิด E-Book หนังสือเรียน
         </button>
-        <a href="https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-lesson-dark">
+        <a href="https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-lesson-dark" style="white-space: nowrap; padding: 9px 16px; font-weight: 700; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px;">
           <i class="fa-solid fa-file-powerpoint text-amber-400"></i> สไลด์ประกอบการสอน ↗
         </a>
       </div>

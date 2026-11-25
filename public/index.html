@@ -50,7 +50,7 @@
     </script>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v=6.6" />
+    <link rel="stylesheet" href="css/style.css?v=7.1" />
       <style>
       /* Ensure Font Awesome icons ALWAYS render correctly and never get overridden */
       .fa-solid, .fas, i.fa-solid, i.fas {
@@ -329,7 +329,7 @@
                   </div>
                   <h2 class="billboard-hero-title">
                     ศูนย์ทดสอบวัดผลออนไลน์<br/>
-                    <span class="hero-subheading">พร้อมระบบบริหารจัดการบทเรียนสำหรับครูผู้สอน</span>
+                    <span class="hero-subheading">พร้อมระบบบริหารจัดการบทเรียน<br/>สำหรับครูผู้สอน</span>
                   </h2>
                   <p class="billboard-hero-desc">
                     ข้อสอบปรนัยรายบท 120 ข้อ กลางภาค 20 ข้อ ปลายภาค 20 ข้อ และข้อสอบปฏิบัติ 12 ข้อ พร้อมตรวจคะแนนแบบ Real-time เฉลยละเอียด และระบบออกรายงานผลการเรียน
@@ -358,7 +358,7 @@
                   </div>
                   <h2 class="billboard-hero-title">
                     วิทยาการคำนวณ ม.4<br/>
-                    <span class="hero-subheading">จากรากฐานแนวคิดเชิงคำนวณ สู่การพัฒนาโครงงานนวัตกรรม</span>
+                    <span class="hero-subheading">จากรากฐานแนวคิดเชิงคำนวณ<br/>สู่การพัฒนาโครงงานนวัตกรรม</span>
                   </h2>
                   <p class="billboard-hero-desc">
                     เจาะลึก 4 เสาหลัก Computational Thinking บูรณาการกระบวนการพัฒนาซอฟต์แวร์ SDLC 5 ขั้นตอน พร้อมจัดทำรายงานโครงงาน 5 บทมาตรฐานวิชาการ
@@ -387,7 +387,7 @@
                   </div>
                   <h2 class="billboard-hero-title">
                     คู่มือจัดทำเค้าโครงโครงงาน 5 บท<br/>
-                    <span class="hero-subheading">และระบบส่งงานออนไลน์ ตรวจสอบสถานะการประเมินได้ทันที</span>
+                    <span class="hero-subheading">และระบบส่งงานออนไลน์<br/>ตรวจสอบสถานะการประเมินได้ทันที</span>
                   </h2>
                   <p class="billboard-hero-desc">
                     ดาวน์โหลดแบบฟอร์มเอกสารโครงงาน 5 บท เทมเพลตสไลด์นำเสนอ Canva และส่งไฟล์รายงานโครงงานผ่านระบบส่งงานออนไลน์ รวดเร็ว แม่นยำ
@@ -416,7 +416,7 @@
                   </div>
                   <h2 class="billboard-hero-title">
                     ห้องปฏิบัติการเสมือน CS Lab<br/>
-                    <span class="hero-subheading">ทดลองแก้ปัญหา 4 มิติ และโปรแกรมจำลองวงจร SDLC</span>
+                    <span class="hero-subheading">ทดลองแก้ปัญหา 4 มิติ<br/>และโปรแกรมจำลองวงจร SDLC</span>
                   </h2>
                   <p class="billboard-hero-desc">
                     ฝึกทักษะการคิดเชิงคำนวณผ่านเครื่องมือจำลองปัญหา การวางแผน Gantt Chart และโปรแกรมจำลองผังงาน Flowgorithm ออนไลน์
@@ -441,14 +441,6 @@
             <button class="billboard-arrow billboard-arrow-right" onclick="nextBillboardSlide()" aria-label="สไลด์ถัดไป" title="สไลด์ถัดไป">
               <i class="fa-solid fa-chevron-right"></i>
             </button>
-
-            <!-- Billboard Dots Indicator -->
-            <div class="billboard-dots-wrap" id="billboard-dots">
-              <button class="billboard-dot active" onclick="goToBillboardSlide(0)" aria-label="สไลด์ที่ 1"></button>
-              <button class="billboard-dot" onclick="goToBillboardSlide(1)" aria-label="สไลด์ที่ 2"></button>
-              <button class="billboard-dot" onclick="goToBillboardSlide(2)" aria-label="สไลด์ที่ 3"></button>
-              <button class="billboard-dot" onclick="goToBillboardSlide(3)" aria-label="สไลด์ที่ 4"></button>
-            </div>
 
           </div>
 
@@ -635,7 +627,7 @@
   <div class="lessons-embedded-wrapper" style="padding-top: 6px;">
 
     <!-- 1. SECTION HEADER (depa-style / EmbeddedAI-style) -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 pb-4 border-b border-slate-200 gap-4">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #e2e8f0; flex-wrap: wrap;">
       <div>
         <h2 class="text-2xl font-black text-[#0f172a] flex items-center gap-2.5 font-heading tracking-tight">
           <div class="w-10 h-10 rounded-xl bg-emerald-50 text-[#107548] border border-emerald-200 flex items-center justify-center text-xl shadow-sm shrink-0">
@@ -647,11 +639,11 @@
           วิทยาการคำนวณ ม.4 • ครอบคลุม 4 เสาหลักแนวคิดเชิงคำนวณ (Computational Thinking), วงจรการพัฒนาระบบ (SDLC 5 ขั้นตอน), การเขียนรายงานโครงงาน 5 บท และกรณีศึกษาเชิงประยุกต์
         </p>
       </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <button onclick="openEbookModal()" class="btn-lesson-outline">
+      <div style="display: flex; flex-direction: row; align-items: center; gap: 10px; flex-shrink: 0; white-space: nowrap;">
+        <button onclick="openEbookModal()" class="btn-lesson-outline" style="white-space: nowrap; padding: 9px 16px; font-weight: 700; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px;">
           <i class="fa-solid fa-book-bookmark text-[#107548]"></i> เปิด E-Book หนังสือเรียน
         </button>
-        <a href="https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-lesson-dark">
+        <a href="https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-lesson-dark" style="white-space: nowrap; padding: 9px 16px; font-weight: 700; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px;">
           <i class="fa-solid fa-file-powerpoint text-amber-400"></i> สไลด์ประกอบการสอน ↗
         </a>
       </div>
@@ -2600,13 +2592,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="js/config.js?v=5.8"></script>
     <script src="js/modules/auth.js?v=5.8"></script>
-    <script src="js/modules/lessons.js?v=6.1"></script>
-    <script src="js/modules/worksheets.js?v=5.8"></script>
+    <script src="js/modules/lessons.js?v=7.1"></script>
+    <script src="js/modules/worksheets.js?v=7.1"></script>
     <script src="js/modules/assignments.js?v=5.8"></script>
     <script src="js/modules/quizzes.js?v=5.8"></script>
     <script src="js/modules/teacher.js?v=5.8"></script>
     <script src="js/modules/pwa.js?v=5.8"></script>
-    <script src="js/app.js?v=6.6"></script>
+    <script src="js/app.js?v=7.1"></script>
 
     <!-- MOBILE & TABLET STICKY BOTTOM NAVIGATION BAR -->
     <nav id="mobile-bottom-nav" class="mobile-bottom-nav">
