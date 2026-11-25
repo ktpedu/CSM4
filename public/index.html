@@ -50,7 +50,7 @@
     </script>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v=6.2" />
+    <link rel="stylesheet" href="css/style.css?v=6.3" />
       <style>
       /* Ensure Font Awesome icons ALWAYS render correctly and never get overridden */
       .fa-solid, .fas, i.fa-solid, i.fas {
@@ -317,7 +317,7 @@
             <div class="thairath-billboard-track" id="billboard-track">
               
               <!-- BILLBOARD SLIDE 1: แนวคิดเชิงคำนวณ & SDLC 5 ขั้นตอน -->
-              <div class="billboard-slide active" style="background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 60%, #e6f7ee 100%);">
+              <div class="billboard-slide active" style="background: linear-gradient(135deg, #062316 0%, #0a3822 55%, #0f172a 100%);">
                 <div class="billboard-slide-grid">
                   <div class="billboard-visual-col">
                     <img src="img/billboard_slide1_ct.svg" alt="แนวคิดเชิงคำนวณ &amp; SDLC" class="billboard-illustration-img" style="width: 148px; height: 148px; object-fit: contain; filter: drop-shadow(0 6px 16px rgba(16, 117, 72, 0.15));" />
@@ -346,7 +346,7 @@
               </div>
 
               <!-- BILLBOARD SLIDE 2: โครงงานคอมพิวเตอร์ 5 บท -->
-              <div class="billboard-slide" style="background: linear-gradient(135deg, #ffffff 0%, #fffbeb 60%, #fef3c7 100%);">
+              <div class="billboard-slide" style="background: linear-gradient(135deg, #1c1917 0%, #292524 55%, #062e1c 100%);">
                 <div class="billboard-slide-grid">
                   <div class="billboard-visual-col">
                     <img src="img/billboard_slide2_project.svg" alt="คู่มือจัดทำเค้าโครงโครงงาน 5 บท &amp; ระบบส่งงานออนไลน์" class="billboard-illustration-img" style="width: 148px; height: 148px; object-fit: contain; filter: drop-shadow(0 6px 16px rgba(217, 119, 6, 0.18));" />
@@ -375,7 +375,7 @@
               </div>
 
               <!-- BILLBOARD SLIDE 3: Interactive CS Lab 4 มิติ -->
-              <div class="billboard-slide" style="background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 60%, #e0f2fe 100%);">
+              <div class="billboard-slide" style="background: linear-gradient(135deg, #082f49 0%, #0c4a6e 55%, #06281a 100%);">
                 <div class="billboard-slide-grid">
                   <div class="billboard-visual-col">
                     <img src="img/billboard_slide3_cslab.svg" alt="CS Lab &amp; Flowgorithm Simulator" class="billboard-illustration-img" style="width: 148px; height: 148px; object-fit: contain; filter: drop-shadow(0 6px 16px rgba(2, 132, 199, 0.18));" />
@@ -404,7 +404,7 @@
               </div>
 
               <!-- BILLBOARD SLIDE 4: คลังข้อสอบกลางภาค & ปลายภาค (ตรงตามรูปที่ผู้ใช้ต้องการ) -->
-              <div class="billboard-slide" style="background: linear-gradient(135deg, #ffffff 0%, #fef2f2 60%, #fee2e2 100%);">
+              <div class="billboard-slide" style="background: linear-gradient(135deg, #18181b 0%, #27272a 55%, #064e3b 100%);">
                 <div class="billboard-slide-grid">
                   <div class="billboard-visual-col">
                     <img src="img/billboard_slide4_quiz.svg" alt="ระบบทดสอบวัดผลสัมฤทธิ์ &amp; จัดอันดับคะแนน" class="billboard-illustration-img" style="width: 148px; height: 148px; object-fit: contain; filter: drop-shadow(0 6px 16px rgba(220, 38, 38, 0.15));" />
@@ -489,54 +489,65 @@
             </div>
           </div>
 
-          <!-- 3. FIVE QUICK ACTION APPS (5 ทางลัดเมนูหลักแบบโมเดิร์น แตะง่าย สบายตา) -->
-          <div class="home-quick-apps">
-            
-            <!-- App 1: บทเรียนดิจิทัล -->
-            <div class="home-app-card" onclick="switchTab('lessons')" role="button" tabindex="0">
-              <div class="home-app-icon" style="background: rgba(16, 185, 129, 0.12); color: #10b981;">
-                <i class="fa-solid fa-book-open"></i>
-              </div>
-              <div class="home-app-title">1. บทเรียน &amp; สไลด์</div>
-              <div class="home-app-desc">สไลด์ ม.4 และวิดีโอสอน</div>
-            </div>
+          <!-- 3. SIX FLOATING QUICK SERVICE CARDS (6 ทางลัดเมนูหลัก สไตล์ EmbeddedAI) -->
+          <div class="quick-nav-cards-wrap" style="position: relative; z-index: 20; margin-top: 14px; margin-bottom: 28px;">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
 
-            <!-- App 2: ใบงาน & Lab -->
-            <div class="home-app-card" onclick="switchTab('worksheets')" role="button" tabindex="0">
-              <div class="home-app-icon" style="background: rgba(59, 130, 246, 0.12); color: #3b82f6;">
-                <i class="fa-solid fa-file-pen"></i>
+              <!-- Card 1: บทเรียน & สไลด์ -->
+              <div onclick="switchTab('lessons')" class="service-card" role="button" tabindex="0">
+                <div class="service-icon-box" style="background: #ecfdf5; color: #107548;">
+                  <i class="fa-solid fa-book-open"></i>
+                </div>
+                <h4 class="service-title">บทเรียนออนไลน์</h4>
+                <p class="service-desc">เรียนรู้ทีละขั้นตอน</p>
               </div>
-              <div class="home-app-title">2. ใบงาน &amp; Lab</div>
-              <div class="home-app-desc">ดาวน์โหลดใบงาน 1-6</div>
-            </div>
 
-            <!-- App 3: ส่งการบ้าน -->
-            <div class="home-app-card" onclick="switchTab('assignments')" role="button" tabindex="0">
-              <div class="home-app-icon" style="background: rgba(139, 92, 246, 0.12); color: #8b5cf6;">
-                <i class="fa-solid fa-cloud-arrow-up"></i>
+              <!-- Card 2: ใบงาน & Lab -->
+              <div onclick="switchTab('worksheets')" class="service-card" role="button" tabindex="0">
+                <div class="service-icon-box" style="background: #eff6ff; color: #2563eb;">
+                  <i class="fa-solid fa-flask-vial"></i>
+                </div>
+                <h4 class="service-title">ใบงานปฏิบัติการ</h4>
+                <p class="service-desc">ใบงาน &amp; Lab ปฏิบัติ</p>
               </div>
-              <div class="home-app-title">3. ส่งการบ้าน</div>
-              <div class="home-app-desc">อัปโหลดไฟล์ / ลิงก์ Canva</div>
-            </div>
 
-            <!-- App 4: ห้องสอบออนไลน์ -->
-            <div class="home-app-card" onclick="switchTab('quizzes')" role="button" tabindex="0">
-              <div class="home-app-icon" style="background: rgba(245, 158, 11, 0.12); color: #f59e0b;">
-                <i class="fa-solid fa-clipboard-check"></i>
+              <!-- Card 3: สอบออนไลน์ -->
+              <div onclick="switchTab('quizzes')" class="service-card" role="button" tabindex="0">
+                <div class="service-icon-box" style="background: #fffbeb; color: #d97706;">
+                  <i class="fa-solid fa-clipboard-check"></i>
+                </div>
+                <h4 class="service-title">สอบออนไลน์</h4>
+                <p class="service-desc">คลังข้อสอบมาตรฐาน</p>
               </div>
-              <div class="home-app-title">4. ห้องสอบออนไลน์</div>
-              <div class="home-app-desc">แบบทดสอบท้ายบท 20 ข้อ</div>
-            </div>
 
-            <!-- App 5: คะแนน & อันดับ -->
-            <div class="home-app-card" onclick="switchTab('analytics')" role="button" tabindex="0">
-              <div class="home-app-icon" style="background: rgba(244, 63, 94, 0.12); color: #f43f5e;">
-                <i class="fa-solid fa-chart-line"></i>
+              <!-- Card 4: ส่งการบ้าน -->
+              <div onclick="switchTab('assignments')" class="service-card" role="button" tabindex="0">
+                <div class="service-icon-box" style="background: #f5f3ff; color: #7c3aed;">
+                  <i class="fa-solid fa-cloud-arrow-up"></i>
+                </div>
+                <h4 class="service-title">ส่งการบ้าน</h4>
+                <p class="service-desc">อัปโหลดไฟล์ / Canva</p>
               </div>
-              <div class="home-app-title">5. คะแนน &amp; อันดับ</div>
-              <div class="home-app-desc">เช็คคะแนนและสถิติการเรียน</div>
-            </div>
 
+              <!-- Card 5: CS Lab & Simulator -->
+              <div onclick="switchTab('ct-tools')" class="service-card" role="button" tabindex="0">
+                <div class="service-icon-box" style="background: #f1f5f9; color: #0f172a;">
+                  <i class="fa-solid fa-code"></i>
+                </div>
+                <h4 class="service-title">CS Lab &amp; Simulator</h4>
+                <p class="service-desc">ผังงาน &amp; แบบจำลอง</p>
+              </div>
+
+              <!-- Card 6: คะแนน & อันดับ -->
+              <div onclick="switchTab('analytics')" class="service-card" role="button" tabindex="0">
+                <div class="service-icon-box" style="background: #fff1f2; color: #e11d48;">
+                  <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h4 class="service-title">สมุดบันทึกคะแนน</h4>
+                <p class="service-desc">ผลสอบและสถิติ</p>
+              </div>
+
+            </div>
           </div>
 
           <!-- 4. DASHBOARD: ประกาศสำคัญของครู & เครื่องมือช่วยเรียน (ตัดหน่วยการเรียนรู้ที่ซ้ำซ้อนออกแล้ว) -->
@@ -2596,7 +2607,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="js/config.js?v=5.8"></script>
     <script src="js/modules/auth.js?v=5.8"></script>
-    <script src="js/modules/lessons.js?v=6.0"></script>
+    <script src="js/modules/lessons.js?v=6.1"></script>
     <script src="js/modules/worksheets.js?v=5.8"></script>
     <script src="js/modules/assignments.js?v=5.8"></script>
     <script src="js/modules/quizzes.js?v=5.8"></script>

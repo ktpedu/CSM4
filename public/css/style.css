@@ -6561,3 +6561,184 @@ textarea::placeholder {
 .billboard-slide:hover .billboard-illustration-img {
   transform: scale(1.06) rotate(1deg);
 }
+
+
+/* ============================================================== */
+/* DARK NAVIGATION BAR THEME (แถบสีเข้ม มองชัด สไตล์ EmbeddedAI)    */
+/* ============================================================== */
+.thairath-cat-nav {
+  background-color: #082115 !important; /* Deep Forest Black */
+  border-bottom: 2.5px solid #107548 !important; /* Emerald Accent Line */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25) !important;
+}
+
+.thairath-cat-list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 2px 0 0 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  white-space: nowrap;
+}
+
+.thairath-cat-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  padding: 11px 16px !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  color: #e2e8f0 !important;
+  cursor: pointer !important;
+  border-bottom: 3px solid transparent !important;
+  transition: all 0.18s ease-in-out !important;
+  text-decoration: none !important;
+  border-radius: 8px 8px 0 0 !important;
+  white-space: nowrap !important;
+}
+
+.thairath-cat-item i {
+  color: #94a3b8 !important;
+  font-size: 0.95rem !important;
+  transition: color 0.18s ease-in-out !important;
+}
+
+.thairath-cat-item:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.thairath-cat-item:hover i {
+  color: #34d399 !important;
+}
+
+.thairath-cat-item.active {
+  color: #ffffff !important;
+  background-color: #107548 !important;
+  border-bottom: 3px solid #34d399 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.thairath-cat-item.active i {
+  color: #a7f3d0 !important;
+}
+
+/* ============================================================== */
+/* FLOATING 6 SERVICE CARDS (แถบการ์ดลอย 6 การ์ด สไตล์ EmbeddedAI) */
+/* ============================================================== */
+.service-card {
+  background-color: #ffffff;
+  padding: 1.15rem 0.85rem;
+  border-radius: 1rem; /* 16px */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  border-bottom: 4px solid transparent;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  border-bottom-color: #107548;
+  box-shadow: 0 16px 30px rgba(16, 117, 72, 0.16);
+  border-color: #bbf7d0;
+}
+
+.service-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 0.65rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease;
+}
+
+.service-card:hover .service-icon-box {
+  transform: scale(1.12);
+}
+
+.service-title {
+  font-family: 'Kanit', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  transition: color 0.2s ease;
+  line-height: 1.3;
+}
+
+.service-card:hover .service-title {
+  color: #107548;
+}
+
+.service-desc {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+/* ============================================================== */
+/* HERO SLIDER DARK IMMERSIVE THEME (สไลเดอร์ใหญ่คมชัด)          */
+/* ============================================================== */
+.thairath-billboard-wrap {
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.billboard-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.billboard-subtitle {
+  color: #f1f5f9 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.billboard-tag-term {
+  color: #e2e8f0 !important;
+}
+
+.billboard-arrow {
+  background-color: rgba(6, 26, 17, 0.65) !important;
+  color: #ffffff !important;
+  backdrop-filter: blur(6px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.billboard-arrow:hover {
+  background-color: #107548 !important;
+  color: #ffffff !important;
+  border-color: #34d399 !important;
+}
+
+.billboard-dot {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.billboard-dot.active {
+  background-color: #34d399 !important;
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.8) !important;
+}
