@@ -1,0 +1,65 @@
+<svg viewBox="0 0 200 200" width="160" height="160" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:auto; font-family:'Kanit',sans-serif;">
+  <defs>
+    <filter id="glow-green" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#107548" flood-opacity="0.25"/>
+    </filter>
+    <linearGradient id="grad-ct" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#107548"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Ambient Disc -->
+  <circle cx="100" cy="100" r="90" fill="#ecfdf5" stroke="#bbf7d0" stroke-width="2"/>
+  <circle cx="100" cy="100" r="82" fill="none" stroke="#a7f3d0" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- Connecting Lines -->
+  <line x1="100" y1="100" x2="45" y2="55" stroke="#10b981" stroke-width="2" stroke-dasharray="3,3"/>
+  <line x1="100" y1="100" x2="155" y2="55" stroke="#10b981" stroke-width="2" stroke-dasharray="3,3"/>
+  <line x1="100" y1="100" x2="45" y2="145" stroke="#10b981" stroke-width="2" stroke-dasharray="3,3"/>
+  <line x1="100" y1="100" x2="155" y2="145" stroke="#10b981" stroke-width="2" stroke-dasharray="3,3"/>
+
+  <!-- 4 Pillars Nodes -->
+  <!-- 1. Decomposition (Top-Left) -->
+  <g transform="translate(45,55)">
+    <circle cx="0" cy="0" r="22" fill="#ffffff" stroke="#107548" stroke-width="2" filter="url(#glow-green)"/>
+    <!-- Puzzle icon -->
+    <path d="M-8,-6 h6 v-3 a3,3 0 0,1 6,0 v3 h6 v6 a3,3 0 0,1 0,6 v4 h-18 z" fill="#107548"/>
+    <text x="0" y="30" font-size="8" font-weight="700" fill="#0f172a" text-anchor="middle">แยกปัญหา</text>
+  </g>
+
+  <!-- 2. Pattern (Top-Right) -->
+  <g transform="translate(155,55)">
+    <circle cx="0" cy="0" r="22" fill="#ffffff" stroke="#0284c7" stroke-width="2" filter="url(#glow-green)"/>
+    <!-- Pattern grid icon -->
+    <rect x="-8" y="-8" width="6" height="6" rx="1.5" fill="#0284c7"/>
+    <rect x="2" y="-8" width="6" height="6" rx="1.5" fill="#0284c7"/>
+    <rect x="-8" y="2" width="6" height="6" rx="1.5" fill="#0284c7"/>
+    <rect x="2" y="2" width="6" height="6" rx="1.5" fill="#38bdf8"/>
+    <text x="0" y="30" font-size="8" font-weight="700" fill="#0f172a" text-anchor="middle">หารูปแบบ</text>
+  </g>
+
+  <!-- 3. Abstraction (Bottom-Left) -->
+  <g transform="translate(45,145)">
+    <circle cx="0" cy="0" r="22" fill="#ffffff" stroke="#d97706" stroke-width="2" filter="url(#glow-green)"/>
+    <!-- Funnel / Filter icon -->
+    <polygon points="-8,-6 8,-6 2,2 2,8 -2,6 -2,2" fill="#d97706"/>
+    <text x="0" y="-25" font-size="8" font-weight="700" fill="#0f172a" text-anchor="middle">สาระสำคัญ</text>
+  </g>
+
+  <!-- 4. Algorithm (Bottom-Right) -->
+  <g transform="translate(155,145)">
+    <circle cx="0" cy="0" r="22" fill="#ffffff" stroke="#8b5cf6" stroke-width="2" filter="url(#glow-green)"/>
+    <!-- Flowchart node icon -->
+    <rect x="-7" y="-7" width="14" height="6" rx="2" fill="#8b5cf6"/>
+    <line x1="0" y1="-1" x2="0" y2="3" stroke="#8b5cf6" stroke-width="2"/>
+    <polygon points="0,7 -4,3 4,3" fill="#8b5cf6"/>
+    <text x="0" y="-25" font-size="8" font-weight="700" fill="#0f172a" text-anchor="middle">ขั้นตอนวิธี</text>
+  </g>
+
+  <!-- Center SDLC Core -->
+  <circle cx="100" cy="100" r="32" fill="url(#grad-ct)" stroke="#ffffff" stroke-width="3" filter="url(#glow-green)"/>
+  <circle cx="100" cy="100" r="28" fill="none" stroke="#a7f3d0" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="100" y="96" font-size="11" font-weight="800" fill="#ffffff" text-anchor="middle">CT &amp; SDLC</text>
+  <text x="100" y="110" font-size="8" font-weight="700" fill="#a7f3d0" text-anchor="middle">5 ขั้นตอน</text>
+</svg>
