@@ -8,281 +8,350 @@ async function loadHomeData() {
 // --- 2. UNITS SHOWCASE (2-COLUMN LAYOUT WITH ILLUSTRATIONS) ---
 function getUnitsShowcaseHtml() {
   return `
-          <!-- TWO-COLUMN PROMINENT SHOWCASE GRID AS REQUESTED BY USER -->
-          <div class="units-showcase-container" style="margin-top: 15px;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 24px;">
-              
-              <!-- ==========================================
-                   CARD 1: UNIT 1 (LEFT ORANGE BOX)
-                   ========================================== -->
-              <div class="glass-card" style="border-radius: 20px; overflow: hidden; border: 2px solid rgba(0, 180, 0, 0.3); box-shadow: 0 10px 25px rgba(0,0,0,0.06); display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                  
-<div style="width: 100%; border-radius: 16px 16px 0 0; overflow: hidden; background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);">
-  <svg viewBox="0 0 600 240" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="display: block; font-family: 'Kanit', 'Sarabun', sans-serif;">
-    <defs>
-      <linearGradient id="u1-glow" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#10b981" stop-opacity="0.3"/>
-        <stop offset="100%" stop-color="#0284c7" stop-opacity="0.05"/>
-      </linearGradient>
-    </defs>
-    
-    <!-- Background Glow & Grid -->
-    <rect width="600" height="240" fill="url(#u1-glow)"/>
-    <circle cx="80" cy="190" r="120" fill="#10b981" opacity="0.1"/>
-    <circle cx="520" cy="50" r="100" fill="#0284c7" opacity="0.1"/>
+  <!-- ============================================================== -->
+  <!-- SECTION: LESSONS (EMBEDDED-AI STYLE • GREEN - WHITE - BLACK)   -->
+  <!-- ============================================================== -->
+  <div class="lessons-embedded-wrapper" style="padding-top: 6px;">
 
-    <!-- Central Decorative Elements -->
-    <!-- Center Badge: CT + SDLC Core -->
-    <circle cx="300" cy="115" r="50" fill="#1e293b" stroke="#10b981" stroke-width="2.5"/>
-    <text x="300" y="108" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">แนวคิด</text>
-    <text x="300" y="126" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">เชิงคำนวณ</text>
-    <text x="300" y="140" fill="#94a3b8" font-size="8" text-anchor="middle">CT &amp; SDLC</text>
-
-    <!-- 4 Pillars Connected Nodes -->
-    <!-- Pillar 1: Decomposition -->
-    <line x1="300" y1="115" x2="120" y2="60" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3"/>
-    <rect x="30" y="35" width="170" height="50" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
-    <circle cx="52" cy="60" r="12" fill="#0284c7"/>
-    <text x="52" y="65" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">1</text>
-    <text x="74" y="55" fill="#38bdf8" font-size="11" font-weight="bold">Decomposition</text>
-    <text x="74" y="72" fill="#cbd5e1" font-size="9">การแยกย่อยปัญหา</text>
-
-    <!-- Pillar 2: Pattern Recognition -->
-    <line x1="300" y1="115" x2="480" y2="60" stroke="#34d399" stroke-width="2" stroke-dasharray="3"/>
-    <rect x="400" y="35" width="170" height="50" rx="8" fill="#0f172a" stroke="#34d399" stroke-width="1.5"/>
-    <circle cx="422" cy="60" r="12" fill="#059669"/>
-    <text x="422" y="65" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">2</text>
-    <text x="444" y="55" fill="#34d399" font-size="11" font-weight="bold">Pattern Recognition</text>
-    <text x="444" y="72" fill="#cbd5e1" font-size="9">การจดจำรูปแบบ</text>
-
-    <!-- Pillar 3: Abstraction -->
-    <line x1="300" y1="115" x2="120" y2="170" stroke="#fbbf24" stroke-width="2" stroke-dasharray="3"/>
-    <rect x="30" y="145" width="170" height="50" rx="8" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5"/>
-    <circle cx="52" cy="170" r="12" fill="#d97706"/>
-    <text x="52" y="175" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">3</text>
-    <text x="74" y="165" fill="#fbbf24" font-size="11" font-weight="bold">Abstraction</text>
-    <text x="74" y="182" fill="#cbd5e1" font-size="9">การคิดเชิงนามธรรม</text>
-
-    <!-- Pillar 4: Algorithm -->
-    <line x1="300" y1="115" x2="480" y2="170" stroke="#f87171" stroke-width="2" stroke-dasharray="3"/>
-    <rect x="400" y="145" width="170" height="50" rx="8" fill="#0f172a" stroke="#f87171" stroke-width="1.5"/>
-    <circle cx="422" cy="170" r="12" fill="#dc2626"/>
-    <text x="422" y="175" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">4</text>
-    <text x="444" y="165" fill="#f87171" font-size="11" font-weight="bold">Algorithm Design</text>
-    <text x="444" y="182" fill="#cbd5e1" font-size="9">ขั้นตอนวิธี &amp; ผังงาน</text>
-
-    <!-- Bottom Ribbon -->
-    <rect x="0" y="210" width="600" height="30" fill="rgba(0, 180, 0, 0.2)"/>
-    <text x="300" y="228" fill="#a7f3d0" font-size="10" font-weight="bold" text-anchor="middle">หน่วยการเรียนรู้ที่ 1 • วิทยาการคำนวณ ม.4 • 20 ชั่วโมง • 3 หัวข้อหลัก</text>
-  </svg>
-</div>
-
-                  <div style="padding: 24px;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
-                      <span style="background: rgba(0, 180, 0, 0.12); color: #10b981; font-weight: 800; font-size: 0.76rem; padding: 4px 12px; border-radius: 999px; letter-spacing: 0.5px;">
-                        <i class="fa-solid fa-graduation-cap mr-1"></i> หน่วยการเรียนรู้ที่ 1 • 20 ชั่วโมง
-                      </span>
-                      <span style="font-size: 0.74rem; color: var(--text-muted); font-weight: 600;">ตัวชี้วัด ว 4.2 ม.4/1</span>
-                    </div>
-
-                    <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; line-height: 1.3;">
-                      แนวคิดเชิงคำนวณในการพัฒนาโครงงาน
-                    </h3>
-                    <div style="font-size: 0.8rem; font-weight: 600; color: #10b981; margin-bottom: 12px;">
-                      Computational Thinking in Project Development
-                    </div>
-
-                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
-                      ศึกษา 4 องค์ประกอบของแนวคิดเชิงคำนวณ การแก้ปัญหาด้วยวงจรการพัฒนาระบบ SDLC 5 ขั้นตอน และโครงสร้างการเขียนรายงานโครงงานคอมพิวเตอร์ 5 บท
-                    </p>
-
-                    <!-- Subtopics List -->
-                    <div class="unit-subtopics-box">
-                      <div class="unit-subtopics-title">
-                        <i class="fa-solid fa-list-check text-emerald-600"></i> เนื้อหาสำคัญ 3 หัวข้อการเรียนรู้:
-                      </div>
-                      <ul class="unit-subtopics-list">
-                        <li>
-                          <i class="fa-solid fa-check-circle text-emerald-600" style="margin-top: 4px;"></i>
-                          <span><strong>1.1 แนวคิดเชิงคำนวณ:</strong> 4 องค์ประกอบ (Decomposition, Pattern, Abstraction, Algorithm) &amp; กรณีศึกษารถของตะวัน</span>
-                        </li>
-                        <li>
-                          <i class="fa-solid fa-check-circle text-emerald-600" style="margin-top: 4px;"></i>
-                          <span><strong>1.2 วงจรการพัฒนาระบบ (SDLC):</strong> 5 ขั้นตอน, ผัง Gantt Chart 20 สัปดาห์, แผนภาพ DFD, พีระมิดทดสอบ 4 ระดับ</span>
-                        </li>
-                        <li>
-                          <i class="fa-solid fa-check-circle text-emerald-600" style="margin-top: 4px;"></i>
-                          <span><strong>1.3 การเขียนรายงานโครงงาน:</strong> 3 ส่วนหลัก 5 บท, ผังเค้าโครงโครงงาน (Proposal) &amp; บรรณานุกรม APA</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- CTA Action Buttons -->
-                <div style="padding: 0 24px 24px 24px; display: flex; flex-direction: column; gap: 10px;">
-                  <a href="unit1.html" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 20px; background: #047857; color: #ffffff; font-weight: 700; font-size: 0.95rem; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 12px rgba(0,180,0,0.25); transition: all 0.2s;">
-                    <i class="fa-solid fa-book-open"></i> เข้าสู่บทเรียน หน่วยที่ 1 (ฉบับสมบูรณ์)
-                  </a>
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                    <button onclick="openSlideModal('sld-1')" class="btn-web-slides">
-                      <i class="fa-solid fa-file-powerpoint text-amber-600"></i> สไลด์ในเว็บ
-                    </button>
-                    <a href="https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px 12px; background: #f59e0b; color: #ffffff; font-weight: 700; font-size: 0.82rem; border-radius: 10px; text-decoration: none; transition: all 0.2s; box-shadow: 0 2px 8px rgba(245,158,11,0.25);">
-                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Google Slides ↗
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <!-- ==========================================
-                   CARD 2: UNIT 2 (RIGHT ORANGE BOX)
-                   ========================================== -->
-              <div class="glass-card" style="border-radius: 20px; overflow: hidden; border: 2px solid rgba(2, 132, 199, 0.3); box-shadow: 0 10px 25px rgba(0,0,0,0.06); display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                  
-<div style="width: 100%; border-radius: 16px 16px 0 0; overflow: hidden; background: linear-gradient(135deg, #0c4a6e 0%, #1e1b4b 100%);">
-  <svg viewBox="0 0 600 240" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="display: block; font-family: 'Kanit', 'Sarabun', sans-serif;">
-    <defs>
-      <linearGradient id="u2-glow" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.3"/>
-        <stop offset="100%" stop-color="#ec4899" stop-opacity="0.1"/>
-      </linearGradient>
-    </defs>
-    
-    <!-- Background Glow & Grid -->
-    <rect width="600" height="240" fill="url(#u2-glow)"/>
-    <circle cx="100" cy="190" r="110" fill="#0284c7" opacity="0.12"/>
-    <circle cx="500" cy="50" r="110" fill="#e11d48" opacity="0.12"/>
-
-    <!-- Left Box: Case 1 - Library Web App Mockup -->
-    <g transform="translate(30, 25)">
-      <rect x="0" y="0" width="245" height="170" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="1.8"/>
-      <!-- Window Title -->
-      <rect x="0" y="0" width="245" height="24" rx="10" fill="#1e293b"/>
-      <circle cx="12" cy="12" r="3.5" fill="#ef4444"/>
-      <circle cx="22" cy="12" r="3.5" fill="#f59e0b"/>
-      <circle cx="32" cy="12" r="3.5" fill="#10b981"/>
-      <text x="125" y="16" fill="#94a3b8" font-size="8" text-anchor="middle">กรณีศึกษาที่ 1: เว็บไซต์ห้องสมุด</text>
-      <!-- Inside Screen -->
-      <rect x="12" y="32" width="221" height="22" rx="4" fill="#0284c7"/>
-      <text x="22" y="46" fill="#ffffff" font-size="9" font-weight="bold">📚 ระบบแนะนำการใช้งานห้องสมุด</text>
-      <!-- Search bar -->
-      <rect x="12" y="60" width="221" height="18" rx="9" fill="#1e293b" stroke="#334155"/>
-      <text x="22" y="72" fill="#64748b" font-size="7">🔍 ค้นหาหนังสือตามหมวดดิวอี้ 000-900...</text>
-      <!-- Cards grid -->
-      <rect x="12" y="85" width="68" height="50" rx="4" fill="#1e293b" stroke="#0284c7"/>
-      <text x="46" y="105" fill="#38bdf8" font-size="7" font-weight="bold" text-anchor="middle">กฎระเบียบ</text>
-      <text x="46" y="122" fill="#94a3b8" font-size="6" text-anchor="middle">ยืม-คืน 7 วัน</text>
-
-      <rect x="88" y="85" width="68" height="50" rx="4" fill="#1e293b" stroke="#10b981"/>
-      <text x="122" y="105" fill="#34d399" font-size="7" font-weight="bold" text-anchor="middle">ผังชั้นวาง 2D</text>
-      <text x="122" y="122" fill="#94a3b8" font-size="6" text-anchor="middle">โซน A/B/C</text>
-
-      <rect x="165" y="85" width="68" height="50" rx="4" fill="#1e293b" stroke="#f59e0b"/>
-      <text x="199" y="105" fill="#fbbf24" font-size="7" font-weight="bold" text-anchor="middle">สืบค้นหมวดหมู่</text>
-      <text x="199" y="122" fill="#94a3b8" font-size="6" text-anchor="middle">Call Number</text>
-
-      <rect x="12" y="142" width="221" height="18" rx="4" fill="rgba(2, 132, 199, 0.15)"/>
-      <text x="122" y="154" fill="#38bdf8" font-size="8" font-weight="bold" text-anchor="middle">Responsive Web Application (HTML/CSS/JS)</text>
-    </g>
-
-    <!-- Center Bridge Icon -->
-    <circle cx="300" cy="110" r="18" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
-    <text x="300" y="115" fill="#c084fc" font-size="12" font-weight="bold" text-anchor="middle">&amp;</text>
-
-    <!-- Right Box: Case 2 - Medicine Reminder Mobile App Mockup -->
-    <g transform="translate(325, 25)">
-      <rect x="0" y="0" width="245" height="170" rx="10" fill="#0f172a" stroke="#f43f5e" stroke-width="1.8"/>
-      <!-- Window Title -->
-      <rect x="0" y="0" width="245" height="24" rx="10" fill="#1e293b"/>
-      <circle cx="12" cy="12" r="3.5" fill="#ef4444"/>
-      <circle cx="22" cy="12" r="3.5" fill="#f59e0b"/>
-      <circle cx="32" cy="12" r="3.5" fill="#10b981"/>
-      <text x="125" y="16" fill="#94a3b8" font-size="8" text-anchor="middle">กรณีศึกษาที่ 2: โปรแกรมแจ้งเตือนกินยา</text>
-      <!-- Inside Mobile Screen Mockup -->
-      <rect x="12" y="32" width="221" height="22" rx="4" fill="#e11d48"/>
-      <text x="22" y="46" fill="#ffffff" font-size="9" font-weight="bold">⏰ แอป nMeMo (Health Tech)</text>
-      <!-- Alarm alert box -->
-      <rect x="12" y="60" width="221" height="38" rx="6" fill="#1e293b" stroke="#f43f5e"/>
-      <circle cx="30" cy="79" r="10" fill="#e11d48"/>
-      <text x="30" y="83" fill="#ffffff" font-size="9" text-anchor="middle">🔔</text>
-      <text x="48" y="74" fill="#fca5a5" font-size="8" font-weight="bold">ถึงเวลาทานยาเช้า (08:00 น.)</text>
-      <text x="48" y="88" fill="#94a3b8" font-size="7">ยาลดความดัน 1 เม็ด • ก่อนอาหาร</text>
-
-      <!-- Elderly big buttons -->
-      <rect x="12" y="104" width="106" height="28" rx="6" fill="#10b981"/>
-      <text x="65" y="121" fill="#ffffff" font-size="8" font-weight="bold" text-anchor="middle">✓ ทานยาแล้ว</text>
-
-      <rect x="127" y="104" width="106" height="28" rx="6" fill="#334155"/>
-      <text x="180" y="121" fill="#e2e8f0" font-size="8" font-weight="bold" text-anchor="middle">เตือนซ้ำ (Snooze)</text>
-
-      <rect x="12" y="142" width="221" height="18" rx="4" fill="rgba(225, 29, 72, 0.15)"/>
-      <text x="122" y="154" fill="#fda4af" font-size="8" font-weight="bold" text-anchor="middle">Mobile App สำหรับผู้สูงอายุ + เชื่อมโยง รพ.</text>
-    </g>
-
-    <!-- Bottom Ribbon -->
-    <rect x="0" y="210" width="600" height="30" fill="rgba(2, 132, 199, 0.2)"/>
-    <text x="300" y="228" fill="#bae6fd" font-size="10" font-weight="bold" text-anchor="middle">หน่วยการเรียนรู้ที่ 2 • วิทยาการคำนวณ ม.4 • 20 ชั่วโมง • 2 โครงงานจริง</text>
-  </svg>
-</div>
-
-                  <div style="padding: 24px;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
-                      <span style="background: rgba(2, 132, 199, 0.12); color: #0284c7; font-weight: 800; font-size: 0.76rem; padding: 4px 12px; border-radius: 999px; letter-spacing: 0.5px;">
-                        <i class="fa-solid fa-laptop-code mr-1"></i> หน่วยการเรียนรู้ที่ 2 • 20 ชั่วโมง
-                      </span>
-                      <span style="font-size: 0.74rem; color: var(--text-muted); font-weight: 600;">Project-Based Learning</span>
-                    </div>
-
-                    <h3 style="font-family: 'Kanit', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; line-height: 1.3;">
-                      การประยุกต์ใช้แนวคิดเชิงคำนวณเพื่อพัฒนาโครงงาน
-                    </h3>
-                    <div style="font-size: 0.8rem; font-weight: 600; color: #0284c7; margin-bottom: 12px;">
-                      Applied Computational Thinking for Projects
-                    </div>
-
-                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
-                      ฝึกปฏิบัติการทำโครงงานจริงผ่าน 2 กรณีศึกษา: เว็บไซต์แนะนำการใช้งานห้องสมุด (Web App) และโปรแกรมแจ้งเตือนการกินยาผ่านสมาร์ตโฟน (Health Tech) ตามวงจร SDLC 5 ขั้นตอน
-                    </p>
-
-                    <!-- Subtopics List -->
-                    <div class="unit-subtopics-box unit2-box">
-                      <div class="unit-subtopics-title">
-                        <i class="fa-solid fa-folder-open text-sky-600"></i> กรณีศึกษาและกิจกรรม 3 ส่วน:
-                      </div>
-                      <ul class="unit-subtopics-list">
-                        <li>
-                          <i class="fa-solid fa-check-circle text-sky-600" style="margin-top: 4px;"></i>
-                          <span><strong>กรณีศึกษาที่ 1 (ห้องสมุด):</strong> เว็บสารสนเทศ, แยกย่อย 4 โมดูล, DFD Level 1, หมวดหมู่ดิวอี้ &amp; UI Responsive</span>
-                        </li>
-                        <li>
-                          <i class="fa-solid fa-check-circle text-sky-600" style="margin-top: 4px;"></i>
-                          <span><strong>กรณีศึกษาที่ 2 (เตือนกินยา):</strong> Mobile App สุขภาพ, 10 กลุ่มงาน, ผังงาน Snooze Logic &amp; UI เพื่อผู้สูงอายุ</span>
-                        </li>
-                        <li>
-                          <i class="fa-solid fa-check-circle text-sky-600" style="margin-top: 4px;"></i>
-                          <span><strong>ท้ายหน่วยการเรียนรู้:</strong> สรุปเปรียบเทียบ Web vs Mobile, กิจกรรม Project Pitch &amp; แบบทดสอบทบทวน</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- CTA Action Buttons -->
-                <div style="padding: 0 24px 24px 24px; display: flex; flex-direction: column; gap: 10px;">
-                  <a href="unit2.html" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 20px; background: #0369a1; color: #ffffff; font-weight: 700; font-size: 0.95rem; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 12px rgba(3,105,161,0.25); transition: all 0.2s;">
-                    <i class="fa-solid fa-laptop-code"></i> เข้าสู่บทเรียน หน่วยที่ 2 (ฉบับสมบูรณ์)
-                  </a>
-                  <button onclick="showToast('สไลด์ประกอบการสอน หน่วยที่ 2 อยู่ระหว่างจัดทำโดยครูผู้สอน จะเปิดให้อ่านเร็วๆ นี้ครับ', 'info')" class="btn-prep-slides">
-                    <i class="fa-solid fa-hourglass-half text-slate-400"></i> สไลด์ประกอบการสอน (อยู่ระหว่างจัดทำ)
-                  </button>
-                </div>
-              </div>
-
-            </div>
+    <!-- 1. SECTION HEADER (depa-style / EmbeddedAI-style) -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 pb-4 border-b border-slate-200 gap-4">
+      <div>
+        <h2 class="text-2xl font-black text-[#0f172a] flex items-center gap-2.5 font-heading tracking-tight">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 text-[#107548] border border-emerald-200 flex items-center justify-center text-xl shadow-sm shrink-0">
+            <i class="fa-solid fa-graduation-cap"></i>
           </div>
+          <span>หลักสูตรบทเรียนออนไลน์</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
+          วิทยาการคำนวณ ม.4 • ครอบคลุม 4 เสาหลักแนวคิดเชิงคำนวณ (Computational Thinking), วงจรการพัฒนาระบบ (SDLC 5 ขั้นตอน), การเขียนรายงานโครงงาน 5 บท และกรณีศึกษาเชิงประยุกต์
+        </p>
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <button onclick="openEbookModal()" class="btn-lesson-outline">
+          <i class="fa-solid fa-book-bookmark text-[#107548]"></i> เปิด E-Book หนังสือเรียน
+        </button>
+        <a href="https://docs.google.com/presentation/d/1dD2oGk7sxJ4mDpGfcFwCwqtPf1bpyQzvPlNtX74Dw9Y/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-lesson-dark">
+          <i class="fa-solid fa-file-powerpoint text-amber-400"></i> สไลด์ประกอบการสอน ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- 2. QUICK LEARNING NOTICE BANNER -->
+    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 12px 18px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+      <div style="font-size: 0.84rem; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-circle-info text-[#107548]" style="font-size: 1.05rem;"></i>
+        <span><strong>คำแนะนำ:</strong> คลิก <strong>"เข้าเรียนฉบับเต็ม"</strong> เพื่อเปิดบทเรียนดิจิทัล หรือคลิก <strong>"สไลด์"</strong> เพื่อเปิด Google Slides ทบทวนเนื้อหา</span>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-white border border-emerald-300 text-[#107548]">
+          <i class="fa-solid fa-shield-check mr-1"></i> ตัวชี้วัด ว 4.2 ม.4/1
+        </span>
+      </div>
+    </div>
+
+    <!-- 3. FLAGSHIP 2 MAJOR UNITS (2 หน่วยการเรียนรู้หลัก • คอลัมน์คู่เด่นชัด) -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+
+      <!-- UNIT 1 CARD -->
+      <div class="lesson-card">
+        <div class="lesson-card-header">
+          <div class="flex items-center justify-between mb-3">
+            <span class="lesson-badge-chapter">
+              <i class="fa-solid fa-bookmark"></i> หน่วยการเรียนรู้ที่ 1
+            </span>
+            <span class="lesson-badge-clock">
+              <i class="fa-regular fa-clock"></i> 20 คาบ (ชั่วโมง)
+            </span>
+          </div>
+
+          <h3 class="lesson-card-title text-xl" onclick="window.open('unit1.html', '_blank')">
+            แนวคิดเชิงคำนวณในการพัฒนาโครงงาน
+          </h3>
+          <p class="lesson-card-subtitle">Computational Thinking in Project Development</p>
+          <p class="lesson-card-desc">
+            ศึกษา 4 องค์ประกอบของแนวคิดเชิงคำนวณ การแก้ปัญหาด้วยวงจรการพัฒนาระบบ SDLC 5 ขั้นตอน การวางแผนด้วย Gantt Chart แผนภาพ DFD พีระมิดการทดสอบ และโครงสร้างการเขียนรายงานโครงงานคอมพิวเตอร์ 5 บท
+          </p>
+
+          <!-- Key Subtopics List -->
+          <div class="lesson-topics-box">
+            <div class="lesson-topics-title">
+              <i class="fa-solid fa-list-check text-[#107548]"></i> สาระสำคัญประจำหน่วย (3 หัวข้อหลัก):
+            </div>
+            <ul class="lesson-topics-list">
+              <li>
+                <i class="fa-solid fa-circle-check"></i>
+                <span><strong>1.1 แนวคิดเชิงคำนวณ 4 เสาหลัก:</strong> Decomposition, Pattern, Abstraction, Algorithm Design &amp; Flowgorithm</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-circle-check"></i>
+                <span><strong>1.2 วงจรการพัฒนาระบบ (SDLC):</strong> 5 ขั้นตอน, ผัง Gantt Chart 20 สัปดาห์, แผนภาพ DFD, พีระมิดทดสอบ 4 ระดับ</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-circle-check"></i>
+                <span><strong>1.3 การเขียนรายงานโครงงาน:</strong> โครงสร้าง 3 ส่วนหลัก 5 บท, ผังเค้าโครงโครงงาน (Proposal) &amp; บรรณานุกรม APA</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="lesson-card-footer">
+          <div class="flex items-center gap-2">
+            <a href="unit1.html" target="_blank" class="btn-lesson-primary">
+              <i class="fa-solid fa-book-open"></i> เข้าเรียนฉบับเต็ม
+            </a>
+            <button onclick="openSlideModal('sld-1')" class="btn-lesson-outline">
+              <i class="fa-solid fa-file-powerpoint text-amber-500"></i> สไลด์
+            </button>
+          </div>
+          <a href="javascript:void(0)" onclick="switchTab('quizzes')" class="btn-lesson-subtle">
+            <i class="fa-solid fa-clipboard-check text-[#107548]"></i> แบบทดสอบ
+          </a>
+        </div>
+      </div>
+
+      <!-- UNIT 2 CARD -->
+      <div class="lesson-card">
+        <div class="lesson-card-header">
+          <div class="flex items-center justify-between mb-3">
+            <span class="lesson-badge-chapter">
+              <i class="fa-solid fa-bookmark"></i> หน่วยการเรียนรู้ที่ 2
+            </span>
+            <span class="lesson-badge-clock">
+              <i class="fa-regular fa-clock"></i> 20 คาบ (ชั่วโมง)
+            </span>
+          </div>
+
+          <h3 class="lesson-card-title text-xl" onclick="window.open('unit2.html', '_blank')">
+            การประยุกต์ใช้แนวคิดเชิงคำนวณเพื่อพัฒนาโครงงาน
+          </h3>
+          <p class="lesson-card-subtitle">Applied Computational Thinking in Project Development</p>
+          <p class="lesson-card-desc">
+            การนำแนวคิดเชิงคำนวณและวงจร SDLC มาประยุกต์ใช้แก้ปัญหาจริงผ่าน 2 กรณีศึกษา ได้แก่ เว็บแอปพลิเคชันแนะนำการใช้งานห้องสมุด และแอปพลิเคชันแจ้งเตือนการกินยา nMeMo พร้อมการประเมินและทดสอบระบบ
+          </p>
+
+          <!-- Key Subtopics List -->
+          <div class="lesson-topics-box">
+            <div class="lesson-topics-title">
+              <i class="fa-solid fa-list-check text-[#107548]"></i> สาระสำคัญประจำหน่วย (3 กรณีศึกษา):
+            </div>
+            <ul class="lesson-topics-list">
+              <li>
+                <i class="fa-solid fa-circle-check"></i>
+                <span><strong>2.1 กรณีศึกษาที่ 1 (ห้องสมุด):</strong> ระบบแนะนำการใช้งานห้องสมุด ค้นหาหมวดดิวอี้ ผังชั้นวาง 2D แบบ Responsive Web</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-circle-check"></i>
+                <span><strong>2.2 กรณีศึกษาที่ 2 (แอปยา):</strong> โปรแกรมแจ้งเตือนกินยา nMeMo (Health Tech) วิเคราะห์ปัญหาผู้สูงอายุ &amp; UI</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-circle-check"></i>
+                <span><strong>2.3 การประเมินและการทดสอบ:</strong> เทคนิคการทดสอบระบบ (Black-box &amp; White-box), ประเมินความพึงพอใจ &amp; สรุปผล</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="lesson-card-footer">
+          <div class="flex items-center gap-2">
+            <a href="unit2.html" target="_blank" class="btn-lesson-primary">
+              <i class="fa-solid fa-book-open"></i> เข้าเรียนฉบับเต็ม
+            </a>
+            <button onclick="openSlideModal('sld-2')" class="btn-lesson-outline">
+              <i class="fa-solid fa-file-powerpoint text-amber-500"></i> สไลด์
+            </button>
+          </div>
+          <a href="javascript:void(0)" onclick="switchTab('quizzes')" class="btn-lesson-subtle">
+            <i class="fa-solid fa-clipboard-check text-[#107548]"></i> แบบทดสอบ
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 4. DETAILED 6-MODULE LESSONS GRID (เจาะลึก 6 บทเรียนย่อย • 3 คอลัมน์สไตล์ EmbeddedAI) -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 pb-2 border-b border-slate-200 gap-2">
+      <h3 class="text-lg font-bold text-[#0f172a] flex items-center gap-2">
+        <i class="fa-solid fa-layer-group text-[#107548]"></i>
+        <span>เจาะลึก 6 หัวข้อบทเรียนย่อย (Curriculum Modules)</span>
+      </h3>
+      <span class="text-xs text-slate-500 font-mono">
+        <i class="fa-solid fa-check-double text-[#107548] mr-1"></i>ครบตามโครงสร้าง 40 คาบ
+      </span>
+    </div>
+
+    <div id="lessonsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- MODULE 1 -->
+      <div class="lesson-card">
+        <div class="lesson-card-header">
+          <div class="flex items-center justify-between mb-3">
+            <span class="lesson-badge-chapter">บทที่ 1</span>
+            <span class="lesson-badge-clock"><i class="fa-regular fa-clock"></i> 6 คาบ</span>
+          </div>
+          <h3 class="lesson-card-title" onclick="window.open('unit1.html#topic-1', '_blank')">
+            แนวคิดเชิงคำนวณ 4 เสาหลัก
+          </h3>
+          <p class="lesson-card-subtitle">4 Pillars of Computational Thinking</p>
+          <p class="lesson-card-desc">
+            เรียนรู้การแยกย่อยปัญหา (Decomposition), การหารูปแบบ (Pattern Recognition), การคิดเชิงนามธรรม (Abstraction) และขั้นตอนวิธี (Algorithm) พร้อมฝึกสร้างผังงาน Flowchart
+          </p>
+        </div>
+        <div class="lesson-card-footer">
+          <div class="flex items-center gap-2">
+            <a href="unit1.html#topic-1" target="_blank" class="btn-lesson-primary">
+              <i class="fa-solid fa-book-open"></i> เข้าเรียน
+            </a>
+            <button onclick="openSlideModal('sld-1')" class="btn-lesson-outline">
+              <i class="fa-solid fa-file-powerpoint text-amber-500"></i> สไลด์
+            </button>
+          </div>
+          <span class="text-xs text-slate-400 font-mono">หน่วยที่ 1</span>
+        </div>
+      </div>
+
+      <!-- MODULE 2 -->
+      <div class="lesson-card">
+        <div class="lesson-card-header">
+          <div class="flex items-center justify-between mb-3">
+            <span class="lesson-badge-chapter">บทที่ 2</span>
+            <span class="lesson-badge-clock"><i class="fa-regular fa-clock"></i> 7 คาบ</span>
+          </div>
+          <h3 class="lesson-card-title" onclick="window.open('unit1.html#topic-2', '_blank')">
+            วงจรการพัฒนาระบบ SDLC
+          </h3>
+          <p class="lesson-card-subtitle">Software Development Life Cycle</p>
+          <p class="lesson-card-desc">
+            การบริหารโครงงาน 5 ขั้นตอนของ SDLC การวางแผนดำเนินงานด้วย Gantt Chart 20 สัปดาห์ การเขียนแผนภาพกระแสข้อมูล DFD และทำความเข้าใจพีระมิดทดสอบ 4 ระดับ
+          </p>
+        </div>
+        <div class="lesson-card-footer">
+          <div class="flex items-center gap-2">
+            <a href="unit1.html#topic-2" target="_blank" class="btn-lesson-primary">
+              <i class="fa-solid fa-book-open"></i> เข้าเรียน
+            </a>
+            <button onclick="openSlideModal('sld-1')" class="btn-lesson-outline">
+              <i class="fa-solid fa-file-powerpoint text-amber-500"></i> สไลด์
+            </button>
+          </div>
+          <span class="text-xs text-slate-400 font-mono">หน่วยที่ 1</span>
+        </div>
+      </div>
+
+      <!-- MODULE 3 -->
+      <div class="lesson-card">
+        <div class="lesson-card-header">
+          <div class="flex items-center justify-between mb-3">
+            <span class="lesson-badge-chapter">บทที่ 3</span>
+            <span class="lesson-badge-clock"><i class="fa-regular fa-clock"></i> 7 คาบ</span>
+          </div>
+          <h3 class="lesson-card-title" onclick="window.open('unit1.html#topic-3', '_blank')">
+            การเขียนรายงานโครงงาน 5 บท
+          </h3>
+          <p class="lesson-card-subtitle">Project Documentation &amp; Proposal</p>
+          <p class="lesson-card-desc">
+            โครงสร้างการเขียนรายงานโครงงานคอมพิวเตอร์ 3 ส่วนหลัก 5 บท ขั้นตอนการจัดทำและขออนุมัติเค้าโครงโครงงาน (Proposal) และการเขียนบรรณานุกรมมาตรฐาน APA
+          </p>
+        </div>
+        <div class="lesson-card-footer">
+          <div class="flex items-center gap-2">
+            <a href="unit1.html#topic-3" target="_blank" class="btn-lesson-primary">
+              <i class="fa-solid fa-book-open"></i> เข้าเรียน
+            </a>
+            <button onclick="openSlideModal('sld-1')" class="btn-lesson-outline">
+              <i class="fa-solid fa-file-powerpoint text-amber-500"></i> สไลด์
+            </button>
+          </div>
+          <span class="text-xs text-slate-400 font-mono">หน่วยที่ 1</span>
+        </div>
+      </div>
+
+      <!-- MODULE 4 -->
+      <div class="lesson-card">
+        <div class="lesson-card-header">
+          <div class="flex items-center justify-between mb-3">
+            <span class="lesson-badge-chapter">บทที่ 4</span>
+            <span class="lesson-badge-clock"><i class="fa-regular fa-clock"></i> 8 คาบ</span>
+          </div>
+          <h3 class="lesson-card-title" onclick="window.open('unit2.html', '_blank')">
+            กรณีศึกษา: เว็บไซต์ห้องสมุด
+          </h3>
+          <p class="lesson-card-subtitle">Library Web Application (Case 1)</p>
+          <p class="lesson-card-desc">
+            กรณีศึกษาแก้ปัญหาการใช้งานห้องสมุดด้วยแนวคิดเชิงคำนวณและ SDLC การออกแบบระบบแนะนำ การค้นหาตามหมวดดิวอี้ 000-900 และผังชั้นวางหนังสือ 2D แบบ Responsive
+          </p>
+        </div>
+        <div class="lesson-card-footer">
+          <div class="flex items-center gap-2">
+            <a href="unit2.html" target="_blank" class="btn-lesson-primary">
+              <i class="fa-solid fa-book-open"></i> เข้าเรียน
+            </a>
+            <button onclick="openSlideModal('sld-2')" class="btn-lesson-outline">
+              <i class="fa-solid fa-file-powerpoint text-amber-500"></i> สไลด์
+            </button>
+          </div>
+          <span class="text-xs text-slate-400 font-mono">หน่วยที่ 2</span>
+        </div>
+      </div>
+
+      <!-- MODULE 5 -->
+      <div class="lesson-card">
+        <div class="lesson-card-header">
+          <div class="flex items-center justify-between mb-3">
+            <span class="lesson-badge-chapter">บทที่ 5</span>
+            <span class="lesson-badge-clock"><i class="fa-regular fa-clock"></i> 8 คาบ</span>
+          </div>
+          <h3 class="lesson-card-title" onclick="window.open('unit2.html', '_blank')">
+            กรณีศึกษา: แอปแจ้งเตือนกินยา
+          </h3>
+          <p class="lesson-card-subtitle">Medicine Reminder Mobile App (Case 2)</p>
+          <p class="lesson-card-desc">
+            กรณีศึกษา Health Tech เพื่อผู้สูงอายุ แอปพลิเคชัน nMeMo ตั้งเวลาแจ้งเตือนทานยา เสียงเตือน ปุ่มกดสัมผัสขนาดใหญ่ และการส่งสัญญาณยืนยันการทานยา
+          </p>
+        </div>
+        <div class="lesson-card-footer">
+          <div class="flex items-center gap-2">
+            <a href="unit2.html" target="_blank" class="btn-lesson-primary">
+              <i class="fa-solid fa-book-open"></i> เข้าเรียน
+            </a>
+            <button onclick="openSlideModal('sld-2')" class="btn-lesson-outline">
+              <i class="fa-solid fa-file-powerpoint text-amber-500"></i> สไลด์
+            </button>
+          </div>
+          <span class="text-xs text-slate-400 font-mono">หน่วยที่ 2</span>
+        </div>
+      </div>
+
+      <!-- MODULE 6 -->
+      <div class="lesson-card">
+        <div class="lesson-card-header">
+          <div class="flex items-center justify-between mb-3">
+            <span class="lesson-badge-chapter">บทที่ 6</span>
+            <span class="lesson-badge-clock"><i class="fa-regular fa-clock"></i> 4 คาบ</span>
+          </div>
+          <h3 class="lesson-card-title" onclick="window.open('unit2.html', '_blank')">
+            การประเมินและทดสอบโครงงาน
+          </h3>
+          <p class="lesson-card-subtitle">Testing, Evaluation &amp; Reflection</p>
+          <p class="lesson-card-desc">
+            เทคนิคการทดสอบซอฟต์แวร์ Black-box และ White-box การสร้างแบบสอบถามประเมินความพึงพอใจ การเปรียบเทียบผลลัพธ์ระหว่าง 2 โครงงาน และการนำเสนอผลงาน
+          </p>
+        </div>
+        <div class="lesson-card-footer">
+          <div class="flex items-center gap-2">
+            <a href="unit2.html" target="_blank" class="btn-lesson-primary">
+              <i class="fa-solid fa-book-open"></i> เข้าเรียน
+            </a>
+            <button onclick="openSlideModal('sld-2')" class="btn-lesson-outline">
+              <i class="fa-solid fa-file-powerpoint text-amber-500"></i> สไลด์
+            </button>
+          </div>
+          <span class="text-xs text-slate-400 font-mono">หน่วยที่ 2</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 `;
 }
 
