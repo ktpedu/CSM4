@@ -3,7 +3,7 @@
    Inspired by modern EdTech design (ScratchLearn style) with Kanit typography
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
 :root, [data-theme="light"] {
   /* ==========================================================================
@@ -47,7 +47,9 @@
   --shadow-lg: 0 10px 15px -3px rgba(16, 117, 72, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
 
   /* Sans-serif Stack: Inter, Segoe UI, Sarabun, TH Sarabun New, Garuda */
-  --font-family: 'Inter', 'Segoe UI', 'Sarabun', 'TH Sarabun New', 'TH Sarabun PSK', 'Garuda', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Kanit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Sarabun', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family: 'Sarabun', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   --navbar-height: 72px;
   --container-width: 1240px;
@@ -74,8 +76,36 @@
   box-sizing: border-box;
 }
 
-body, button, input, select, textarea {
-  font-family: var(--font-family);
+body, input, select, textarea {
+  font-family: var(--font-body);
+}
+
+/* Global Headings & UI Elements strictly Kanit (Clean, Crisp, Modern Thai EdTech) */
+h1, h2, h3, h4, h5, h6,
+.font-heading,
+.thairath-section-title,
+.section-title,
+.hero-title,
+.hero-subtitle,
+.billboard-hero-title,
+.hero-subheading,
+.service-title,
+.lesson-card-title,
+.quiz-card-title,
+.asg-card-title,
+.thairath-cat-item,
+.thairath-nav-link,
+.navbar-brand,
+.btn,
+button,
+.ws-cat-pill,
+.btn-ws-filter,
+.badge,
+.ws-badge,
+.ws-score,
+.modal-title,
+th {
+  font-family: var(--font-heading) !important;
 }
 
 body {
@@ -3419,7 +3449,7 @@ button, a, input, select, textarea {
 }
 
 .ws-card.unit-2::before {
-  background: linear-gradient(90deg, #0284c7, #7c3aed);
+  background: #107548;
 }
 
 .ws-answer-key-box {
@@ -7445,44 +7475,58 @@ textarea::placeholder {
   border-radius: 999px !important;
 }
 
-/* 2. Worksheets Category Switcher (Very Distinct & Prominent) */
+/* ==========================================================================
+   2. UNIFIED WORKSHEETS DESIGN SYSTEM (White - Emerald Green - Slate Black Theme)
+   ========================================================================== */
+
+/* Category Switcher Pills */
 .ws-cat-pill {
-  padding: 10px 22px !important;
+  padding: 9px 20px !important;
   border-radius: 12px !important;
-  font-size: 0.95rem !important;
+  font-size: 0.92rem !important;
   font-weight: 700 !important;
   cursor: pointer !important;
-  border: 1.5px solid #cbd5e1 !important;
-  background: #ffffff !important;
-  color: #334155 !important;
+  border: 1.5px solid transparent !important;
+  background: transparent !important;
+  color: #475569 !important;
   display: inline-flex !important;
   align-items: center !important;
-  gap: 10px !important;
+  gap: 8px !important;
+  font-family: 'Kanit', sans-serif !important;
   transition: all 0.2s ease !important;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
 }
 
 .ws-cat-pill:hover {
-  border-color: #107548 !important;
-  color: #107548 !important;
-  transform: translateY(-1px) !important;
+  color: #0f172a !important;
+  background: rgba(0, 0, 0, 0.04) !important;
 }
 
+.ws-cat-pill.active,
 .ws-cat-pill.active.theory {
-  border: 2px solid #0284c7 !important;
-  color: #0284c7 !important;
-  background: #f0f9ff !important;
-  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.15) !important;
+  background: #ffffff !important;
+  color: #107548 !important;
+  border: 2px solid #107548 !important;
+  box-shadow: 0 2px 8px rgba(16, 117, 72, 0.15) !important;
 }
 
 .ws-cat-pill.active.practical {
-  border: 2px solid #059669 !important;
+  background: #ffffff !important;
   color: #059669 !important;
-  background: #ecfdf5 !important;
-  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.15) !important;
+  border: 2px solid #059669 !important;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15) !important;
 }
 
-/* 3. Sub-filter Tabs */
+.ws-pill-counter {
+  font-size: 0.74rem !important;
+  font-weight: 800 !important;
+  padding: 2px 8px !important;
+  border-radius: 999px !important;
+  background: rgba(0, 0, 0, 0.06) !important;
+  color: inherit !important;
+  font-family: 'Kanit', sans-serif !important;
+}
+
+/* Sub-filter Tabs */
 .btn-ws-filter {
   padding: 8px 16px !important;
   border-radius: 10px !important;
@@ -7491,12 +7535,16 @@ textarea::placeholder {
   border: 1.5px solid #cbd5e1 !important;
   background: #ffffff !important;
   color: #334155 !important;
+  font-family: 'Kanit', sans-serif !important;
   transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
 }
 
 .btn-ws-filter:hover {
   border-color: #107548 !important;
   color: #107548 !important;
+  background: #f0fdf4 !important;
 }
 
 .btn-ws-filter.active {
@@ -7506,14 +7554,19 @@ textarea::placeholder {
   box-shadow: 0 2px 8px rgba(16, 117, 72, 0.25) !important;
 }
 
-/* 4. Worksheet Cards (Distinct Prominent Borders) */
+/* 4. Worksheet Cards (Unified 5px Emerald Green Top Accent Bar - Matches Lessons Exactly) */
 .ws-card {
+  padding: 20px !important;
   border: 2px solid #cbd5e1 !important;
-  border-top: 5px solid #0284c7 !important;
+  border-top: 5px solid #107548 !important;
   border-radius: 16px !important;
   background-color: #ffffff !important;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05) !important;
   transition: all 0.22s ease-in-out !important;
+}
+
+.ws-card.unit-2 {
+  border-top-color: #107548 !important;
 }
 
 .ws-card.practical {
@@ -7522,10 +7575,12 @@ textarea::placeholder {
 
 .ws-card:hover {
   transform: translateY(-4px) !important;
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 16px 30px rgba(16, 117, 72, 0.12) !important;
+  border-color: #107548 !important;
 }
 
 .ws-card h4 {
+  font-family: 'Kanit', sans-serif !important;
   font-size: 1.15rem !important;
   font-weight: 800 !important;
   color: #0f172a !important;
@@ -7533,9 +7588,10 @@ textarea::placeholder {
 }
 
 .ws-card-subtitle {
-  font-size: 0.82rem !important;
+  font-family: 'Kanit', sans-serif !important;
+  font-size: 0.84rem !important;
   font-weight: 700 !important;
-  color: #0284c7 !important;
+  color: #107548 !important;
 }
 
 .ws-card.practical .ws-card-subtitle {
@@ -7543,17 +7599,52 @@ textarea::placeholder {
 }
 
 .ws-card-desc {
+  font-family: 'Sarabun', sans-serif !important;
   font-size: 0.9rem !important;
   font-weight: 500 !important;
-  color: #1e293b !important;
+  color: #334155 !important;
   line-height: 1.6 !important;
 }
 
+.ws-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Kanit', sans-serif !important;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1.5px solid #a7f3d0;
+}
 
-/* ==========================================================================
-   STREAMLINED COMPACT WORKSHEETS LAYOUT (3 คอลัมน์สบายตา ใช้งานง่าย ไม่รก)
-   ========================================================================== */
+.ws-badge.unit-2 {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
 
+.ws-badge.practical {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
+}
+
+.ws-score {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Kanit', sans-serif !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #fefce8;
+  color: #854d0e;
+  border: 1.5px solid #fef08a;
+}
+
+/* Responsive 3-Column Layout */
 .worksheets-responsive-grid {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
@@ -7570,106 +7661,4 @@ textarea::placeholder {
   .worksheets-responsive-grid {
     grid-template-columns: 1fr !important;
   }
-}
-
-.ws-cat-pill {
-  padding: 8px 18px !important;
-  border-radius: 10px !important;
-  font-size: 0.92rem !important;
-  font-weight: 700 !important;
-  cursor: pointer !important;
-  border: 1.5px solid transparent !important;
-  background: transparent !important;
-  color: #475569 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  transition: all 0.2s ease !important;
-}
-
-.ws-cat-pill:hover {
-  color: #0f172a !important;
-}
-
-.ws-cat-pill.active.theory {
-  background: #ffffff !important;
-  color: #0284c7 !important;
-  border: 1.5px solid #0284c7 !important;
-  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.15) !important;
-}
-
-.ws-cat-pill.active.practical {
-  background: #ffffff !important;
-  color: #059669 !important;
-  border: 1.5px solid #059669 !important;
-  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15) !important;
-}
-
-.ws-pill-counter {
-  font-size: 0.74rem !important;
-  font-weight: 800 !important;
-  padding: 2px 8px !important;
-  border-radius: 999px !important;
-  background: rgba(0, 0, 0, 0.06) !important;
-  color: inherit !important;
-}
-
-.ws-badge {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.78rem;
-  font-weight: 800;
-  padding: 4px 10px;
-  border-radius: 8px;
-  background: #e0f2fe;
-  color: #0369a1;
-  border: 1px solid #bae6fd;
-}
-
-.ws-badge.unit-2 {
-  background: #f0fdf4;
-  color: #15803d;
-  border-color: #bbf7d0;
-}
-
-.ws-badge.practical {
-  background: #ecfdf5;
-  color: #047857;
-  border-color: #a7f3d0;
-}
-
-.ws-score {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.8rem;
-  font-weight: 800;
-  padding: 4px 10px;
-  border-radius: 8px;
-  background: #fefce8;
-  color: #854d0e;
-  border: 1px solid #fef08a;
-}
-
-.ws-card {
-  padding: 18px !important;
-  border: 2px solid #cbd5e1 !important;
-  border-top: 5px solid #0284c7 !important;
-  border-radius: 16px !important;
-  background-color: #ffffff !important;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05) !important;
-  transition: all 0.22s ease-in-out !important;
-}
-
-.ws-card.unit-2 {
-  border-top-color: #0d9488 !important;
-}
-
-.ws-card.practical {
-  border-top-color: #059669 !important;
-}
-
-.ws-card:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1) !important;
-  border-color: #94a3b8 !important;
 }

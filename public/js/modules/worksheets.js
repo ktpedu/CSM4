@@ -570,12 +570,12 @@ function setWorksheetCategory(category) {
     } else {
       // Clean iPad hint bar for theory mode
       bannerContainer.innerHTML = `
-        <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; border-left: 5px solid #0284c7; border-radius: 12px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
-          <div style="font-size: 0.86rem; color: #0369a1; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-            <i class="fa-solid fa-circle-info text-sky-600" style="font-size: 1.15rem;"></i>
+        <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; border-left: 5px solid #107548; border-radius: 12px; padding: 10px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+          <div style="font-size: 0.86rem; color: #065f46; font-weight: 600; display: flex; align-items: center; gap: 8px; font-family: 'Kanit', sans-serif;">
+            <i class="fa-solid fa-circle-info text-emerald-700" style="font-size: 1.15rem;"></i>
             <span><strong>สำหรับ iPad:</strong> กดปุ่ม <strong>"PDF/iPad"</strong> ในการ์ดใบงานเพื่อโหลดเข้า GoodNotes หรือแอป Files แล้วเขียนส่งได้ทันที</span>
           </div>
-          <span style="font-size: 0.78rem; font-weight: 700; background: #e0f2fe; color: #0284c7; padding: 3px 10px; border-radius: 999px;">
+          <span style="font-size: 0.78rem; font-weight: 700; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; padding: 3px 10px; border-radius: 999px; font-family: 'Kanit', sans-serif;">
             6 ใบงานมาตรฐาน
           </span>
         </div>
@@ -610,7 +610,7 @@ function setWorksheetCategory(category) {
           <i class="fa-solid fa-lightbulb mr-1.5" style="color: #10b981;"></i> หน่วยที่ 1: แนวคิดเชิงคำนวณ (ใบงาน 1.1 - 1.3)
         </button>
         <button onclick="filterWorksheets('mod-2')" class="btn-ws-filter" id="btn-ws-filter-mod-2">
-          <i class="fa-solid fa-diagram-project mr-1.5" style="color: #0284c7;"></i> หน่วยที่ 2: การพัฒนาโครงงาน (ใบงาน 2.1 - 2.3)
+          <i class="fa-solid fa-diagram-project mr-1.5" style="color: #107548;"></i> หน่วยที่ 2: การพัฒนาโครงงาน (ใบงาน 2.1 - 2.3)
         </button>
       `;
     }
@@ -713,7 +713,7 @@ async function loadWorksheetsData(filterUnit = currentWorksheetSubFilter) {
               <h4 style="font-size: 1.12rem; font-weight: 800; color: #0f172a; margin: 0 0 6px 0; line-height: 1.35; font-family: 'Kanit', sans-serif;">
                 ${escapeHtml(stripDifficultyTags(ws.title))}
               </h4>
-              <p style="font-size: 0.82rem; color: ${isFlow ? '#059669' : '#0284c7'}; font-weight: 700; margin: 0 0 8px 0;">
+              <p style="font-size: 0.84rem; color: #107548; font-weight: 700; margin: 0 0 8px 0; font-family: 'Kanit', sans-serif;">
                 ${escapeHtml(stripDifficultyTags(ws.subtitle || ws.plan))}
               </p>
               <p style="font-size: 0.88rem; color: #334155; line-height: 1.55; margin: 0; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
@@ -733,7 +733,7 @@ async function loadWorksheetsData(filterUnit = currentWorksheetSubFilter) {
                   <i class="fa-solid fa-book-open mr-1"></i> ${isFlow ? 'โจทย์ 10 ข้อ' : 'ทำออนไลน์'}
                 </button>
                 <a href="worksheets/${isFlow ? 'all_flowchart_worksheets_m4.pdf' : `${escapeHtml(ws.id)}.pdf`}" target="_blank" download="${escapeHtml(ws.code)}_ม4.pdf" class="btn btn-outline" style="padding: 8px 8px; font-size: 0.8rem; font-weight: 700; border-radius: 8px; justify-content: center; text-decoration: none; display: inline-flex; align-items: center; border-color: #cbd5e1; color: #1e293b; white-space: nowrap;">
-                  <i class="fa-solid fa-file-arrow-down mr-1 text-sky-600"></i> PDF/iPad
+                  <i class="fa-solid fa-file-arrow-down mr-1 text-emerald-700"></i> PDF/iPad
                 </a>
                 <button onclick="openSubmitModal('${asgId}', '${escapeHtml(stripDifficultyTags(ws.title))}')" class="btn btn-amber" style="padding: 8px 12px; font-size: 0.82rem; font-weight: 700; border-radius: 8px; justify-content: center;" title="ส่งงาน">
                   <i class="fa-solid fa-cloud-arrow-up"></i>

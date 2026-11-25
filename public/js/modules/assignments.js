@@ -597,7 +597,7 @@ function renderMultiFileViewer(areaEl, files, sub, asgId, btnDownload, btnNewTab
 
       fileContentEl.innerHTML = `
         <div style="padding: 16px; color: #cbd5e1; max-width: 720px; margin: 0 auto; text-align: center;">
-          <div style="width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, #0284c7, #2563eb); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 10px; box-shadow: 0 4px 16px rgba(2, 132, 199, 0.4);">
+          <div style="width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, #107548, #059669); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 10px; box-shadow: 0 4px 16px rgba(16, 117, 72, 0.4);">
             <i class="fa-solid fa-diagram-project"></i>
           </div>
           <h4 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 4px;">${escapeHtml(file.name)}</h4>
@@ -608,7 +608,7 @@ function renderMultiFileViewer(areaEl, files, sub, asgId, btnDownload, btnNewTab
             <button type="button" onclick="downloadSingleFileRecord(window.__currentMultiFiles[${idx}], '${escapeHtml(sub?.student_name)}', '${escapeHtml(sub?.class_room)}', '${escapeHtml(asgId)}', ${idx})" class="btn btn-primary" style="padding: 8px 18px; font-weight: 700; font-size: 0.84rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
               <i class="fa-solid fa-download"></i> ดาวน์โหลด ${escapeHtml(file.name)}
             </button>
-            <a href="flowgorithm-guide.html" target="_blank" class="btn" style="background: rgba(2, 132, 199, 0.15); color: #38bdf8; border: 1.5px solid rgba(2, 132, 199, 0.4); padding: 8px 16px; font-weight: 700; font-size: 0.84rem; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; border-radius: 8px;">
+            <a href="flowgorithm-guide.html" target="_blank" class="btn" style="background: rgba(2, 132, 199, 0.15); color: #38bdf8; border: 1.5px solid rgba(16, 117, 72, 0.4); padding: 8px 16px; font-weight: 700; font-size: 0.84rem; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; border-radius: 8px;">
               <i class="fa-solid fa-book-open"></i> คู่มือ Flowgorithm ↗
             </a>
           </div>
@@ -669,7 +669,7 @@ function renderMultiFileViewer(areaEl, files, sub, asgId, btnDownload, btnNewTab
           }).join('')}
         </div>
 
-        <button type="button" onclick="downloadAllSubmissionFiles(window.__currentMultiFiles, '${escapeHtml(sub?.student_name)}', '${escapeHtml(sub?.class_room)}', '${escapeHtml(asgId)}')" class="btn" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: white; font-size: 0.8rem; font-weight: 800; padding: 7px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);">
+        <button type="button" onclick="downloadAllSubmissionFiles(window.__currentMultiFiles, '${escapeHtml(sub?.student_name)}', '${escapeHtml(sub?.class_room)}', '${escapeHtml(asgId)}')" class="btn" style="background: linear-gradient(135deg, #107548, #059669); color: white; font-size: 0.8rem; font-weight: 800; padding: 7px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer; box-shadow: 0 2px 8px rgba(16, 117, 72, 0.3);">
           <i class="fa-solid fa-file-zipper"></i> ดาวน์โหลดทุกไฟล์ (${files.length} ไฟล์ .zip)
         </button>
       </div>
@@ -995,7 +995,7 @@ async function previewSubmissionWork(subId, studentName, asgId) {
 
       areaEl.innerHTML = `
         <div style="padding: 24px; color: #cbd5e1; max-width: 720px; margin: 0 auto; text-align: center;">
-          <div style="width: 76px; height: 76px; border-radius: 20px; background: linear-gradient(135deg, #0284c7, #2563eb); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 2.2rem; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(2, 132, 199, 0.4);">
+          <div style="width: 76px; height: 76px; border-radius: 20px; background: linear-gradient(135deg, #107548, #059669); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 2.2rem; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(16, 117, 72, 0.4);">
             <i class="fa-solid fa-diagram-project"></i>
           </div>
           <h4 style="font-size: 1.25rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">ไฟล์ผังงาน Flowgorithm (.fprg)</h4>
@@ -1006,7 +1006,7 @@ async function previewSubmissionWork(subId, studentName, asgId) {
             <button type="button" onclick="downloadSubmissionFileById('${escapeHtml(sub.id)}', '${escapeHtml(studentName || sub?.student_name)}', '${escapeHtml(sub?.class_room)}', '${escapeHtml(asgId)}')" class="btn btn-primary" style="padding: 10px 24px; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35); cursor: pointer;">
               <i class="fa-solid fa-cloud-arrow-down"></i> ดาวน์โหลดไฟล์ .fprg
             </button>
-            <a href="flowgorithm-guide.html" target="_blank" class="btn" style="background: rgba(2, 132, 199, 0.15); color: #38bdf8; border: 1.5px solid rgba(2, 132, 199, 0.4); padding: 10px 20px; font-weight: 700; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; border-radius: 8px;">
+            <a href="flowgorithm-guide.html" target="_blank" class="btn" style="background: rgba(2, 132, 199, 0.15); color: #38bdf8; border: 1.5px solid rgba(16, 117, 72, 0.4); padding: 10px 20px; font-weight: 700; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; border-radius: 8px;">
               <i class="fa-solid fa-book-open"></i> คู่มือ Flowgorithm ↗
             </a>
           </div>
@@ -1027,7 +1027,7 @@ async function previewSubmissionWork(subId, studentName, asgId) {
           <i class="fa-solid fa-link text-4xl text-sky-400 mb-3 block"></i>
           <h4 style="font-weight: 700; margin-bottom: 8px;">ลิงก์ผลงานภายนอก (${fileInfo.label})</h4>
           <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 20px; word-break: break-all; max-width: 500px; margin-left: auto; margin-right: auto;">${escapeHtml(fileUrl)}</p>
-          <a href="${escapeHtml(fileUrl)}" target="_blank" rel="noopener noreferrer" class="btn" style="background: #0284c7; color: white; font-weight: 700; padding: 10px 24px; border-radius: 12px; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);">
+          <a href="${escapeHtml(fileUrl)}" target="_blank" rel="noopener noreferrer" class="btn" style="background: #107548; color: white; font-weight: 700; padding: 10px 24px; border-radius: 12px; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(16, 117, 72, 0.4);">
             <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดดูงานใน ${fileInfo.label} (แท็บใหม่) ↗
           </a>
         </div>
@@ -1689,7 +1689,7 @@ function openGradeModal(subId, studentName, currentScore) {
       const fileInfo = analyzeSubmissionFile(sub?.file_url, sub?.content);
       if (sub.file_url && sub.file_url.startsWith('http')) {
         fileContainer.innerHTML = `
-          <a href="${escapeHtml(sub.file_url)}" target="_blank" rel="noopener noreferrer" class="btn" style="background: #0284c7; color: white; font-size: 0.8rem; padding: 7px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px;">
+          <a href="${escapeHtml(sub.file_url)}" target="_blank" rel="noopener noreferrer" class="btn" style="background: #107548; color: white; font-size: 0.8rem; padding: 7px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px;">
             <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดดูไฟล์งานใน ${fileInfo.label} ↗
           </a>
         `;

@@ -50,7 +50,7 @@
     </script>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v=7.2" />
+    <link rel="stylesheet" href="css/style.css?v=7.3" />
       <style>
       /* Ensure Font Awesome icons ALWAYS render correctly and never get overridden */
       .fa-solid, .fas, i.fa-solid, i.fas {
@@ -329,7 +329,7 @@
                   </div>
                   <h2 class="billboard-hero-title">
                     ศูนย์ทดสอบวัดผลออนไลน์<br/>
-                    <span class="hero-subheading">พร้อมระบบบริหารจัดการบทเรียน<br/>สำหรับครูผู้สอน</span>
+                    <span class="hero-subheading">พร้อมระบบบริหารจัดการบทเรียน<span style="white-space: nowrap;">สำหรับครูผู้สอน</span></span>
                   </h2>
                   <p class="billboard-hero-desc">
                     ข้อสอบปรนัยรายบท 120 ข้อ กลางภาค 20 ข้อ ปลายภาค 20 ข้อ และข้อสอบปฏิบัติ 12 ข้อ พร้อมตรวจคะแนนแบบ Real-time เฉลยละเอียด และระบบออกรายงานผลการเรียน
@@ -422,7 +422,7 @@
                     ฝึกทักษะการคิดเชิงคำนวณผ่านเครื่องมือจำลองปัญหา การวางแผน Gantt Chart และโปรแกรมจำลองผังงาน Flowgorithm ออนไลน์
                   </p>
                   <div class="billboard-hero-actions">
-                    <button onclick="switchTab('ct-tools')" class="btn-hero-primary" style="background: #0284c7; color: #ffffff !important; border-color: #38bdf8; font-weight: 800; box-shadow: 0 4px 16px rgba(2, 132, 199, 0.45);">
+                    <button onclick="switchTab('ct-tools')" class="btn-hero-primary" style="background: #107548; color: #ffffff !important; border-color: #34d399; font-weight: 800; box-shadow: 0 4px 16px rgba(16, 117, 72, 0.45);">
                       <i class="fa-solid fa-laptop-code"></i> เปิดห้องทดลอง CS Lab
                     </button>
                     <button onclick="switchTab('worksheets')" class="btn-hero-glass" style="background: rgba(0, 0, 0, 0.6); color: #ffffff !important; border: 1.5px solid rgba(255, 255, 255, 0.5); font-weight: 700; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);">
@@ -459,7 +459,7 @@
 
               <!-- Card 2: ใบงาน & Lab -->
               <div onclick="switchTab('worksheets')" class="service-card" role="button" tabindex="0">
-                <div class="service-icon-box" style="background: #eff6ff; color: #2563eb;">
+                <div class="service-icon-box" style="background: #ecfdf5; color: #059669;">
                   <i class="fa-solid fa-flask-vial"></i>
                 </div>
                 <h4 class="service-title">ใบงานปฏิบัติการ</h4>
@@ -477,7 +477,7 @@
 
               <!-- Card 4: ส่งการบ้าน -->
               <div onclick="switchTab('assignments')" class="service-card" role="button" tabindex="0">
-                <div class="service-icon-box" style="background: #f5f3ff; color: #7c3aed;">
+                <div class="service-icon-box" style="background: #f0fdf4; color: #15803d;">
                   <i class="fa-solid fa-cloud-arrow-up"></i>
                 </div>
                 <h4 class="service-title">ส่งการบ้าน</h4>
@@ -495,7 +495,7 @@
 
               <!-- Card 6: คะแนน & อันดับ -->
               <div onclick="switchTab('analytics')" class="service-card" role="button" tabindex="0">
-                <div class="service-icon-box" style="background: #fff1f2; color: #e11d48;">
+                <div class="service-icon-box" style="background: #ecfdf5; color: #047857;">
                   <i class="fa-solid fa-chart-line"></i>
                 </div>
                 <h4 class="service-title">สมุดบันทึกคะแนน</h4>
@@ -909,7 +909,7 @@
             <!-- Two Clear Category Tabs (ทฤษฎี vs ปฏิบัติการ) -->
             <div style="background: #f1f5f9; border: 1.5px solid #cbd5e1; border-radius: 14px; padding: 5px; display: inline-flex; gap: 6px;">
               <button id="ws-cat-btn-theory" onclick="setWorksheetCategory('theory')" class="ws-cat-pill active theory">
-                <i class="fa-solid fa-file-lines text-sky-600"></i>
+                <i class="fa-solid fa-file-lines text-emerald-700"></i>
                 <span>1. ใบงานทฤษฎี &amp; โครงงาน</span>
                 <span class="ws-pill-counter">6 ฉบับ</span>
               </button>
@@ -962,7 +962,7 @@
               <!-- Category Filter in Assignments Tab -->
               <div style="display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap;">
                 <button type="button" id="asg-filter-btn-theory" onclick="filterAssignmentsCategory('theory')" class="btn-asg-filter active">
-                  <i class="fa-solid fa-file-lines mr-1 text-sky-600"></i> ทฤษฎี & โครงงาน (6)
+                  <i class="fa-solid fa-file-lines mr-1 text-emerald-700"></i> ทฤษฎี & โครงงาน (6)
                 </button>
                 <button type="button" id="asg-filter-btn-practical" onclick="filterAssignmentsCategory('practical')" class="btn-asg-filter">
                   <i class="fa-solid fa-laptop-code mr-1 text-emerald-600"></i> ปฏิบัติการ Flowchart (3)
@@ -2269,7 +2269,7 @@
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 8px;">
-            <a id="modal-ws-download-pdf-btn" href="worksheets/ws-1-1.pdf" target="_blank" download class="btn" style="background: #0284c7; color: #ffffff; padding: 7px 14px; font-size: 0.8rem; font-weight: 700; text-decoration: none; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px;">
+            <a id="modal-ws-download-pdf-btn" href="worksheets/ws-1-1.pdf" target="_blank" download class="btn" style="background: #107548; color: #ffffff; padding: 7px 14px; font-size: 0.8rem; font-weight: 700; text-decoration: none; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px;">
               <i class="fa-solid fa-file-arrow-down"></i> โหลด PDF (สำหรับ iPad)
             </a>
             <button onclick="printCurrentWorksheet()" class="btn btn-outline" style="padding: 7px 14px; font-size: 0.8rem;" title="พิมพ์เอกสารใบงานนี้ (ขนาด A4)">
@@ -2593,13 +2593,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="js/config.js?v=5.8"></script>
     <script src="js/modules/auth.js?v=5.8"></script>
-    <script src="js/modules/lessons.js?v=7.1"></script>
-    <script src="js/modules/worksheets.js?v=7.2"></script>
+    <script src="js/modules/lessons.js?v=7.3"></script>
+    <script src="js/modules/worksheets.js?v=7.3"></script>
     <script src="js/modules/assignments.js?v=5.8"></script>
     <script src="js/modules/quizzes.js?v=5.8"></script>
     <script src="js/modules/teacher.js?v=5.8"></script>
     <script src="js/modules/pwa.js?v=5.8"></script>
-    <script src="js/app.js?v=7.2"></script>
+    <script src="js/app.js?v=7.3"></script>
 
     <!-- MOBILE & TABLET STICKY BOTTOM NAVIGATION BAR -->
     <nav id="mobile-bottom-nav" class="mobile-bottom-nav">
