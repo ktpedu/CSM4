@@ -50,7 +50,7 @@
     </script>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v=6.3" />
+    <link rel="stylesheet" href="css/style.css?v=6.5" />
       <style>
       /* Ensure Font Awesome icons ALWAYS render correctly and never get overridden */
       .fa-solid, .fas, i.fa-solid, i.fas {
@@ -310,126 +310,118 @@
         
         <div class="container" style="padding-top: 14px;">
           
-          <!-- 1. FULL-WIDTH TOP BILLBOARD SLIDER (หัวเว็บสไลเดอร์ใหญ่ด้านบนสุด ตามรูปที่ผู้ใช้เลือก) -->
-          <div class="thairath-billboard-wrap" id="billboard-slider-container" onmouseenter="pauseBillboardSlider()" onmouseleave="resumeBillboardSlider()" style="margin-bottom: 22px;">
+          <!-- 1. FULL-WIDTH TOP BILLBOARD SLIDER (หัวเว็บสไลเดอร์ใหญ่คมชัด สไตล์ EmbeddedAI) -->
+          <div class="thairath-billboard-wrap" id="billboard-slider-container" onmouseenter="pauseBillboardSlider()" onmouseleave="resumeBillboardSlider()">
             
             <!-- Billboard Slider Track -->
             <div class="thairath-billboard-track" id="billboard-track">
               
-              <!-- BILLBOARD SLIDE 1: แนวคิดเชิงคำนวณ & SDLC 5 ขั้นตอน -->
-              <div class="billboard-slide active" style="background: linear-gradient(135deg, #062316 0%, #0a3822 55%, #0f172a 100%);">
-                <div class="billboard-slide-grid">
-                  <div class="billboard-visual-col">
-                    <img src="img/billboard_slide1_ct.svg" alt="แนวคิดเชิงคำนวณ &amp; SDLC" class="billboard-illustration-img" style="width: 148px; height: 148px; object-fit: contain; filter: drop-shadow(0 6px 16px rgba(16, 117, 72, 0.15));" />
+              <!-- BILLBOARD SLIDE 1: ศูนย์ทดสอบวัดผลออนไลน์ (ตรงตามที่ผู้ใช้ส่งมาในรูปตัวอย่าง) -->
+              <div class="billboard-slide active">
+                <img src="img/banners/slide4_assessment_workshop.jpg" alt="ศูนย์ทดสอบวัดผลออนไลน์" class="billboard-bg-img" />
+                <div class="billboard-overlay"></div>
+                <div class="billboard-slide-content">
+                  <div class="hero-slide-badge badge-rose">
+                    <i class="fa-solid fa-square-check text-rose-400"></i>
+                    <span>Assessment &amp; CMS • ระบบวัดผลมาตรฐาน สพฐ.</span>
                   </div>
-                  <div class="billboard-content-col">
-                    <div class="billboard-top-tag">
-                      <span class="billboard-tag-live"><i class="fa-solid fa-circle-dot mr-1 text-emerald-700"></i> ประเด็นสำคัญการเรียนรู้ ม.4</span>
-                      <span class="billboard-tag-term">ว 4.2 ม.4/1 • หลักสูตรแกนกลาง</span>
-                    </div>
-                    <h2 class="billboard-title">
-                      จากรากฐานแนวคิดเชิงคำนวณ สู่การพัฒนาโครงงานอย่างยั่งยืน
-                    </h2>
-                    <p class="billboard-subtitle">
-                      เจาะลึก 4 องค์ประกอบ Computational Thinking บูรณาการวงจร SDLC 5 ขั้นตอน พร้อมจัดทำรายงานโครงงาน 5 บทมาตรฐานวิชาการ
-                    </p>
-                    <div class="billboard-meta-row">
-                      <span><i class="fa-solid fa-user-pen mr-1 text-emerald-700"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
-                      <span><i class="fa-solid fa-book-bookmark mr-1 text-amber-600"></i> หนังสือเรียนอิเล็กทรอนิกส์</span>
-                      <button onclick="switchTab('lessons')" class="billboard-btn-action">
-                        เข้าสู่บทเรียน <i class="fa-solid fa-arrow-right ml-1"></i>
-                      </button>
-                    </div>
+                  <h2 class="billboard-hero-title">
+                    ศูนย์ทดสอบวัดผลออนไลน์<br/>
+                    <span class="hero-subheading">พร้อมระบบบริหารจัดการบทเรียนสำหรับครูผู้สอน</span>
+                  </h2>
+                  <p class="billboard-hero-desc">
+                    ข้อสอบปรนัยรายบท 120 ข้อ กลางภาค 20 ข้อ ปลายภาค 20 ข้อ และข้อสอบปฏิบัติ 12 ข้อ พร้อมตรวจคะแนนแบบ Real-time เฉลยละเอียด และระบบออกรายงานผลการเรียน
+                  </p>
+                  <div class="billboard-hero-actions">
+                    <button onclick="switchTab('quizzes')" class="btn-hero-primary" style="background: #facc15; color: #0f172a; border-color: #facc15;">
+                      <i class="fa-solid fa-bolt"></i> เริ่มทำข้อสอบทันที
+                    </button>
+                    <button onclick="switchTab('teacher')" class="btn-hero-glass">
+                      <i class="fa-solid fa-screwdriver-wrench text-emerald-400"></i> แผงควบคุมครู (Admin CMS)
+                    </button>
                   </div>
                 </div>
-                <div class="billboard-ambient-mesh"></div>
               </div>
 
-              <!-- BILLBOARD SLIDE 2: โครงงานคอมพิวเตอร์ 5 บท -->
-              <div class="billboard-slide" style="background: linear-gradient(135deg, #1c1917 0%, #292524 55%, #062e1c 100%);">
-                <div class="billboard-slide-grid">
-                  <div class="billboard-visual-col">
-                    <img src="img/billboard_slide2_project.svg" alt="คู่มือจัดทำเค้าโครงโครงงาน 5 บท &amp; ระบบส่งงานออนไลน์" class="billboard-illustration-img" style="width: 148px; height: 148px; object-fit: contain; filter: drop-shadow(0 6px 16px rgba(217, 119, 6, 0.18));" />
+              <!-- BILLBOARD SLIDE 2: วิทยาการคำนวณ ม.4 & เทคโนโลยีสารสนเทศ -->
+              <div class="billboard-slide">
+                <img src="img/banners/slide1_curriculum_stem.jpg" alt="วิทยาการคำนวณ ม.4" class="billboard-bg-img" />
+                <div class="billboard-overlay"></div>
+                <div class="billboard-slide-content">
+                  <div class="hero-slide-badge">
+                    <i class="fa-solid fa-compass text-emerald-400"></i>
+                    <span>หลักสูตร ว 4.2 ม.4/1 • โรงเรียนวังน้ำเย็นวิทยาคม</span>
                   </div>
-                  <div class="billboard-content-col">
-                    <div class="billboard-top-tag">
-                      <span class="billboard-tag-live tag-amber"><i class="fa-solid fa-star mr-1"></i> โครงงานวิทยาการคำนวณ</span>
-                      <span class="billboard-tag-term">ระบบส่งงานออนไลน์</span>
-                    </div>
-                    <h2 class="billboard-title">
-                      คู่มือจัดทำเค้าโครงโครงงาน 5 บท &amp; ระบบส่งงานออนไลน์
-                    </h2>
-                    <p class="billboard-subtitle">
-                      ดาวน์โหลดแบบฟอร์มเอกสารโครงงาน 5 บท เทมเพลตสไลด์นำเสนอ และส่งไฟล์ผ่านระบบออนไลน์ ตรวจสอบสถานะการตรวจได้ทันที
-                    </p>
-                    <div class="billboard-meta-row">
-                      <span><i class="fa-solid fa-file-pdf mr-1 text-amber-600"></i> ดาวน์โหลดแบบฟอร์ม</span>
-                      <span><i class="fa-solid fa-cloud-arrow-up mr-1 text-emerald-700"></i> แนบไฟล์ / Canva</span>
-                      <button onclick="switchTab('assignments')" class="billboard-btn-action" style="background-color: var(--accent-amber); border-color: var(--accent-amber);">
-                        ไปยังหน้าส่งงาน <i class="fa-solid fa-arrow-right ml-1"></i>
-                      </button>
-                    </div>
+                  <h2 class="billboard-hero-title">
+                    วิทยาการคำนวณ ม.4<br/>
+                    <span class="hero-subheading">จากรากฐานแนวคิดเชิงคำนวณ สู่การพัฒนาโครงงานนวัตกรรม</span>
+                  </h2>
+                  <p class="billboard-hero-desc">
+                    เจาะลึก 4 เสาหลัก Computational Thinking บูรณาการกระบวนการพัฒนาซอฟต์แวร์ SDLC 5 ขั้นตอน พร้อมจัดทำรายงานโครงงาน 5 บทมาตรฐานวิชาการ
+                  </p>
+                  <div class="billboard-hero-actions">
+                    <button onclick="switchTab('lessons')" class="btn-hero-primary">
+                      <i class="fa-solid fa-book-open"></i> เข้าสู่บทเรียนออนไลน์
+                    </button>
+                    <button onclick="openEbookModal()" class="btn-hero-glass">
+                      <i class="fa-solid fa-book-bookmark text-emerald-400"></i> หนังสือเรียน e-Book
+                    </button>
                   </div>
                 </div>
-                <div class="billboard-ambient-mesh"></div>
               </div>
 
-              <!-- BILLBOARD SLIDE 3: Interactive CS Lab 4 มิติ -->
-              <div class="billboard-slide" style="background: linear-gradient(135deg, #082f49 0%, #0c4a6e 55%, #06281a 100%);">
-                <div class="billboard-slide-grid">
-                  <div class="billboard-visual-col">
-                    <img src="img/billboard_slide3_cslab.svg" alt="CS Lab &amp; Flowgorithm Simulator" class="billboard-illustration-img" style="width: 148px; height: 148px; object-fit: contain; filter: drop-shadow(0 6px 16px rgba(2, 132, 199, 0.18));" />
+              <!-- BILLBOARD SLIDE 3: คู่มือจัดทำเค้าโครงโครงงาน 5 บท & ระบบส่งงานออนไลน์ -->
+              <div class="billboard-slide">
+                <img src="img/banners/slide2_project_coding.jpg" alt="คู่มือจัดทำเค้าโครงโครงงาน 5 บท" class="billboard-bg-img" />
+                <div class="billboard-overlay"></div>
+                <div class="billboard-slide-content">
+                  <div class="hero-slide-badge badge-amber">
+                    <i class="fa-solid fa-file-signature text-amber-400"></i>
+                    <span>โครงงานวิทยาการคำนวณ 5 บท • ระบบส่งงานออนไลน์</span>
                   </div>
-                  <div class="billboard-content-col">
-                    <div class="billboard-top-tag">
-                      <span class="billboard-tag-live tag-cyan"><i class="fa-solid fa-flask mr-1"></i> ห้องปฏิบัติการเสมือน</span>
-                      <span class="billboard-tag-term">Interactive CS Lab</span>
-                    </div>
-                    <h2 class="billboard-title">
-                      ทดลองแก้ปัญหา 4 มิติ และโปรแกรมจำลองวงจร SDLC
-                    </h2>
-                    <p class="billboard-subtitle">
-                      ฝึกทักษะการคิดเชิงคำนวณผ่านเครื่องมือจำลองปัญหา การวางแผน Gantt Chart และโปรแกรมจำลองผังงาน Flowgorithm ออนไลน์
-                    </p>
-                    <div class="billboard-meta-row">
-                      <span><i class="fa-solid fa-microchip mr-1 text-cyan-600"></i> Simulation Tool</span>
-                      <span><i class="fa-solid fa-puzzle-piece mr-1 text-emerald-700"></i> 4 กิจกรรมปฏิบัติการ</span>
-                      <button onclick="switchTab('ct-tools')" class="billboard-btn-action" style="background-color: #0284c7; border-color: #0284c7;">
-                        เปิด CS Lab <i class="fa-solid fa-arrow-right ml-1"></i>
-                      </button>
-                    </div>
+                  <h2 class="billboard-hero-title">
+                    คู่มือจัดทำเค้าโครงโครงงาน 5 บท<br/>
+                    <span class="hero-subheading">และระบบส่งงานออนไลน์ ตรวจสอบสถานะการประเมินได้ทันที</span>
+                  </h2>
+                  <p class="billboard-hero-desc">
+                    ดาวน์โหลดแบบฟอร์มเอกสารโครงงาน 5 บท เทมเพลตสไลด์นำเสนอ Canva และส่งไฟล์รายงานโครงงานผ่านระบบส่งงานออนไลน์ รวดเร็ว แม่นยำ
+                  </p>
+                  <div class="billboard-hero-actions">
+                    <button onclick="switchTab('assignments')" class="btn-hero-primary" style="background: #10b981; color: #ffffff; border-color: #10b981;">
+                      <i class="fa-solid fa-cloud-arrow-up"></i> ไปยังหน้าระบบส่งงาน
+                    </button>
+                    <button onclick="switchTab('lessons')" class="btn-hero-glass">
+                      <i class="fa-solid fa-file-lines text-amber-400"></i> แนวทางจัดทำ 5 บท
+                    </button>
                   </div>
                 </div>
-                <div class="billboard-ambient-mesh"></div>
               </div>
 
-              <!-- BILLBOARD SLIDE 4: คลังข้อสอบกลางภาค & ปลายภาค (ตรงตามรูปที่ผู้ใช้ต้องการ) -->
-              <div class="billboard-slide" style="background: linear-gradient(135deg, #18181b 0%, #27272a 55%, #064e3b 100%);">
-                <div class="billboard-slide-grid">
-                  <div class="billboard-visual-col">
-                    <img src="img/billboard_slide4_quiz.svg" alt="ระบบทดสอบวัดผลสัมฤทธิ์ &amp; จัดอันดับคะแนน" class="billboard-illustration-img" style="width: 148px; height: 148px; object-fit: contain; filter: drop-shadow(0 6px 16px rgba(220, 38, 38, 0.15));" />
+              <!-- BILLBOARD SLIDE 4: Interactive CS Lab & Simulation -->
+              <div class="billboard-slide">
+                <img src="img/banners/slide3_cslab_flowchart.jpg" alt="Interactive CS Lab" class="billboard-bg-img" />
+                <div class="billboard-overlay"></div>
+                <div class="billboard-slide-content">
+                  <div class="hero-slide-badge badge-cyan">
+                    <i class="fa-solid fa-flask-vial text-cyan-400"></i>
+                    <span>ห้องปฏิบัติการเสมือน • Interactive CS Lab &amp; Simulator</span>
                   </div>
-                  <div class="billboard-content-col">
-                    <div class="billboard-top-tag">
-                      <span class="billboard-tag-live tag-rose"><i class="fa-solid fa-square-check mr-1"></i> การวัดและประเมินผลการเรียนรู้ ม.4</span>
-                      <span class="billboard-tag-term">ระบบตรวจข้อสอบอัตโนมัติ 100%</span>
-                    </div>
-                    <h2 class="billboard-title">
-                      คลังข้อสอบกลางภาค &amp; ปลายภาค 20 ข้อ พร้อมเฉลยละเอียดทันที
-                    </h2>
-                    <p class="billboard-subtitle">
-                      ทดสอบความรู้ครบถ้วน 2 หน่วยการเรียนรู้ ทราบผลคะแนนเรียลไทม์ บันทึกข้อมูลเข้าระบบอัตโนมัติ และอัปเดตตารางคะแนนทันที
-                    </p>
-                    <div class="billboard-meta-row">
-                      <span><i class="fa-solid fa-user-pen mr-1 text-emerald-700"></i> ผู้สอน: ครูปณิฏฐา บุญยงค์</span>
-                      <span><i class="fa-solid fa-stopwatch mr-1 text-amber-600"></i> จับเวลาและเฉลยรายข้อ</span>
-                      <button onclick="switchTab('quizzes')" class="billboard-btn-action" style="background-color: #dc2626; border-color: #dc2626;">
-                        เริ่มทำแบบทดสอบ <i class="fa-solid fa-arrow-right ml-1"></i>
-                      </button>
-                    </div>
+                  <h2 class="billboard-hero-title">
+                    ห้องปฏิบัติการเสมือน CS Lab<br/>
+                    <span class="hero-subheading">ทดลองแก้ปัญหา 4 มิติ และโปรแกรมจำลองวงจร SDLC</span>
+                  </h2>
+                  <p class="billboard-hero-desc">
+                    ฝึกทักษะการคิดเชิงคำนวณผ่านเครื่องมือจำลองปัญหา การวางแผน Gantt Chart และโปรแกรมจำลองผังงาน Flowgorithm ออนไลน์
+                  </p>
+                  <div class="billboard-hero-actions">
+                    <button onclick="switchTab('ct-tools')" class="btn-hero-primary" style="background: #0284c7; color: #ffffff; border-color: #0284c7;">
+                      <i class="fa-solid fa-laptop-code"></i> เปิดห้องทดลอง CS Lab
+                    </button>
+                    <button onclick="switchTab('worksheets')" class="btn-hero-glass">
+                      <i class="fa-solid fa-vial text-cyan-400"></i> ใบงาน &amp; Lab ปฏิบัติ
+                    </button>
                   </div>
                 </div>
-                <div class="billboard-ambient-mesh"></div>
               </div>
 
             </div>
@@ -442,7 +434,7 @@
               <i class="fa-solid fa-chevron-right"></i>
             </button>
 
-            <!-- Billboard Centered Dots Indicator -->
+            <!-- Billboard Dots Indicator -->
             <div class="billboard-dots-wrap" id="billboard-dots">
               <button class="billboard-dot active" onclick="goToBillboardSlide(0)" aria-label="สไลด์ที่ 1"></button>
               <button class="billboard-dot" onclick="goToBillboardSlide(1)" aria-label="สไลด์ที่ 2"></button>
@@ -450,47 +442,10 @@
               <button class="billboard-dot" onclick="goToBillboardSlide(3)" aria-label="สไลด์ที่ 4"></button>
             </div>
 
-            <!-- Floating Pill on Bottom-Right (สรุปบทเรียนเด่น) -->
-            <button class="billboard-ai-pill" onclick="openEbookModal()" title="เปิดดูสรุปเนื้อหาสำคัญและ E-Book">
-              <i class="fa-solid fa-wand-magic-sparkles text-emerald-400 mr-1"></i>
-              <span>✦ สรุปบทเรียนเด่น CS-M4</span>
-              <i class="fa-solid fa-chevron-right ml-1 text-xs opacity-75"></i>
-            </button>
-
           </div>
 
-          <!-- 2. STUDENT WELCOME & IDENTITY BANNER -->
-          <div id="student-welcome-banner" class="home-welcome-card">
-            <div style="display: flex; align-items: center; gap: 16px;">
-              <div style="width: 50px; height: 50px; border-radius: 14px; background: #ecfdf5; border: 2px solid #bbf7d0; display: flex; align-items: center; justify-content: center; font-size: 1.65rem; flex-shrink: 0;">
-                <span id="student-banner-icon">🎓</span>
-              </div>
-              <div>
-                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 3px;">
-                  <span id="student-banner-badge" style="background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; font-size: 0.72rem; font-weight: 800; padding: 2px 10px; border-radius: 999px; letter-spacing: 0.5px;">
-                    ระบบการเรียนรู้ออนไลน์ ม.4
-                  </span>
-                  <span style="font-size: 0.76rem; color: #475569; font-weight: 600;">ว 4.2 ม.4/1 • โรงเรียนวังน้ำเย็นวิทยาคม • ครูปณิฏฐา บุญยงค์</span>
-                </div>
-                <h2 id="student-banner-title" style="font-family: 'Kanit', sans-serif; font-size: 1.28rem; font-weight: 800; margin: 0; color: #0f172a; line-height: 1.3;">
-                  ศูนย์การเรียนรู้วิทยาการคำนวณ ม.4 (CS-M4)
-                </h2>
-                <p id="student-banner-sub" style="font-size: 0.82rem; color: #334155; margin: 3px 0 0 0;">
-                  ยินดีต้อนรับนักเรียนทุกคน สามารถเข้าเรียน ส่งงาน และทำแบบทดสอบได้ทันที
-                </p>
-              </div>
-            </div>
-
-            <!-- Quick login / student status -->
-            <div id="student-banner-actions" style="display: flex; align-items: center; gap: 10px;">
-              <button type="button" onclick="openLoginModal()" id="btn-banner-login" class="btn btn-primary" style="padding: 9px 18px; border-radius: 12px; font-size: 0.86rem; display: inline-flex; align-items: center; gap: 8px;">
-                <i class="fa-solid fa-arrow-right-to-bracket"></i> เข้าสู่ระบบนักเรียน (เลข 5 หลัก)
-              </button>
-            </div>
-          </div>
-
-          <!-- 3. SIX FLOATING QUICK SERVICE CARDS (6 ทางลัดเมนูหลัก สไตล์ EmbeddedAI) -->
-          <div class="quick-nav-cards-wrap" style="position: relative; z-index: 20; margin-top: 14px; margin-bottom: 28px;">
+          <!-- 2. SIX FLOATING QUICK SERVICE CARDS (6 ทางลัดเมนูหลัก สไตล์ EmbeddedAI ลอยเกยขอบล่างสไลเดอร์) -->
+          <div class="quick-nav-cards-wrap">
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
 
               <!-- Card 1: บทเรียน & สไลด์ -->
@@ -547,6 +502,36 @@
                 <p class="service-desc">ผลสอบและสถิติ</p>
               </div>
 
+            </div>
+          </div>
+
+          <!-- 3. STUDENT WELCOME & IDENTITY BANNER -->
+          <div id="student-welcome-banner" class="home-welcome-card" style="margin-bottom: 24px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div style="width: 50px; height: 50px; border-radius: 14px; background: #ecfdf5; border: 2px solid #bbf7d0; display: flex; align-items: center; justify-content: center; font-size: 1.65rem; flex-shrink: 0;">
+                <span id="student-banner-icon">🎓</span>
+              </div>
+              <div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 3px;">
+                  <span id="student-banner-badge" style="background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; font-size: 0.72rem; font-weight: 800; padding: 2px 10px; border-radius: 999px; letter-spacing: 0.5px;">
+                    ระบบการเรียนรู้ออนไลน์ ม.4
+                  </span>
+                  <span style="font-size: 0.76rem; color: #475569; font-weight: 600;">ว 4.2 ม.4/1 • โรงเรียนวังน้ำเย็นวิทยาคม • ครูปณิฏฐา บุญยงค์</span>
+                </div>
+                <h2 id="student-banner-title" style="font-family: 'Kanit', sans-serif; font-size: 1.28rem; font-weight: 800; margin: 0; color: #0f172a; line-height: 1.3;">
+                  ศูนย์การเรียนรู้วิทยาการคำนวณ ม.4 (CS-M4)
+                </h2>
+                <p id="student-banner-sub" style="font-size: 0.82rem; color: #334155; margin: 3px 0 0 0;">
+                  ยินดีต้อนรับนักเรียนทุกคน สามารถเข้าเรียน ส่งงาน และทำแบบทดสอบได้ทันที
+                </p>
+              </div>
+            </div>
+
+            <!-- Quick login / student status -->
+            <div id="student-banner-actions" style="display: flex; align-items: center; gap: 10px;">
+              <button type="button" onclick="openLoginModal()" id="btn-banner-login" class="btn btn-primary" style="padding: 9px 18px; border-radius: 12px; font-size: 0.86rem; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i> เข้าสู่ระบบนักเรียน (เลข 5 หลัก)
+              </button>
             </div>
           </div>
 
@@ -2613,7 +2598,7 @@
     <script src="js/modules/quizzes.js?v=5.8"></script>
     <script src="js/modules/teacher.js?v=5.8"></script>
     <script src="js/modules/pwa.js?v=5.8"></script>
-    <script src="js/app.js?v=5.8"></script>
+    <script src="js/app.js?v=6.5"></script>
 
     <!-- MOBILE & TABLET STICKY BOTTOM NAVIGATION BAR -->
     <nav id="mobile-bottom-nav" class="mobile-bottom-nav">
